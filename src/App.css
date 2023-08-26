@@ -1,0 +1,22 @@
+@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css2?family=Shadows + Into + Light&amp;display=swap);
+.link-button {
+    color: #0f2236;
+    -webkit-text-decoration: var(--link-text-decoration);
+    text-decoration: var(--link-text-decoration);
+    background-color: #31c981;
+}
+button {
+    border-radius: 50px !important;
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: #31c981;
+    cursor: pointer;
+    transition: border-color 0.25s;
+}
+.btn{
+    font-size: 1rem;
+}
