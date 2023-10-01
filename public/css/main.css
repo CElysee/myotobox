@@ -116,6 +116,70 @@ li.notification-item.seen .body {
     --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 @font-face {
+    font-family: Proxima Nova;
+    src: url(../../src/assets/fonts/ProximaNova/ProximaNovaFont.otf);
+    src: local("Proxima Nova"), url(../../src/assets/fonts/ProximaNova/ProximaNovaFont.otf) format("opentype");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: proxima-nova;
+    src: local("proxima-nova"),url(https://static.dubizzle.com/frontend-web/static-resources/assets/fonts/Proxima-Nova-Bold.woff) format("woff"),url(https://static.dubizzle.com/frontend-web/static-resources/assets/fonts/Proxima-Nova-Bold.woff2) format("woff2"),url(https://static.dubizzle.com/frontend-web/static-resources/assets/fonts/Proxima-Nova-Bold.otf) format("opentype"),url(https://static.dubizzle.com/frontend-web/static-resources/assets/fonts/Proxima-Nova-Bold.ttf) format("truetype"),url(https://static.dubizzle.com/frontend-web/static-resources/assets/fonts/Proxima-Nova-Bold.eot) format("eot");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap
+}
+
+@font-face {
+    font-family: proxima-nova;
+    src: local("proxima-nova"),url(https://static.dubizzle.com/frontend-web/static-resources/assets/fonts/Proxima-Nova-Light.woff) format("woff"),url(https://static.dubizzle.com/frontend-web/static-resources/assets/fonts/Proxima-Nova-Light.woff2) format("woff2"),url(https://static.dubizzle.com/frontend-web/static-resources/assets/fonts/Proxima-Nova-Light.otf) format("opentype"),url(https://static.dubizzle.com/frontend-web/static-resources/assets/fonts/Proxima-Nova-Light.ttf) format("truetype"),url(https://static.dubizzle.com/frontend-web/static-resources/assets/fonts/Proxima-Nova-Light.eot) format("eot");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap
+}
+
+@font-face {
+    font-family: proxima-nova;
+    src: local("proxima-nova"),url(https://static.dubizzle.com/frontend-web/static-resources/assets/fonts/Proxima-Nova-Regular-Italic.woff) format("woff"),url(https://static.dubizzle.com/frontend-web/static-resources/assets/fonts/Proxima-Nova-Regular-Italic.woff2) format("woff2"),url(https://static.dubizzle.com/frontend-web/static-resources/assets/fonts/Proxima-Nova-Regular-Italic.otf) format("opentype"),url(https://static.dubizzle.com/frontend-web/static-resources/assets/fonts/Proxima-Nova-Regular-Italic.ttf) format("truetype"),url(https://static.dubizzle.com/frontend-web/static-resources/assets/fonts/Proxima-Nova-Regular-Italic.eot) format("eot");
+    font-weight: 400;
+    font-style: italic;
+    font-display: swap
+}
+
+@font-face {
+    font-family: proxima-nova;
+    src: local("proxima-nova"),url(https://static.dubizzle.com/frontend-web/static-resources/assets/fonts/Proxima-Nova-Regular.woff) format("woff"),url(https://static.dubizzle.com/frontend-web/static-resources/assets/fonts/Proxima-Nova-Regular.woff2) format("woff2"),url(https://static.dubizzle.com/frontend-web/static-resources/assets/fonts/Proxima-Nova-Regular.otf) format("opentype"),url(https://static.dubizzle.com/frontend-web/static-resources/assets/fonts/Proxima-Nova-Regular.ttf) format("truetype"),url(https://static.dubizzle.com/frontend-web/static-resources/assets/fonts/Proxima-Nova-Regular.eot) format("eot");
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap
+}
+
+@font-face {
+    font-family: proxima-nova;
+    src: local("proxima-nova"),url(https://static.dubizzle.com/frontend-web/static-resources/assets/fonts/Proxima-Nova-Semibold.woff) format("woff"),url(https://static.dubizzle.com/frontend-web/static-resources/assets/fonts/Proxima-Nova-Semibold.woff2) format("woff2"),url(https://static.dubizzle.com/frontend-web/static-resources/assets/fonts/Proxima-Nova-Semibold.otf) format("opentype"),url(https://static.dubizzle.com/frontend-web/static-resources/assets/fonts/Proxima-Nova-Semibold.ttf) format("truetype"),url(https://static.dubizzle.com/frontend-web/static-resources/assets/fonts/Proxima-Nova-Semibold.eot) format("eot");
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap
+}
+
+@font-face {
+    font-family: proxima-nova;
+    src: local("proxima-nova"),url(https://static.dubizzle.com/frontend-web/static-resources/assets/fonts/Proxima-Nova-Thin-Italic.woff) format("woff"),url(https://static.dubizzle.com/frontend-web/static-resources/assets/fonts/Proxima-Nova-Thin-Italic.woff2) format("woff2"),url(https://static.dubizzle.com/frontend-web/static-resources/assets/fonts/Proxima-Nova-Thin-Italic.otf) format("opentype"),url(https://static.dubizzle.com/frontend-web/static-resources/assets/fonts/Proxima-Nova-Thin-Italic.ttf) format("truetype"),url(https://static.dubizzle.com/frontend-web/static-resources/assets/fonts/Proxima-Nova-Thin-Italic.eot) format("eot");
+    font-weight: 200;
+    font-style: italic;
+    font-display: swap
+}
+
+@font-face {
+    font-family: proxima-nova;
+    src: local("proxima-nova"),url(https://static.dubizzle.com/frontend-web/static-resources/assets/fonts/Proxima-Nova-Thin.woff) format("woff"),url(https://static.dubizzle.com/frontend-web/static-resources/assets/fonts/Proxima-Nova-Thin.woff2) format("woff2"),url(https://static.dubizzle.com/frontend-web/static-resources/assets/fonts/Proxima-Nova-Thin.otf) format("opentype"),url(https://static.dubizzle.com/frontend-web/static-resources/assets/fonts/Proxima-Nova-Thin.ttf) format("truetype"),url(https://static.dubizzle.com/frontend-web/static-resources/assets/fonts/Proxima-Nova-Thin.eot) format("eot");
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap
+}
+
+@font-face {
     font-family: Radikal;
     src: url(../../src/assets/fonts/Radikal/Radikal.otf);
     src: local("Radikal"), url(../../src/assets/fonts/Radikal/Radikal.otf) format("opentype");
@@ -178,7 +242,7 @@ html {
     line-height: 1;
     font-size: 16px;
     overflow-x: hidden;
-    font-family: Radikal !important;
+    font-family: proxima-nova !important;
     -webkit-font-smoothing: antialiased;
 }
 *,
@@ -8985,8 +9049,6 @@ a.text-dark:hover {
     width: 100%;
 }
 #root > .page {
-    margin-top: 80px;
-    padding-bottom: 40px;
     flex-grow: 1;
 }
 #root svg {
@@ -9005,9 +9067,9 @@ a.text-dark:hover {
     }
 }
 @media (min-width: 769px) {
-    #root > .page {
+    /* #root > .page {
         min-height: calc(100vh - 80px);
-    }
+    } */
     #root > .page.embedded-modal {
         min-height: auto;
     }
@@ -12769,9 +12831,9 @@ p.no-results + .paginator {
     }
 }
 @media (min-width: 769px) {
-    .page.home .row:first-of-type {
+    /* .page.home .row:first-of-type {
         padding-top: 26px;
-    }
+    } */
     .page.home .heading {
         margin-bottom: 24px;
         flex-direction: row;

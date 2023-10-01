@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Logo from "../../assets/images/myotobox.jpg";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import "../header/header.css";
+import "./header.css";
 
 function Header() {
   const nav_links = [
@@ -10,7 +10,7 @@ function Header() {
       display: "Home",
     },
     {
-      path: "/buy",
+      path: "/BuyCars",
       display: "Buy",
     },
     {

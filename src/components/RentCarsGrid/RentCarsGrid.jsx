@@ -1,11 +1,19 @@
 import React from "react";
-import "./SellCarsGrid.css";
+import "./RentCarsGrid.css";
 import { Link } from "react-router-dom";
 
-function sellCarsGrid() {
+function RentCarsGrid() {
   return (
     <>
-      <div className="page home">
+      <div className="page container-fluid home">
+        <div className="row flex-nowrap">
+          <div className="col primary">
+            <div className="heading clearfix">
+              <h1>Featured cars for rent</h1>
+            </div>
+          </div>
+          <div className="col secondary d-none d-lg-block">&nbsp;</div>
+        </div>
         <div className="row">
           <div className="col primary">
             <article className="min">
@@ -830,4 +838,4 @@ function sellCarsGrid() {
   );
 }
 
-export default sellCarsGrid;
+export default RentCarsGrid;

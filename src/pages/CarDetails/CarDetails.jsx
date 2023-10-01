@@ -1,6 +1,6 @@
 import React from "react";
 import CarMoreDetails from "../../components/CarMoreDetails/CarMoreDetails";
-import "../CarDetails/CarDetails.css"
+import "./CarDetails.css"
 import CarGallery from "../../components/CarGallery/CarGallery";
 
 function CarDetails() {
