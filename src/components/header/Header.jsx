@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Logo from "../../assets/images/myotobox.jpg";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import "./header.css";
+import "./Header.css";
 
 function Header() {
   const nav_links = [
@@ -14,7 +14,7 @@ function Header() {
       display: "Buy",
     },
     {
-      path: "/rent",
+      path: "/RentCars",
       display: "Rent",
     },
     {
@@ -74,7 +74,7 @@ function Header() {
                 id="SvgjsG1012"
                 featurekey="PG4fjM-0"
                 transform="matrix(1.0247690251052775,0,0,1.0247690251052775,-9.571376078911218,-23.095615284545097)"
-                fill="#4bd593"
+                fill="#FFC300"
               >
                 <g xmlns="http://www.w3.org/2000/svg">
                   <path d="M32.27,57.891c0,1.104-0.298,2.124-0.82,3.005c-1.031,1.738-2.917,2.905-5.079,2.905c-2.607,0-4.83-1.701-5.6-4.061   c-0.199-0.582-0.299-1.203-0.299-1.85c0-3.254,2.645-5.886,5.898-5.886C29.625,52.005,32.27,54.637,32.27,57.891z"></path>

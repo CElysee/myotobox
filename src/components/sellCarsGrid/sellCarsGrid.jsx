@@ -5,8 +5,16 @@ import { Link } from "react-router-dom";
 function sellCarsGrid() {
   return (
     <>
-      <div className="page home">
-        <div className="row">
+      <div className="page container-fluid home">
+      <div className="row flex-nowrap">
+          <div className="col primary">
+            <div className="heading clearfix">
+              <h1>Featured cars for sell</h1>
+            </div>
+          </div>
+          <div className="col secondary d-none d-lg-block">&nbsp;</div>
+        </div>
+        <div className="row flex-nowrap">
           <div className="col primary">
             <article className="min">
               <ul className="auctions-list">

@@ -8,7 +8,7 @@
     font-weight: 600;
     font-size: 12px;
     line-height: 12px;
-    background: #4bd593;
+    background: var(--first-color);
     border-radius: 4px;
     display: inline-block;
     position: absolute;
@@ -259,8 +259,8 @@ svg {
     text-align: right;
 } */
 .discount-text {
-    color: #03806d;
-    background-color: #eefaf0;
+    color: var(--first-color);
+    background-color: var(--second-color);
     padding: 0.25rem 0.625rem;
     border-radius: 0.3125rem;
     font-weight: 600;

@@ -624,7 +624,7 @@ input[type="search"]::-webkit-search-results-decoration {
   .jSvZvk {
     padding: 24px 16px;
     flex: 1 1 0%;
-    height: 400px;
+    height: auto;
     /* overflow-y: scroll; */
   }
   .lmVkIt {

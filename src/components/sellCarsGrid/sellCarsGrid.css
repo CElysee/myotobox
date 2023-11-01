@@ -8,7 +8,7 @@
     font-weight: 600;
     font-size: 12px;
     line-height: 12px;
-    background: #4bd593;
+    background: var(--first-color);
     border-radius: 4px;
     display: inline-block;
     position: absolute;
