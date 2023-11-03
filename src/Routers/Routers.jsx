@@ -4,6 +4,7 @@ import Home from '../Pages/home/Home'
 import BuyCars from '../Pages/BuyCars/BuyCars'
 import RentCars from '../Pages/RentCars/RentCars'
 import CarDetails from '../Pages/CarDetails/CarDetails'
+import ImportOnOrder from '../Pages/ImportOnOrder/ImportOnOrder'
 
 function Routers() {
   return (
@@ -12,6 +13,7 @@ function Routers() {
     <Route path='/CarDetails' element={<CarDetails />} />
     <Route path='/BuyCars' element={<BuyCars />} />
     <Route path='/RentCars' element={<RentCars />} />
+    <Route path='/ImportOnOrder' element={<ImportOnOrder />} />
    </Routes>
   )
 }

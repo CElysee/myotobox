@@ -18,13 +18,13 @@ function Header() {
       display: "Rent",
     },
     {
-      path: "/import_on_order",
+      path: "/ImportOnOrder",
       display: "Import on order",
     },
-    // {
-    //   path: "/myotobox",
-    //   display: "What's myotobox",
-    // },
+    {
+      path: "/myotobox",
+      display: "Tax calculator",
+    },
     {
       path: "/contact",
       display: "Contact Us",
