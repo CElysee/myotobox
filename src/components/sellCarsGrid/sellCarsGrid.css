@@ -258,13 +258,14 @@ svg {
 /* .text-right {
     text-align: right;
 } */
-.discount-text {
+/* .discount-text {
     color: #03806d;
     background-color: #eefaf0;
     padding: 0.25rem 0.625rem;
     border-radius: 0.3125rem;
     font-weight: 600;
-}
+
+} */
 .mt-1 {
     margin-top: 0.3125rem;
 }

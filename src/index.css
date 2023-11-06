@@ -43,6 +43,16 @@
   --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
+@keyframes car {
+  0% {
+    /* Initial state */
+    transform: translateX(0);
+  }
+  100% {
+    /* Final state */
+    transform: translateX(100%);
+  }
+}
 a {
   font-weight: 500;
   color: #646cff;
@@ -94,5 +104,81 @@ button:focus-visible {
   }
   button {
     background-color: #f9f9f9;
+  }
+}
+#preLoader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 1000;
+}
+#preLoader .loader .road {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px;
+  perspective: 10px;
+  overflow: hidden;
+  z-index: 1;
+}
+#preLoader .loader .line {
+  height: 100px;
+  width: 7px;
+  margin-inline: 10px;
+  background: #4f4f4f;
+  transform: rotateX(10deg);
+}
+#preLoader .loader .line.center-line {
+    position: relative;
+}
+#preLoader .loader .line.center-line:after {
+  content: "";
+  position: absolute;
+  width: 7px;
+  height: 100%;
+  background:#ffc300;
+  background-size: 100% 10px;
+  animation: road 120ms linear infinite;
+}
+
+#preLoader .loader .icon{
+  position: absolute;
+  z-index: 1;
+  width: 35px;
+  animation: car 2s infinite linear reverse;
+}
+#preLoader .loader .line {
+  height: 100px;
+  width: 3px;
+  margin-inline: 20px;
+  background: #ffc300;
+  transform: rotateX(10deg);
+}
+@keyframes road {
+  100% {
+    background: linear-gradient(to bottom, #ffc300 50%, #ffc300, #fff, #fff 50%);
+    background-size: 100% 10px;
+  }
+}
+@keyframes car {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-30%);
+  }
+  75% {
+    transform: translateX(10%);
+  }
+  100% {
+    transform: translateX(0);
   }
 }
