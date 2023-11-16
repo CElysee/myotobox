@@ -1,157 +1,195 @@
 .login-card {
-    /* min-height: 100vh; */
-    display: block;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto;
-    background: url(../images/login/login_bg.jpg);
-    background-position: center;
-    padding: 30px 12px;
-    background-color: #fff;
-    box-shadow: 0 0 37px rgba(8, 21, 66, 0.05);
-    border-radius: 10px;
+  /* min-height: 100vh; */
+  display: block;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  background: url(../images/login/login_bg.jpg);
+  background-position: center;
+  padding: 30px 12px;
+  background-color: #fff;
+  box-shadow: 0 0 37px rgba(8, 21, 66, 0.05);
+  border-radius: 10px;
 }
 .login-card .login-main {
-    width: 80%;
-    padding: 40px;
-    margin: 0 auto;
-    /* background-color: #fff; */
+  width: 80%;
+  padding: 40px;
+  margin: 0 auto;
+  /* background-color: #fff; */
 }
 .login-card .login-main .theme-form h4 {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 .login-card .login-main .theme-form p {
-    margin-bottom: 25px;
-    font-size: 14px;
-    color: #898989;
+  margin-bottom: 25px;
+  font-size: 14px;
+  color: #898989;
 }
 .login-card .login-main .theme-form .form-group {
-    margin-bottom: 10px;
-    position: relative;
+  margin-bottom: 10px;
+  position: relative;
 }
 .login-card .login-main .theme-form label {
-    font-size: 14px;
-    letter-spacing: 0.4px;
+  font-size: 14px;
+  letter-spacing: 0.4px;
 }
 .col-form-label {
-    padding-bottom: 4px;
+  padding-bottom: 4px;
 }
-.login-card .login-main .theme-form input {
+.login-card .login-main .theme-form input{
+  background-color: #f3f3ff;
+  transition: all 0.3s ease;
+}
+.input-container{
     background-color: #f3f3ff;
-    transition: all 0.3s ease;
+    border: 1px solid #cccccc;;
+    border-radius: 5px;
 }
-.theme-form input[type=text], .theme-form input[type=email], .theme-form input[type=search], .theme-form input[type=password], .theme-form input[type=number], .theme-form input[type=tel], .theme-form input[type=date], .theme-form input[type=datetime-local], .theme-form input[type=time], .theme-form input[type=datetime-local], .theme-form input[type=month], .theme-form input[type=week], .theme-form input[type=url], .theme-form input[type=file], .theme-form textarea, .theme-form select {
-    border-color: #cccccc;
-    background-color: #fff;
-    font-size: 14px;
-    color: #898989;
+.theme-form input[type="password"]{
     padding: 25px 10px;
-    -webkit-box-shadow: none;
-    box-shadow: none;
+    border: none;  
+}
+input[type="password"]{
+    border: none;
+}
+.theme-form input[type="text"],
+.theme-form input[type="email"],
+.theme-form input[type="search"],
+.theme-form input[type="number"],
+.theme-form input[type="tel"],
+.theme-form input[type="date"],
+.theme-form input[type="datetime-local"],
+.theme-form input[type="time"],
+.theme-form input[type="datetime-local"],
+.theme-form input[type="month"],
+.theme-form input[type="week"],
+.theme-form input[type="url"],
+.theme-form input[type="file"],
+.theme-form textarea,
+.theme-form select {
+  border-color: #cccccc;
+  background-color: #fff;
+  font-size: 14px;
+  color: #898989;
+  padding: 25px 10px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
 }
 .login-card .login-main .theme-form .or {
-    position: relative;
+  position: relative;
 }
 .btn-showcase {
-    margin-bottom: -10px;
+  margin-bottom: -10px;
 }
-.btn-showcase a{
-    display: block;
-    font-weight: 600;
+.btn-showcase a {
+  display: block;
+  font-weight: 600;
 }
 .login-card .btn-showcase .btn {
-    line-height: 1;
-    padding: 10px 15px;
-    margin: 0;
-    color: #000;
-    display: block;
-    justify-content: space-between;
+  line-height: 1;
+  padding: 10px 15px;
+  margin: 0;
+  color: #000;
+  display: block;
+  justify-content: space-between;
 }
 .login-card .btn-showcase .btn svg {
-    height: 16px;
-    vertical-align: bottom;
-    position: relative;
-    top: 2px;
-    right: 2px;
+  height: 16px;
+  vertical-align: bottom;
+  position: relative;
+  top: 2px;
+  right: 2px;
 }
 .txt-linkedin {
-    color: #0077B5 !important;
+  color: #0077b5 !important;
 }
 .btn-light {
-    background-color: rgba(115, 102, 255, 0.06) !important;
-    border-color: rgba(115, 102, 255, 0.06) !important;
-    -webkit-tap-highlight-color: transparent;
-    transform: translateZ(0);
+  background-color: rgba(115, 102, 255, 0.06) !important;
+  border-color: rgba(115, 102, 255, 0.06) !important;
+  -webkit-tap-highlight-color: transparent;
+  transform: translateZ(0);
 }
 .txt-twitter {
-    color: #6fa2d8 !important;
+  color: #6fa2d8 !important;
 }
 .txt-fb {
-    color: #50598e !important;
+  color: #50598e !important;
 }
 .login-card .login-main .theme-form p {
-    margin-bottom: 25px;
-    font-size: 14px;
-    color: #898989;
+  margin-bottom: 25px;
+  font-size: 14px;
+  color: #898989;
 }
 .ms-2 {
-    margin-left: 0.5rem !important;
+  margin-left: 0.5rem !important;
 }
 .mb-0 {
-    margin-bottom: 0 !important;
+  margin-bottom: 0 !important;
 }
 .mt-4 {
-    margin-top: 1.5rem !important;
+  margin-top: 1.5rem !important;
 }
 .login-card .login-main .theme-form .or {
-    position: relative;
+  position: relative;
 }
 .login-card .login-main .theme-form .or:before {
-    content: "";
-    position: absolute;
-    width: 65%;
-    height: 2px;
-    background-color: #ffc402;
-    top: 9px;
-    z-index: 0;
-    right: 0;
+  content: "";
+  position: absolute;
+  width: 65%;
+  height: 2px;
+  background-color: #ffc402;
+  top: 9px;
+  z-index: 0;
+  right: 0;
 }
 .text-muted {
-    --bs-text-opacity: 1;
-    color: var(--bs-secondary-color) !important;
-    font-size: 1rem;
-    font-weight: 500;
-    line-height: 1.2;
+  --bs-text-opacity: 1;
+  color: var(--bs-secondary-color) !important;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.2;
 }
 .checkbox label {
-    display: inline-block;
-    position: relative;
-    padding-left: 16px;
-    cursor: pointer;
-    margin-top: 10px;
-    margin-bottom: 10px;
+  display: inline-block;
+  position: relative;
+  padding-left: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 .login-card .login-main .theme-form label {
-    font-size: 14px;
+  font-size: 14px;
 }
 .login-card .login-main .theme-form label {
-    font-size: 15px;
-    letter-spacing: 0.4px;
+  font-size: 15px;
+  letter-spacing: 0.4px;
 }
 .theme-form .checkbox label {
-    padding-left: 10px;
+  padding-left: 10px;
 }
 .login-card .login-main .theme-form input {
-    background-color: #f3f3ff;
-    transition: all 0.3s ease;
-    font-family: 'Circular' !important;
+  background-color: #f3f3ff;
+  transition: all 0.3s ease;
+  font-family: "Circular" !important;
 }
-.checkbox input[type=checkbox] {
-    opacity: 0;
+.checkbox input[type="checkbox"] {
+  opacity: 0;
 }
-[type=checkbox], [type=radio] {
-    box-sizing: border-box;
-    padding: 0;
+[type="checkbox"],
+[type="radio"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+@media (min-width: 0px) {
+  .grey-2-text {
+    color: #6b7b8a !important;
+  }
+}
+.cursor-pointer {
+  cursor: pointer;
+}
+.cursor-pointer svg{
+    margin-right: 10px;
 }
 /* .btn {
     font-size: 14px;

@@ -1,10 +1,97 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Login.css";
+import axiosInstance from "../../../../utils/axiosInstance";
+import "react-toastify/dist/ReactToastify.css";
+import RiseLoader from "react-spinners/RiseLoader";
+import { ToastContainer, toast } from "react-toastify";
 
+
+const override = {
+  display: "block",
+  margin: "0 auto",
+  borderColor: "#e55812",
+  paddingRight: "10px",
+};
 function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [color, setColor] = useState("#fff");
+  const [formError, setFormError] = useState(false);
+  const navigate = useNavigate();
+
+  const emailChangeHandler = (e) => {
+    setEmail(e.target.value);
+  };
+  const passwordChangeHandler = (e) => {
+    setPassword(e.target.value);
+  };
+  const passwordView = () => {
+    setShowPassword(!showPassword);
+  };
+  const submitHandler = async (e) => {
+    e.preventDefault();
+    if (email != "" || password != "") {
+      setFormError(false);
+      setLoading(true);
+      const formData = new FormData();
+      // Append some data to the FormData
+      formData.append("username", email);
+      formData.append("password", password);
+  
+      try {
+        const response = await axiosInstance.post("/auth/login", formData, {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+        });
+        const role = response.data.role;
+        localStorage.setItem("access_token", response.data.access_token);
+        localStorage.setItem("user_role", response.data.role);
+        localStorage.setItem("userId", response.data.userId);
+  
+        notify("Login Successfully", "success");
+        switch (role) {
+          case "admin":
+            navigate("/admin/dashboard");
+            break;
+          case "mentee":
+            navigate("/mentee/dashboard");
+            break;
+          case "mentor":
+            navigate("/mentor/dashboard");
+            break;
+          default:
+            navigate("/signIn");
+        }
+      } catch (error) {
+        console.error(error);
+        notify(error.response.data.detail, "error");
+      } finally {
+        setLoading(false);
+      }
+    }else{
+      notify("Please fill all the fields", "error");
+      setFormError(true);
+    }
+  };
+  const notify = (message, type) => {
+    if (type === "success") {
+      toast.success(message, {
+        icon: "👏",
+      });
+    } else if (type === "error") {
+      toast.error(message, {
+        icon: "😬",
+      });
+    }
+  };
   return (
     <>
       <div className="container-fluid" style={{ marginTop: "80px" }}>
+        <ToastContainer autoClose={1500} />
         <div className="row">
           <div
             className="col-md-7"
@@ -19,30 +106,71 @@ function Login() {
             <div className="login-card login-dark">
               <div>
                 <div className="login-main">
-                  <form className="theme-form">
+                  <form className="theme-form" onSubmit={submitHandler}>
                     <h4>Sign in to account</h4>
                     <p>Enter your email & password to login</p>
+                    <p className="error">{formError && "Please fill all the fields"}</p>
                     <div className="form-group">
                       <label className="col-form-label">Email Address</label>
                       <input
                         className="form-control"
                         type="email"
                         required=""
-                        placeholder="Test@gmail.com"
+                        placeholder="test@gmail.com"
+                        onChange={emailChangeHandler}
+                        value={email}
                       />
                     </div>
                     <div className="form-group">
                       <label className="col-form-label">Password</label>
-                      <div className="form-input position-relative">
+
+                      <div className="form-input position-relativ position-relative d-flex align-items-center input-container">
                         <input
                           className="form-control"
-                          type="password"
+                          type={showPassword ? "text" : "password"}
                           name="login[password]"
                           required=""
                           placeholder="*********"
+                          onChange={passwordChangeHandler}
+                          value={password}
                         />
-                        <div className="show-hide">
-                          <span className="show"> </span>
+                        <div
+                          className="cursor-pointer grey-2-text"
+                          onClick={passwordView}
+                        >
+                          <svg
+                            width="16px"
+                            height="16px"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <g id="SVGRepo_bgCarrier" strokeWidth="0" />
+
+                            <g
+                              id="SVGRepo_tracerCarrier"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+
+                            <g id="SVGRepo_iconCarrier">
+                              {" "}
+                              <path
+                                d="M15.0007 12C15.0007 13.6569 13.6576 15 12.0007 15C10.3439 15 9.00073 13.6569 9.00073 12C9.00073 10.3431 10.3439 9 12.0007 9C13.6576 9 15.0007 10.3431 15.0007 12Z"
+                                stroke="#000000"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />{" "}
+                              <path
+                                d="M12.0012 5C7.52354 5 3.73326 7.94288 2.45898 12C3.73324 16.0571 7.52354 19 12.0012 19C16.4788 19 20.2691 16.0571 21.5434 12C20.2691 7.94291 16.4788 5 12.0012 5Z"
+                                stroke="#000000"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />{" "}
+                            </g>
+                          </svg>
                         </div>
                       </div>
                     </div>
@@ -51,7 +179,19 @@ function Login() {
                         className="btn btn-primary btn-block w-100 mt-3"
                         type="submit"
                       >
-                        Sign in
+                        {loading ? (
+                          <RiseLoader
+                            color={color}
+                            loading={loading}
+                            cssOverride={override}
+                            size={10}
+                            aria-label="Loading Spinner"
+                            data-testid="loader"
+                            className="loader"
+                          />
+                        ) : (
+                          " Sign in"
+                        )}
                       </button>
                     </div>
                     <h6 className="text-muted mt-4 or">Follow us</h6>

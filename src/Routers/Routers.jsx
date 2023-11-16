@@ -6,6 +6,8 @@ import RentCars from '../frontend/Pages/RentCars/RentCars'
 import CarDetails from '../frontend/Pages/CarDetails/CarDetails'
 import ImportOnOrder from '../frontend/Pages/ImportOnOrder/ImportOnOrder'
 import Login from '../frontend/Pages/Auth/Login'
+import PrivateRoutes from '../../utils/PrivateRoutes'
+import AdminDashboard from '../dashboard/pages/admin/AdminDashboard'
 
 function Routers() {
   return (
@@ -16,6 +18,15 @@ function Routers() {
     <Route path='/RentCars' element={<RentCars />} />
     <Route path='/ImportOnOrder' element={<ImportOnOrder />} />
     <Route path='/login' element={<Login />} />
+    <Route path="dashboard" element={<AdminDashboard />} />
+    <Route path="/admin/*" element={<PrivateRoutes />}>
+        <Route path="dashboard" element={<AdminDashboard />} />
+        {/* <Route path="users" element={<AdminUsers />} />
+        <Route path="bookings" element={<AdminBookings />} />
+        <Route path="calendar" element={<AdminCalendar />} />
+        <Route path="vouchers" element={<AdminVoucher />} />
+        <Route path="support" element={<Support />} /> */}
+      </Route>
    </Routes>
   )
 }

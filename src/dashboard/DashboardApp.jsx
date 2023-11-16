@@ -2,10 +2,9 @@ import { useState, useEffect } from "react";
 import reactLogo from "../assets/react.svg";
 import viteLogo from "/vite.svg";
 import "../frontend/styles/App.css";
-import Layout from "../frontend/layout/Layout";
+import BackendLayout from "./Layout/BackendLayout";
 
 function App() {
-  const [count, setCount] = useState(0);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
@@ -44,7 +43,7 @@ function App() {
           </div>
         </div>
       ) : (
-        <Layout />
+        <BackendLayout />
       )}
     </>
   );

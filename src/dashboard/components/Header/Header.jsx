@@ -58,1655 +58,261 @@ function Header() {
 
   return (
     <>
-      <div className="sidebar-wrapper" data-sidebar-layout="stroke-svg">
-        <div>
-          <div className="logo-wrapper">
-            <a href="index.html">
-              <img
-                className="img-fluid for-light"
-                src="../assets/images/logo/logo.png"
-                alt=""
-              />
-              <img
-                className="img-fluid for-dark"
-                src="../assets/images/logo/logo_dark.png"
-                alt=""
-              />
-            </a>
-            <div className="back-btn">
-              <i className="fa fa-angle-left"></i>
-            </div>
-            <div className="toggle-sidebar">
-              <i
-                className="status_toggle middle sidebar-toggle"
-                data-feather="grid"
+      <div className="app-menu navbar-menu">
+        <div className="navbar-brand-box">
+          <a href="index.html" className="logo logo-dark">
+            <span className="logo-sm">
+              <svg
+                width="890.5000000000001"
+                height="133.12576794511895"
+                viewBox="0 0 369.6666666666667 55.26351362572971"
+                className="css-1j8o68f"
               >
-                {" "}
-              </i>
-            </div>
-          </div>
-          <div className="logo-icon-wrapper">
-            <a href="index.html">
-              <img
-                className="img-fluid"
-                src="../assets/images/logo/logo-icon.png"
-                alt=""
-              />
-            </a>
-          </div>
-          <nav className="sidebar-main">
-            <div className="left-arrow" id="left-arrow">
-              <i data-feather="arrow-left"></i>
-            </div>
-            <div id="sidebar-menu">
-              <ul className="sidebar-links" id="simple-bar">
-                <li className="back-btn">
-                  <a href="index.html">
-                    <img
-                      className="img-fluid"
-                      src="../assets/images/logo/logo-icon.png"
-                      alt=""
-                    />
-                  </a>
-                  <div className="mobile-back text-end">
-                    <span>Back</span>
-                    <i
-                      className="fa fa-angle-right ps-2"
-                      aria-hidden="true"
-                    ></i>
-                  </div>
-                </li>
-                <li className="pin-title sidebar-main-title">
-                  <div>
-                    <h6>Pinned</h6>
-                  </div>
-                </li>
-                <li className="sidebar-main-title">
-                  <div>
-                    <h6 className="lan-1">General</h6>
-                  </div>
-                </li>
-                <li className="sidebar-list">
-                  <i className="fa fa-thumb-tack"></i>
-                  <label className="badge badge-light-primary">8</label>
-                  <a className="sidebar-link sidebar-title" href="#">
-                    <svg className="stroke-icon">
-                      <use href="../assets/svg/icon-sprite.svg#stroke-home"></use>
-                    </svg>
-                    <svg className="fill-icon">
-                      <use href="../assets/svg/icon-sprite.svg#fill-home"></use>
-                    </svg>
-                    <span className="lan-3">Dashboard </span>
-                  </a>
-                  <ul className="sidebar-submenu">
-                    <li>
-                      <a className="lan-4" href="index.html">
-                        Default
-                      </a>
-                    </li>
-                    <li>
-                      <a className="lan-5" href="dashboard-02.html">
-                        Ecommerce
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/dashboard-03.html">
-                        Online course
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/dashboard-04.html">
-                        Crypto
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/dashboard-05.html">
-                        Social
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/dashboard-06.html">
-                        NFT
-                      </a>
-                    </li>
-                    <li>
-                      {" "}
-                      <a href="https://admin.pixelstrap.com/cuba/template/dashboard-07.html">
-                        School management
-                      </a>
-                    </li>
-                    <li>
-                      {" "}
-                      <a href="https://admin.pixelstrap.com/cuba/template/dashboard-08.html">
-                        POS
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li className="sidebar-list">
-                  <i className="fa fa-thumb-tack"></i>
-                  <a className="sidebar-link sidebar-title" href="#">
-                    <svg className="stroke-icon">
-                      <use href="../assets/svg/icon-sprite.svg#stroke-widget"></use>
-                    </svg>
-                    <svg className="fill-icon">
-                      <use href="../assets/svg/icon-sprite.svg#fill-widget"></use>
-                    </svg>
-                    <span className="lan-6">Widgets</span>
-                  </a>
-                  <ul className="sidebar-submenu">
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/general-widget.html">
-                        General
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/chart-widget.html">
-                        Chart
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li className="sidebar-list">
-                  <i className="fa fa-thumb-tack"></i>
-                  <a className="sidebar-link sidebar-title" href="#">
-                    <svg className="stroke-icon">
-                      <use href="../assets/svg/icon-sprite.svg#stroke-layout"></use>
-                    </svg>
-                    <svg className="fill-icon">
-                      <use href="../assets/svg/icon-sprite.svg#fill-layout"></use>
-                    </svg>
-                    <span className="lan-7">Page layout</span>
-                  </a>
-                  <ul className="sidebar-submenu">
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/box-layout.html">
-                        Boxed
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/layout-rtl.html">
-                        RTL
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/layout-dark.html">
-                        Dark Layout
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/hide-on-scroll.html">
-                        Hide Nav Scroll
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/footer-light.html">
-                        Footer Light
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/footer-dark.html">
-                        Footer Dark
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/footer-fixed.html">
-                        Footer Fixed
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li className="sidebar-main-title">
-                  <div>
-                    <h6 className="lan-8">Applications</h6>
-                  </div>
-                </li>
-                <li className="sidebar-list">
-                  <i className="fa fa-thumb-tack"> </i>
-                  <label className="badge badge-light-secondary">New</label>
-                  <a className="sidebar-link sidebar-title" href="#">
-                    <svg className="stroke-icon">
-                      <use href="../assets/svg/icon-sprite.svg#stroke-project"></use>
-                    </svg>
-                    <svg className="fill-icon">
-                      <use href="../assets/svg/icon-sprite.svg#fill-project"></use>
-                    </svg>
-                    <span>Project </span>
-                  </a>
-                  <ul className="sidebar-submenu">
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/projects.html">
-                        Project List
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/projectcreate.html">
-                        Create new
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li className="sidebar-list">
-                  <i className="fa fa-thumb-tack"></i>
-                  <a
-                    className="sidebar-link sidebar-title link-nav"
-                    href="https://admin.pixelstrap.com/cuba/template/file-manager.html"
-                  >
-                    <svg className="stroke-icon">
-                      <use href="../assets/svg/icon-sprite.svg#stroke-file"></use>
-                    </svg>
-                    <svg className="fill-icon">
-                      <use href="../assets/svg/icon-sprite.svg#fill-file"></use>
-                    </svg>
-                    <span>File manager</span>
-                  </a>
-                </li>
-                <li className="sidebar-list">
-                  <i className="fa fa-thumb-tack"></i>
-                  <label className="badge badge-light-danger">Latest </label>
-                  <a
-                    className="sidebar-link sidebar-title link-nav"
-                    href="https://admin.pixelstrap.com/cuba/template/kanban.html"
-                  >
-                    <svg className="stroke-icon">
-                      <use href="../assets/svg/icon-sprite.svg#stroke-board"></use>
-                    </svg>
-                    <svg className="fill-icon">
-                      <use href="../assets/svg/icon-sprite.svg#fill-board"></use>
-                    </svg>
-                    <span>kanban Board</span>
-                  </a>
-                </li>
-                <li className="sidebar-list">
-                  <i className="fa fa-thumb-tack"></i>
-                  <a className="sidebar-link sidebar-title" href="#">
-                    <svg className="stroke-icon">
-                      <use href="../assets/svg/icon-sprite.svg#stroke-ecommerce"></use>
-                    </svg>
-                    <svg className="fill-icon">
-                      <use href="../assets/svg/icon-sprite.svg#fill-ecommerce"></use>
-                    </svg>
-                    <span>Ecommerce</span>
-                  </a>
-                  <ul className="sidebar-submenu">
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/add-products.html">
-                        Add Products
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/product.html">
-                        Product
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/category.html">
-                        Category page
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/product-page.html">
-                        Product page
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/list-products.html">
-                        Product list
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/payment-details.html">
-                        Payment Details
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/order-history.html">
-                        Order History
-                      </a>
-                    </li>
-                    <li>
-                      <a className="submenu-title" href="#">
-                        Invoices
-                        <span className="sub-arrow">
-                          <i className="fa fa-angle-right"></i>
-                        </span>
-                      </a>
-                      <ul className="nav-sub-childmenu submenu-content">
-                        <li>
-                          <a href="https://admin.pixelstrap.com/cuba/template/invoice-1.html">
-                            Invoice-1
-                          </a>
-                        </li>
-                        <li>
-                          <a href="https://admin.pixelstrap.com/cuba/template/invoice-2.html">
-                            Invoice-2
-                          </a>
-                        </li>
-                        <li>
-                          <a href="https://admin.pixelstrap.com/cuba/template/invoice-3.html">
-                            Invoice-3
-                          </a>
-                        </li>
-                        <li>
-                          <a href="https://admin.pixelstrap.com/cuba/template/invoice-4.html">
-                            Invoice-4
-                          </a>
-                        </li>
-                        <li>
-                          <a href="https://admin.pixelstrap.com/cuba/template/invoice-5.html">
-                            Invoice-5
-                          </a>
-                        </li>
-                        <li>
-                          <a href="https://admin.pixelstrap.com/cuba/template/invoice-template.html">
-                            Invoice-6
-                          </a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li>
-                      <a href="cart.html">Cart</a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/list-wish.html">
-                        Wishlist
-                      </a>
-                    </li>
-                    <li>
-                      <a href="checkout.html">Checkout</a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/pricing.html">
-                        Pricing{" "}
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li className="sidebar-list">
-                  <i className="fa fa-thumb-tack"></i>
-                  <a
-                    className="sidebar-link sidebar-title link-nav"
-                    href="letter-box.html"
-                  >
-                    <svg className="stroke-icon">
-                      <use href="../assets/svg/icon-sprite.svg#stroke-email"></use>
-                    </svg>
-                    <svg className="fill-icon">
-                      <use href="../assets/svg/icon-sprite.svg#fill-email"></use>
-                    </svg>
-                    <span>Letter Box</span>
-                  </a>
-                </li>
-                <li className="sidebar-list">
-                  <i className="fa fa-thumb-tack"></i>
-                  <a className="sidebar-link sidebar-title" href="#">
-                    <svg className="stroke-icon">
-                      <use href="../assets/svg/icon-sprite.svg#stroke-chat"></use>
-                    </svg>
-                    <svg className="fill-icon">
-                      <use href="../assets/svg/icon-sprite.svg#fill-chat"></use>
-                    </svg>
-                    <span>Chat</span>
-                  </a>
-                  <ul className="sidebar-submenu">
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/private-chat.html">
-                        Private Chat
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/group-chat.html">
-                        Group Chat
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li className="sidebar-list">
-                  <i className="fa fa-thumb-tack"></i>
-                  <a className="sidebar-link sidebar-title" href="#">
-                    <svg className="stroke-icon">
-                      <use href="../assets/svg/icon-sprite.svg#stroke-user"></use>
-                    </svg>
-                    <svg className="fill-icon">
-                      <use href="../assets/svg/icon-sprite.svg#fill-user"></use>
-                    </svg>
-                    <span>Users</span>
-                  </a>
-                  <ul className="sidebar-submenu">
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/user-profile.html">
-                        Users Profile
-                      </a>
-                    </li>
-                    <li>
-                      <a href="edit-profile.html">Users Edit</a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/user-cards.html">
-                        Users Cards
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li className="sidebar-list">
-                  <i className="fa fa-thumb-tack"></i>
-                  <a
-                    className="sidebar-link sidebar-title link-nav"
-                    href="https://admin.pixelstrap.com/cuba/template/bookmark.html"
-                  >
-                    <svg className="stroke-icon">
-                      <use href="../assets/svg/icon-sprite.svg#stroke-bookmark"></use>
-                    </svg>
-                    <svg className="fill-icon">
-                      <use href="../assets/svg/icon-sprite.svg#fill-bookmark">
-                        {" "}
-                      </use>
-                    </svg>
-                    <span>Bookmarks</span>
-                  </a>
-                </li>
-                <li className="sidebar-list">
-                  <i className="fa fa-thumb-tack"></i>
-                  <a
-                    className="sidebar-link sidebar-title link-nav"
-                    href="https://admin.pixelstrap.com/cuba/template/contacts.html"
-                  >
-                    <svg className="stroke-icon">
-                      <use href="../assets/svg/icon-sprite.svg#stroke-contact"></use>
-                    </svg>
-                    <svg className="fill-icon">
-                      <use href="../assets/svg/icon-sprite.svg#fill-contact">
-                        {" "}
-                      </use>
-                    </svg>
-                    <span>Contacts</span>
-                  </a>
-                </li>
-                <li className="sidebar-list">
-                  <i className="fa fa-thumb-tack"></i>
-                  <a
-                    className="sidebar-link sidebar-title link-nav"
-                    href="task.html"
-                  >
-                    <svg className="stroke-icon">
-                      <use href="../assets/svg/icon-sprite.svg#stroke-task"></use>
-                    </svg>
-                    <svg className="fill-icon">
-                      <use href="../assets/svg/icon-sprite.svg#fill-task">
-                        {" "}
-                      </use>
-                    </svg>
-                    <span>Tasks</span>
-                  </a>
-                </li>
-                <li className="sidebar-list">
-                  <i className="fa fa-thumb-tack"></i>
-                  <a
-                    className="sidebar-link sidebar-title link-nav"
-                    href="https://admin.pixelstrap.com/cuba/template/calendar-basic.html"
-                  >
-                    <svg className="stroke-icon">
-                      <use href="../assets/svg/icon-sprite.svg#stroke-calendar"></use>
-                    </svg>
-                    <svg className="fill-icon">
-                      <use href="../assets/svg/icon-sprite.svg#fill-calender"></use>
-                    </svg>
-                    <span>Calendar</span>
-                  </a>
-                </li>
-                <li className="sidebar-list">
-                  <i className="fa fa-thumb-tack"></i>
-                  <a
-                    className="sidebar-link sidebar-title link-nav"
-                    href="https://admin.pixelstrap.com/cuba/template/social-app.html"
-                  >
-                    <svg className="stroke-icon">
-                      <use href="../assets/svg/icon-sprite.svg#stroke-social"></use>
-                    </svg>
-                    <svg className="fill-icon">
-                      <use href="../assets/svg/icon-sprite.svg#fill-social">
-                        {" "}
-                      </use>
-                    </svg>
-                    <span>Social App</span>
-                  </a>
-                </li>
-                <li className="sidebar-list">
-                  <i className="fa fa-thumb-tack"></i>
-                  <a
-                    className="sidebar-link sidebar-title link-nav"
-                    href="https://admin.pixelstrap.com/cuba/template/to-do.html"
-                  >
-                    <svg className="stroke-icon">
-                      <use href="../assets/svg/icon-sprite.svg#stroke-to-do"></use>
-                    </svg>
-                    <svg className="fill-icon">
-                      <use href="../assets/svg/icon-sprite.svg#fill-to-do">
-                        {" "}
-                      </use>
-                    </svg>
-                    <span>To-Do</span>
-                  </a>
-                </li>
-                <li className="sidebar-list">
-                  <i className="fa fa-thumb-tack"></i>
-                  <a
-                    className="sidebar-link sidebar-title link-nav"
-                    href="https://admin.pixelstrap.com/cuba/template/search.html"
-                  >
-                    <svg className="stroke-icon">
-                      <use href="../assets/svg/icon-sprite.svg#stroke-search"></use>
-                    </svg>
-                    <svg className="fill-icon">
-                      <use href="../assets/svg/icon-sprite.svg#fill-search">
-                        {" "}
-                      </use>
-                    </svg>
-                    <span>Search Result</span>
-                  </a>
-                </li>
-                <li className="sidebar-main-title">
-                  <div>
-                    <h6>Forms & Table</h6>
-                  </div>
-                </li>
-                <li className="sidebar-list">
-                  <i className="fa fa-thumb-tack"></i>
-                  <a className="sidebar-link sidebar-title" href="#">
-                    <svg className="stroke-icon">
-                      <use href="../assets/svg/icon-sprite.svg#stroke-form"></use>
-                    </svg>
-                    <svg className="fill-icon">
-                      <use href="../assets/svg/icon-sprite.svg#fill-form">
-                        {" "}
-                      </use>
-                    </svg>
-                    <span>Forms</span>
-                  </a>
-                  <ul className="sidebar-submenu">
-                    <li>
-                      <a className="submenu-title" href="#">
-                        Form Controls
-                        <span className="sub-arrow">
-                          <i className="fa fa-angle-right"></i>
-                        </span>
-                      </a>
-                      <ul className="nav-sub-childmenu submenu-content">
-                        <li>
-                          <a href="https://admin.pixelstrap.com/cuba/template/form-validation.html">
-                            Form Validation
-                          </a>
-                        </li>
-                        <li>
-                          <a href="https://admin.pixelstrap.com/cuba/template/base-input.html">
-                            Base Inputs
-                          </a>
-                        </li>
-                        <li>
-                          <a href="https://admin.pixelstrap.com/cuba/template/radio-checkbox-control.html">
-                            Checkbox & Radio
-                          </a>
-                        </li>
-                        <li>
-                          <a href="https://admin.pixelstrap.com/cuba/template/input-group.html">
-                            Input Groups
-                          </a>
-                        </li>
-                        <li>
-                          {" "}
-                          <a href="https://admin.pixelstrap.com/cuba/template/input-mask.html">
-                            Input Mask
-                          </a>
-                        </li>
-                        <li>
-                          <a href="https://admin.pixelstrap.com/cuba/template/megaoptions.html">
-                            Mega Options
-                          </a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li>
-                      <a className="submenu-title" href="#">
-                        Form Widgets
-                        <span className="sub-arrow">
-                          <i className="fa fa-angle-right"></i>
-                        </span>
-                      </a>
-                      <ul className="nav-sub-childmenu submenu-content">
-                        <li>
-                          <a href="https://admin.pixelstrap.com/cuba/template/datepicker.html">
-                            Datepicker
-                          </a>
-                        </li>
-                        <li>
-                          <a href="https://admin.pixelstrap.com/cuba/template/touchspin.html">
-                            Touchspin
-                          </a>
-                        </li>
-                        <li>
-                          <a href="https://admin.pixelstrap.com/cuba/template/select2.html">
-                            Select2
-                          </a>
-                        </li>
-                        <li>
-                          <a href="https://admin.pixelstrap.com/cuba/template/switch.html">
-                            Switch
-                          </a>
-                        </li>
-                        <li>
-                          <a href="https://admin.pixelstrap.com/cuba/template/typeahead.html">
-                            Typeahead
-                          </a>
-                        </li>
-                        <li>
-                          <a href="https://admin.pixelstrap.com/cuba/template/clipboard.html">
-                            Clipboard
-                          </a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li>
-                      <a className="submenu-title" href="#">
-                        Form layout
-                        <span className="sub-arrow">
-                          <i className="fa fa-angle-right"></i>
-                        </span>
-                      </a>
-                      <ul className="nav-sub-childmenu submenu-content">
-                        <li>
-                          <a href="https://admin.pixelstrap.com/cuba/template/form-wizard.html">
-                            Form Wizard 1
-                          </a>
-                        </li>
-                        <li>
-                          <a href="https://admin.pixelstrap.com/cuba/template/form-wizard-two.html">
-                            Form Wizard 2
-                          </a>
-                        </li>
-                        <li>
-                          <a href="https://admin.pixelstrap.com/cuba/template/two-factor.html">
-                            Two Factor
-                          </a>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-                <li className="sidebar-list">
-                  <i className="fa fa-thumb-tack"></i>
-                  <a className="sidebar-link sidebar-title" href="#">
-                    <svg className="stroke-icon">
-                      <use href="../assets/svg/icon-sprite.svg#stroke-table"></use>
-                    </svg>
-                    <svg className="fill-icon">
-                      <use href="../assets/svg/icon-sprite.svg#fill-table"></use>
-                    </svg>
-                    <span>Tables</span>
-                  </a>
-                  <ul className="sidebar-submenu">
-                    <li>
-                      <a className="submenu-title" href="#">
-                        Bootstrap Tables
-                        <span className="sub-arrow">
-                          <i className="fa fa-angle-right"></i>
-                        </span>
-                      </a>
-                      <ul className="nav-sub-childmenu submenu-content">
-                        <li>
-                          <a href="https://admin.pixelstrap.com/cuba/template/bootstrap-basic-table.html">
-                            Basic Tables
-                          </a>
-                        </li>
-                        <li>
-                          <a href="https://admin.pixelstrap.com/cuba/template/table-components.html">
-                            Table components
-                          </a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li>
-                      <a className="submenu-title" href="#">
-                        Data Tables
-                        <span className="sub-arrow">
-                          <i className="fa fa-angle-right"></i>
-                        </span>
-                      </a>
-                      <ul className="nav-sub-childmenu submenu-content">
-                        <li>
-                          <a href="https://admin.pixelstrap.com/cuba/template/datatable-basic-init.html">
-                            Basic Init
-                          </a>
-                        </li>
-                        <li>
-                          {" "}
-                          <a href="https://admin.pixelstrap.com/cuba/template/datatable-advance.html">
-                            Advance Init{" "}
-                          </a>
-                        </li>
-                        <li>
-                          <a href="https://admin.pixelstrap.com/cuba/template/datatable-API.html">
-                            API
-                          </a>
-                        </li>
-                        <li>
-                          <a href="https://admin.pixelstrap.com/cuba/template/datatable-data-source.html">
-                            Data Sources
-                          </a>
-                        </li>
-                      </ul>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/datatable-ext-autofill.html">
-                        Ex. Data Tables
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/jsgrid-table.html">
-                        Js Grid Table{" "}
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li className="sidebar-main-title">
-                  <div>
-                    <h6>Components</h6>
-                  </div>
-                </li>
-                <li className="sidebar-list">
-                  <i className="fa fa-thumb-tack"></i>
-                  <a className="sidebar-link sidebar-title" href="#">
-                    <svg className="stroke-icon">
-                      <use href="../assets/svg/icon-sprite.svg#stroke-ui-kits"></use>
-                    </svg>
-                    <svg className="fill-icon">
-                      <use href="../assets/svg/icon-sprite.svg#fill-ui-kits"></use>
-                    </svg>
-                    <span>Ui Kits</span>
-                  </a>
-                  <ul className="sidebar-submenu">
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/typography.html">
-                        Typography
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/avatars.html">
-                        Avatars
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/helper-classes.html">
-                        helper classes
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/grid.html">
-                        Grid
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/tag-pills.html">
-                        Tag & pills
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/progress-bar.html">
-                        Progress
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/modal.html">
-                        Modal
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/alert.html">
-                        Alert
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/popover.html">
-                        Popover
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/tooltip.html">
-                        Tooltip
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/dropdown.html">
-                        Dropdown
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/according.html">
-                        Accordion
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/tab-bootstrap.html">
-                        Tabs
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/list.html">
-                        Lists
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li className="sidebar-list">
-                  <i className="fa fa-thumb-tack"></i>
-                  <a className="sidebar-link sidebar-title" href="#">
-                    <svg className="stroke-icon">
-                      <use href="../assets/svg/icon-sprite.svg#stroke-bonus-kit"></use>
-                    </svg>
-                    <svg className="fill-icon">
-                      <use href="../assets/svg/icon-sprite.svg#fill-bonus-kit"></use>
-                    </svg>
-                    <span>Bonus Ui</span>
-                  </a>
-                  <ul className="sidebar-submenu">
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/scrollable.html">
-                        Scrollable
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/tree.html">
-                        Tree view
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/toasts.html">
-                        Toasts
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/rating.html">
-                        Rating
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/dropzone.html">
-                        dropzone
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/tour.html">
-                        Tour
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/sweet-alert2.html">
-                        SweetAlert2
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/modal-animated.html">
-                        Animated Modal
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/owl-carousel.html">
-                        Owl Carousel
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/ribbons.html">
-                        Ribbons
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/pagination.html">
-                        Pagination
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/breadcrumb.html">
-                        Breadcrumb
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/range-slider.html">
-                        Range Slider
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/image-cropper.html">
-                        Image cropper
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/basic-card.html">
-                        Basic Card
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/creative-card.html">
-                        Creative Card
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/dragable-card.html">
-                        Draggable Card
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/timeline-v-1.html">
-                        Timeline{" "}
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li className="sidebar-list">
-                  <i className="fa fa-thumb-tack"></i>
-                  <a className="sidebar-link sidebar-title" href="#">
-                    <svg className="stroke-icon">
-                      <use href="../assets/svg/icon-sprite.svg#stroke-animation"></use>
-                    </svg>
-                    <svg className="fill-icon">
-                      <use href="../assets/svg/icon-sprite.svg#fill-animation"></use>
-                    </svg>
-                    <span>Animation</span>
-                  </a>
-                  <ul className="sidebar-submenu">
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/animate.html">
-                        Animate
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/scroll-reval.html">
-                        Scroll Reveal
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/AOS.html">
-                        AOS animation
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/tilt.html">
-                        Tilt Animation
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/wow.html">
-                        Wow Animation
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li className="sidebar-list">
-                  <i className="fa fa-thumb-tack"></i>
-                  <a className="sidebar-link sidebar-title" href="#">
-                    <svg className="stroke-icon">
-                      <use href="../assets/svg/icon-sprite.svg#stroke-icons"></use>
-                    </svg>
-                    <svg className="fill-icon">
-                      <use href="../assets/svg/icon-sprite.svg#fill-icons"></use>
-                    </svg>
-                    <span>Icons</span>
-                  </a>
-                  <ul className="sidebar-submenu">
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/flag-icon.html">
-                        Flag icon
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/font-awesome.html">
-                        Fontawesome Icon
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/ico-icon.html">
-                        Ico Icon
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/themify-icon.html">
-                        Themify Icon
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/feather-icon.html">
-                        Feather icon
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/whether-icon.html">
-                        Whether Icon
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li className="sidebar-list">
-                  <i className="fa fa-thumb-tack"></i>
-                  <a className="sidebar-link sidebar-title" href="#">
-                    <svg className="stroke-icon">
-                      <use href="../assets/svg/icon-sprite.svg#stroke-button"></use>
-                    </svg>
-                    <svg className="fill-icon">
-                      <use href="../assets/svg/icon-sprite.svg#fill-botton"></use>
-                    </svg>
-                    <span>Buttons</span>
-                  </a>
-                  <ul className="sidebar-submenu">
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/buttons.html">
-                        Default Style
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/buttons-flat.html">
-                        Flat Style
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/buttons-edge.html">
-                        Edge Style
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/raised-button.html">
-                        Raised Style
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/button-group.html">
-                        Button Group
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li className="sidebar-list">
-                  <i className="fa fa-thumb-tack"></i>
-                  <a className="sidebar-link sidebar-title" href="#">
-                    <svg className="stroke-icon">
-                      <use href="../assets/svg/icon-sprite.svg#stroke-charts"></use>
-                    </svg>
-                    <svg className="fill-icon">
-                      <use href="../assets/svg/icon-sprite.svg#fill-charts"></use>
-                    </svg>
-                    <span>Charts</span>
-                  </a>
-                  <ul className="sidebar-submenu">
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/echarts.html">
-                        Echarts
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/chart-apex.html">
-                        Apex Chart
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/chart-google.html">
-                        Google Chart
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/chart-sparkline.html">
-                        Sparkline chart
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/chart-flot.html">
-                        Flot Chart
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/chart-knob.html">
-                        Knob Chart
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/chart-morris.html">
-                        Morris Chart
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/chartjs.html">
-                        Chatjs Chart
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/chartist.html">
-                        Chartist Chart
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/chart-peity.html">
-                        Peity Chart
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li className="sidebar-main-title">
-                  <div>
-                    <h6>Pages</h6>
-                  </div>
-                </li>
-                <li className="sidebar-list">
-                  <i className="fa fa-thumb-tack"></i>
-                  <a
-                    className="sidebar-link sidebar-title link-nav"
-                    href="https://admin.pixelstrap.com/cuba/template/landing-page.html"
-                  >
-                    <svg className="stroke-icon">
-                      <use href="../assets/svg/icon-sprite.svg#stroke-landing-page"></use>
-                    </svg>
-                    <svg className="fill-icon">
-                      <use href="../assets/svg/icon-sprite.svg#fill-landing-page"></use>
-                    </svg>
-                    <span>Landing page</span>
-                  </a>
-                </li>
-                <li className="sidebar-list">
-                  <i className="fa fa-thumb-tack"></i>
-                  <a
-                    className="sidebar-link sidebar-title link-nav"
-                    href="https://admin.pixelstrap.com/cuba/template/sample-page.html"
-                  >
-                    <svg className="stroke-icon">
-                      <use href="../assets/svg/icon-sprite.svg#stroke-sample-page"></use>
-                    </svg>
-                    <svg className="fill-icon">
-                      <use href="../assets/svg/icon-sprite.svg#fill-sample-page"></use>
-                    </svg>
-                    <span>Sample page</span>
-                  </a>
-                </li>
-                <li className="sidebar-list">
-                  <i className="fa fa-thumb-tack"></i>
-                  <a
-                    className="sidebar-link sidebar-title link-nav"
-                    href="https://admin.pixelstrap.com/cuba/template/internationalization.html"
-                  >
-                    <svg className="stroke-icon">
-                      <use href="../assets/svg/icon-sprite.svg#stroke-internationalization"></use>
-                    </svg>
-                    <svg className="fill-icon">
-                      <use href="../assets/svg/icon-sprite.svg#fill-internationalization"></use>
-                    </svg>
-                    <span>Internationalization</span>
-                  </a>
-                </li>
-                <li className="sidebar-list">
-                  <i className="fa fa-thumb-tack"></i>
-                  <a
-                    className="sidebar-link sidebar-title link-nav"
-                    href="https://admin.pixelstrap.com/cuba/starter-kit/index.html"
-                    target="_blank"
-                  >
-                    <svg className="stroke-icon">
-                      <use href="../assets/svg/icon-sprite.svg#stroke-starter-kit"></use>
-                    </svg>
-                    <svg className="fill-icon">
-                      <use href="../assets/svg/icon-sprite.svg#fill-starter-kit"></use>
-                    </svg>
-                    <span>Starter kit</span>
-                  </a>
-                </li>
-                <li className="mega-menu sidebar-list">
-                  <i className="fa fa-thumb-tack"></i>
-                  <a className="sidebar-link sidebar-title" href="#">
-                    <svg className="stroke-icon">
-                      <use href="../assets/svg/icon-sprite.svg#stroke-others"></use>
-                    </svg>
-                    <svg className="fill-icon">
-                      <use href="../assets/svg/icon-sprite.svg#fill-others"></use>
-                    </svg>
-                    <span>Others</span>
-                  </a>
-                  <div className="mega-menu-container menu-content">
-                    <div className="container-fluid">
-                      <div className="row">
-                        <div className="col mega-box">
-                          <div className="link-section">
-                            <div className="submenu-title">
-                              <h5>Error Page</h5>
-                            </div>
-                            <ul className="submenu-content opensubmegamenu">
-                              <li>
-                                <a href="https://admin.pixelstrap.com/cuba/template/error-400.html">
-                                  Error 400
-                                </a>
-                              </li>
-                              <li>
-                                <a href="https://admin.pixelstrap.com/cuba/template/error-401.html">
-                                  Error 401
-                                </a>
-                              </li>
-                              <li>
-                                <a href="https://admin.pixelstrap.com/cuba/template/error-403.html">
-                                  Error 403
-                                </a>
-                              </li>
-                              <li>
-                                <a href="https://admin.pixelstrap.com/cuba/template/error-404.html">
-                                  Error 404
-                                </a>
-                              </li>
-                              <li>
-                                <a href="https://admin.pixelstrap.com/cuba/template/error-500.html">
-                                  Error 500
-                                </a>
-                              </li>
-                              <li>
-                                <a href="https://admin.pixelstrap.com/cuba/template/error-503.html">
-                                  Error 503
-                                </a>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                        <div className="col mega-box">
-                          <div className="link-section">
-                            <div className="submenu-title">
-                              <h5> Authentication</h5>
-                            </div>
-                            <ul className="submenu-content opensubmegamenu">
-                              <li>
-                                <a href="login.html" target="_blank">
-                                  Login Simple
-                                </a>
-                              </li>
-                              <li>
-                                <a
-                                  href="https://admin.pixelstrap.com/cuba/template/login_one.html"
-                                  target="_blank"
-                                >
-                                  Login with bg image
-                                </a>
-                              </li>
-                              <li>
-                                <a
-                                  href="https://admin.pixelstrap.com/cuba/template/login_two.html"
-                                  target="_blank"
-                                >
-                                  Login with image two{" "}
-                                </a>
-                              </li>
-                              <li>
-                                <a
-                                  href="https://admin.pixelstrap.com/cuba/template/login-bs-validation.html"
-                                  target="_blank"
-                                >
-                                  Login With validation
-                                </a>
-                              </li>
-                              <li>
-                                <a
-                                  href="https://admin.pixelstrap.com/cuba/template/login-bs-tt-validation.html"
-                                  target="_blank"
-                                >
-                                  Login with tooltip
-                                </a>
-                              </li>
-                              <li>
-                                <a
-                                  href="https://admin.pixelstrap.com/cuba/template/login-sa-validation.html"
-                                  target="_blank"
-                                >
-                                  Login with sweetalert
-                                </a>
-                              </li>
-                              <li>
-                                <a href="sign-up.html" target="_blank">
-                                  Register Simple
-                                </a>
-                              </li>
-                              <li>
-                                <a
-                                  href="https://admin.pixelstrap.com/cuba/template/sign-up-one.html"
-                                  target="_blank"
-                                >
-                                  Register with Bg Image{" "}
-                                </a>
-                              </li>
-                              <li>
-                                <a
-                                  href="https://admin.pixelstrap.com/cuba/template/sign-up-two.html"
-                                  target="_blank"
-                                >
-                                  Register with image two
-                                </a>
-                              </li>
-                              <li>
-                                <a
-                                  href="https://admin.pixelstrap.com/cuba/template/sign-up-wizard.html"
-                                  target="_blank"
-                                >
-                                  Register wizard
-                                </a>
-                              </li>
-                              <li>
-                                <a href="https://admin.pixelstrap.com/cuba/template/unlock.html">
-                                  Unlock User
-                                </a>
-                              </li>
-                              <li>
-                                <a href="https://admin.pixelstrap.com/cuba/template/forget-password.html">
-                                  Forget Password
-                                </a>
-                              </li>
-                              <li>
-                                <a href="https://admin.pixelstrap.com/cuba/template/reset-password.html">
-                                  Reset Password
-                                </a>
-                              </li>
-                              <li>
-                                <a href="https://admin.pixelstrap.com/cuba/template/maintenance.html">
-                                  Maintenance
-                                </a>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                        <div className="col mega-box">
-                          <div className="link-section">
-                            <div className="submenu-title">
-                              <h5>Coming Soon</h5>
-                            </div>
-                            <ul className="submenu-content opensubmegamenu">
-                              <li>
-                                <a href="https://admin.pixelstrap.com/cuba/template/comingsoon.html">
-                                  Coming Simple
-                                </a>
-                              </li>
-                              <li>
-                                <a href="https://admin.pixelstrap.com/cuba/template/comingsoon-bg-video.html">
-                                  Coming with Bg video
-                                </a>
-                              </li>
-                              <li>
-                                <a href="https://admin.pixelstrap.com/cuba/template/comingsoon-bg-img.html">
-                                  Coming with Bg Image
-                                </a>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                        <div className="col mega-box">
-                          <div className="link-section">
-                            <div className="submenu-title">
-                              <h5>Email templates</h5>
-                            </div>
-                            <ul className="submenu-content opensubmegamenu">
-                              <li>
-                                <a href="https://admin.pixelstrap.com/cuba/template/basic-template.html">
-                                  Basic Email
-                                </a>
-                              </li>
-                              <li>
-                                <a href="https://admin.pixelstrap.com/cuba/template/email-header.html">
-                                  Basic With Header
-                                </a>
-                              </li>
-                              <li>
-                                <a href="https://admin.pixelstrap.com/cuba/template/template-email.html">
-                                  Ecomerce Template
-                                </a>
-                              </li>
-                              <li>
-                                <a href="https://admin.pixelstrap.com/cuba/template/template-email-2.html">
-                                  Email Template 2
-                                </a>
-                              </li>
-                              <li>
-                                <a href="https://admin.pixelstrap.com/cuba/template/ecommerce-templates.html">
-                                  Ecommerce Email
-                                </a>
-                              </li>
-                              <li>
-                                <a href="https://admin.pixelstrap.com/cuba/template/email-order-success.html">
-                                  Order Success
-                                </a>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <li className="sidebar-main-title">
-                  <div>
-                    <h6>Miscellaneous</h6>
-                  </div>
-                </li>
-                <li className="sidebar-list">
-                  <i className="fa fa-thumb-tack"></i>
-                  <a className="sidebar-link sidebar-title" href="#">
-                    <svg className="stroke-icon">
-                      <use href="../assets/svg/icon-sprite.svg#stroke-gallery"></use>
-                    </svg>
-                    <svg className="fill-icon">
-                      <use href="../assets/svg/icon-sprite.svg#fill-gallery"></use>
-                    </svg>
-                    <span>Gallery</span>
-                  </a>
-                  <ul className="sidebar-submenu">
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/gallery.html">
-                        Gallery Grid
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/gallery-with-description.html">
-                        Gallery Grid Desc
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/gallery-masonry.html">
-                        Masonry Gallery
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/masonry-gallery-with-disc.html">
-                        Masonry with Desc
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/gallery-hover.html">
-                        Hover Effects
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li className="sidebar-list">
-                  <i className="fa fa-thumb-tack"></i>
-                  <a className="sidebar-link sidebar-title" href="#">
-                    <svg className="stroke-icon">
-                      <use href="../assets/svg/icon-sprite.svg#stroke-blog"></use>
-                    </svg>
-                    <svg className="fill-icon">
-                      <use href="../assets/svg/icon-sprite.svg#fill-blog"></use>
-                    </svg>
-                    <span>Blog</span>
-                  </a>
-                  <ul className="sidebar-submenu">
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/blog.html">
-                        Blog Details
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/blog-single.html">
-                        Blog Single
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/add-post.html">
-                        Add Post
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li className="sidebar-list">
-                  <i className="fa fa-thumb-tack"></i>
-                  <a
-                    className="sidebar-link sidebar-title link-nav"
-                    href="https://admin.pixelstrap.com/cuba/template/faq.html"
-                  >
-                    <svg className="stroke-icon">
-                      <use href="../assets/svg/icon-sprite.svg#stroke-faq"></use>
-                    </svg>
-                    <svg className="fill-icon">
-                      <use href="../assets/svg/icon-sprite.svg#fill-faq"></use>
-                    </svg>
-                    <span>FAQ</span>
-                  </a>
-                </li>
-                <li className="sidebar-list">
-                  <i className="fa fa-thumb-tack"></i>
-                  <a className="sidebar-link sidebar-title" href="#">
-                    <svg className="stroke-icon">
-                      <use href="../assets/svg/icon-sprite.svg#stroke-job-search"></use>
-                    </svg>
-                    <svg className="fill-icon">
-                      <use href="../assets/svg/icon-sprite.svg#fill-job-search"></use>
-                    </svg>
-                    <span>Job Search</span>
-                  </a>
-                  <ul className="sidebar-submenu">
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/job-cards-view.html">
-                        Cards view
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/job-list-view.html">
-                        List View
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/job-details.html">
-                        Job Details
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/job-apply.html">
-                        Apply
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li className="sidebar-list">
-                  <i className="fa fa-thumb-tack"></i>
-                  <a className="sidebar-link sidebar-title" href="#">
-                    <svg className="stroke-icon">
-                      <use href="../assets/svg/icon-sprite.svg#stroke-learning"></use>
-                    </svg>
-                    <svg className="fill-icon">
-                      <use href="../assets/svg/icon-sprite.svg#fill-learning"></use>
-                    </svg>
-                    <span>Learning</span>
-                  </a>
-                  <ul className="sidebar-submenu">
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/learning-list-view.html">
-                        Learning List
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/learning-detailed.html">
-                        Detailed Course
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li className="sidebar-list">
-                  <i className="fa fa-thumb-tack"></i>
-                  <a className="sidebar-link sidebar-title" href="#">
-                    <svg className="stroke-icon">
-                      <use href="../assets/svg/icon-sprite.svg#stroke-maps"></use>
-                    </svg>
-                    <svg className="fill-icon">
-                      <use href="../assets/svg/icon-sprite.svg#fill-maps"></use>
-                    </svg>
-                    <span>Maps</span>
-                  </a>
-                  <ul className="sidebar-submenu">
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/map-js.html">
-                        Maps JS
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/vector-map.html">
-                        Vector Maps
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li className="sidebar-list">
-                  <i className="fa fa-thumb-tack"></i>
-                  <a className="sidebar-link sidebar-title" href="#">
-                    <svg className="stroke-icon">
-                      <use href="../assets/svg/icon-sprite.svg#stroke-editors"></use>
-                    </svg>
-                    <svg className="fill-icon">
-                      <use href="../assets/svg/icon-sprite.svg#fill-editors"></use>
-                    </svg>
-                    <span>Editors</span>
-                  </a>
-                  <ul className="sidebar-submenu">
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/quilleditor.html">
-                        Quill editor
-                      </a>
-                    </li>
-                    <li>
-                      <a href="https://admin.pixelstrap.com/cuba/template/ace-code-editor.html">
-                        ACE code editor{" "}
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li className="sidebar-list">
-                  <i className="fa fa-thumb-tack"></i>
-                  <a
-                    className="sidebar-link sidebar-title link-nav"
-                    href="https://admin.pixelstrap.com/cuba/template/knowledgebase.html"
-                  >
-                    <svg className="stroke-icon">
-                      <use href="../assets/svg/icon-sprite.svg#stroke-knowledgebase"></use>
-                    </svg>
-                    <svg className="fill-icon">
-                      <use href="../assets/svg/icon-sprite.svg#fill-knowledgebase"></use>
-                    </svg>
-                    <span>Knowledgebase</span>
-                  </a>
-                </li>
-                <li className="sidebar-list">
-                  <i className="fa fa-thumb-tack"></i>
-                  <a
-                    className="sidebar-link sidebar-title link-nav"
-                    href="https://admin.pixelstrap.com/cuba/template/support-ticket.html"
-                  >
-                    <svg className="stroke-icon">
-                      <use href="../assets/svg/icon-sprite.svg#stroke-support-tickets"></use>
-                    </svg>
-                    <svg className="fill-icon">
-                      <use href="../assets/svg/icon-sprite.svg#fill-support-tickets"></use>
-                    </svg>
-                    <span>Support Ticket</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div className="right-arrow" id="right-arrow">
-              <i data-feather="arrow-right"></i>
-            </div>
-          </nav>
+                <defs id="SvgjsDefs1011"></defs>
+                <g
+                  id="SvgjsG1012"
+                  featurekey="PG4fjM-0"
+                  transform="matrix(1.0247690251052775,0,0,1.0247690251052775,-9.571376078911218,-23.095615284545097)"
+                  fill="#FFC300"
+                >
+                  <g xmlns="http://www.w3.org/2000/svg">
+                    <path d="M32.27,57.891c0,1.104-0.298,2.124-0.82,3.005c-1.031,1.738-2.917,2.905-5.079,2.905c-2.607,0-4.83-1.701-5.6-4.061   c-0.199-0.582-0.299-1.203-0.299-1.85c0-3.254,2.645-5.886,5.898-5.886C29.625,52.005,32.27,54.637,32.27,57.891z"></path>
+                    <path d="M85.206,57.891c0,0.795-0.149,1.539-0.435,2.223c-0.881,2.161-2.992,3.688-5.477,3.688c-2.384,0-4.433-1.415-5.353-3.464   c-0.347-0.745-0.533-1.564-0.533-2.446c0-3.254,2.633-5.886,5.886-5.886C82.562,52.005,85.206,54.637,85.206,57.891z"></path>
+                    <path d="M89.701,59.294l-2.955,0.782L86.1,60.09c0.236-0.696,0.349-1.441,0.349-2.199c0-3.924-3.204-7.128-7.153-7.128   c-3.924,0-7.128,3.204-7.128,7.128c0,0.857,0.149,2.483,0.46,3.266H33.896l-1.117-0.123c0.484-0.969,0.732-2.05,0.732-3.143   c0-3.924-3.204-7.128-7.14-7.128c-3.936,0-7.14,3.204-7.14,7.128c0,0.583,0.074,1.154,0.199,1.701l-8.581-0.919   c0,0-2.869-5.974-0.695-8.147c2.172-2.173,0.695-5.972,0.695-5.972h7.45c0,0,8.68-6.941,21.036-8.158   c3.949-0.385,7.835-0.087,7.835-0.087s7.997,0.012,12.802,3.899c5.837,4.694,9.302,4.842,13.797,5.152   c4.507,0.311,12.355,0.436,15.385,3.614C92.185,52.154,89.701,59.294,89.701,59.294z"></path>
+                  </g>
+                </g>
+                <g
+                  id="SvgjsG1013"
+                  featurekey="jxYttZ-0"
+                  transform="matrix(2.69578115247462,0,0,2.69578115247462,98.68674591406015,-12.993665617689173)"
+                  fill="#111111"
+                >
+                  <path d="M18.54 5 l0.32 0 l0 15 l-2.22 0 l0 -11.26 l-5.78 11.26 l-1.26 0 l-5.78 -11.26 l0 11.26 l-2.22 0 l0 -15 l0.3 0 l2.38 0 l5.94 11.6 l5.94 -11.6 l2.38 0 z M30.439999999999998 10.12 c0 0 -2.5 5.92 -4.16 9.88 c-1.4 3.32 -2.5 5.32 -4.36 5.32 c-0.58 0 -1.32 -0.28 -1.86 -0.6 l0.62 -1.8 c0.16 0.14 0.52 0.34 0.76 0.4 c1.54 0.44 2.5 -2.78 3.16 -4.36 l-3.74 -8.84 l2.08 0 l2.72 6.48 l2.7 -6.48 l2.08 0 z M39.06 6.66 c-3.16 0 -5.4 2.8 -5.4 5.84 c0 3.06 2.24 5.86 5.4 5.86 c3.18 0 5.4 -2.8 5.4 -5.86 c0 -3.04 -2.24 -5.84 -5.4 -5.84 z M39.06 4.82 c4.2 0 7.62 3.32 7.62 7.68 s-3.42 7.7 -7.62 7.7 s-7.62 -3.34 -7.62 -7.7 s3.42 -7.68 7.62 -7.68 z M52.480000000000004 18.36 c0.64 0.26 1.14 0.08 1.44 -0.06 l0 1.6 c-0.26 0.16 -0.64 0.3 -1.18 0.3 c-1.18 0 -2.22 -0.38 -2.86 -1.42 c-0.6 -1 -0.6 -1.54 -0.6 -3.1 l0 -3.88 l-1.2 0 l0 -1.68 l1.2 0 l0 -3.12 l2.06 0 l0 3.12 l2.58 0 l0 1.68 l-2.58 0 l0 3.88 c0 1.64 0.16 2.24 1.14 2.68 z M61.06 11.64 c-1.7 0 -3.08 1.42 -3.08 3.44 c0 2 1.38 3.44 3.08 3.44 s3.08 -1.44 3.08 -3.44 c0 -2.02 -1.38 -3.44 -3.08 -3.44 z M61.06 9.94 c2.84 0 5.14 2.2 5.14 5.14 s-2.3 5.12 -5.14 5.12 s-5.14 -2.18 -5.14 -5.12 s2.3 -5.14 5.14 -5.14 z M73.36 9.94 c2.84 0 4.94 2.2 4.94 5.14 s-2.1 5.12 -4.94 5.12 c-0.96 0 -2.06 -0.36 -2.84 -0.94 l0 0.74 l-2.06 0 l0 -15 l2.06 0 l0 5.9 c0.66 -0.54 1.88 -0.96 2.84 -0.96 z M73.16 18.52 c1.7 0 3.08 -1.44 3.08 -3.44 c0 -2.02 -1.38 -3.44 -3.08 -3.44 c-1.12 0 -2.1 0.5 -2.64 1.56 c-0.28 0.56 -0.44 1.2 -0.44 1.88 s0.16 1.32 0.44 1.86 c0.54 1.06 1.52 1.58 2.64 1.58 z M85.04 11.64 c-1.7 0 -3.08 1.42 -3.08 3.44 c0 2 1.38 3.44 3.08 3.44 s3.08 -1.44 3.08 -3.44 c0 -2.02 -1.38 -3.44 -3.08 -3.44 z M85.04 9.94 c2.84 0 5.14 2.2 5.14 5.14 s-2.3 5.12 -5.14 5.12 s-5.14 -2.18 -5.14 -5.12 s2.3 -5.14 5.14 -5.14 z M100.52000000000001 10.12 l-3.5 4.94 l3.5 4.94 l-2.36 0 l-2.2 -3.3 l-2.22 3.3 l-2.36 0 l3.52 -4.94 l-3.52 -4.94 l2.36 0 l2.22 3.3 l2.2 -3.3 l2.36 0 z"></path>
+                </g>
+              </svg>
+            </span>
+            <span className="logo-lg">
+              <svg
+                width="890.5000000000001"
+                height="133.12576794511895"
+                viewBox="0 0 369.6666666666667 55.26351362572971"
+                className="css-1j8o68f"
+              >
+                <defs id="SvgjsDefs1011"></defs>
+                <g
+                  id="SvgjsG1012"
+                  featurekey="PG4fjM-0"
+                  transform="matrix(1.0247690251052775,0,0,1.0247690251052775,-9.571376078911218,-23.095615284545097)"
+                  fill="#FFC300"
+                >
+                  <g xmlns="http://www.w3.org/2000/svg">
+                    <path d="M32.27,57.891c0,1.104-0.298,2.124-0.82,3.005c-1.031,1.738-2.917,2.905-5.079,2.905c-2.607,0-4.83-1.701-5.6-4.061   c-0.199-0.582-0.299-1.203-0.299-1.85c0-3.254,2.645-5.886,5.898-5.886C29.625,52.005,32.27,54.637,32.27,57.891z"></path>
+                    <path d="M85.206,57.891c0,0.795-0.149,1.539-0.435,2.223c-0.881,2.161-2.992,3.688-5.477,3.688c-2.384,0-4.433-1.415-5.353-3.464   c-0.347-0.745-0.533-1.564-0.533-2.446c0-3.254,2.633-5.886,5.886-5.886C82.562,52.005,85.206,54.637,85.206,57.891z"></path>
+                    <path d="M89.701,59.294l-2.955,0.782L86.1,60.09c0.236-0.696,0.349-1.441,0.349-2.199c0-3.924-3.204-7.128-7.153-7.128   c-3.924,0-7.128,3.204-7.128,7.128c0,0.857,0.149,2.483,0.46,3.266H33.896l-1.117-0.123c0.484-0.969,0.732-2.05,0.732-3.143   c0-3.924-3.204-7.128-7.14-7.128c-3.936,0-7.14,3.204-7.14,7.128c0,0.583,0.074,1.154,0.199,1.701l-8.581-0.919   c0,0-2.869-5.974-0.695-8.147c2.172-2.173,0.695-5.972,0.695-5.972h7.45c0,0,8.68-6.941,21.036-8.158   c3.949-0.385,7.835-0.087,7.835-0.087s7.997,0.012,12.802,3.899c5.837,4.694,9.302,4.842,13.797,5.152   c4.507,0.311,12.355,0.436,15.385,3.614C92.185,52.154,89.701,59.294,89.701,59.294z"></path>
+                  </g>
+                </g>
+                <g
+                  id="SvgjsG1013"
+                  featurekey="jxYttZ-0"
+                  transform="matrix(2.69578115247462,0,0,2.69578115247462,98.68674591406015,-12.993665617689173)"
+                  fill="#111111"
+                >
+                  <path d="M18.54 5 l0.32 0 l0 15 l-2.22 0 l0 -11.26 l-5.78 11.26 l-1.26 0 l-5.78 -11.26 l0 11.26 l-2.22 0 l0 -15 l0.3 0 l2.38 0 l5.94 11.6 l5.94 -11.6 l2.38 0 z M30.439999999999998 10.12 c0 0 -2.5 5.92 -4.16 9.88 c-1.4 3.32 -2.5 5.32 -4.36 5.32 c-0.58 0 -1.32 -0.28 -1.86 -0.6 l0.62 -1.8 c0.16 0.14 0.52 0.34 0.76 0.4 c1.54 0.44 2.5 -2.78 3.16 -4.36 l-3.74 -8.84 l2.08 0 l2.72 6.48 l2.7 -6.48 l2.08 0 z M39.06 6.66 c-3.16 0 -5.4 2.8 -5.4 5.84 c0 3.06 2.24 5.86 5.4 5.86 c3.18 0 5.4 -2.8 5.4 -5.86 c0 -3.04 -2.24 -5.84 -5.4 -5.84 z M39.06 4.82 c4.2 0 7.62 3.32 7.62 7.68 s-3.42 7.7 -7.62 7.7 s-7.62 -3.34 -7.62 -7.7 s3.42 -7.68 7.62 -7.68 z M52.480000000000004 18.36 c0.64 0.26 1.14 0.08 1.44 -0.06 l0 1.6 c-0.26 0.16 -0.64 0.3 -1.18 0.3 c-1.18 0 -2.22 -0.38 -2.86 -1.42 c-0.6 -1 -0.6 -1.54 -0.6 -3.1 l0 -3.88 l-1.2 0 l0 -1.68 l1.2 0 l0 -3.12 l2.06 0 l0 3.12 l2.58 0 l0 1.68 l-2.58 0 l0 3.88 c0 1.64 0.16 2.24 1.14 2.68 z M61.06 11.64 c-1.7 0 -3.08 1.42 -3.08 3.44 c0 2 1.38 3.44 3.08 3.44 s3.08 -1.44 3.08 -3.44 c0 -2.02 -1.38 -3.44 -3.08 -3.44 z M61.06 9.94 c2.84 0 5.14 2.2 5.14 5.14 s-2.3 5.12 -5.14 5.12 s-5.14 -2.18 -5.14 -5.12 s2.3 -5.14 5.14 -5.14 z M73.36 9.94 c2.84 0 4.94 2.2 4.94 5.14 s-2.1 5.12 -4.94 5.12 c-0.96 0 -2.06 -0.36 -2.84 -0.94 l0 0.74 l-2.06 0 l0 -15 l2.06 0 l0 5.9 c0.66 -0.54 1.88 -0.96 2.84 -0.96 z M73.16 18.52 c1.7 0 3.08 -1.44 3.08 -3.44 c0 -2.02 -1.38 -3.44 -3.08 -3.44 c-1.12 0 -2.1 0.5 -2.64 1.56 c-0.28 0.56 -0.44 1.2 -0.44 1.88 s0.16 1.32 0.44 1.86 c0.54 1.06 1.52 1.58 2.64 1.58 z M85.04 11.64 c-1.7 0 -3.08 1.42 -3.08 3.44 c0 2 1.38 3.44 3.08 3.44 s3.08 -1.44 3.08 -3.44 c0 -2.02 -1.38 -3.44 -3.08 -3.44 z M85.04 9.94 c2.84 0 5.14 2.2 5.14 5.14 s-2.3 5.12 -5.14 5.12 s-5.14 -2.18 -5.14 -5.12 s2.3 -5.14 5.14 -5.14 z M100.52000000000001 10.12 l-3.5 4.94 l3.5 4.94 l-2.36 0 l-2.2 -3.3 l-2.22 3.3 l-2.36 0 l3.52 -4.94 l-3.52 -4.94 l2.36 0 l2.22 3.3 l2.2 -3.3 l2.36 0 z"></path>
+                </g>
+              </svg>
+            </span>
+          </a>
+          <a href="index.html" className="logo logo-light">
+            <span className="logo-sm">
+              <svg
+                width="890.5000000000001"
+                height="133.12576794511895"
+                viewBox="0 0 369.6666666666667 55.26351362572971"
+                className="css-1j8o68f"
+              >
+                <defs id="SvgjsDefs1011"></defs>
+                <g
+                  id="SvgjsG1012"
+                  featurekey="PG4fjM-0"
+                  transform="matrix(1.0247690251052775,0,0,1.0247690251052775,-9.571376078911218,-23.095615284545097)"
+                  fill="#FFC300"
+                >
+                  <g xmlns="http://www.w3.org/2000/svg">
+                    <path d="M32.27,57.891c0,1.104-0.298,2.124-0.82,3.005c-1.031,1.738-2.917,2.905-5.079,2.905c-2.607,0-4.83-1.701-5.6-4.061   c-0.199-0.582-0.299-1.203-0.299-1.85c0-3.254,2.645-5.886,5.898-5.886C29.625,52.005,32.27,54.637,32.27,57.891z"></path>
+                    <path d="M85.206,57.891c0,0.795-0.149,1.539-0.435,2.223c-0.881,2.161-2.992,3.688-5.477,3.688c-2.384,0-4.433-1.415-5.353-3.464   c-0.347-0.745-0.533-1.564-0.533-2.446c0-3.254,2.633-5.886,5.886-5.886C82.562,52.005,85.206,54.637,85.206,57.891z"></path>
+                    <path d="M89.701,59.294l-2.955,0.782L86.1,60.09c0.236-0.696,0.349-1.441,0.349-2.199c0-3.924-3.204-7.128-7.153-7.128   c-3.924,0-7.128,3.204-7.128,7.128c0,0.857,0.149,2.483,0.46,3.266H33.896l-1.117-0.123c0.484-0.969,0.732-2.05,0.732-3.143   c0-3.924-3.204-7.128-7.14-7.128c-3.936,0-7.14,3.204-7.14,7.128c0,0.583,0.074,1.154,0.199,1.701l-8.581-0.919   c0,0-2.869-5.974-0.695-8.147c2.172-2.173,0.695-5.972,0.695-5.972h7.45c0,0,8.68-6.941,21.036-8.158   c3.949-0.385,7.835-0.087,7.835-0.087s7.997,0.012,12.802,3.899c5.837,4.694,9.302,4.842,13.797,5.152   c4.507,0.311,12.355,0.436,15.385,3.614C92.185,52.154,89.701,59.294,89.701,59.294z"></path>
+                  </g>
+                </g>
+                <g
+                  id="SvgjsG1013"
+                  featurekey="jxYttZ-0"
+                  transform="matrix(2.69578115247462,0,0,2.69578115247462,98.68674591406015,-12.993665617689173)"
+                  fill="#111111"
+                >
+                  <path d="M18.54 5 l0.32 0 l0 15 l-2.22 0 l0 -11.26 l-5.78 11.26 l-1.26 0 l-5.78 -11.26 l0 11.26 l-2.22 0 l0 -15 l0.3 0 l2.38 0 l5.94 11.6 l5.94 -11.6 l2.38 0 z M30.439999999999998 10.12 c0 0 -2.5 5.92 -4.16 9.88 c-1.4 3.32 -2.5 5.32 -4.36 5.32 c-0.58 0 -1.32 -0.28 -1.86 -0.6 l0.62 -1.8 c0.16 0.14 0.52 0.34 0.76 0.4 c1.54 0.44 2.5 -2.78 3.16 -4.36 l-3.74 -8.84 l2.08 0 l2.72 6.48 l2.7 -6.48 l2.08 0 z M39.06 6.66 c-3.16 0 -5.4 2.8 -5.4 5.84 c0 3.06 2.24 5.86 5.4 5.86 c3.18 0 5.4 -2.8 5.4 -5.86 c0 -3.04 -2.24 -5.84 -5.4 -5.84 z M39.06 4.82 c4.2 0 7.62 3.32 7.62 7.68 s-3.42 7.7 -7.62 7.7 s-7.62 -3.34 -7.62 -7.7 s3.42 -7.68 7.62 -7.68 z M52.480000000000004 18.36 c0.64 0.26 1.14 0.08 1.44 -0.06 l0 1.6 c-0.26 0.16 -0.64 0.3 -1.18 0.3 c-1.18 0 -2.22 -0.38 -2.86 -1.42 c-0.6 -1 -0.6 -1.54 -0.6 -3.1 l0 -3.88 l-1.2 0 l0 -1.68 l1.2 0 l0 -3.12 l2.06 0 l0 3.12 l2.58 0 l0 1.68 l-2.58 0 l0 3.88 c0 1.64 0.16 2.24 1.14 2.68 z M61.06 11.64 c-1.7 0 -3.08 1.42 -3.08 3.44 c0 2 1.38 3.44 3.08 3.44 s3.08 -1.44 3.08 -3.44 c0 -2.02 -1.38 -3.44 -3.08 -3.44 z M61.06 9.94 c2.84 0 5.14 2.2 5.14 5.14 s-2.3 5.12 -5.14 5.12 s-5.14 -2.18 -5.14 -5.12 s2.3 -5.14 5.14 -5.14 z M73.36 9.94 c2.84 0 4.94 2.2 4.94 5.14 s-2.1 5.12 -4.94 5.12 c-0.96 0 -2.06 -0.36 -2.84 -0.94 l0 0.74 l-2.06 0 l0 -15 l2.06 0 l0 5.9 c0.66 -0.54 1.88 -0.96 2.84 -0.96 z M73.16 18.52 c1.7 0 3.08 -1.44 3.08 -3.44 c0 -2.02 -1.38 -3.44 -3.08 -3.44 c-1.12 0 -2.1 0.5 -2.64 1.56 c-0.28 0.56 -0.44 1.2 -0.44 1.88 s0.16 1.32 0.44 1.86 c0.54 1.06 1.52 1.58 2.64 1.58 z M85.04 11.64 c-1.7 0 -3.08 1.42 -3.08 3.44 c0 2 1.38 3.44 3.08 3.44 s3.08 -1.44 3.08 -3.44 c0 -2.02 -1.38 -3.44 -3.08 -3.44 z M85.04 9.94 c2.84 0 5.14 2.2 5.14 5.14 s-2.3 5.12 -5.14 5.12 s-5.14 -2.18 -5.14 -5.12 s2.3 -5.14 5.14 -5.14 z M100.52000000000001 10.12 l-3.5 4.94 l3.5 4.94 l-2.36 0 l-2.2 -3.3 l-2.22 3.3 l-2.36 0 l3.52 -4.94 l-3.52 -4.94 l2.36 0 l2.22 3.3 l2.2 -3.3 l2.36 0 z"></path>
+                </g>
+              </svg>
+            </span>
+            <span className="logo-lg">
+              <svg
+                width="890.5000000000001"
+                height="133.12576794511895"
+                viewBox="0 0 369.6666666666667 55.26351362572971"
+                className="css-1j8o68f"
+              >
+                <defs id="SvgjsDefs1011"></defs>
+                <g
+                  id="SvgjsG1012"
+                  featurekey="PG4fjM-0"
+                  transform="matrix(1.0247690251052775,0,0,1.0247690251052775,-9.571376078911218,-23.095615284545097)"
+                  fill="#FFC300"
+                >
+                  <g xmlns="http://www.w3.org/2000/svg">
+                    <path d="M32.27,57.891c0,1.104-0.298,2.124-0.82,3.005c-1.031,1.738-2.917,2.905-5.079,2.905c-2.607,0-4.83-1.701-5.6-4.061   c-0.199-0.582-0.299-1.203-0.299-1.85c0-3.254,2.645-5.886,5.898-5.886C29.625,52.005,32.27,54.637,32.27,57.891z"></path>
+                    <path d="M85.206,57.891c0,0.795-0.149,1.539-0.435,2.223c-0.881,2.161-2.992,3.688-5.477,3.688c-2.384,0-4.433-1.415-5.353-3.464   c-0.347-0.745-0.533-1.564-0.533-2.446c0-3.254,2.633-5.886,5.886-5.886C82.562,52.005,85.206,54.637,85.206,57.891z"></path>
+                    <path d="M89.701,59.294l-2.955,0.782L86.1,60.09c0.236-0.696,0.349-1.441,0.349-2.199c0-3.924-3.204-7.128-7.153-7.128   c-3.924,0-7.128,3.204-7.128,7.128c0,0.857,0.149,2.483,0.46,3.266H33.896l-1.117-0.123c0.484-0.969,0.732-2.05,0.732-3.143   c0-3.924-3.204-7.128-7.14-7.128c-3.936,0-7.14,3.204-7.14,7.128c0,0.583,0.074,1.154,0.199,1.701l-8.581-0.919   c0,0-2.869-5.974-0.695-8.147c2.172-2.173,0.695-5.972,0.695-5.972h7.45c0,0,8.68-6.941,21.036-8.158   c3.949-0.385,7.835-0.087,7.835-0.087s7.997,0.012,12.802,3.899c5.837,4.694,9.302,4.842,13.797,5.152   c4.507,0.311,12.355,0.436,15.385,3.614C92.185,52.154,89.701,59.294,89.701,59.294z"></path>
+                  </g>
+                </g>
+                <g
+                  id="SvgjsG1013"
+                  featurekey="jxYttZ-0"
+                  transform="matrix(2.69578115247462,0,0,2.69578115247462,98.68674591406015,-12.993665617689173)"
+                  fill="#111111"
+                >
+                  <path d="M18.54 5 l0.32 0 l0 15 l-2.22 0 l0 -11.26 l-5.78 11.26 l-1.26 0 l-5.78 -11.26 l0 11.26 l-2.22 0 l0 -15 l0.3 0 l2.38 0 l5.94 11.6 l5.94 -11.6 l2.38 0 z M30.439999999999998 10.12 c0 0 -2.5 5.92 -4.16 9.88 c-1.4 3.32 -2.5 5.32 -4.36 5.32 c-0.58 0 -1.32 -0.28 -1.86 -0.6 l0.62 -1.8 c0.16 0.14 0.52 0.34 0.76 0.4 c1.54 0.44 2.5 -2.78 3.16 -4.36 l-3.74 -8.84 l2.08 0 l2.72 6.48 l2.7 -6.48 l2.08 0 z M39.06 6.66 c-3.16 0 -5.4 2.8 -5.4 5.84 c0 3.06 2.24 5.86 5.4 5.86 c3.18 0 5.4 -2.8 5.4 -5.86 c0 -3.04 -2.24 -5.84 -5.4 -5.84 z M39.06 4.82 c4.2 0 7.62 3.32 7.62 7.68 s-3.42 7.7 -7.62 7.7 s-7.62 -3.34 -7.62 -7.7 s3.42 -7.68 7.62 -7.68 z M52.480000000000004 18.36 c0.64 0.26 1.14 0.08 1.44 -0.06 l0 1.6 c-0.26 0.16 -0.64 0.3 -1.18 0.3 c-1.18 0 -2.22 -0.38 -2.86 -1.42 c-0.6 -1 -0.6 -1.54 -0.6 -3.1 l0 -3.88 l-1.2 0 l0 -1.68 l1.2 0 l0 -3.12 l2.06 0 l0 3.12 l2.58 0 l0 1.68 l-2.58 0 l0 3.88 c0 1.64 0.16 2.24 1.14 2.68 z M61.06 11.64 c-1.7 0 -3.08 1.42 -3.08 3.44 c0 2 1.38 3.44 3.08 3.44 s3.08 -1.44 3.08 -3.44 c0 -2.02 -1.38 -3.44 -3.08 -3.44 z M61.06 9.94 c2.84 0 5.14 2.2 5.14 5.14 s-2.3 5.12 -5.14 5.12 s-5.14 -2.18 -5.14 -5.12 s2.3 -5.14 5.14 -5.14 z M73.36 9.94 c2.84 0 4.94 2.2 4.94 5.14 s-2.1 5.12 -4.94 5.12 c-0.96 0 -2.06 -0.36 -2.84 -0.94 l0 0.74 l-2.06 0 l0 -15 l2.06 0 l0 5.9 c0.66 -0.54 1.88 -0.96 2.84 -0.96 z M73.16 18.52 c1.7 0 3.08 -1.44 3.08 -3.44 c0 -2.02 -1.38 -3.44 -3.08 -3.44 c-1.12 0 -2.1 0.5 -2.64 1.56 c-0.28 0.56 -0.44 1.2 -0.44 1.88 s0.16 1.32 0.44 1.86 c0.54 1.06 1.52 1.58 2.64 1.58 z M85.04 11.64 c-1.7 0 -3.08 1.42 -3.08 3.44 c0 2 1.38 3.44 3.08 3.44 s3.08 -1.44 3.08 -3.44 c0 -2.02 -1.38 -3.44 -3.08 -3.44 z M85.04 9.94 c2.84 0 5.14 2.2 5.14 5.14 s-2.3 5.12 -5.14 5.12 s-5.14 -2.18 -5.14 -5.12 s2.3 -5.14 5.14 -5.14 z M100.52000000000001 10.12 l-3.5 4.94 l3.5 4.94 l-2.36 0 l-2.2 -3.3 l-2.22 3.3 l-2.36 0 l3.52 -4.94 l-3.52 -4.94 l2.36 0 l2.22 3.3 l2.2 -3.3 l2.36 0 z"></path>
+                </g>
+              </svg>
+            </span>
+          </a>
+          <button
+            type="button"
+            className="btn btn-sm p-0 fs-20 header-item float-end btn-vertical-sm-hover"
+            id="vertical-hover"
+          >
+            <i className="ri-record-circle-line"></i>
+          </button>
         </div>
+
+        <div id="scrollbar">
+          <div className="container-fluid">
+            <div id="two-column-menu"></div>
+            <ul className="navbar-nav" id="navbar-nav">
+              <li className="nav-item">
+                <a className="nav-link menu-link" href="widgets.html">
+                  <i className="ri-dashboard-2-line"></i>{" "}
+                  <span data-key="t-widgets">Dashboards</span>
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link menu-link" href="widgets.html">
+                  <i className="ri-user-6-fill"></i>{" "}
+                  <span data-key="t-widgets">Users</span>
+                </a>
+              </li>
+
+              <li className="menu-title">
+                <i className="ri-more-fill"></i>{" "}
+                <span data-key="t-pages">Car Configuration</span>
+              </li>
+
+              <li className="nav-item">
+                <a className="nav-link menu-link" href="widgets.html">
+                  <i className="ri-car-fill"></i>{" "}
+                  <span data-key="t-widgets">Car Brands</span>
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link menu-link" href="widgets.html">
+                  <i className="ri-car-washing-fill"></i>{" "}
+                  <span data-key="t-widgets">Car Models</span>
+                </a>
+              </li>
+
+              <li className="nav-item">
+                <a
+                  className="nav-link menu-link"
+                  href="#sidebarExtra"
+                  data-bs-toggle="collapse"
+                  role="button"
+                  aria-expanded="false"
+                  aria-controls="sidebarAuth"
+                >
+                  <i className="ri-truck-fill"></i>{" "}
+                  <span data-key="t-authentication">Car Extra</span>
+                </a>
+                <div className="collapse menu-dropdown" id="sidebarExtra">
+                  <ul className="nav nav-sm flex-column">
+                    <li className="nav-item">
+                      <a href="#" className="nav-link">
+                        {" "}
+                        Car Trims
+                      </a>
+                    </li>
+                    <li className="nav-item">
+                      <a href="#" className="nav-link">
+                        {" "}
+                        Car Standard Features
+                      </a>
+                    </li>
+                    <li className="nav-item">
+                      <a href="#" className="nav-link">
+                        {" "}
+                        Car Fuel Types
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li className="menu-title">
+                <i className="ri-more-fill"></i>{" "}
+                <span data-key="t-pages">Inventory</span>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link menu-link" href="widgets.html">
+                  <i className="ri-shopping-bag-fill"></i>{" "}
+                  <span data-key="t-widgets">Car For Sale</span>
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link menu-link" href="widgets.html">
+                  <i className="ri-shopping-bag-3-fill"></i>{" "}
+                  <span data-key="t-widgets">Car For Rent</span>
+                </a>
+              </li>
+              <li className="menu-title">
+                <i className="ri-more-fill"></i>{" "}
+                <span data-key="t-pages">Transactions</span>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link menu-link" href="widgets.html">
+                  <i className="ri-ship-fill"></i>{" "}
+                  <span data-key="t-widgets">Import on Order</span>
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link menu-link" href="widgets.html">
+                  <i className="ri-government-fill"></i>{" "}
+                  <span data-key="t-widgets">Tax Calculator</span>
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link menu-link" href="widgets.html">
+                  <i className="ri-bar-chart-fill"></i>{" "}
+                  <span data-key="t-widgets">Cars for sale</span>
+                </a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link menu-link" href="widgets.html">
+                  <i className="ri-line-chart-fill"></i>{" "}
+                  <span data-key="t-widgets">Cars for rent</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div className="sidebar-background"></div>
       </div>
+      <div className="vertical-overlay"></div>
     </>
   );
 }

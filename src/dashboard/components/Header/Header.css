@@ -6,3 +6,6 @@
     line-height: 36px; 
     color: #262626;
 }
+#scrollbar{
+    overflow-y: scroll;
+}

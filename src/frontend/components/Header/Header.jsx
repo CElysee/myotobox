@@ -120,7 +120,7 @@ function Header() {
                 <MenuItem key={i} to={link.path} display={link.display} />
               ))}
             </ul>
-            <form
+            {/* <form
               method="post"
               className="search-form form-inline"
               autoComplete="off"
@@ -143,7 +143,7 @@ function Header() {
                   ></div>
                 </div>
               </fieldset>
-            </form>
+            </form> */}
           </div>
         </div>
         <div className="header-border"></div>

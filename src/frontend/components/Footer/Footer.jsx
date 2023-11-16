@@ -1,6 +1,8 @@
 import React from "react";
+import { useState } from "react";
 
 function footer() {
+  const [emailSubscribe, setEmailSubscribe] = useState("");
   return (
     <>
     <div id="autos-reviews">
@@ -73,7 +75,8 @@ function footer() {
                   autoCapitalize="off"
                   autoCorrect="off"
                   spellCheck="false"
-                  value=""
+                  value={emailSubscribe}
+                  onChange={(e) => setEmailSubscribe(e.target.value)}
                 />
               </fieldset>
               <button className="btn btn-primary">Subscribe</button>
