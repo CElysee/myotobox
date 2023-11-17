@@ -2400,9 +2400,9 @@ fieldset:disabled a.btn {
   pointer-events: none;
 }
 .btn-primary {
-  color: #212529;
-  background-color: var(--first-color);
-  border-color: var(--first-color);
+  color: #212529 !important;
+  background-color: var(--first-color) !important;
+  border-color: var(--first-color) !important;
 }
 .btn-primary.focus,
 .btn-primary:focus,
@@ -4386,6 +4386,7 @@ input[type="submit"].btn-block {
   flex: 1 1 auto;
   min-height: 1px;
   padding: 1.25rem;
+  width: 100%;
 }
 .card-title {
   margin-bottom: 0.75rem;
@@ -4612,8 +4613,8 @@ input[type="submit"].btn-block {
 .page-item.active .page-link {
   z-index: 3;
   color: #fff;
-  background-color: #3db07a;
-  border-color: #3db07a;
+  background-color: var(--first-color) !important;
+  border-color: var(--first-color) !important;
 }
 .page-item.disabled .page-link {
   color: #6c757d;
@@ -13584,6 +13585,7 @@ p.no-results + .paginator {
     align-items: center;
     margin-bottom: 25px;
     min-height: 37px;
+    padding-left: 30px;
   }
   .page.home:not(.sresults) .heading h1 {
     margin-right: 16px;

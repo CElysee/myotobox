@@ -99,12 +99,12 @@ function Header() {
         >
           Login
         </Link>
-        <button
+        <Link
           className="btn btn-primary btn-lg btn-signin"
-          onClick={navigateToSignUp}
+          to={"/sign-up"}
         >
           Sign Up
-        </button>
+        </Link>
         <button className="navbar-toggler closed" type="button">
           <span className="navbar-toggler-icon">
             <span className="sr-only">Nav</span>

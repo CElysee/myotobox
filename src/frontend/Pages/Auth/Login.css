@@ -37,20 +37,23 @@
   padding-bottom: 4px;
 }
 .login-card .login-main .theme-form input{
-  background-color: #f3f3ff;
+  background-color: #f3f3ff !important;
   transition: all 0.3s ease;
+  border-color: transparent !important;
 }
 .input-container{
     background-color: #f3f3ff;
-    border: 1px solid #cccccc;;
+    border-color: transparent !important;
     border-radius: 5px;
 }
 .theme-form input[type="password"]{
     padding: 25px 10px;
-    border: none;  
+    border: none;
+    border-color: transparent !important;
 }
 input[type="password"]{
     border: none;
+    border-color: transparent !important;
 }
 .theme-form input[type="text"],
 .theme-form input[type="email"],
@@ -144,7 +147,7 @@ input[type="password"]{
 }
 .text-muted {
   --bs-text-opacity: 1;
-  color: var(--bs-secondary-color) !important;
+  color: #878a99 !important;
   font-size: 1rem;
   font-weight: 500;
   line-height: 1.2;
@@ -191,6 +194,33 @@ input[type="password"]{
 .cursor-pointer svg{
     margin-right: 10px;
 }
-/* .btn {
-    font-size: 14px;
-} */
+.otp-input{
+  width: 100%;
+  padding: 0.5rem 0.9rem;
+  font-size: .875rem;
+  font-weight: 400;
+  line-height: 1.5;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: var(--vz-border-radius);
+  -webkit-transition: border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+  transition: border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+  background-color: #f3f3ff;
+}
+.otpSent {
+  display: block !important;
+}
+.otp-verify{
+  display: block !important;
+}
+.inputStyle {
+  width: 3rem!important;
+  height: 3rem;
+  margin: 0 1rem;
+  font-size: 2rem;
+  border-radius: 4px;
+  border: 1px solid rgba(0,0,0,.3);
+}

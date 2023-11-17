@@ -12,6 +12,7 @@ import RentCars from "./Pages/RentCars/RentCars";
 import CarDetails from "./Pages/CarDetails/CarDetails";
 import ImportOnOrder from "./Pages/ImportOnOrder/ImportOnOrder";
 import Login from "./Pages/Auth/Login";
+import SignUp from "./Pages/Auth/SignUp";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -63,6 +64,7 @@ function App() {
             <Route path="/RentCars" element={<RentCars />} />
             <Route path="/ImportOnOrder" element={<ImportOnOrder />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/sign-up" element={<SignUp />} />
           </Routes>
           <Footer />
         </>

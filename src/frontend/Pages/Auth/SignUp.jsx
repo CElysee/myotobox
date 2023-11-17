@@ -5,7 +5,9 @@ import axiosInstance from "../../../../utils/axiosInstance";
 import "react-toastify/dist/ReactToastify.css";
 import RiseLoader from "react-spinners/RiseLoader";
 import { ToastContainer, toast } from "react-toastify";
-
+import OtpInput from "react-otp-input";
+import "react-phone-number-input/style.css";
+import PhoneInput from "react-phone-number-input";
 
 const override = {
   display: "block",
@@ -16,15 +18,17 @@ const override = {
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [names, setNames] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [otpInput, setOtpInput] = useState("");
+  const [otpSent, setOtpSent] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [color, setColor] = useState("#fff");
   const [formError, setFormError] = useState(false);
+  const [isOtpVerified, setIsOtpVerified] = useState(false);
   const navigate = useNavigate();
 
-  const emailChangeHandler = (e) => {
-    setEmail(e.target.value);
-  };
   const passwordChangeHandler = (e) => {
     setPassword(e.target.value);
   };
@@ -40,7 +44,7 @@ function Login() {
       // Append some data to the FormData
       formData.append("username", email);
       formData.append("password", password);
-  
+
       try {
         const response = await axiosInstance.post("/auth/login", formData, {
           headers: {
@@ -51,7 +55,7 @@ function Login() {
         localStorage.setItem("access_token", response.data.access_token);
         localStorage.setItem("user_role", response.data.role);
         localStorage.setItem("userId", response.data.userId);
-  
+
         notify("Login Successfully", "success");
         switch (role) {
           case "admin":
@@ -72,7 +76,7 @@ function Login() {
       } finally {
         setLoading(false);
       }
-    }else{
+    } else {
       notify("Please fill all the fields", "error");
       setFormError(true);
     }
@@ -88,6 +92,29 @@ function Login() {
       });
     }
   };
+  const handleValueChange = (e) => {
+    switch (e.target.name) {
+      case "name":
+        setNames(e.target.value);
+        break;
+      case "email":
+        setEmail(e.target.value);
+        break;
+      case "password":
+        setPassword(e.target.value);
+        break;
+    }
+  };
+  const sendOtp = async (e) => {
+    e.preventDefault();
+    if (names != "" && phoneNumber.length >= 10) {
+      setOtpSent(true);
+      setFormError(false);
+    } else {
+      notify("Please fill all fields", "error");
+      setFormError(true);
+    }
+  };
   return (
     <>
       <div className="container-fluid" style={{ marginTop: "80px" }}>
@@ -96,7 +123,7 @@ function Login() {
           <div
             className="col-md-7"
             style={{
-              backgroundImage: `url("/assets/images/login_2.jpg")`,
+              backgroundImage: `url("/assets/images/login_1.jpg")`,
               backgroundSize: "cover",
               backgroundPosition: "center center",
               display: "block",
@@ -107,93 +134,164 @@ function Login() {
               <div>
                 <div className="login-main">
                   <form className="theme-form" onSubmit={submitHandler}>
-                    <h4>Sign in to account</h4>
-                    <p>Enter your email & password to login</p>
-                    <p className="error">{formError && "Please fill all the fields"}</p>
+                    <h4>
+                      Join MyOtobox today and start exploring cars for sale and
+                      rent.
+                    </h4>
+                    <p className="error">
+                      {formError && "Please fill all the fields"}
+                    </p>
                     <div className="form-group">
-                      <label className="col-form-label">Email Address</label>
+                      <label className="col-form-label">Names</label>
                       <input
                         className="form-control"
-                        type="email"
+                        type="text"
+                        name="name"
                         required=""
-                        placeholder="test@gmail.com"
-                        onChange={emailChangeHandler}
-                        value={email}
+                        placeholder="Murenzi David"
+                        onChange={handleValueChange}
+                        value={names}
                       />
                     </div>
-                    <div className="form-group">
-                      <label className="col-form-label">Password</label>
+                    <PhoneInput
+                      placeholder="078*********"
+                      defaultCountry="RW"
+                      value={phoneNumber}
+                      onChange={setPhoneNumber}
+                    />
+                    {otpSent && (
+                      <div>
+                        <label className="col-form-label">
+                          Enter verification code sent to your phone number
+                        </label>
+                        <OtpInput
+                          inputStyle={{ width: "25%" }}
+                          value={otpInput} // Assuming you intended to use a variable named otpInput here
+                          onChange={setOtpInput} // Assuming setOtpInput is the function to update otpInput
+                          numInputs={4}
+                          inputType="number"
+                          renderSeparator={<span>-</span>}
+                          renderInput={(props) => <input {...props} />}
+                        />
+                      </div>
+                    )}
 
-                      <div className="form-input position-relativ position-relative d-flex align-items-center input-container">
+                    <div
+                      className={isOtpVerified && "otp-verify"}
+                      style={{ display: "none" }}
+                    >
+                      <div className="form-group">
+                        <label className="col-form-label">Email</label>
                         <input
                           className="form-control"
-                          type={showPassword ? "text" : "password"}
-                          name="login[password]"
+                          type="email"
+                          name="email"
                           required=""
-                          placeholder="*********"
-                          onChange={passwordChangeHandler}
-                          value={password}
+                          placeholder="test@myotobox.rw"
+                          onChange={handleValueChange}
+                          value={email}
                         />
-                        <div
-                          className="cursor-pointer grey-2-text"
-                          onClick={passwordView}
-                        >
-                          <svg
-                            width="16px"
-                            height="16px"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
+                      </div>
+                      <div className="form-group">
+                        <label className="col-form-label">Password</label>
+
+                        <div className="form-input position-relativ position-relative d-flex align-items-center input-container">
+                          <input
+                            className="form-control"
+                            type={showPassword ? "text" : "password"}
+                            name="password"
+                            required=""
+                            placeholder="*********"
+                            onChange={handleValueChange}
+                            value={password}
+                          />
+                          <div
+                            className="cursor-pointer grey-2-text"
+                            onClick={passwordView}
                           >
-                            <g id="SVGRepo_bgCarrier" strokeWidth="0" />
+                            <svg
+                              width="16px"
+                              height="16px"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <g id="SVGRepo_bgCarrier" strokeWidth="0" />
 
-                            <g
-                              id="SVGRepo_tracerCarrier"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-
-                            <g id="SVGRepo_iconCarrier">
-                              {" "}
-                              <path
-                                d="M15.0007 12C15.0007 13.6569 13.6576 15 12.0007 15C10.3439 15 9.00073 13.6569 9.00073 12C9.00073 10.3431 10.3439 9 12.0007 9C13.6576 9 15.0007 10.3431 15.0007 12Z"
-                                stroke="#000000"
-                                strokeWidth="2"
+                              <g
+                                id="SVGRepo_tracerCarrier"
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
-                              />{" "}
-                              <path
-                                d="M12.0012 5C7.52354 5 3.73326 7.94288 2.45898 12C3.73324 16.0571 7.52354 19 12.0012 19C16.4788 19 20.2691 16.0571 21.5434 12C20.2691 7.94291 16.4788 5 12.0012 5Z"
-                                stroke="#000000"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              />{" "}
-                            </g>
-                          </svg>
+                              />
+
+                              <g id="SVGRepo_iconCarrier">
+                                {" "}
+                                <path
+                                  d="M15.0007 12C15.0007 13.6569 13.6576 15 12.0007 15C10.3439 15 9.00073 13.6569 9.00073 12C9.00073 10.3431 10.3439 9 12.0007 9C13.6576 9 15.0007 10.3431 15.0007 12Z"
+                                  stroke="#000000"
+                                  strokeWidth="2"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                />{" "}
+                                <path
+                                  d="M12.0012 5C7.52354 5 3.73326 7.94288 2.45898 12C3.73324 16.0571 7.52354 19 12.0012 19C16.4788 19 20.2691 16.0571 21.5434 12C20.2691 7.94291 16.4788 5 12.0012 5Z"
+                                  stroke="#000000"
+                                  strokeWidth="2"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                />{" "}
+                              </g>
+                            </svg>
+                          </div>
                         </div>
                       </div>
                     </div>
-                    <div className="form-group mb-0">
-                      <button
-                        className="btn btn-primary btn-block w-100 mt-3"
-                        type="submit"
-                      >
-                        {loading ? (
-                          <RiseLoader
-                            color={color}
-                            loading={loading}
-                            cssOverride={override}
-                            size={10}
-                            aria-label="Loading Spinner"
-                            data-testid="loader"
-                            className="loader"
-                          />
-                        ) : (
-                          " Sign in"
-                        )}
-                      </button>
-                    </div>
+
+                    {isOtpVerified ? (
+                      <div className="form-group mb-0">
+                        <button
+                          className="btn btn-primary btn-block w-100 mt-3"
+                          type="submit"
+                        >
+                          {loading ? (
+                            <RiseLoader
+                              color={color}
+                              loading={loading}
+                              cssOverride={override}
+                              size={10}
+                              aria-label="Loading Spinner"
+                              data-testid="loader"
+                              className="loader"
+                            />
+                          ) : (
+                            "Sign Up"
+                          )}
+                        </button>
+                      </div>
+                    ) : (
+                      <div className="form-group mb-0">
+                        <button
+                          className="btn btn-primary btn-block w-100 mt-3"
+                          type="submit"
+                          onClick={sendOtp}
+                        >
+                          {loading ? (
+                            <RiseLoader
+                              color={color}
+                              loading={loading}
+                              cssOverride={override}
+                              size={10}
+                              aria-label="Loading Spinner"
+                              data-testid="loader"
+                              className="loader"
+                            />
+                          ) : (
+                            "Verify Phone Number"
+                          )}
+                        </button>
+                      </div>
+                    )}
+
                     <h6 className="text-muted mt-4 or">Follow us</h6>
                     <div
                       className="social mt-4"
