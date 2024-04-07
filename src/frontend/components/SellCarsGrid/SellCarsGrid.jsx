@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 function sellCarsGrid() {
   return (
     <>
-      <div className="page container-fluid home">
-      <div className="row flex-nowrap">
+      <div className="page container home pt-4">
+        <div className="row flex-nowrap">
           <div className="col primary">
             <div className="heading clearfix">
               <h1>Featured cars for sell</h1>
@@ -17,7 +17,7 @@ function sellCarsGrid() {
           <div className="col primary">
             <article className="min">
               <ul className="auctions-list">
-              <li className="auction-item">
+                <li className="auction-item">
                   <div
                     className="linkable card card-shadow vehicle-card"
                     aria-label="View details for 2021 Jeep Wrangler, Unlimited Sahara High Altitude - MSRP: $35,659"
@@ -25,10 +25,7 @@ function sellCarsGrid() {
                     data-test-item="1C4HJXEG4MW515388"
                     data-test-dealerid="25103"
                   >
-                    <Link
-                      className="hero"
-                      to="/CarDetails"
-                      >
+                    <Link className="hero" to="/CarDetails">
                       <div className="preload-wrap loaded">
                         <img
                           src="https://media.carsandbids.com/cdn-cgi/image/width=712,height=468,quality=70/1477bbe21e8d6b5e719c7c3ccab577fd47dd8cc3/photos/rMxnRya8-T2akcE3-yP-(edit).jpg?t=169162197942"
@@ -87,25 +84,25 @@ function sellCarsGrid() {
                       <div className="vehicle-card-bottom vehicle-card-bottom-top-spacing">
                         <div
                           className="vehicle-card-bottom-pricing flex w-full justify-between"
-                        //   style={{ minHeight: "43px" }}
+                          //   style={{ minHeight: "43px" }}
                         >
                           <div className="pr-3 vehicle-card-bottom-pricing-primary">
                             <div className="text-sm">
                               <div className="">
                                 <div className="vehicle-card-price-rating-label-container">
-                                <svg
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      width="16"
-                                      height="16"
-                                      fill="currentColor"
-                                      className="bi bi-graph-down-arrow"
-                                      viewBox="0 0 16 16"
-                                    >
-                                      <path
-                                        fillRule="evenodd"
-                                        d="M0 0h1v15h15v1H0V0Zm10 11.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 0-1 0v2.6l-3.613-4.417a.5.5 0 0 0-.74-.037L7.06 8.233 3.404 3.206a.5.5 0 0 0-.808.588l4 5.5a.5.5 0 0 0 .758.06l2.609-2.61L13.445 11H10.5a.5.5 0 0 0-.5.5Z"
-                                      />
-                                    </svg>
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="16"
+                                    height="16"
+                                    fill="currentColor"
+                                    className="bi bi-graph-down-arrow"
+                                    viewBox="0 0 16 16"
+                                  >
+                                    <path
+                                      fillRule="evenodd"
+                                      d="M0 0h1v15h15v1H0V0Zm10 11.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 0-1 0v2.6l-3.613-4.417a.5.5 0 0 0-.74-.037L7.06 8.233 3.404 3.206a.5.5 0 0 0-.808.588l4 5.5a.5.5 0 0 0 .758.06l2.609-2.61L13.445 11H10.5a.5.5 0 0 0-.5.5Z"
+                                    />
+                                  </svg>
                                   <span
                                     data-test="graphIconLabel"
                                     className="graph-icon-title ml-1 vehicle-card-price-rating-label truncate font-bold"
@@ -114,7 +111,6 @@ function sellCarsGrid() {
                                   </span>
                                 </div>
                               </div>
-                            
                             </div>
                           </div>
                           <div className="vehicle-card-bottom-pricing-secondary pl-3 lg:pl-2 vehicle-card-bottom-max-50">
@@ -175,7 +171,6 @@ function sellCarsGrid() {
                             <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
                           </svg>
                           <span> Streetsboro, OH</span>
-                         
                         </div>
                         <div
                           className="vehicle-card-location mt-1 truncate text-xs"
@@ -227,10 +222,7 @@ function sellCarsGrid() {
                     data-test-item="1C4HJXEG4MW515388"
                     data-test-dealerid="25103"
                   >
-                    <Link
-                      className="hero"
-                      to="/CarDetails"
-                      >
+                    <Link className="hero" to="/CarDetails">
                       <div className="preload-wrap loaded">
                         <img
                           src="https://media.carsandbids.com/cdn-cgi/image/width=712,height=468,quality=70/1477bbe21e8d6b5e719c7c3ccab577fd47dd8cc3/photos/rMxnRya8-T2akcE3-yP-(edit).jpg?t=169162197942"
@@ -289,25 +281,25 @@ function sellCarsGrid() {
                       <div className="vehicle-card-bottom vehicle-card-bottom-top-spacing">
                         <div
                           className="vehicle-card-bottom-pricing flex w-full justify-between"
-                        //   style={{ minHeight: "43px" }}
+                          //   style={{ minHeight: "43px" }}
                         >
                           <div className="pr-3 vehicle-card-bottom-pricing-primary">
                             <div className="text-sm">
                               <div className="">
                                 <div className="vehicle-card-price-rating-label-container">
-                                <svg
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      width="16"
-                                      height="16"
-                                      fill="currentColor"
-                                      className="bi bi-graph-down-arrow"
-                                      viewBox="0 0 16 16"
-                                    >
-                                      <path
-                                        fillRule="evenodd"
-                                        d="M0 0h1v15h15v1H0V0Zm10 11.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 0-1 0v2.6l-3.613-4.417a.5.5 0 0 0-.74-.037L7.06 8.233 3.404 3.206a.5.5 0 0 0-.808.588l4 5.5a.5.5 0 0 0 .758.06l2.609-2.61L13.445 11H10.5a.5.5 0 0 0-.5.5Z"
-                                      />
-                                    </svg>
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="16"
+                                    height="16"
+                                    fill="currentColor"
+                                    className="bi bi-graph-down-arrow"
+                                    viewBox="0 0 16 16"
+                                  >
+                                    <path
+                                      fillRule="evenodd"
+                                      d="M0 0h1v15h15v1H0V0Zm10 11.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 0-1 0v2.6l-3.613-4.417a.5.5 0 0 0-.74-.037L7.06 8.233 3.404 3.206a.5.5 0 0 0-.808.588l4 5.5a.5.5 0 0 0 .758.06l2.609-2.61L13.445 11H10.5a.5.5 0 0 0-.5.5Z"
+                                    />
+                                  </svg>
                                   <span
                                     data-test="graphIconLabel"
                                     className="graph-icon-title ml-1 vehicle-card-price-rating-label truncate font-bold"
@@ -316,7 +308,6 @@ function sellCarsGrid() {
                                   </span>
                                 </div>
                               </div>
-                            
                             </div>
                           </div>
                           <div className="vehicle-card-bottom-pricing-secondary pl-3 lg:pl-2 vehicle-card-bottom-max-50">
@@ -428,10 +419,7 @@ function sellCarsGrid() {
                     data-test-item="1C4HJXEG4MW515388"
                     data-test-dealerid="25103"
                   >
-                    <Link
-                      className="hero"
-                      to="/CarDetails"
-                      >
+                    <Link className="hero" to="/CarDetails">
                       <div className="preload-wrap loaded">
                         <img
                           src="https://media.carsandbids.com/cdn-cgi/image/width=712,height=468,quality=70/1477bbe21e8d6b5e719c7c3ccab577fd47dd8cc3/photos/rMxnRya8-T2akcE3-yP-(edit).jpg?t=169162197942"
@@ -490,25 +478,25 @@ function sellCarsGrid() {
                       <div className="vehicle-card-bottom vehicle-card-bottom-top-spacing">
                         <div
                           className="vehicle-card-bottom-pricing flex w-full justify-between"
-                        //   style={{ minHeight: "43px" }}
+                          //   style={{ minHeight: "43px" }}
                         >
                           <div className="pr-3 vehicle-card-bottom-pricing-primary">
                             <div className="text-sm">
                               <div className="">
                                 <div className="vehicle-card-price-rating-label-container">
-                                <svg
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      width="16"
-                                      height="16"
-                                      fill="currentColor"
-                                      className="bi bi-graph-down-arrow"
-                                      viewBox="0 0 16 16"
-                                    >
-                                      <path
-                                        fillRule="evenodd"
-                                        d="M0 0h1v15h15v1H0V0Zm10 11.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 0-1 0v2.6l-3.613-4.417a.5.5 0 0 0-.74-.037L7.06 8.233 3.404 3.206a.5.5 0 0 0-.808.588l4 5.5a.5.5 0 0 0 .758.06l2.609-2.61L13.445 11H10.5a.5.5 0 0 0-.5.5Z"
-                                      />
-                                    </svg>
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="16"
+                                    height="16"
+                                    fill="currentColor"
+                                    className="bi bi-graph-down-arrow"
+                                    viewBox="0 0 16 16"
+                                  >
+                                    <path
+                                      fillRule="evenodd"
+                                      d="M0 0h1v15h15v1H0V0Zm10 11.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 0-1 0v2.6l-3.613-4.417a.5.5 0 0 0-.74-.037L7.06 8.233 3.404 3.206a.5.5 0 0 0-.808.588l4 5.5a.5.5 0 0 0 .758.06l2.609-2.61L13.445 11H10.5a.5.5 0 0 0-.5.5Z"
+                                    />
+                                  </svg>
                                   <span
                                     data-test="graphIconLabel"
                                     className="graph-icon-title ml-1 vehicle-card-price-rating-label truncate font-bold"
@@ -517,7 +505,6 @@ function sellCarsGrid() {
                                   </span>
                                 </div>
                               </div>
-                            
                             </div>
                           </div>
                           <div className="vehicle-card-bottom-pricing-secondary pl-3 lg:pl-2 vehicle-card-bottom-max-50">
@@ -629,10 +616,7 @@ function sellCarsGrid() {
                     data-test-item="1C4HJXEG4MW515388"
                     data-test-dealerid="25103"
                   >
-                    <Link
-                      className="hero"
-                      to="/CarDetails"
-                      >
+                    <Link className="hero" to="/CarDetails">
                       <div className="preload-wrap loaded">
                         <img
                           src="https://media.carsandbids.com/cdn-cgi/image/width=712,height=468,quality=70/1477bbe21e8d6b5e719c7c3ccab577fd47dd8cc3/photos/rMxnRya8-T2akcE3-yP-(edit).jpg?t=169162197942"
@@ -691,25 +675,25 @@ function sellCarsGrid() {
                       <div className="vehicle-card-bottom vehicle-card-bottom-top-spacing">
                         <div
                           className="vehicle-card-bottom-pricing flex w-full justify-between"
-                        //   style={{ minHeight: "43px" }}
+                          //   style={{ minHeight: "43px" }}
                         >
                           <div className="pr-3 vehicle-card-bottom-pricing-primary">
                             <div className="text-sm">
                               <div className="">
                                 <div className="vehicle-card-price-rating-label-container">
-                                <svg
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      width="16"
-                                      height="16"
-                                      fill="currentColor"
-                                      className="bi bi-graph-down-arrow"
-                                      viewBox="0 0 16 16"
-                                    >
-                                      <path
-                                        fillRule="evenodd"
-                                        d="M0 0h1v15h15v1H0V0Zm10 11.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 0-1 0v2.6l-3.613-4.417a.5.5 0 0 0-.74-.037L7.06 8.233 3.404 3.206a.5.5 0 0 0-.808.588l4 5.5a.5.5 0 0 0 .758.06l2.609-2.61L13.445 11H10.5a.5.5 0 0 0-.5.5Z"
-                                      />
-                                    </svg>
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    width="16"
+                                    height="16"
+                                    fill="currentColor"
+                                    className="bi bi-graph-down-arrow"
+                                    viewBox="0 0 16 16"
+                                  >
+                                    <path
+                                      fillRule="evenodd"
+                                      d="M0 0h1v15h15v1H0V0Zm10 11.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 0-1 0v2.6l-3.613-4.417a.5.5 0 0 0-.74-.037L7.06 8.233 3.404 3.206a.5.5 0 0 0-.808.588l4 5.5a.5.5 0 0 0 .758.06l2.609-2.61L13.445 11H10.5a.5.5 0 0 0-.5.5Z"
+                                    />
+                                  </svg>
                                   <span
                                     data-test="graphIconLabel"
                                     className="graph-icon-title ml-1 vehicle-card-price-rating-label truncate font-bold"
@@ -718,7 +702,6 @@ function sellCarsGrid() {
                                   </span>
                                 </div>
                               </div>
-                            
                             </div>
                           </div>
                           <div className="vehicle-card-bottom-pricing-secondary pl-3 lg:pl-2 vehicle-card-bottom-max-50">
@@ -822,7 +805,6 @@ function sellCarsGrid() {
                     </div>
                   </div>
                 </li>
-               
               </ul>
             </article>
             <div className="d-md-flex flex-column">

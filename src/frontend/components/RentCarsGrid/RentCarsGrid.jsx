@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 function RentCarsGrid() {
   return (
     <>
-      <div className="page container-fluid home">
+      <div className="page container home">
         <div className="row flex-nowrap">
           <div className="col primary">
             <div className="heading clearfix">

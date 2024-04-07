@@ -12747,6 +12747,7 @@ p.no-results + .paginator {
   display: grid;
   grid-template-columns: 1fr;
   grid-column-gap: 28px;
+  padding-left: 0px;
 }
 .page.home .col.primary ul.auctions-list .auction-item .metadata,
 .page.home .col.primary ul.ss-cards .auction-item .metadata {
@@ -13088,9 +13089,9 @@ p.no-results + .paginator {
   .page.home p.no-results {
     margin-left: 0;
   }
-  .page.home .col.primary {
+  /* .page.home .col.primary {
     margin-right: 30px;
-  }
+  } */
   .page.home .col.primary h2 {
     margin: 0;
     padding: 0;
@@ -13153,8 +13154,8 @@ p.no-results + .paginator {
     display: block;
   }
   .page.home .col.primary .btn-primary {
-    margin-top: 41px;
-    margin-bottom: 32px;
+    /* margin-top: 41px; */
+    /* margin-bottom: 32px; */
     align-self: center;
     width: 234px;
   }
@@ -13585,7 +13586,7 @@ p.no-results + .paginator {
     align-items: center;
     margin-bottom: 25px;
     min-height: 37px;
-    padding-left: 30px;
+    /* padding-left: 30px; */
   }
   .page.home:not(.sresults) .heading h1 {
     margin-right: 16px;
@@ -16746,3 +16747,4 @@ li.notification-item {
       color: #262626;
     }
   }
+ 
