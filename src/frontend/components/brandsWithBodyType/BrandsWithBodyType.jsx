@@ -7,13 +7,13 @@ function BrandsWithBodyType() {
         <div className="row justify-content-center">
           <div className="col-lg-7">
             <div className="at-section-title text-center">
-              <span className="at-subtitle lead text-primary position-relative">
-                Browse Top Car
-              </span>
+              <h1 className="at-subtitle lead text-primary position-relative">
+                Shop your favorite brand
+              </h1>
             </div>
           </div>
         </div>
-        <div className="brands-filter mt-5">
+        <div className="brands-filter mt-4">
           <ul className="nav nav-tabs border-0 justify-content-center flex-wrap">
             <li>
               <a href="#toyota" data-bs-toggle="tab">

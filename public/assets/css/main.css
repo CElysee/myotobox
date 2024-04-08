@@ -7342,6 +7342,14 @@ button.bg-dark:hover {
 .px-5 {
   padding-left: 3rem !important;
 }
+.pt-6,
+.py-6 {
+  padding-top: 4rem !important;
+}
+.pt-7,
+.py-7 {
+  padding-top: 5rem !important;
+}
 .m-n1 {
   margin: -0.25rem !important;
 }
@@ -12680,10 +12688,11 @@ p.no-results + .paginator {
 }
 .page.home .heading h1 {
   margin-left: 14px;
-  margin-bottom: 0;
+  margin-bottom: 1.5rem !important;
   font-weight: 700;
-  font-size: 22px;
+  font-size: 2.25rem;
   line-height: 22px;
+  color: var(--dark);
 }
 .page.home .heading ul.filter-sorts {
   margin-top: 14px;
@@ -13054,7 +13063,7 @@ p.no-results + .paginator {
   .page.home .heading h1 {
     margin-bottom: 0;
     margin-left: 0;
-    font-size: 24px;
+    font-size: 2.25rem;
     line-height: 24px;
   }
   .page.home .heading ul.filter-sorts {
@@ -13109,10 +13118,10 @@ p.no-results + .paginator {
   .page.home .col.primary ul.ss-cards {
     grid-template-columns: 1fr 1fr;
   }
-  .page.home .col.primary ul.auctions-list .auction-item,
+  /* .page.home .col.primary ul.auctions-list .auction-item,
   .page.home .col.primary ul.ss-cards .auction-item {
     padding-bottom: 40px;
-  }
+  } */
   .page.home .col.primary ul.auctions-list .auction-item .metadata,
   .page.home .col.primary ul.ss-cards .auction-item .metadata {
     padding: 0;

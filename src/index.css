@@ -183,23 +183,24 @@ button:focus-visible {
   height: 50px;
   border: 3px solid var(--dark);
   position: absolute;
-  bottom: -52px;
-  right: -20px;
+  bottom: -50px;
+  right: 122px;
   border-radius: 50%;
   opacity: 0.2;
-  -webkit-clip-path: circle(45.4% at 50% 0);
-  clip-path: circle(45.4% at 50% 0);
+  -webkit-clip-path: circle(45.4% at 43% 0);
+  clip-path: circle(45.4% at 43% 0);
 }
 .at-section-title .at-subtitle.shape-primary::after {
   opacity: 1;
 }
 .text-primary {
   --bs-text-opacity: 1;
-  color: var(--first-color) !important;
+  color: var(--dark) !important;
 }
 .lead {
-  font-size: 1.25rem;
-  font-weight: 600;
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: var(--dark);
 }
 .brands-filter ul {
   gap: 16px;
@@ -559,4 +560,49 @@ fieldset {
 b,
 strong {
   font-weight: 600 !important;
+}
+.discount-text {
+  color: #5f5f5f;
+  background-color: var(--first-color);
+  padding: 0.25rem 0.625rem;
+  border-radius: 0.3125rem;
+  font-weight: 600;
+}
+.about-section .small-circle-shape {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  top: 200px;
+  right: 100px;
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(#fc0012),
+    to(rgba(252, 0, 18, 0))
+  );
+  background: linear-gradient(180deg, #fc0012 0%, rgba(252, 0, 18, 0) 100%);
+}
+.about-left .circle-large {
+  width: 140px;
+  height: 140px;
+  background: linear-gradient(
+    32.54deg,
+    rgba(252, 0, 18, 0.5) -28.01%,
+    rgba(247, 108, 119, 0) 101.07%
+  );
+  border-radius: 50%;
+  bottom: 0;
+  left: -50px;
+}
+.about-icon-box {
+  padding: 30px;
+  max-width: 570px;
+}
+.about-icon-box .icon-wrapper {
+  width: 48px;
+  height: 48px;
+  background: #fff2f3;
+  color: #fc0012;
+  font-size: 22px;
 }

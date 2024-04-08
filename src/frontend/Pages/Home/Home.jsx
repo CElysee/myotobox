@@ -2,6 +2,7 @@ import React from "react";
 import SellCarsGrid from "../../components/SellCarsGrid/SellCarsGrid";
 import RentCarsGrid from "../../components/RentCarsGrid/RentCarsGrid";
 import BrandsWithBodyType from "../../components/brandsWithBodyType/BrandsWithBodyType";
+import WhyChooseUs from "../../components/whyChooseUs/WhyChooseUs";
 
 function Home() {
   return (
@@ -9,6 +10,7 @@ function Home() {
       <BrandsWithBodyType />
       <SellCarsGrid />
       <RentCarsGrid />
+      <WhyChooseUs />
     </div>
   );
 }
