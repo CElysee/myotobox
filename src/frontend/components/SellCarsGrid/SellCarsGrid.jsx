@@ -5,12 +5,14 @@ import axiosInstance from "../../../../utils/axiosInstance";
 
 function SellCarsGrid() {
   const [carsForSale, setCarsForSale] = useState("");
+  const [countCarsForSale, setCountCarsForSale] = useState("");
   const imageBaseUrl = import.meta.env.VITE_REACT_APP_API;
 
   useEffect(() => {
     const fetchData = async () => {
       const response = await axiosInstance.get("/car_for_sale/list");
-      setCarsForSale(response.data);
+      setCarsForSale(response.data.cars_for_sale);
+      setCountCarsForSale(response.data.count_cars_for_sale);
     };
     fetchData();
   }, []);
@@ -22,6 +24,7 @@ function SellCarsGrid() {
   };
   return (
     <>
+
       <div className="featured-tabs page container home pt-5">
         <div className="row flex-nowrap">
           <div className="col primary">
@@ -29,7 +32,7 @@ function SellCarsGrid() {
               <h1>
                 Buy & sell cars online in Rwanda.{" "}
                 <span className="text-sm-2 graph-icon-title ml-1 vehicle-card-price-rating-label font-bold">
-                  28,947 cars
+                  {formatNumbers(countCarsForSale)} cars
                 </span>
               </h1>
             </div>
@@ -178,7 +181,7 @@ function SellCarsGrid() {
                               </div>
                               <div className="vehicle-card-discount ml-2 truncate text-right text-xs">
                                 <div className="discount-text">
-                                  Akagera Motor
+                                  {car.car_seller_name}
                                 </div>
                               </div>
                             </div>
