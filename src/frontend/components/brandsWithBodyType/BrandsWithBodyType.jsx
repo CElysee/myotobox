@@ -1,6 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axiosInstance from "../../../../utils/axiosInstance";
 
 function BrandsWithBodyType() {
+  const [carBodyTypeList, setCarBodyTypeList] = useState("");
+  const imageBaseUrl = import.meta.env.VITE_REACT_APP_API;
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await axiosInstance.get("/car_body_type/list");
+      setCarBodyTypeList(response.data.car_body);
+    };
+    fetchData();
+  }, []);
   return (
     <>
       <section className="bpage container" id="brands">
@@ -80,166 +90,27 @@ function BrandsWithBodyType() {
           <div className="tab-content mt-5">
             <div className="tab-pane fade active show" id="honda">
               <div className="ct-row d-flex align-items-center justify-content-center flex-wrap">
-                <div className="ct-col">
-                  <div className="brand-card text-center bg-white position-relative rounded">
-                    <img
-                      src="assets/bodyType/crossover.svg"
-                      alt="crossover"
-                      className="img-fluid icon-black"
-                    />
-                    <h5 className="mt-3 mb-0">Crossover</h5>
-                    <a
-                      href="#"
-                      className="explore-btn position-absolute text-white"
-                    >
-                      <i className="fa-solid fa-arrow-right-long"></i>
-                    </a>
-                  </div>
-                </div>
-                <div className="ct-col">
-                  <div className="brand-card text-center bg-white position-relative rounded">
-                    <img
-                      src="assets/bodyType/suv.svg"
-                      alt="suv"
-                      className="img-fluid icon-black"
-                    />
-                    <h5 className="mt-3 mb-0">Suv</h5>
-                    <a
-                      href="#"
-                      className="explore-btn position-absolute text-white"
-                    >
-                      <i className="fa-solid fa-arrow-right-long"></i>
-                    </a>
-                  </div>
-                </div>
-                <div className="ct-col">
-                  <div className="brand-card text-center bg-white position-relative rounded">
-                    <img
-                      src="assets/bodyType/sedan.svg"
-                      alt="sedan"
-                      className="img-fluid icon-black"
-                    />
-                    <h5 className="mt-3 mb-0">Sedan</h5>
-                    <a
-                      href="#"
-                      className="explore-btn position-absolute text-white"
-                    >
-                      <i className="fa-solid fa-arrow-right-long"></i>
-                    </a>
-                  </div>
-                </div>
-                <div className="ct-col">
-                  <div className="brand-card text-center bg-white position-relative rounded">
-                    <img
-                      src="assets/bodyType/wagon.svg"
-                      alt="wagon"
-                      className="img-fluid icon-black"
-                    />
-                    <h5 className="mt-3 mb-0">Wagon</h5>
-                    <a
-                      href="#"
-                      className="explore-btn position-absolute text-white"
-                    >
-                      <i className="fa-solid fa-arrow-right-long"></i>
-                    </a>
-                  </div>
-                </div>
-                <div className="ct-col">
-                  <div className="brand-card text-center bg-white position-relative rounded">
-                    <img
-                      src="assets/bodyType/coup.svg"
-                      alt="coup"
-                      className="img-fluid icon-black"
-                    />
-                    <h5 className="mt-3 mb-0">Coup</h5>
-                    <a
-                      href="#"
-                      className="explore-btn position-absolute text-white"
-                    >
-                      <i className="fa-solid fa-arrow-right-long"></i>
-                    </a>
-                  </div>
-                </div>
-                <div className="ct-col">
-                  <div className="brand-card text-center bg-white position-relative rounded">
-                    <img
-                      src="assets/bodyType/convertible.svg"
-                      alt="convertible"
-                      className="img-fluid icon-black"
-                    />
-                    <h5 className="mt-3 mb-0">Convertible</h5>
-                    <a
-                      href="#"
-                      className="explore-btn position-absolute text-white"
-                    >
-                      <i className="fa-solid fa-arrow-right-long"></i>
-                    </a>
-                  </div>
-                </div>
-                <div className="ct-col">
-                  <div className="brand-card text-center bg-white position-relative rounded">
-                    <img
-                      src="assets/bodyType/compact.svg"
-                      alt="compact"
-                      className="img-fluid icon-black"
-                    />
-                    <h5 className="mt-3 mb-0">Compact</h5>
-                    <a
-                      href="#"
-                      className="explore-btn position-absolute text-white"
-                    >
-                      <i className="fa-solid fa-arrow-right-long"></i>
-                    </a>
-                  </div>
-                </div>
-                <div className="ct-col">
-                  <div className="brand-card text-center bg-white position-relative rounded">
-                    <img
-                      src="assets/bodyType/sport-coupe.svg"
-                      alt="sport-coupe"
-                      className="img-fluid icon-black"
-                    />
-                    <h5 className="mt-3 mb-0">Sport Coupe</h5>
-                    <a
-                      href="#"
-                      className="explore-btn position-absolute text-white"
-                    >
-                      <i className="fa-solid fa-arrow-right-long"></i>
-                    </a>
-                  </div>
-                </div>
-                <div className="ct-col">
-                  <div className="brand-card text-center bg-white position-relative rounded">
-                    <img
-                      src="assets/bodyType/pickup.svg"
-                      alt="pickup"
-                      className="img-fluid icon-black"
-                    />
-                    <h5 className="mt-3 mb-0">Pickup</h5>
-                    <a
-                      href="#"
-                      className="explore-btn position-absolute text-white"
-                    >
-                      <i className="fa-solid fa-arrow-right-long"></i>
-                    </a>
-                  </div>
-                </div>
-                <div className="ct-col">
-                  <div className="brand-card text-center bg-white position-relative rounded">
-                    <img
-                      src="assets/bodyType/mpv.svg"
-                      alt="mpv"
-                      className="img-fluid icon-black"
-                    />
-                    <h5 className="mt-3 mb-0">Minivan</h5>
-                    <a
-                      href="#"
-                      className="explore-btn position-absolute text-white"
-                    >
-                      <i className="fa-solid fa-arrow-right-long"></i>
-                    </a>
-                  </div>
-                </div>
+                {carBodyTypeList.length > 0 &&
+                  carBodyTypeList.map((carBodyType, index) => (
+                    <div className="ct-col" key={index}>
+                      <div className="brand-card text-center bg-white position-relative rounded">
+                        <img
+                          src={`${imageBaseUrl}/BodyTypeImage/${carBodyType.body_type_image}`}
+                          className="img-fluid icon-black"
+                          alt={carBodyType.body_type_name}
+                        ></img>
+                        <h5 className="mt-3 mb-0">
+                          {carBodyType.body_type_name}
+                        </h5>
+                        <a
+                          href="#"
+                          className="explore-btn position-absolute text-white"
+                        >
+                          <i className="fa-solid fa-arrow-right-long"></i>
+                        </a>
+                      </div>
+                    </div>
+                  ))}
               </div>
             </div>
           </div>

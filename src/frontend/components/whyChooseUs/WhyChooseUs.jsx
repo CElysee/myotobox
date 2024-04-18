@@ -17,23 +17,21 @@ function WhyChooseUs() {
           <div className="row align-items-center">
             <div className="col-xl-6 col-lg-6">
               <div className="about-left position-relative z-1">
-                <span className="circle-large position-absolute z--1"></span>
                 <div className="at-section-title mb-20">
                   <span className="at-subtitle position-relative lead text-primary">
                     Why Choose Us
                   </span>
-                  <h2 className="h1 mt-2 mb-4">
+                  <h2 className="mt-2 mb-4">
                     Don't Waste Your Valuable Time or Money
                   </h2>
                   <p>
-                    Collaboratively leverage existing client-centric schemas
-                    integrated processes. Inter actively engineer global sources
-                    after team driven niche markets. Rapidiously processes with
-                    resource maximizing architectures.
+                    Buy or rent with confidence on MyOtobox, Rwanda's leading
+                    online marketplace for guaranteed quality used and brand new
+                    cars.
                   </p>
                 </div>
                 <img
-                  src="https://autohive-html.themetags.com/assets/img/home1/car-red.png"
+                  src="assets/images/toyota.png"
                   alt="car"
                   className="img-fluid"
                 />
@@ -44,9 +42,13 @@ function WhyChooseUs() {
                 <div className="about-icon-box bg-white shadow rounded">
                   <div className="ab-icon-box-top d-flex align-items-center mb-3">
                     <span className="icon-wrapper d-flex align-items-center justify-content-center rounded">
-                      <i className="flaticon-shield"></i>
+                      <img
+                        src="assets/svg/mechanics.svg"
+                        alt="mechanics"
+                        style={{ width: "20px" }}
+                      />
                     </span>
-                    <h5 className="mb-0 ms-3">Expert Certified Mechanics</h5>
+                    <h5 className="mb-0 ms-3 dark">Expert Certified Mechanics</h5>
                   </div>
                   <p className="mb-0">
                     Credibly maximize resource maximizing channels after
@@ -56,26 +58,37 @@ function WhyChooseUs() {
                 <div className="about-icon-box bg-white shadow rounded mt-20 ms-md-5 mt-4">
                   <div className="ab-icon-box-top d-flex align-items-center mb-3">
                     <span className="icon-wrapper d-flex align-items-center justify-content-center rounded">
-                      <i className="flaticon-shield"></i>
+                      <img
+                        src="assets/svg/online.svg"
+                        alt="mechanics"
+                        style={{ width: "25px" }}
+                      />
                     </span>
-                    <h5 className="mb-0 ms-3">Genuine Spares Parts</h5>
+                    <h5 className="mb-0 ms-3 dark">More Information</h5>
                   </div>
                   <p className="mb-0">
-                    Credibly maximize resource maximizing channels after
-                    interoperable frictionless. Rather than synergistic models.
+                    We provide vehicle Information , standard features for every
+                    vehicle listed on myOtobox — for sell and rent.
                   </p>
                 </div>
 
                 <div className="about-icon-box bg-white shadow rounded mt-4">
                   <div className="ab-icon-box-top d-flex align-items-center mb-3">
                     <span className="icon-wrapper d-flex align-items-center justify-content-center rounded">
-                      <i className="flaticon-price-tag"></i>
+                      <img
+                        src="assets/svg/car.svg"
+                        alt="mechanics"
+                        style={{ width: "25px" }}
+                      />
                     </span>
-                    <h5 className="mb-0 ms-3">Get Reasonable Price</h5>
+                    <h5 className="mb-0 ms-3 dark">
+                      User-friendly online automotive marketplace
+                    </h5>
                   </div>
                   <p className="mb-0">
-                    Credibly maximize resource maximizing channels after
-                    interoperable frictionless. Rather than synergistic models.
+                    With easy sorting and searching – and simplified listing
+                    that tell you exactly what you need to know about each
+                    vehicle.
                   </p>
                 </div>
               </div>

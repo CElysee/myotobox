@@ -225,7 +225,8 @@
     margin-bottom: 0.3125rem;
 }
 .heading-3 {
-    font-size: 1.375rem;
+    /* font-size: 1.375rem; */
+    font-size: 1.125rem;
     font-weight: 600;
     line-height: 1.36;
 }

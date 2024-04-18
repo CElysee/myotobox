@@ -5,11 +5,11 @@ import { Link } from "react-router-dom";
 function RentCarsGrid() {
   return (
     <>
-     <div className="featured-tabs page container home pt-7 pb-5">
+     <div className="featured-tabs page container home pt-5 pb-5">
         <div className="row flex-nowrap">
           <div className="col primary">
             <div className="heading clearfix">
-              <h1>Featured cars for sell</h1>
+              <h1>Rent cars online in Rwanda.<span className="text-sm-2 graph-icon-title ml-1 vehicle-card-price-rating-label font-bold">28,947 cars</span></h1>
             </div>
           </div>
         </div>

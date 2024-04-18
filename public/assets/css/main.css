@@ -297,6 +297,7 @@ h6 {
 p {
   margin-top: 0;
   margin-bottom: 1rem;
+  font-size: 16px !important;
 }
 abbr[data-original-title],
 abbr[title] {
@@ -12690,7 +12691,7 @@ p.no-results + .paginator {
   margin-left: 14px;
   margin-bottom: 1.5rem !important;
   font-weight: 700;
-  font-size: 2.25rem;
+  font-size: 1.625rem;
   line-height: 22px;
   color: var(--dark);
 }
@@ -13063,7 +13064,8 @@ p.no-results + .paginator {
   .page.home .heading h1 {
     margin-bottom: 0;
     margin-left: 0;
-    font-size: 2.25rem;
+    /* font-size: 2.25rem; */
+    font-size: 1.625rem;
     line-height: 24px;
   }
   .page.home .heading ul.filter-sorts {
@@ -13574,7 +13576,7 @@ p.no-results + .paginator {
 @media (min-width: 1257px) {
   .page.home:not(.sresults) .heading {
     margin-bottom: 25px;
-    min-height: 81px;
+    min-height: 40px;
   }
   .page.home:not(.sresults) .heading .filter-set {
     float: left;
