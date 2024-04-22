@@ -1,8 +1,10 @@
 import React from "react";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function footer() {
   const [emailSubscribe, setEmailSubscribe] = useState("");
+  const year = new Date().getFullYear();
   return (
     <>
       <footer className="footer-section">
@@ -10,71 +12,9 @@ function footer() {
           <div className="container">
             <div className="row pt-5">
               <div className="col-xl-6">
-                <div className="footer-banner position-relative bg-primary z-3 rounded">
-                  <img
-                    src="https://autohive-html.themetags.com/assets/img/shapes/banner-wave.png"
-                    alt="wave"
-                    className="position-absolute end-0 top-0 z--1"
-                  />
-                  <div className="row">
-                    <div className="col-lg-6">
-                      <div className="footer-banner-left">
-                        <span className="icon-wrapper d-flex align-items-center justify-content-center rounded">
-                        <img src="assets/svg/searching-car.svg" width={"40px"}/>
-                        </span>
-                        <h3 className="text-dark mt-3 mb-20">
-                          Are You Looking to Buy or Rent a Car?
-                        </h3>
-                        <a
-                          href="https://autohive-html.themetags.com/inventory-listing.html"
-                          className="at-explore-btn text-dark"
-                        >
-                          <span className="me-2 text-white mt-2">
-                            <svg
-                              width="39"
-                              height="26"
-                              viewBox="0 0 39 26"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
-                              style={{position: "relative", top: "7px"}}
-                            >
-                              <path
-                                d="M32.6161 7.85693L37.4087 12.9998M37.4087 12.9998L32.6161 18.1426M37.4087 12.9998H18.0671"
-                                stroke="#262626"
-                                strokeWidth="1.71429"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              />
-                              <ellipse
-                                cx="12.9322"
-                                cy="13"
-                                rx="11.9815"
-                                ry="12"
-                                stroke="#262626"
-                                strokeWidth="1.71429"
-                              />
-                            </svg>
-                          </span>
-                          Search Car
-                        </a>
-                      </div>
-                    </div>
-                    <div className="col-lg-6 align-self-end">
-                      <div className="footer-banner-right">
-                        <img
-                          src="https://autohive-html.themetags.com/assets/img/home1/footer-car-1.png"
-                          alt="car"
-                          className="img-fluid"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-xl-6">
                 <div className="footer-banner position-relative banner-gradient z-3 rounded">
                   <img
-                    src="https://autohive-html.themetags.com/assets/img/shapes/banner-wave.png"
+                    src="/assets/images/banner-wave.png"
                     alt="wave"
                     className="opacity-50 position-absolute end-0 top-0 z--1"
                   />
@@ -82,13 +22,13 @@ function footer() {
                     <div className="col-lg-6">
                       <div className="footer-banner-left">
                         <span className="icon-wrapper d-flex align-items-center justify-content-center rounded">
-                        <img src="assets/svg/sale-car.svg" width={"40px"}/>
+                          <img src="/assets/svg/sale-car.svg" width={"40px"} />
                         </span>
                         <h3 className="text-white mt-3 mb-20">
                           Are You Looking to Sell your Car?
                         </h3>
                         <a
-                          href="https://autohive-html.themetags.com/car-listing.html"
+                          href="#"
                           className="at-explore-btn text-white"
                         >
                           <span className="me-2 text-white">
@@ -98,7 +38,7 @@ function footer() {
                               viewBox="0 0 39 26"
                               fill="none"
                               xmlns="http://www.w3.org/2000/svg"
-                              style={{position: "relative", top: "7px"}}
+                              style={{ position: "relative", top: "7px" }}
                             >
                               <path
                                 d="M32.6161 7.85693L37.4087 12.9998M37.4087 12.9998L32.6161 18.1426M37.4087 12.9998H18.0671"
@@ -124,7 +64,72 @@ function footer() {
                     <div className="col-lg-6 align-self-end">
                       <div className="footer-banner-right">
                         <img
-                          src="https://autohive-html.themetags.com/assets/img/home1/footer-car-2.png"
+                          src="/assets/images/footer-car-2.png"
+                          alt="car"
+                          className="img-fluid"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-xl-6">
+                <div className="footer-banner position-relative bg-primary z-3 rounded">
+                  <img
+                    src="#"
+                    alt="wave"
+                    className="position-absolute end-0 top-0 z--1"
+                  />
+                  <div className="row">
+                    <div className="col-lg-6">
+                      <div className="footer-banner-left">
+                        <span className="icon-wrapper d-flex align-items-center justify-content-center rounded">
+                          <img
+                            src="/assets/svg/searching-car.svg"
+                            width={"40px"}
+                          />
+                        </span>
+                        <h3 className="text-dark mt-3 mb-20">
+                          Are You Looking to Buy or Rent a Car?
+                        </h3>
+                        <a
+                          href="#"
+                          className="at-explore-btn text-dark"
+                        >
+                          <span className="me-2 text-white mt-2">
+                            <svg
+                              width="39"
+                              height="26"
+                              viewBox="0 0 39 26"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                              style={{ position: "relative", top: "7px" }}
+                            >
+                              <path
+                                d="M32.6161 7.85693L37.4087 12.9998M37.4087 12.9998L32.6161 18.1426M37.4087 12.9998H18.0671"
+                                stroke="#262626"
+                                strokeWidth="1.71429"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
+                              <ellipse
+                                cx="12.9322"
+                                cy="13"
+                                rx="11.9815"
+                                ry="12"
+                                stroke="#262626"
+                                strokeWidth="1.71429"
+                              />
+                            </svg>
+                          </span>
+                          Search Car
+                        </a>
+                      </div>
+                    </div>
+                    <div className="col-lg-6 align-self-end">
+                      <div className="footer-banner-right">
+                        <img
+                          src="/assets/images/footer-car-1.png"
                           alt="car"
                           className="img-fluid"
                         />
@@ -144,20 +149,13 @@ function footer() {
             <div className="row justify-content-between">
               <div className="col-xl-5 col-lg-5">
                 <div className="footer-widget widget-basic">
-                  <h3 className="widget-title-large mb-4 text-white">
-                    Have a Question? Feel Free to Ask..Feedback
-                  </h3>
-                  <p className="mb-40">
-                    Compellingly expedite mission-critical methodologies and
-                    integrated readiness without quality intellectual capital.
-                  </p>
                   <div className="phone-box d-flex align-items-center">
                     <span className="icon-wrapper d-inline-flex align-items-center justify-content-center rounded-circle bg-primary text-white">
                       <i className="flaticon-phone-call"></i>
                     </span>
-                    <h4 className="text-white ms-3 mb-0">+978-9674-4455</h4>
+                    <h4 className="text-white ms-3 mb-0">+250 782 384 772</h4>
                   </div>
-                  <div className="sb-form mt-40">
+                  <div className="sb-form mt-40 pt-3">
                     <h5 className="text-white mb-4">
                       Get latest updates & offers
                     </h5>
@@ -167,7 +165,11 @@ function footer() {
                         placeholder="Enter your email..."
                         className="bg-white w-100"
                       />
-                      <button type="submit" className="btn btn-primary">
+                      <button
+                        type="submit"
+                        className="btn btn-primary"
+                        style={{ height: "-webkit-fill-available" }}
+                      >
                         Subscribe
                       </button>
                     </form>
@@ -179,7 +181,7 @@ function footer() {
                   <div className="row align-items-center">
                     <div className="col-6">
                       <a
-                        href="https://autohive-html.themetags.com/index.html"
+                        href="#"
                         className="footer-logo d-inline-block"
                       >
                         <svg
@@ -253,25 +255,13 @@ function footer() {
                             <a href="#">Our Company</a>
                           </li>
                           <li>
-                            <a href="#">Shop Toyota</a>
+                            <a href="#">CanMove</a>
                           </li>
                           <li>
-                            <a href="#">Autohive USA</a>
+                            <a href="#">CNV customs</a>
                           </li>
                           <li>
-                            <a href="#">Autohive Worldwide</a>
-                          </li>
-                          <li>
-                            <a href="#">Autohive Racing</a>
-                          </li>
-                          <li>
-                            <a href="#">TRD USA</a>
-                          </li>
-                          <li>
-                            <a href="#">Autohive Plant Tours</a>
-                          </li>
-                          <li>
-                            <a href="#">Virtual Auto Show</a>
+                            <a href="#">FAQs & support</a>
                           </li>
                         </ul>
                       </div>
@@ -312,32 +302,39 @@ function footer() {
                     <div className="col-sm-4">
                       <div className="footer-widget footer-nav-widget mb-5 mb-sm-0">
                         <h6 className="widget-title text-white mb-3">
-                          Quick links
+                          Favorite brand
                         </h6>
                         <ul className="footer-nav">
                           <li>
-                            <a href="#">My account</a>
+                            <Link to={"/BuyCars/toyota"}>
+                              <span>Toyota</span>
+                            </Link>
                           </li>
                           <li>
-                            <a href="#">Champaigns</a>
+                            <Link to={"/BuyCars/hyundai"}>
+                              <span>Hyundai</span>
+                            </Link>
                           </li>
                           <li>
-                            <a href="#">Autohive Dealers</a>
+                            <Link to={"/BuyCars/kia"}>
+                              <span>KIA</span>
+                            </Link>
+                          </li>
+
+                          <li>
+                            <Link to={"/BuyCars/mercedes"}>
+                              <span>Mercedes Benz</span>
+                            </Link>
                           </li>
                           <li>
-                            <a href="#">Deals and Incentives</a>
+                            <Link to={"/BuyCars/volkswagen"}>
+                              <span>Volkswagen</span>
+                            </Link>
                           </li>
                           <li>
-                            <a href="#">Financial Services</a>
-                          </li>
-                          <li>
-                            <a href="#">Autohive Insurance</a>
-                          </li>
-                          <li>
-                            <a href="#">Autohive Care</a>
-                          </li>
-                          <li>
-                            <a href="#">FAQs & support</a>
+                            <Link to={"/BuyCars/byd"}>
+                              <span>BYD</span>
+                            </Link>
                           </li>
                         </ul>
                       </div>
@@ -353,10 +350,7 @@ function footer() {
                 <div className="col-sm-7">
                   <div className="copyright-text">
                     <p className="mb-0">
-                      &copy; All rights reserved. Made by{" "}
-                      <a href="https://autohive-html.themetags.com/index.html">
-                        ThemeTags
-                      </a>
+                      &copy; Copyright {year} <a href="#">MyOtobox</a>
                     </p>
                   </div>
                 </div>

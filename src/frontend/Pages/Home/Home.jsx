@@ -9,6 +9,16 @@ function Home() {
     <div className="main_content">
       <BrandsWithBodyType />
       <SellCarsGrid />
+      <div className="container">
+        <div className="row flex-nowrap">
+          <div className="d-md-flex" style={{justifyContent: "center"}}>
+            <a className="btn btn-lg btn-primary" href="/past-auctions/">
+              View more
+            </a>
+          </div>
+        </div>
+      </div>
+
       <RentCarsGrid />
       <WhyChooseUs />
     </div>

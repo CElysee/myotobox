@@ -18,7 +18,7 @@
   display: flex;
   flex: 1 1 auto;
   width: 100%;
-  padding: 15px 0px;
+  padding-top: 5px;
 }
 .lmVkIt {
   transition: transform 0.3s ease 0s;
@@ -73,6 +73,7 @@
   appearance: textfield;
   background: #fff;
   color: hsl(0, 0%, 50%);
+  height: 40px !important;
 }
 input[type="text"],
 input[type="tel"],
@@ -119,19 +120,7 @@ input[type="search"]::-webkit-search-results-decoration {
   margin-left: 16px;
   flex: 3 1 0%;
 }
-.hHfOrj {
-  display: inline-flex;
-  -moz-box-pack: center;
-  justify-content: center;
-  -moz-box-align: center;
-  align-items: center;
-  border-radius: 4px;
-  min-height: 36px;
-  font-size: 16px;
-  background: rgb(35, 38, 42);
-  color: rgb(255, 255, 255);
-  border: 1px solid transparent;
-}
+
 .iEzCwv {
   margin-right: 8px;
   display: inline-block;
@@ -242,9 +231,9 @@ input[type="search"]::-webkit-search-results-decoration {
   font-weight: bold;
   margin-bottom: 0px;
 }
-.car_filter .css-13cymwt-control {
+/* .car_filter .css-13cymwt-control {
   border-color: transparent;
-}
+} */
 .car_filter .css-1jqq78o-placeholder {
   margin-left: 0px;
   margin-right: 0px;
@@ -252,6 +241,16 @@ input[type="search"]::-webkit-search-results-decoration {
 .car_filter .css-13cymwt-control:hover {
   border-color: transparent !important;
   cursor: pointer;
+}
+.css-t3ipsp-control:hover{
+  border-color: transparent !important;
+  box-shadow: 0 0 0 1px transparent;
+  background-color: transparent;
+}
+
+.css-13cymwt-control{
+  background: transparent !important;
+  border: none !important;
 }
 .carfilter_button_dropdown {
   font-size: 14px;
@@ -566,7 +565,7 @@ input[type="search"]::-webkit-search-results-decoration {
     justify-content: space-between;
     -webkit-box-align: center;
     align-items: center;
-    padding-bottom: 10px;
+    /* padding-bottom: 10px; */
   }
   .hVORPI {
     padding: 0px;
@@ -597,7 +596,7 @@ input[type="search"]::-webkit-search-results-decoration {
     justify-content: space-between;
     -webkit-box-align: center;
     align-items: center;
-    padding-bottom: 10px;
+    /* padding-bottom: 10px; */
   }
 }
 @media (min-width: 900px) {
@@ -660,7 +659,7 @@ input[type="search"]::-webkit-search-results-decoration {
   }
   .jbRQcv {
     display: block;
-    padding: 15px 8px 0px;
+    /* padding: 15px 8px 0px; */
   }
   .hVORPI {
     padding: 10px;

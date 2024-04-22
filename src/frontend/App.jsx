@@ -2,17 +2,10 @@ import { useState, useEffect } from "react";
 import reactLogo from "../assets/react.svg";
 import viteLogo from "/vite.svg";
 import "../frontend/styles/App.css";
-import Layout from "../frontend/layout/Layout";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Layout from "./layout/Layout";
+import Router from "../routers/routers";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
-import Home from "./Pages/home/Home";
-import BuyCars from "./Pages/BuyCars/BuyCars";
-import RentCars from "./Pages/RentCars/RentCars";
-import CarDetails from "./Pages/CarDetails/CarDetails";
-import ImportOnOrder from "./Pages/ImportOnOrder/ImportOnOrder";
-import Login from "./Pages/Auth/Login";
-import SignUp from "./Pages/Auth/SignUp";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -56,16 +49,7 @@ function App() {
       ) : (
         <>
           <Header />
-          <Routes>
-            {/* <Route path="/" exact component={Home} /> */}
-            <Route path="/" element={<Home />} />
-            <Route path="/CarDetails" element={<CarDetails />} />
-            <Route path="/BuyCars" element={<BuyCars />} />
-            <Route path="/RentCars" element={<RentCars />} />
-            <Route path="/ImportOnOrder" element={<ImportOnOrder />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/sign-up" element={<SignUp />} />
-          </Routes>
+          <Router />
           <Footer />
         </>
       )}

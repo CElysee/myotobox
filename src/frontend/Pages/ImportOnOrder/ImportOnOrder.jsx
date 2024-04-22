@@ -1,5 +1,5 @@
 import React from "react";
-import "../ImportOnOrder/ImportOnOrder.css";
+import "./ImportOnOrder.css";
 
 function ImportOnOrder() {
   return (

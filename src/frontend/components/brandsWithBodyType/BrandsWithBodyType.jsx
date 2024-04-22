@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axiosInstance from "../../../../utils/axiosInstance";
+import { Link } from "react-router-dom";
 
 function BrandsWithBodyType() {
   const [carBodyTypeList, setCarBodyTypeList] = useState("");
@@ -13,7 +14,7 @@ function BrandsWithBodyType() {
   }, []);
   return (
     <>
-      <section className="bpage container" id="brands">
+      <section className="bpage container pb-4" id="brands">
         <div className="row justify-content-center">
           <div className="col-lg-7">
             <div className="at-section-title text-center">
@@ -26,65 +27,65 @@ function BrandsWithBodyType() {
         <div className="brands-filter mt-4">
           <ul className="nav nav-tabs border-0 justify-content-center flex-wrap">
             <li>
-              <a href="#toyota" data-bs-toggle="tab">
+              <Link to={"/BuyCars/toyota"}>
                 <img
                   src="assets/brands/toyota.svg"
                   alt="toyota"
                   className="icon-red"
                 />
                 <span className="ms-4">Toyota</span>
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#hyundai" data-bs-toggle="tab">
+              <Link to={"/buyCars/hyundai"}>
                 <img
                   src="assets/brands/hyundai.svg"
                   alt="Hyundai"
                   className="icon-red"
                 />
                 <span className="ms-4">Hyundai</span>
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#honda" data-bs-toggle="tab">
+              <Link to={"/buyCars/kia"}>
                 <img
                   src="assets/brands/kia.svg"
                   alt="Kia"
                   className="icon-red"
                 />
                 <span className="ms-4">KIA</span>
-              </a>
+              </Link>
             </li>
 
             <li>
-              <a href="#mercedes" data-bs-toggle="tab">
+              <Link to={"/buyCars/mercedes"}>
                 <img
                   src="assets/brands/mercedes-benz.svg"
                   alt="Mercedes Benz"
                   className="icon-red"
                 />
                 <span className="ms-4">Mercedes Benz</span>
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#volkswagen" data-bs-toggle="tab">
+              <Link to={"/buyCars/volkswagen"}>
                 <img
                   src="assets/brands/volkswagen.svg"
                   alt="Volkswagen"
                   className="icon-red"
                 />
                 <span className="ms-4">Volkswagen</span>
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#ferrari" data-bs-toggle="tab">
+              <Link to={"/buyCars/byd"}>
                 <img
                   src="assets/brands/byd.png"
                   alt="byd"
                   className="icon-red"
                 />
                 <span className="ms-4">BYD</span>
-              </a>
+              </Link>
             </li>
           </ul>
           <div className="tab-content mt-5">
