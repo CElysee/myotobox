@@ -17,7 +17,7 @@ function SellCarsGrid({ brandName, makeWithModels, countCars }) {
     const fetchData = async () => {
       if (makeWithModels) {
         setCarsForSale(makeWithModels);
-        setCountCarsForSale(countCars)
+        setCountCarsForSale(countCars);
       } else {
         const response = await axiosInstance.get(`/car_for_sale/list`);
         setCarsForSale(response.data.cars_for_sale);
@@ -119,7 +119,12 @@ function SellCarsGrid({ brandName, makeWithModels, countCars }) {
                                 className="truncate text-xs"
                                 data-test="vehicleCardTrim"
                               >
-                                Fuel type: {car.car_fuel_type}
+                                <span className="mr-1 text-xs font-bold">
+                                  Fuel type:
+                                </span>
+                                <span className="vehicle-card-year text-xs">
+                                  {car.car_fuel_type}
+                                </span>
                               </div>
                             </div>
                           </div>
@@ -213,8 +218,10 @@ function SellCarsGrid({ brandName, makeWithModels, countCars }) {
                 />
                 <div className="sc-fThUAz GNSHw">
                   <h3 className="sc-kMribo kQonRp">
-                    At this time, we do not have any {brandName &&  brandName.toUpperCase()} vehicles matching your search in stock.
-                    We're happy to assist you with alternative choices.
+                    At this time, we do not have any{" "}
+                    {brandName && brandName.toUpperCase()} vehicles matching
+                    your search in stock. We're happy to assist you with
+                    alternative choices.
                   </h3>
                   <h4 className="sc-bdOgaJ bvAGqr">
                     Look for other brands using our filters

@@ -1135,6 +1135,12 @@ select, input{
   color: var(--dark);
   border: 1px solid transparent;
 }
+.dwAEqK{
+  cursor: pointer;
+}
+.cOTnrw{
+  cursor: pointer;
+}
 .dwAEqK-auto{
   padding: 10px 16px;
   background: var(--first-color);
@@ -1150,4 +1156,8 @@ select, input{
   -moz-box-align: center;
   align-items: center;
   border-color: rgb(224, 225, 227);
+  cursor: pointer;
+}
+.dropdown-menu.no-close {
+  pointer-events: none;
 }
