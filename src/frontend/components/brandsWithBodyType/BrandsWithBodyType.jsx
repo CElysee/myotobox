@@ -58,7 +58,7 @@ function BrandsWithBodyType() {
             </li>
 
             <li>
-              <Link to={"/buyCars/mercedes"}>
+              <Link to={"/buyCars/Mercedes-Benz"}>
                 <img
                   src="assets/brands/mercedes-benz.svg"
                   alt="Mercedes Benz"

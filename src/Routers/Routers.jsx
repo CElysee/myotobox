@@ -14,9 +14,10 @@ function Routers() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/CarDetails" element={<CarDetails />} />
+      <Route path="/carDetails/:stock/:name" element={<CarDetails />} />
       <Route path="/buyCars/:make/:model" element={<BuyCars />} />
       <Route path="/buyCars/:make" element={<BuyCars />} />
+      <Route path="/buyCars" element={<BuyCars />} />
       <Route path="/RentCars" element={<RentCars />} />
       <Route path="/ImportOnOrder" element={<ImportOnOrder />} />
       <Route path="/login" element={<Login />} />

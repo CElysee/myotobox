@@ -28,7 +28,6 @@ function BuyCars() {
   const [selectedBrand, setSelectedBrand] = useState([]);
   const [brandModels, setBrandModels] = useState([]);
   const [selectedModel, setSelectedModel] = useState([]);
-  const [carsForSale, setCarsForSale] = useState("");
   const [makeWithModels, setMakeWithModels] = useState([]);
   const [countCarsForSale, setCountCarsForSale] = useState("");
   const [listBrands, setListBrands] = useState([]);
@@ -37,7 +36,6 @@ function BuyCars() {
   const [loading, setLoading] = useState(false);
   const [skeletonLoading, setSkeletonLoading] = useState(false);
   const [skeleton, setSkeleton] = useState([1, 2, 3, 4]);
-  const [queryParameters, setQueryParameters] = useState({});
   const [updateUrl, setUpdateUrl] = useState(false);
   const [updateOnChangeFilter, setUpdateOnChangeFilter] = useState(false);
 
@@ -59,11 +57,8 @@ function BuyCars() {
 
   const makeName = make_search.make;
   const modelName = make_search.model;
-  const carTransmission = new URLSearchParams(location.search).get(
-    "car_transmission"
-  );
+  const carTransmission = new URLSearchParams(location.search).get("car_transmission");
   const fuelType = new URLSearchParams(location.search).get("fuel_type");
-
   const [inputValues, setInputValues] = useState({
     brand_id: "",
     model_id: "",
@@ -78,32 +73,19 @@ function BuyCars() {
   });
 
   useEffect(() => {
-    const searchParams = new URLSearchParams(window.location.search);
-    const params = {};
-
-    for (const [key, value] of searchParams.entries()) {
-      params[key] = value;
-    }
-
-    setQueryParameters(params);
-  }, []);
-
-  useEffect(() => {
     setBrandModels([]);
     const fetchData = async () => {
       // const response = await axiosInstance.get("/car_for_sale/list");
       const list_brands = await axiosInstance.get("/car_for_sale/car_brands");
-      const brand = list_brands.data.car_brand.filter(
-        (brand) => brand.name.toLowerCase() == brandName
-      );
-      setSelectedBrand({
-        value: brand[0].id,
-        label: brand[0].name,
-      });
-      setListBrands(list_brands.data.car_brand);
-
-      // Check if brand[0].models is not empty
-      if (brand[0].models.length > 0) {
+      if(brandName){
+        const brand = list_brands.data.car_brand.filter(
+          (brand) => brand.name.toLowerCase() == brandName.toLowerCase()
+        );
+        setSelectedBrand({
+          value: brand[0].id,
+          label: brand[0].name,
+        });
+        if (brand[0].models.length > 0) {
         setBrandModels(brand[0].models);
         if (model_id) {
           const model = brand[0].models.filter(
@@ -115,6 +97,12 @@ function BuyCars() {
           });
         }
       }
+      }
+      
+      setListBrands(list_brands.data.car_brand);
+
+      // Check if brand[0].models is not empty
+      
       // setCarsForSale(response.data.cars_for_sale);
       // setCountCarsForSale(response.data.count_cars_for_sale);
       // console.log(brand)
@@ -218,6 +206,7 @@ function BuyCars() {
     setSelectedBrand(selectedOption);
     setBrandName(selectedOption.label.toLowerCase());
     setUpdateUrl(true);
+    setSelectedModel([]);
   };
 
   // Handle Model change
@@ -323,8 +312,6 @@ function BuyCars() {
         car_transmission,
         fuel_type,
       } = inputValues;
-
-      const modalName = selectedModel.label.toLowerCase();
       // Set default values for min and max prices if they are not provided
       const minPrice = min_input_price ? min_input_price : 1;
       const maxPrice = max_input_price ? max_input_price : 550000000;
@@ -341,8 +328,8 @@ function BuyCars() {
       let url = `/car_for_sale/makeModels?make=${brandName}`;
 
       // Add query parameters only if their values are not empty
-      if (modalName) {
-        url += `?model_id=${modalName}`;
+      if (selectedModel !== null && selectedModel.label) {
+        url += `?model_id=${selectedModel.label.toLowerCase()}`;
       }
       if (minPrice) {
         url += `${url.includes("?") ? "&" : "?"}min_input_price=${minPrice}`;
@@ -403,7 +390,7 @@ function BuyCars() {
         car_transmission,
         fuel_type,
       } = inputValues;
-      const modalName = selectedModel.label.toLowerCase();
+      
       // Set default values for min and max prices if they are not provided
       const minPrice = min_input_price ? min_input_price : 1;
       const maxPrice = max_input_price ? max_input_price : 550000000;
@@ -419,8 +406,8 @@ function BuyCars() {
       let url = `/buyCars/${brandName}`;
 
       // Add query parameters only if their values are not empty
-      if (modalName) {
-        url += `?model_id=${modalName}`;
+      if (selectedModel !== null && selectedModel.label) {
+        url += `?model_id=${selectedModel.label.toLowerCase()}`;
       }
       if (min_input_price) {
         url += `${url.includes("?") ? "&" : "?"}min_input_price=${minPrice}`;
