@@ -1135,3 +1135,19 @@ select, input{
   color: var(--dark);
   border: 1px solid transparent;
 }
+.dwAEqK-auto{
+  padding: 10px 16px;
+  background: var(--first-color);
+  box-sizing: border-box;
+  border-radius: 40px;
+  display: flex;
+  flex-direction: row;
+  -moz-box-pack: center;
+  justify-content: center;
+  user-select: none;
+  border-width: 1px;
+  border-style: solid;
+  -moz-box-align: center;
+  align-items: center;
+  border-color: rgb(224, 225, 227);
+}

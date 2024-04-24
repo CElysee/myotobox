@@ -6,6 +6,12 @@ import makeAnimated from "react-select/animated";
 import SellCarsGrid from "../../components/SellCarsGrid/SellCarsGrid";
 import axiosInstance from "../../../../utils/axiosInstance";
 import Select from "react-select";
+import ContentLoader from "react-content-loader";
+import {
+  formatNumber,
+  formatAmount,
+  truncateText,
+} from "../../../../utils/helpers";
 
 const override = {
   display: "block",
@@ -29,23 +35,63 @@ function BuyCars() {
   const imageBaseUrl = import.meta.env.VITE_REACT_APP_API;
   const [color, setColor] = useState("#fff");
   const [loading, setLoading] = useState(false);
+  const [skeletonLoading, setSkeletonLoading] = useState(false);
+  const [skeleton, setSkeleton] = useState([1, 2, 3, 4]);
+  const [queryParameters, setQueryParameters] = useState({});
+  const [updateUrl, setUpdateUrl] = useState(false);
+  const [updateOnChangeFilter, setUpdateOnChangeFilter] = useState(false);
+
+  const model_id = new URLSearchParams(location.search).get("model_id");
   const minInputPrice = new URLSearchParams(location.search).get(
     "min_input_price"
   );
   const maxInputPrice = new URLSearchParams(location.search).get(
     "max_input_price"
   );
+  const startYear = new URLSearchParams(location.search).get("start_year");
+  const endYear = new URLSearchParams(location.search).get("end_year");
+  const start_kilometers = new URLSearchParams(location.search).get(
+    "start_kilometers"
+  );
+  const end_kilometers = new URLSearchParams(location.search).get(
+    "end_kilometers"
+  );
+
+  const makeName = make_search.make;
+  const modelName = make_search.model;
+  const carTransmission = new URLSearchParams(location.search).get(
+    "car_transmission"
+  );
+  const fuelType = new URLSearchParams(location.search).get("fuel_type");
 
   const [inputValues, setInputValues] = useState({
     brand_id: "",
     model_id: "",
     min_input_price: minInputPrice,
     max_input_price: maxInputPrice,
+    start_year: startYear,
+    end_year: endYear,
+    start_kilometers: "",
+    end_kilometers: "",
+    car_transmission: "",
+    fuel_type: "",
   });
 
   useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    const params = {};
+
+    for (const [key, value] of searchParams.entries()) {
+      params[key] = value;
+    }
+
+    setQueryParameters(params);
+  }, []);
+
+  useEffect(() => {
+    setBrandModels([]);
     const fetchData = async () => {
-      const response = await axiosInstance.get("/car_for_sale/list");
+      // const response = await axiosInstance.get("/car_for_sale/list");
       const list_brands = await axiosInstance.get("/car_for_sale/car_brands");
       const brand = list_brands.data.car_brand.filter(
         (brand) => brand.name.toLowerCase() == brandName
@@ -54,51 +100,103 @@ function BuyCars() {
         value: brand[0].id,
         label: brand[0].name,
       });
-      const model = brand[0].models.filter(
-        (item) =>
-          item.brand_model_name.toLowerCase() ===
-          make_search.model.toLowerCase()
-      );
-      setSelectedModel({
-        value: model[0].id,
-        label: model[0].brand_model_name,
-      });
-      setBrandModels(brand[0].models);
       setListBrands(list_brands.data.car_brand);
-      setCarsForSale(response.data.cars_for_sale);
-      setCountCarsForSale(response.data.count_cars_for_sale);
+
+      // Check if brand[0].models is not empty
+      if (brand[0].models.length > 0) {
+        setBrandModels(brand[0].models);
+        if (model_id) {
+          const model = brand[0].models.filter(
+            (item) => item.brand_model_name.toLowerCase() === model_id
+          );
+          setSelectedModel({
+            value: model[0].id,
+            label: model[0].brand_model_name,
+          });
+        }
+      }
+      // setCarsForSale(response.data.cars_for_sale);
+      // setCountCarsForSale(response.data.count_cars_for_sale);
+      // console.log(brand)
     };
     fetchData();
-  }, []);
+  }, [brandName, make_search.model, model_id]);
 
   useEffect(() => {
-    const model_name = make_search.model;
+    setSkeletonLoading(true);
     const fetchData = async () => {
-      let url = `/car_for_sale/makeModels?make=${brandName}&model_id=${model_name}`;
-      
-      // Append min_input_price if it's not null
-      if (minInputPrice !== null) {
-        url += `&min_input_price=${minInputPrice}`;
+      try {
+        let url = `/car_for_sale/makeModels?make=${brandName}`;
+
+        // Append model_id if it's not null
+        if (model_id !== null) {
+          url += `&model_id=${model_id}`;
+        }
+        // Append min_input_price if it's not null
+        if (minInputPrice !== null) {
+          url += `&min_input_price=${minInputPrice}`;
+        }
+
+        // Append max_input_price if it's not null
+        if (maxInputPrice !== null) {
+          url += `&max_input_price=${maxInputPrice}`;
+        }
+
+        // Append start_year if it's not null
+        if (startYear !== null) {
+          url += `&start_year=${startYear}`;
+        }
+
+        // Append end_year if it's not null
+        if (endYear !== null) {
+          url += `&end_year=${endYear}`;
+        }
+
+        // Append start_kilometers if it's not null
+        if (start_kilometers !== null) {
+          url += `&start_kilometers=${start_kilometers}`;
+        }
+
+        // Append end_kilometers if it's not null
+        if (end_kilometers !== null) {
+          url += `&end_kilometers=${end_kilometers}`;
+        }
+
+        // Append car_transmission if it's not null
+        if (carTransmission !== null) {
+          url += `&car_transmission=${carTransmission}`;
+        }
+
+        //  Append fuel_type if it's not null
+        if (fuelType !== null) {
+          url += `&fuel_type=${fuelType}`;
+        }
+
+        const make_models = await axiosInstance.get(url);
+        setMakeWithModels(make_models.data.cars_for_sale);
+        setCountCarsForSale(make_models.data.count_cars_for_sale);
+        setSkeletonLoading(false);
+      } catch (error) {
+        console.log("Error fetching data", error);
+        setSkeletonLoading(false);
       }
-      
-      // Append max_input_price if it's not null
-      if (maxInputPrice !== null) {
-        url += `&max_input_price=${maxInputPrice}`;
-      }
-  
-      const make_models = await axiosInstance.get(url);
-      setMakeWithModels(make_models.data.cars_for_sale);
-      setCountCarsForSale(make_models.data.count_cars_for_sale);
     };
     fetchData();
-  }, [brandName, make_search.model, minInputPrice, maxInputPrice]);
+  }, [
+    brandName,
+    model_id,
+    makeName,
+    modelName,
+    minInputPrice,
+    maxInputPrice,
+    startYear,
+    endYear,
+    start_kilometers,
+    end_kilometers,
+    carTransmission,
+    fuelType,
+  ]);
 
-  const formatNumbers = (amountInRwf) => {
-    return new Intl.NumberFormat("en-RW").format(amountInRwf);
-  };
-  const truncateText = (text) => {
-    return text.length > 20 ? `${text.substring(0, 20)}...` : text;
-  };
   const filteredModels = makeWithModels.filter((model) => model.count_cars > 0);
 
   const brandsOptions = listBrands.map((brand) => ({
@@ -111,6 +209,7 @@ function BuyCars() {
     label: model.brand_model_name,
   }));
 
+  // Handle Brand change
   const handleBrandChange = (selectedOption) => {
     setInputValues({
       ...inputValues,
@@ -118,77 +217,245 @@ function BuyCars() {
     });
     setSelectedBrand(selectedOption);
     setBrandName(selectedOption.label.toLowerCase());
-    navigate(`/BuyCars/${selectedOption.label.toLowerCase()}`);
+    setUpdateUrl(true);
   };
 
+  // Handle Model change
   const handleModelChange = (selectedOption) => {
     setInputValues({ ...inputValues, model_id: selectedOption });
     setSelectedModel(selectedOption);
-    navigate(
-      `/BuyCars/${selectedBrand.label.toLowerCase()}/${selectedOption.label.toLowerCase()}`
-    );
+    setUpdateUrl(true);
   };
 
-  const handleYearChange = (e) => {
+  // Handle Price change
+  const handlePriceChange = (e) => {
     const { name, value } = e.target;
     setInputValues({ ...inputValues, [name]: value });
-    let url = `/BuyCars/${selectedBrand.label.toLowerCase()}/${selectedModel.label.toLowerCase()}`;
-    if (name === "min_input_price") {
-      setLoading(true);
-      const fetchData = async () => {
-        const response = await axiosInstance.get(
-          `/car_for_sale/list?make=${brandName}&model=${selectedModel.values}&min_input_price=${value}&max_input_price=500000000`
-        );
-        setLoading(false);
-        // setCarsForSale(response.data.cars_for_sale);
-        setCountCarsForSale(response.data.count_cars_for_sale);
-      };
-      fetchData();
-    }
-    if (name === "max_input_price") {
-      const fetchData = async () => {
-        setLoading(true);
-        const response = await axiosInstance.get(
-          `/car_for_sale/list?make=${brandName}&model_id=${selectedModel.value}&min_input_price=${inputValues.min_input_price}&max_input_price=${value}`
-        );
-        setLoading(false);
-        setCountCarsForSale(response.data.count_cars_for_sale);
-      };
-      fetchData();
-      // url += `/?min_input_price=${inputValues.min_input_price}&max_input_price=${value}`;
-    }
-    navigate(url);
+    setUpdateOnChangeFilter(true);
   };
 
+  // Handle Price filter
   const handlePriceFilter = () => {
-    // Set default values for min and max prices if they are not provided or invalid
-    const minPrice = inputValues.min_input_price
-      ? inputValues.min_input_price
-      : 1;
-    const maxPrice = inputValues.max_input_price
-      ? inputValues.max_input_price
-      : 550000000;
-
-    const url = `/buyCars/${brandName}/${selectedModel.label}?min_input_price=${minPrice}&max_input_price=${maxPrice}`;
-
-    navigate(url); // Navigate to the constructed URL
+    setUpdateUrl(true);
   };
-  const formatNumber = (number) => {
-    // Convert the number to a string and remove any spaces
-    const numString = String(number).replace(/\s/g, "");
 
-    // Convert the string back to a number
-    const numValue = parseInt(numString);
+  // Handle Year change
+  const handleYearChange = async (e) => {
+    const { name, value } = e.target;
+    setInputValues({ ...inputValues, [name]: value });
+    setUpdateOnChangeFilter(true);
+  };
 
-    // Check the magnitude of the number and format accordingly
-    if (numValue >= 1000000) {
-      return numValue / 1000000 + "M";
-    } else if (numValue >= 1000) {
-      return numValue / 1000 + "K";
-    } else {
-      return numValue;
+  // Handle Year filter
+  const handleYearFilter = () => {
+    setUpdateUrl(true);
+  };
+
+  // Handle Kilometers change
+  const handleKilometersChange = async (e) => {
+    const { name, value } = e.target;
+    setInputValues({ ...inputValues, [name]: value });
+    setUpdateOnChangeFilter(true);
+  };
+
+  // Handle Kilometers filter
+  const handleKilometersFilter = () => {
+    setUpdateUrl(true);
+  };
+
+  // Handle Transmission change
+  const handleTransmissionChange = (transmissionType) => {
+    setInputValues({ ...inputValues, car_transmission: transmissionType });
+    setUpdateUrl(true);
+  };
+
+  // Handle Fuel type change
+  const handleFuelTypeChange = (fuelType) => {
+    setInputValues({ ...inputValues, fuel_type: fuelType });
+    setUpdateUrl(true);
+  };
+
+  const handleReset = (data) => {
+    if (data === "transmission_fuel_type") {
+      setInputValues({
+        ...inputValues,
+        car_transmission: "",
+      })
+      setUpdateUrl(true);
+    }
+    if (data === "kilometers") {
+      setInputValues({
+        ...inputValues,
+        start_kilometers: "",
+        end_kilometers: "",
+      })
+      setUpdateUrl(true);
+    }
+    if (data === "price") {
+      setInputValues({
+        ...inputValues,
+        min_input_price: "",
+        max_input_price: "",
+      })
+      setUpdateUrl(true);
+    }
+    if (data === "year") {
+      setInputValues({
+        ...inputValues,
+        start_year: "",
+        end_year: "",
+      })
+      setUpdateUrl(true);
     }
   };
+
+    // Update when inputs are updated
+    useEffect(() => {
+      if (updateOnChangeFilter) {
+        const {
+          min_input_price,
+          max_input_price,
+          start_year,
+          end_year,
+          start_kilometers,
+          end_kilometers,
+          car_transmission,
+          fuel_type,
+        } = inputValues;
+
+        const modalName = selectedModel.label.toLowerCase();
+        // Set default values for min and max prices if they are not provided
+        const minPrice = min_input_price ? min_input_price : 1;
+        const maxPrice = max_input_price ? max_input_price : 550000000;
+  
+        // Set default values for start and end years if they are not provided
+        const startYear = start_year ? start_year : 1950;
+        const endYear = end_year ? end_year : new Date().getFullYear();
+  
+        // Set default values for start and end kilometers if they are not provided
+        const startKilometers = start_kilometers ? start_kilometers : 1;
+        const endKilometers = end_kilometers ? end_kilometers : 1000000;
+        // Construct the base URL with brandName and selectedModel.label
+
+        let url = `/car_for_sale/makeModels?make=${brandName}`;
+  
+        // Add query parameters only if their values are not empty
+        if (modalName) {
+          url += `?model_id=${modalName}`;
+        }
+        if (minPrice) {
+          url += `${url.includes("?") ? "&" : "?"}min_input_price=${minPrice}`;
+        }
+        if (maxPrice) {
+          url += `${url.includes("?") ? "&" : "?"}max_input_price=${maxPrice}`;
+        }
+        if (startYear) {
+          url += `${url.includes("?") ? "&" : "?"}start_year=${startYear}`;
+        }
+        if (endYear) {
+          url += `${url.includes("?") ? "&" : "?"}end_year=${endYear}`;
+        }
+        if (startKilometers) {
+          url += `${
+            url.includes("?") ? "&" : "?"
+          }start_kilometers=${startKilometers}`;
+        }
+        if (endKilometers) {
+          url += `${
+            url.includes("?") ? "&" : "?"
+          }end_kilometers=${endKilometers}`;
+        }
+        if (car_transmission) {
+          url += `${
+            url.includes("?") ? "&" : "?"
+          }car_transmission=${car_transmission}`;
+        }
+        if (fuel_type) {
+          url += `${url.includes("?") ? "&" : "?"}fuel_type=${fuel_type}`;
+        }
+        const fetchData = async () => {
+          setLoading(true);
+          try {
+            const response = await axiosInstance.get(url);
+            setLoading(false);
+            setCountCarsForSale(response.data.count_cars_for_sale);
+          } catch (error) {
+            console.log("Error while filtering", error);
+            setLoading(false);
+          }
+        };
+        fetchData();
+        setUpdateOnChangeFilter(false); // Reset the flag after update
+      }
+    }, [updateOnChangeFilter, brandName, navigate, inputValues, selectedModel]);
+
+  // Update URL with when filters are applied
+  useEffect(() => {
+    if (updateUrl) {
+      const {
+        min_input_price,
+        max_input_price,
+        start_year,
+        end_year,
+        start_kilometers,
+        end_kilometers,
+        car_transmission,
+        fuel_type,
+      } = inputValues;
+      const modalName = selectedModel.label.toLowerCase();
+      // Set default values for min and max prices if they are not provided
+      const minPrice = min_input_price ? min_input_price : 1;
+      const maxPrice = max_input_price ? max_input_price : 550000000;
+
+      // Set default values for start and end years if they are not provided
+      const startYear = start_year ? start_year : 1950;
+      const endYear = end_year ? end_year : new Date().getFullYear();
+
+      // Set default values for start and end kilometers if they are not provided
+      const startKilometers = start_kilometers ? start_kilometers : 1;
+      const endKilometers = end_kilometers ? end_kilometers : 1000000;
+      // Construct the base URL with brandName and selectedModel.label
+      let url = `/buyCars/${brandName}`;
+
+      // Add query parameters only if their values are not empty
+      if (modalName) {
+        url += `?model_id=${modalName}`;
+      }
+      if (min_input_price) {
+        url += `${url.includes("?") ? "&" : "?"}min_input_price=${minPrice}`;
+      }
+      if (max_input_price) {
+        url += `${url.includes("?") ? "&" : "?"}max_input_price=${maxPrice}`;
+      }
+      if (start_year) {
+        url += `${url.includes("?") ? "&" : "?"}start_year=${startYear}`;
+      }
+      if (end_year) {
+        url += `${url.includes("?") ? "&" : "?"}end_year=${endYear}`;
+      }
+      if (start_kilometers) {
+        url += `${
+          url.includes("?") ? "&" : "?"
+        }start_kilometers=${startKilometers}`;
+      }
+      if (end_kilometers) {
+        url += `${
+          url.includes("?") ? "&" : "?"
+        }end_kilometers=${endKilometers}`;
+      }
+      if (car_transmission) {
+        url += `${
+          url.includes("?") ? "&" : "?"
+        }car_transmission=${car_transmission}`;
+      }
+      if (fuel_type) {
+        url += `${url.includes("?") ? "&" : "?"}fuel_type=${fuel_type}`;
+      }
+      navigate(url);
+      setUpdateUrl(false); // Reset the flag after update
+    }
+  }, [updateUrl, brandName, navigate, inputValues, selectedModel]);
+
   return (
     <section className="bpage container page home" id="NotFound">
       <div className="row justify-content-center">
@@ -233,8 +500,10 @@ function BuyCars() {
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
-                  {minInputPrice
-                    ? formatNumber(minInputPrice) - formatNumber(maxInputPrice)
+                  {inputValues.min_input_price
+                    ? `${formatNumber(
+                        inputValues.min_input_price
+                      )} - ${formatNumber(inputValues.max_input_price)}`
                     : "Choose range"}
                 </button>
                 <div className="css-4xgw5l-IndicatorsContainer2">
@@ -279,7 +548,7 @@ function BuyCars() {
                             name="min_input_price"
                             placeholder="0"
                             value={inputValues.min_input_price}
-                            onChange={handleYearChange}
+                            onChange={handlePriceChange}
                           />
                         </div>
                         <div className="sc-1xtdvaj-3 drIaET">
@@ -299,7 +568,7 @@ function BuyCars() {
                             name="max_input_price"
                             placeholder="Any"
                             value={inputValues.max_input_price}
-                            onChange={handleYearChange}
+                            onChange={handlePriceChange}
                           />
                         </div>
                       </div>
@@ -310,6 +579,7 @@ function BuyCars() {
                       className="sc-1c4mb2u-0 hUdPjg"
                       type="reset"
                       data-testid="reset"
+                      onClick={() => handleReset("price")}
                     >
                       Clear
                     </button>
@@ -341,7 +611,7 @@ function BuyCars() {
 
             <div className="iEzCwv thirdItem">
               <label className="form-label" htmlFor="expertise">
-                Price (RWF)
+                Year
               </label>
               <div className="dropdown" style={{ display: "flex" }}>
                 <button
@@ -352,7 +622,7 @@ function BuyCars() {
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
-                  Choose range
+                  {inputValues.start_year ? `${inputValues.start_year} - ${inputValues.end_year}` : "Choose range"}
                 </button>
                 <div className="css-4xgw5l-IndicatorsContainer2">
                   <span className=" css-1u9des2-indicatorSeparator"></span>
@@ -391,12 +661,13 @@ function BuyCars() {
                             type="number"
                             className="sc-u95ujf-0 dNPQQh sc-1xtdvaj-4 fNpmOJ"
                             data-testid="min-input-price"
-                            min="1"
-                            max="200000000"
+                            min="1950"
+                            max={new Date().getFullYear()}
                             step="1"
-                            name="price.min"
-                            placeholder="0"
-                            value="200"
+                            name="start_year"
+                            placeholder="1950"
+                            value={inputValues.start_year}
+                            onChange={handleYearChange}
                           />
                         </div>
                         <div className="sc-1xtdvaj-3 drIaET">
@@ -411,31 +682,47 @@ function BuyCars() {
                             type="number"
                             className="sc-u95ujf-0 dNPQQh sc-1xtdvaj-4 fNpmOJ"
                             data-testid="max-input-price"
-                            min="1"
-                            max="200000000"
+                            min="1950"
+                            max={new Date().getFullYear()}
                             step="1"
-                            name="price.max"
-                            placeholder="Any"
-                            value="3000"
+                            name="end_year"
+                            placeholder={new Date().getFullYear()}
+                            value={inputValues.end_year}
+                            onChange={handleYearChange}
                           />
                         </div>
                       </div>
                     </div>
                   </div>
                   <div className="sc-rpwses-1 gjZPbt dropDownButtonsRow">
-                    <button
+                  <button
                       className="sc-1c4mb2u-0 hUdPjg"
                       type="reset"
                       data-testid="reset"
+                      onClick={() => handleReset("year")}
                     >
                       Clear
                     </button>
                     <button
                       className="sc-1c4mb2u-0 hHfOrj filter"
                       type="submit"
-                      data-testid="submit"
+                      disabled={countCarsForSale === 0}
+                      onClick={handleYearFilter}
                     >
-                      Apply filters
+                      {loading ? (
+                        <RiseLoader
+                          color={color}
+                          loading={loading}
+                          cssOverride={override}
+                          size={10}
+                          aria-label="Loading Spinner"
+                          data-testid="loader"
+                        />
+                      ) : countCarsForSale >= 0 ? (
+                        `Show ${countCarsForSale} Results`
+                      ) : (
+                        "Apply filters"
+                      )}
                     </button>
                   </div>
                 </div>
@@ -455,7 +742,11 @@ function BuyCars() {
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
-                  Choose range
+                  {inputValues.start_kilometers
+                    ? `${formatNumber(inputValues.start_kilometers)} - ${formatNumber(
+                        inputValues.end_kilometers
+                      )}`
+                    : "Choose range"}
                 </button>
                 <div className="css-4xgw5l-IndicatorsContainer2">
                   <span className=" css-1u9des2-indicatorSeparator"></span>
@@ -497,9 +788,10 @@ function BuyCars() {
                             min="0"
                             max="10000000"
                             step="1"
-                            name="price.min"
+                            name="start_kilometers"
                             placeholder="0"
-                            value="0"
+                            value={inputValues.start_kilometers}
+                            onChange={handleKilometersChange}
                           />
                         </div>
                         <div className="sc-1xtdvaj-3 drIaET">
@@ -517,9 +809,10 @@ function BuyCars() {
                             min="0"
                             max="10000000"
                             step="1"
-                            name="price.max"
+                            name="end_kilometers"
                             placeholder="Any"
-                            value="10000000"
+                            value={inputValues.end_kilometers}
+                            onChange={handleKilometersChange}
                           />
                         </div>
                       </div>
@@ -530,15 +823,30 @@ function BuyCars() {
                       className="sc-1c4mb2u-0 hUdPjg"
                       type="reset"
                       data-testid="reset"
+                      onClick={() => handleReset("kilometers")}
                     >
                       Clear
                     </button>
                     <button
                       className="sc-1c4mb2u-0 hHfOrj filter"
                       type="submit"
-                      data-testid="submit"
+                      disabled={countCarsForSale === 0}
+                      onClick={handleKilometersFilter}
                     >
-                      Apply filters
+                      {loading ? (
+                        <RiseLoader
+                          color={color}
+                          loading={loading}
+                          cssOverride={override}
+                          size={10}
+                          aria-label="Loading Spinner"
+                          data-testid="loader"
+                        />
+                      ) : countCarsForSale > 0 ? (
+                        `Show ${countCarsForSale} Results`
+                      ) : (
+                        "Apply filters"
+                      )}
                     </button>
                   </div>
                 </div>
@@ -558,7 +866,9 @@ function BuyCars() {
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
-                  Seller Type, Fuel Type, Transmission Type
+                  {carTransmission
+                    ? carTransmission
+                    : "Transmission Type, Fuel Type, "}
                 </button>
                 <div className="css-4xgw5l-IndicatorsContainer2">
                   <span className=" css-1u9des2-indicatorSeparator"></span>
@@ -604,11 +914,21 @@ function BuyCars() {
                                     display="block"
                                     type="large"
                                     className="sc-6bmekm-0 cOTnrw"
+                                    onClick={() =>
+                                      handleTransmissionChange(
+                                        "Manual Transmission"
+                                      )
+                                    }
                                   >
                                     <div
                                       data-testid="transmission_type-manual-transmission"
                                       type="large"
-                                      className="sc-6bmekm-1 dwAEqK contentContainer"
+                                      className={`sc-6bmekm-1 contentContainer ${
+                                        carTransmission ===
+                                        "Manual Transmission"
+                                          ? "dwAEqK-auto"
+                                          : "dwAEqK"
+                                      }`}
                                     >
                                       <span
                                         type="large"
@@ -626,7 +946,17 @@ function BuyCars() {
                                     <div
                                       data-testid="transmission_type-automatic-transmission"
                                       type="large"
-                                      className="sc-6bmekm-1 dwAEqK contentContainer"
+                                      className={`sc-6bmekm-1 contentContainer ${
+                                        carTransmission ===
+                                        "Automatic Transmission"
+                                          ? "dwAEqK-auto"
+                                          : "dwAEqK"
+                                      }`}
+                                      onClick={() =>
+                                        handleTransmissionChange(
+                                          "Automatic Transmission"
+                                        )
+                                      }
                                     >
                                       <span
                                         type="large"
@@ -667,7 +997,14 @@ function BuyCars() {
                                     <div
                                       data-testid="fuel_type-petrol"
                                       type="large"
-                                      className="sc-6bmekm-1 dwAEqK contentContainer"
+                                      className={`sc-6bmekm-1 contentContainer ${
+                                        carTransmission === "Petrol"
+                                          ? "dwAEqK-auto"
+                                          : "dwAEqK"
+                                      }`}
+                                      onClick={() =>
+                                        handleFuelTypeChange("Petrol")
+                                      }
                                     >
                                       <span
                                         type="large"
@@ -680,7 +1017,14 @@ function BuyCars() {
                                   <div
                                     display="block"
                                     type="large"
-                                    className="sc-6bmekm-0 cOTnrw"
+                                    className={`sc-6bmekm-1 contentContainer ${
+                                      carTransmission === "Diesel"
+                                        ? "dwAEqK-auto"
+                                        : "dwAEqK"
+                                    }`}
+                                    onClick={() =>
+                                      handleFuelTypeChange("Diesel")
+                                    }
                                   >
                                     <div
                                       data-testid="fuel_type-diesel"
@@ -703,7 +1047,14 @@ function BuyCars() {
                                     <div
                                       data-testid="fuel_type-hybrid"
                                       type="large"
-                                      className="sc-6bmekm-1 dwAEqK contentContainer"
+                                      className={`sc-6bmekm-1 contentContainer ${
+                                        carTransmission === "Hybrid"
+                                          ? "dwAEqK-auto"
+                                          : "dwAEqK"
+                                      }`}
+                                      onClick={() =>
+                                        handleFuelTypeChange("Hybrid")
+                                      }
                                     >
                                       <span
                                         type="large"
@@ -721,7 +1072,14 @@ function BuyCars() {
                                     <div
                                       data-testid="fuel_type-electric"
                                       type="large"
-                                      className="sc-6bmekm-1 dwAEqK contentContainer"
+                                      className={`sc-6bmekm-1 contentContainer ${
+                                        carTransmission === "Electric"
+                                          ? "dwAEqK-auto"
+                                          : "dwAEqK"
+                                      }`}
+                                      onClick={() =>
+                                        handleFuelTypeChange("Electric")
+                                      }
                                     >
                                       <span
                                         type="large"
@@ -744,6 +1102,7 @@ function BuyCars() {
                       className="sc-1c4mb2u-0 hUdPjg"
                       type="reset"
                       data-testid="reset"
+                      onClick={() => handleReset("transmission_fuel_type")}
                     >
                       Clear
                     </button>
@@ -799,12 +1158,27 @@ function BuyCars() {
               </div>
             </div>
           </div>
-
-          <SellCarsGrid
-            brandName={brandName}
-            makeWithModels={makeWithModels}
-            countCars={countCarsForSale}
-          />
+          {skeletonLoading ? (
+            skeleton.map((item, index) => (
+              <ContentLoader
+                key={index}
+                style={{ width: "25%", height: "300px", padding: "10px" }}
+                speed={1}
+                backgroundColor="#eee"
+                foregroundColor="#e8e7e7"
+              >
+                <rect x="2" y="4" rx="8" ry="8" width="70" height="20" />
+                <rect x="100" y="4" rx="8" ry="8" width="60" height="20" />
+                <rect x="0" y="40" rx="5" ry="5" width="650" height="415" />
+              </ContentLoader>
+            ))
+          ) : (
+            <SellCarsGrid
+              brandName={brandName}
+              makeWithModels={makeWithModels}
+              countCars={countCarsForSale}
+            />
+          )}
         </div>
       </div>
     </section>

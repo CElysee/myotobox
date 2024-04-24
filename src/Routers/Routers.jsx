@@ -16,6 +16,7 @@ function Routers() {
       <Route path="/" element={<Home />} />
       <Route path="/CarDetails" element={<CarDetails />} />
       <Route path="/buyCars/:make/:model" element={<BuyCars />} />
+      <Route path="/buyCars/:make" element={<BuyCars />} />
       <Route path="/RentCars" element={<RentCars />} />
       <Route path="/ImportOnOrder" element={<ImportOnOrder />} />
       <Route path="/login" element={<Login />} />

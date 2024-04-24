@@ -2,9 +2,14 @@ import React, { useEffect, useState } from "react";
 import "./SellCarsGrid.css";
 import { Link } from "react-router-dom";
 import axiosInstance from "../../../../utils/axiosInstance";
+import {
+  formatNumber,
+  formatAmount,
+  truncateText,
+} from "../../../../utils/helpers";
 
 function SellCarsGrid({ brandName, makeWithModels, countCars }) {
-  const [carsForSale, setCarsForSale] = useState(makeWithModels);
+  const [carsForSale, setCarsForSale] = useState([]);
   const [countCarsForSale, setCountCarsForSale] = useState(0);
   const imageBaseUrl = import.meta.env.VITE_REACT_APP_API;
 
@@ -31,14 +36,6 @@ function SellCarsGrid({ brandName, makeWithModels, countCars }) {
     };
     fetchData();
   }, [brandName, makeWithModels]);
-
-  const formatNumbers = (amountInRwf) => {
-    return new Intl.NumberFormat("en-RW").format(amountInRwf);
-  };
-  const truncateText = (text) => {
-    return text.length > 20 ? `${text.substring(0, 20)}...` : text;
-  };
-  console.log(makeWithModels);
   return (
     <>
       <div className="featured-tabs page container home">
@@ -49,7 +46,7 @@ function SellCarsGrid({ brandName, makeWithModels, countCars }) {
                 Buy & sell <span className="makeName">{brandName}</span> cars
                 online in Rwanda.{" "}
                 <span className="text-sm-2 graph-icon-title ml-1 vehicle-card-price-rating-label font-bold">
-                  {formatNumbers(countCarsForSale)} cars
+                  {formatAmount(countCarsForSale)} cars
                 </span>
               </h1>
             </div>
@@ -167,7 +164,7 @@ function SellCarsGrid({ brandName, makeWithModels, countCars }) {
                                   data-test="vehicleCardPricingBlockPrice"
                                 >
                                   <span data-test="vehicleListingPriceAmount">
-                                    {formatNumbers(car.car_price)} Rwf
+                                    {formatAmount(car.car_price)} Rwf
                                   </span>
                                 </div>
                               </div>
@@ -194,7 +191,7 @@ function SellCarsGrid({ brandName, makeWithModels, countCars }) {
                                   d="M0 10a8 8 0 1 1 15.547 2.661c-.442 1.253-1.845 1.602-2.932 1.25C11.309 13.488 9.475 13 8 13c-1.474 0-3.31.488-4.615.911-1.087.352-2.49.003-2.932-1.25A7.988 7.988 0 0 1 0 10zm8-7a7 7 0 0 0-6.603 9.329c.203.575.923.876 1.68.63C4.397 12.533 6.358 12 8 12s3.604.532 4.923.96c.757.245 1.477-.056 1.68-.631A7 7 0 0 0 8 3z"
                                 />
                               </svg>
-                              <span>{formatNumbers(car.car_mileage)} kms</span>
+                              <span>{formatAmount(car.car_mileage)} kms</span>
                             </div>
                             <div className="vehicle-card-discount ml-2 truncate text-right text-xs">
                               <div className="discount-text">
@@ -216,7 +213,7 @@ function SellCarsGrid({ brandName, makeWithModels, countCars }) {
                 />
                 <div className="sc-fThUAz GNSHw">
                   <h3 className="sc-kMribo kQonRp">
-                    At this time, we do not have any Foton vehicles in stock.
+                    At this time, we do not have any {brandName &&  brandName.toUpperCase()} vehicles matching your search in stock.
                     We're happy to assist you with alternative choices.
                   </h3>
                   <h4 className="sc-bdOgaJ bvAGqr">
