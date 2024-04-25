@@ -3,7 +3,7 @@ import { useParams, useNavigate, useLocation } from "react-router-dom";
 import RiseLoader from "react-spinners/RiseLoader";
 import "./BuyCars.css";
 import makeAnimated from "react-select/animated";
-import SellCarsGrid from "../../components/SellCarsGrid/SellCarsGrid";
+import SellCarsGrid from "../../components/sellCarsGrid/SellCarsGrid";
 import axiosInstance from "../../../../utils/axiosInstance";
 import Select from "react-select";
 import ContentLoader from "react-content-loader";
@@ -57,7 +57,9 @@ function BuyCars() {
 
   const makeName = make_search.make;
   const modelName = make_search.model;
-  const carTransmission = new URLSearchParams(location.search).get("car_transmission");
+  const carTransmission = new URLSearchParams(location.search).get(
+    "car_transmission"
+  );
   const fuelType = new URLSearchParams(location.search).get("fuel_type");
   const [inputValues, setInputValues] = useState({
     brand_id: "",
@@ -77,7 +79,7 @@ function BuyCars() {
     const fetchData = async () => {
       // const response = await axiosInstance.get("/car_for_sale/list");
       const list_brands = await axiosInstance.get("/car_for_sale/car_brands");
-      if(brandName){
+      if (brandName) {
         const brand = list_brands.data.car_brand.filter(
           (brand) => brand.name.toLowerCase() == brandName.toLowerCase()
         );
@@ -86,23 +88,23 @@ function BuyCars() {
           label: brand[0].name,
         });
         if (brand[0].models.length > 0) {
-        setBrandModels(brand[0].models);
-        if (model_id) {
-          const model = brand[0].models.filter(
-            (item) => item.brand_model_name.toLowerCase() === model_id
-          );
-          setSelectedModel({
-            value: model[0].id,
-            label: model[0].brand_model_name,
-          });
+          setBrandModels(brand[0].models);
+          if (model_id) {
+            const model = brand[0].models.filter(
+              (item) => item.brand_model_name.toLowerCase() === model_id
+            );
+            setSelectedModel({
+              value: model[0].id,
+              label: model[0].brand_model_name,
+            });
+          }
         }
       }
-      }
-      
+
       setListBrands(list_brands.data.car_brand);
 
       // Check if brand[0].models is not empty
-      
+
       // setCarsForSale(response.data.cars_for_sale);
       // setCountCarsForSale(response.data.count_cars_for_sale);
       // console.log(brand)
@@ -390,7 +392,7 @@ function BuyCars() {
         car_transmission,
         fuel_type,
       } = inputValues;
-      
+
       // Set default values for min and max prices if they are not provided
       const minPrice = min_input_price ? min_input_price : 1;
       const maxPrice = max_input_price ? max_input_price : 550000000;

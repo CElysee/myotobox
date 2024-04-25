@@ -1161,3 +1161,30 @@ select, input{
 .dropdown-menu.no-close {
   pointer-events: none;
 }
+#main_content{
+  margin-top: 70px !important;
+}
+._5kaapu {
+  -webkit-box-align: center !important;
+  display: flex !important;
+  align-items: center !important;
+  background: #f7f7f7;
+  padding: 8px;
+  border-radius: 8px;
+  color: #000;
+}
+._14tkmhr {
+  margin-right: 8px !important;
+}
+.atm_mk_h2mmj6 {
+  position: relative;
+}
+._14tkmhr {
+  margin-right: 8px !important;
+}
+._1jdtwz4 {
+  -webkit-box-pack: end !important;
+  display: flex !important;
+  justify-content: flex-end !important;
+  gap: 15px;
+}

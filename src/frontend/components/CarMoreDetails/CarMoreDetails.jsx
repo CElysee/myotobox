@@ -1,14 +1,13 @@
 import React from "react";
-import "../CarMoreDetails/CarMoreDetails.css";
+import "./CarMoreDetails.css";
 import Sticky from "react-sticky-el";
-import CarGallery from "../CarGallery/CarGallery";
+import CarGallery from "../carGallery/CarGallery";
 
 function CarMoreDetails() {
   return (
     <>
-     
       <div className="md:pt-3">
-        <div className="container-fluid">
+        <div className="container">
           <div className="row md:flex-row-reverse">
             <div className="col-12 col-md-4 col-lg-4 contact_dealer">
               <Sticky boundaryElement=".contact_dealer">

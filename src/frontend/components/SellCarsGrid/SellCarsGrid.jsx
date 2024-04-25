@@ -35,7 +35,19 @@ function SellCarsGrid({ brandName, makeWithModels, countCars }) {
       //   setCountCarsForSale(response.data.count_cars_for_sale);
     };
     fetchData();
-  }, [brandName, makeWithModels]);
+  }, [brandName, makeWithModels, countCars]);
+
+  const formatUrl = (inputString) => {
+    // Convert the input string to lowercase and replace special characters
+    const formattedString = inputString
+      .toLowerCase() // Convert to lowercase
+      .replace(/%20/g, '-') // Replace '%20' with '-'
+      .replace(/[^a-zA-Z0-9-]/g, '') // Remove non-alphanumeric characters except '-'
+      .replace(/-{2,}/g, '-'); // Replace consecutive '-' with a single '-'
+  
+    return formattedString;
+  };
+
   return (
     <>
       <div className="featured-tabs page container home">
@@ -63,7 +75,7 @@ function SellCarsGrid({ brandName, makeWithModels, countCars }) {
                       className="linkable card card-shadow vehicle-card"
                       aria-label={`View details ${car.car_name_info}, - Price: ${car.car_price}`}
                     >
-                      <Link className="hero" to="/CarDetails">
+                      <Link className="hero" to={`/carDetails/${car.stock_number}/${formatUrl(`${car.car_year}-${car.car_name_info}`)}`}>
                         <div className="preload-wrap loaded">
                           <img
                             src={`${imageBaseUrl}${car.cover_image}`}

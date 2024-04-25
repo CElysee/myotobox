@@ -6,16 +6,19 @@ import Layout from "./layout/Layout";
 import Router from "../routers/routers";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
+import { useParams } from "react-router-dom";
 
 function App() {
+  const params = useParams();
   const [count, setCount] = useState(0);
   const [loading, setLoading] = useState(false);
+  
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
     }, 0);
-  }, []);
+  }, []);  
 
   return (
     <>

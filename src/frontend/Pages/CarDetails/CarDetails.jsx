@@ -1,13 +1,13 @@
 import React from "react";
-import CarMoreDetails from "../../components/CarMoreDetails/CarMoreDetails";
-import "./CarDetails.css"
-import CarGallery from "../../components/CarGallery/CarGallery";
+import CarMoreDetails from "../../components/carMoreDetails/CarMoreDetails";
+import "./CarDetails.css";
+import CarGallery from "../../components/carGallery/CarGallery";
 
 function CarDetails() {
   return (
     <>
-      <div className="tc-container _1f3sn1b">
-        <CarGallery /> 
+      <div className="main_content" id="main_content">
+        <CarGallery />
         <CarMoreDetails />
       </div>
     </>

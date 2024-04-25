@@ -1,8 +1,8 @@
-import React from 'react'
+import React from "react";
 import "./RentCars.css";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
-import RentCarsGrid from '../../components/RentCarsGrid/RentCarsGrid';
+import RentCarsGrid from "../../components/rentCarsGrid/RentCarsGrid";
 
 function RentCars() {
   return (
@@ -1380,7 +1380,7 @@ function RentCars() {
         <RentCarsGrid />
       </div>
     </div>
-  )
+  );
 }
 
-export default RentCars
+export default RentCars;
