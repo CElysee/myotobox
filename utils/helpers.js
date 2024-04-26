@@ -26,8 +26,29 @@ const truncateText = (text) => {
   return text.length > 20 ? `${text.substring(0, 20)}...` : text;
 };
 
+const formatDate = (timestamp) => {
+  const date = new Date(timestamp);
+  const currentDate = new Date();
+
+  const diffInMilliseconds = currentDate - date;
+  const diffInSeconds = Math.floor(diffInMilliseconds / 1000);
+  const diffInMinutes = Math.floor(diffInSeconds / 60);
+  const diffInHours = Math.floor(diffInMinutes / 60);
+  const diffInDays = Math.floor(diffInHours / 24);
+
+  if (diffInDays > 0) {
+    return `${diffInDays} day${diffInDays === 1 ? '' : 's'} ago`;
+  } else if (diffInHours > 0) {
+    return `${diffInHours} hour${diffInHours === 1 ? '' : 's'} ago`;
+  } else if (diffInMinutes > 0) {
+    return `${diffInMinutes} minute${diffInMinutes === 1 ? '' : 's'} ago`;
+  } else {
+    return `${diffInSeconds} second${diffInSeconds === 1 ? '' : 's'} ago`;
+  }
+};
+
 // Export individual functions
-export { formatNumber, capitalizeFirstLetter, formatAmount , truncateText};
+export { formatNumber, capitalizeFirstLetter, formatAmount , truncateText, formatDate};
 
 // Alternatively, export as a single object
 // export default { formatNumber, capitalizeFirstLetter };

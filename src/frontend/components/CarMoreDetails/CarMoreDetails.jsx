@@ -1,9 +1,41 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import "./CarMoreDetails.css";
 import Sticky from "react-sticky-el";
-import CarGallery from "../carGallery/CarGallery";
+import axiosInstance from "../../../../utils/axiosInstance";
+import {
+  formatAmount,
+  formatNumber,
+  formatDate,
+} from "../../../../utils/helpers";
 
 function CarMoreDetails() {
+  const urlParams = useParams();
+  const [carDetails, setCarDetails] = useState([]);
+  const [carFeatures, setCarFeatures] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  const stock_numner = urlParams.stock;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const response = await axiosInstance.get(
+          `/car_for_sale/car_details?id=${stock_numner}`
+        );
+        setCarDetails(response.data[0]);
+        setCarFeatures(response.data[0].features);
+        setLoading(false);
+        // console.log("Car details",response.data);
+      } catch (error) {
+        console.log("Error fetching car details", error);
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
     <>
       <div className="md:pt-3">
@@ -23,7 +55,7 @@ function CarMoreDetails() {
                       <div className="mt-2-5 rounded-[8px] border border-[#E5E5E5] bg-[#FCFBFC] py-3">
                         <div className="px-3">
                           <div className="flex content-center text-sm">
-                            List Price
+                            Listing Price
                           </div>
                           <div className="flex items-center justify-between">
                             <div className="relative flex-1">
@@ -32,18 +64,34 @@ function CarMoreDetails() {
                                 data-qa="Heading"
                                 data-test="vdpTabPriceBlock"
                               >
-                                $19,995
+                                {formatAmount(carDetails.car_price)} Rwf
                               </h2>
                             </div>
                             <button
                               type="button"
-                              className="link-button ml-2 text-sm"
+                              className="ml-2 text-sm gray-button"
                               id="priceQuality"
                               aria-haspopup="true"
                             >
                               <div className="relative flex items-center">
                                 <span className="text-center">
-                                  Price Details
+                                  {" "}
+                                  <svg
+                                    width="20px"
+                                    height="20px"
+                                    viewBox="0 0 24 24"
+                                    fill="none"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <path
+                                      d="M12 6V18M12 6L7 11M12 6L17 11"
+                                      stroke="#000000"
+                                      strokeWidth="2"
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                    />
+                                  </svg>
+                                  Great Deal
                                 </span>
                               </div>
                             </button>
@@ -53,7 +101,7 @@ function CarMoreDetails() {
                               className="mx-1 text-sm lg:mr-2"
                               id="taxesFeesLabel"
                             >
-                              Include est. taxes and fees
+                              Complete your car purchase in minutes.
                             </span>
                           </div>
                         </div>
@@ -67,9 +115,7 @@ function CarMoreDetails() {
                         target="blank"
                         className="mt-4 w-full py-[24px] mb-4 btn btn-primary btn-md"
                       >
-                        <span className="btn-inner">
-                          Unlock Dealer Contacts
-                        </span>
+                        <span className="btn-inner">Book a test drive</span>
                       </button>
                       <span style={{ fontSize: " 0px" }}></span>
                       <div className="flex flex-col border-t pt-4 md:mt-4 md:border-t md:pl-2 lg:pl-3">
@@ -81,35 +127,57 @@ function CarMoreDetails() {
                         </div>
                         <div className="flex">
                           <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            fill="currentColor"
-                            className="bi bi-geo-alt-fill"
+                            width="20"
+                            height="20"
                             viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
                           >
-                            <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
+                            <path
+                              d="M5.13948 12.7696C3.76094 10.2681 3 7.29713 3 4L4.96733 3.5081C5.68758 3.32804 6.0477 3.238 6.37009 3.29854C6.65417 3.35188 6.91678 3.48615 7.12635 3.68522C7.36417 3.91113 7.50204 4.25579 7.77776 4.9451L8.48846 6.72184C8.67477 7.18763 8.76793 7.42053 8.784 7.65625C8.79821 7.86484 8.76867 8.07409 8.69726 8.27058C8.61655 8.49264 8.46255 8.69065 8.15456 9.08664L5.13948 12.7696ZM5.13948 12.7696C6.66062 15.5299 8.93373 17.7184 11.7662 19.1428M11.7662 19.1428C14.1523 20.3425 16.9352 21 20 21L20.4916 19.0324C20.6717 18.3121 20.7617 17.952 20.7012 17.6296C20.6478 17.3456 20.5136 17.0829 20.3145 16.8734C20.0886 16.6355 19.7439 16.4977 19.0546 16.222L17.4691 15.5877C16.9377 15.3752 16.672 15.2689 16.4071 15.2608C16.1729 15.2536 15.9404 15.3013 15.728 15.4001C15.4877 15.512 15.2854 15.7143 14.8807 16.119L11.7662 19.1428ZM20.9997 7V3M20.9997 3H16.9997M20.9997 3L14.9997 9"
+                              stroke="#000000"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
                           </svg>
                           <div className="ml-3">
                             <div
                               className="heading-4 normal-case mb-2"
                               data-qa="Heading"
                             >
-                              Pickup from dealership
+                              Phone Number
                             </div>
-                            <div className="mb-3">Hempstead, NY</div>
+                            <div className="mb-3">
+                              {carDetails.seller_phone_number}
+                            </div>
                           </div>
                         </div>
                         <div className="flex">
                           <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="30"
-                            height="30"
-                            fill="currentColor"
-                            className="bi bi-truck-flatbed"
+                            width="20"
+                            height="20"
                             viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
                           >
-                            <path d="M11.5 4a.5.5 0 0 1 .5.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-4 0 1 1 0 0 1-1-1v-1h11V4.5a.5.5 0 0 1 .5-.5zM3 11a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm1.732 0h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4a2 2 0 0 1 1.732 1z" />
+                            <path
+                              d="M4 7.00005L10.2 11.65C11.2667 12.45 12.7333 12.45 13.8 11.65L20 7"
+                              stroke="#000000"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                            <rect
+                              x="3"
+                              y="5"
+                              width="18"
+                              height="14"
+                              rx="2"
+                              stroke="#000000"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                            />
                           </svg>
                           <div className="ml-3">
                             <div
@@ -117,10 +185,10 @@ function CarMoreDetails() {
                               data-qa="Heading"
                               data-test="deliveryDetailsDeliveryHeading"
                             >
-                              Delivery
+                              Email
                             </div>
                             <div className="mb-3">
-                              Contact dealer for options
+                              {carDetails.seller_email}
                             </div>
                           </div>
                         </div>
@@ -152,7 +220,7 @@ function CarMoreDetails() {
                       className="heading-base flex items-center mx-3"
                       data-qa="Heading"
                     >
-                      Hempstead, NY
+                      {carDetails.car_location}
                     </h3>
                   </div>
                 </div>
@@ -176,7 +244,7 @@ function CarMoreDetails() {
                       className="heading-base flex items-center mx-3"
                       data-qa="Heading"
                     >
-                      80,234 miles
+                      {formatAmount(carDetails.car_mileage)} Kms
                     </h3>
                   </div>
                 </div>
@@ -194,7 +262,7 @@ function CarMoreDetails() {
                       className="heading-base flex items-center mx-3"
                       data-qa="Heading"
                     >
-                      Exterior: Granite Crystal Metallic Clearcoat
+                      Exterior: {carDetails.car_exterior_color}
                     </h3>
                   </div>
                 </div>
@@ -225,7 +293,7 @@ function CarMoreDetails() {
                       className="heading-base flex items-center mx-3"
                       data-qa="Heading"
                     >
-                      Interior: Black
+                      Interior: {carDetails.car_interior_color}
                     </h3>
                   </div>
                 </div>
@@ -246,7 +314,7 @@ function CarMoreDetails() {
                       className="heading-base flex items-center mx-3"
                       data-qa="Heading"
                     >
-                      Fuel Type: Gas
+                      Fuel Type: {carDetails.car_fuel_type}
                     </h3>
                   </div>
                 </div>
@@ -284,7 +352,7 @@ function CarMoreDetails() {
                       className="heading-base flex items-center mx-3"
                       data-qa="Heading"
                     >
-                      18 city / 25 highway
+                      {carDetails.car_fuel_consumption} Km/l
                     </h3>
                   </div>
                 </div>
@@ -349,7 +417,7 @@ function CarMoreDetails() {
                       className="heading-base flex items-center mx-3"
                       data-qa="Heading"
                     >
-                      Automatic Transmission
+                      {carDetails.car_transmission}
                     </h3>
                   </div>
                 </div>
@@ -394,7 +462,7 @@ function CarMoreDetails() {
                       className="heading-base flex items-center mx-3"
                       data-qa="Heading"
                     >
-                      4WD
+                      {carDetails.car_drive_train}
                     </h3>
                   </div>
                 </div>
@@ -419,7 +487,7 @@ function CarMoreDetails() {
                       className="heading-base flex items-center mx-3"
                       data-qa="Heading"
                     >
-                      3.6L V-6 Gas
+                      {carDetails.car_engine_capacity}
                     </h3>
                   </div>
                 </div>
@@ -429,19 +497,21 @@ function CarMoreDetails() {
                   <div className="col-12 col-lg-4">
                     <h3 className="heading-base mt-3" data-qa="Heading">
                       <p className="font-bold">Listed:</p>
-                      <p data-test="listedDays">3 days ago</p>
+                      <p data-test="listedDays">
+                        {formatDate(carDetails.created_at)}
+                      </p>
                     </h3>
                   </div>
                   <div className="col-12 col-lg-4">
                     <h3 className="heading-base mt-3" data-qa="Heading">
                       <p className="font-bold">VIN:</p>
-                      <p data-test="vinNumber">1C4RJFBG0LC218153</p>
+                      <p data-test="vinNumber"> {carDetails.car_vin_number}</p>
                     </h3>
                   </div>
                   <div className="col-12 col-lg-4">
                     <h3 className="heading-base mt-3 lg:ml-3" data-qa="Heading">
                       <p className="font-bold">Stock Number:</p>
-                      <p data-test="stockNumber">UC2973BP</p>
+                      <p data-test="stockNumber">{carDetails.stock_number}</p>
                     </h3>
                   </div>
                 </div>
@@ -456,33 +526,33 @@ function CarMoreDetails() {
                 <div className="row md:flex">
                   <div className="pl-3 md:pl-3 mt-4 border-l-2 border-l col-6">
                     <h3 className="heading-base" data-qa="Heading">
-                      <strong>Accidents Reported</strong>
+                      <strong>Control Technique</strong>
                       <div className="heading-base mt-1" data-qa="Heading">
-                        0
+                        {carDetails.car_control_technique}
                       </div>
                     </h3>
                   </div>
                   <div className="pl-3 md:pl-3 mt-4 border-l-2 border-l col-6">
                     <h3 className="heading-base" data-qa="Heading">
-                      <strong>Number of Owners</strong>
+                      <strong>Insurance</strong>
                       <div className="heading-base mt-1" data-qa="Heading">
-                        1
+                        {carDetails.car_insurance}
                       </div>
                     </h3>
                   </div>
                   <div className="pl-3 md:pl-3 mt-4 border-l-2 border-l col-6">
                     <h3 className="heading-base" data-qa="Heading">
-                      <strong>Title</strong>
+                      <strong>Listed By</strong>
                       <div className="heading-base mt-1" data-qa="Heading">
-                        Clean
+                        {carDetails.car_seller_name}
                       </div>
                     </h3>
                   </div>
                   <div className="pl-3 md:pl-3 mt-4 border-l-2 border-l col-6">
                     <h3 className="heading-base" data-qa="Heading">
-                      <strong>Use Type</strong>
+                      <strong>Plate</strong>
                       <div className="heading-base mt-1" data-qa="Heading">
-                        Personal Use
+                        {carDetails.car_registration_number}
                       </div>
                     </h3>
                   </div>
@@ -496,278 +566,40 @@ function CarMoreDetails() {
                   Standard Features
                 </h2>
                 <div className="row">
-                  <div
-                    data-test="vdpPopularFeatureItem"
-                    className="mb-2-5 flex lg:mb-3 lg:pr-2 col-12 col-lg-4"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      fill="currentColor"
-                      className="bi bi-check-circle-fill"
-                      viewBox="0 0 24 24"
+                  {carFeatures.map((feature, index) => (
+                    <div
+                      data-test="vdpPopularFeatureItem"
+                      className="mb-2-5 flex lg:mb-3 lg:pr-2 col-12 col-lg-4"
+                      key={index}
                     >
-                      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-                    </svg>
-                    <h3 className="heading-base text-base" data-qa="Heading">
-                      Premium Wheels
-                    </h3>
-                  </div>
-                  <div
-                    data-test="vdpPopularFeatureItem"
-                    className="mb-2-5 flex lg:mb-3 lg:pr-2 col-12 col-lg-4"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      fill="currentColor"
-                      className="bi bi-check-circle-fill"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-                    </svg>
-                    <h3 className="heading-base text-base" data-qa="Heading">
-                      Moonroof
-                    </h3>
-                  </div>
-                  <div
-                    data-test="vdpPopularFeatureItem"
-                    className="mb-2-5 flex lg:mb-3 lg:pr-2 col-12 col-lg-4"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      fill="currentColor"
-                      className="bi bi-check-circle-fill"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-                    </svg>
-                    <h3 className="heading-base text-base" data-qa="Heading">
-                      Power Trunk/Liftgate
-                    </h3>
-                  </div>
-                  <div
-                    data-test="vdpPopularFeatureItem"
-                    className="mb-2-5 flex lg:mb-3 lg:pr-2 col-12 col-lg-4"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      fill="currentColor"
-                      className="bi bi-check-circle-fill"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-                    </svg>
-                    <h3 className="heading-base text-base" data-qa="Heading">
-                      Navigation
-                    </h3>
-                  </div>
-                  <div
-                    data-test="vdpPopularFeatureItem"
-                    className="mb-2-5 flex lg:mb-3 lg:pr-2 col-12 col-lg-4"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      fill="currentColor"
-                      className="bi bi-check-circle-fill"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-                    </svg>
-                    <h3 className="heading-base text-base" data-qa="Heading">
-                      Apple CarPlay
-                    </h3>
-                  </div>
-                  <div
-                    data-test="vdpPopularFeatureItem"
-                    className="mb-2-5 flex lg:mb-3 lg:pr-2 col-12 col-lg-4"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      fill="currentColor"
-                      className="bi bi-check-circle-fill"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-                    </svg>
-                    <h3 className="heading-base text-base" data-qa="Heading">
-                      Android Auto
-                    </h3>
-                  </div>
-                  <div
-                    data-test="vdpPopularFeatureItem"
-                    className="mb-2-5 flex lg:mb-3 lg:pr-2 col-12 col-lg-4"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      fill="currentColor"
-                      className="bi bi-check-circle-fill"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-                    </svg>
-                    <h3 className="heading-base text-base" data-qa="Heading">
-                      Premium Seat Material
-                    </h3>
-                  </div>
-                  <div
-                    data-test="vdpPopularFeatureItem"
-                    className="mb-2-5 flex lg:mb-3 lg:pr-2 col-12 col-lg-4"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      fill="currentColor"
-                      className="bi bi-check-circle-fill"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-                    </svg>
-                    <h3 className="heading-base text-base" data-qa="Heading">
-                      Front Heated Seats
-                    </h3>
-                  </div>
-                  <div
-                    data-test="vdpPopularFeatureItem"
-                    className="mb-2-5 flex lg:mb-3 lg:pr-2 col-12 col-lg-4"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      fill="currentColor"
-                      className="bi bi-check-circle-fill"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-                    </svg>
-                    <h3 className="heading-base text-base" data-qa="Heading">
-                      Remote Engine Start
-                    </h3>
-                  </div>
-                  <div
-                    data-test="vdpPopularFeatureItem"
-                    className="mb-2-5 flex lg:mb-3 lg:pr-2 col-12 col-lg-4"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      fill="currentColor"
-                      className="bi bi-check-circle-fill"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-                    </svg>
-                    <h3 className="heading-base text-base" data-qa="Heading">
-                      Multi-Zone Climate Control
-                    </h3>
-                  </div>
-                  <div
-                    data-test="vdpPopularFeatureItem"
-                    className="mb-2-5 flex lg:mb-3 lg:pr-2 col-12 col-lg-4"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      fill="currentColor"
-                      className="bi bi-check-circle-fill"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-                    </svg>
-                    <h3 className="heading-base text-base" data-qa="Heading">
-                      Adaptive Cruise Control
-                    </h3>
-                  </div>
-                  <div
-                    data-test="vdpPopularFeatureItem"
-                    className="mb-2-5 flex lg:mb-3 lg:pr-2 col-12 col-lg-4"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      fill="currentColor"
-                      className="bi bi-check-circle-fill"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-                    </svg>
-                    <h3 className="heading-base text-base" data-qa="Heading">
-                      Blind Spot System
-                    </h3>
-                  </div>
-                  <div
-                    data-test="vdpPopularFeatureItem"
-                    className="mb-2-5 flex lg:mb-3 lg:pr-2 col-12 col-lg-4"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      fill="currentColor"
-                      className="bi bi-check-circle-fill"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-                    </svg>
-                    <h3 className="heading-base text-base" data-qa="Heading">
-                      Backup Camera
-                    </h3>
-                  </div>
-                  <div
-                    data-test="vdpPopularFeatureItem"
-                    className="mb-2-5 flex lg:mb-3 lg:pr-2 col-12 col-lg-4"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      fill="currentColor"
-                      className="bi bi-check-circle-fill"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-                    </svg>
-                    <h3 className="heading-base text-base" data-qa="Heading">
-                      Parking Sensors
-                    </h3>
-                  </div>
-                  <div
-                    data-test="vdpPopularFeatureItem"
-                    className="mb-2-5 flex lg:mb-3 lg:pr-2 col-12 col-lg-4"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      fill="currentColor"
-                      className="bi bi-check-circle-fill"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
-                    </svg>
-                    <h3 className="heading-base text-base" data-qa="Heading">
-                      Bluetooth
-                    </h3>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        fill="currentColor"
+                        className="bi bi-check-circle-fill"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+                      </svg>
+                      <h3 className="heading-base text-base" data-qa="Heading">
+                        {feature.feature_name}
+                      </h3>
+                    </div>
+                  ))}
+                </div>
+                <div className="border-t pb-5 pt-5 mt-5">
+                  <h2 className="heading-3_5 normal-case" data-qa="Heading">
+                    MyOtobox's Note
+                  </h2>
+                  <div className="seller-note-body">
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: carDetails.seller_note,
+                      }}
+                    />
                   </div>
                 </div>
-
                 <div className="row pl-1 text-sm"></div>
               </div>
             </div>

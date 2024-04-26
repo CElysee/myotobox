@@ -76,7 +76,7 @@ function footer() {
               <div className="col-xl-6">
                 <div className="footer-banner position-relative bg-primary z-3 rounded">
                   <img
-                    src="#"
+                    src="/assets/images/banner-wave.png"
                     alt="wave"
                     className="position-absolute end-0 top-0 z--1"
                   />
@@ -163,7 +163,7 @@ function footer() {
                       <input
                         type="email"
                         placeholder="Enter your email..."
-                        className="bg-white w-100"
+                        className="bg-white w-100 subscribe-input"
                       />
                       <button
                         type="submit"
