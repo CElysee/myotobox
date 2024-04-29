@@ -19,12 +19,13 @@ const override = {
   borderColor: "#e55812",
   paddingRight: "10px",
 };
-function BuyCars() {
+function BodyShape() {
   const make_search = useParams();
   const navigate = useNavigate();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const [brandName, setBrandName] = useState(make_search.make);
+  const [bodyShape, setBodyShape] = useState(make_search.shape);
+  const [brandName, setBrandName] = useState();
   const [selectedBrand, setSelectedBrand] = useState([]);
   const [brandModels, setBrandModels] = useState([]);
   const [selectedModel, setSelectedModel] = useState([]);
@@ -38,10 +39,6 @@ function BuyCars() {
   const [skeleton, setSkeleton] = useState([1, 2, 3, 4]);
   const [updateUrl, setUpdateUrl] = useState(false);
   const [updateOnChangeFilter, setUpdateOnChangeFilter] = useState(false);
-  const [showResultsNumber, setShowResultsNumber] = useState({
-    "results": "",
-    "category": "",
-  });
 
   const model_id = new URLSearchParams(location.search).get("model_id");
   const minInputPrice = new URLSearchParams(location.search).get(
@@ -83,9 +80,9 @@ function BuyCars() {
     const fetchData = async () => {
       // const response = await axiosInstance.get("/car_for_sale/list");
       const list_brands = await axiosInstance.get("/car_for_sale/car_brands");
-      if (brandName) {
+      if (selectedBrand !== null && selectedBrand.label) {
         const brand = list_brands.data.car_brand.filter(
-          (brand) => brand.name.toLowerCase() == brandName.toLowerCase()
+          (brand) => brand.name.toLowerCase() == selectedBrand.label.toLowerCase()
         );
         setSelectedBrand({
           value: brand[0].id,
@@ -104,14 +101,7 @@ function BuyCars() {
           }
         }
       }
-
       setListBrands(list_brands.data.car_brand);
-
-      // Check if brand[0].models is not empty
-
-      // setCarsForSale(response.data.cars_for_sale);
-      // setCountCarsForSale(response.data.count_cars_for_sale);
-      // console.log(brand)
     };
     fetchData();
   }, [brandName, make_search.model, model_id]);
@@ -120,8 +110,11 @@ function BuyCars() {
     setSkeletonLoading(true);
     const fetchData = async () => {
       try {
-        let url = `/car_for_sale/makeModels?make=${brandName}`;
+        let url = `/car_for_sale/makeModels?shape=${bodyShape}`;
 
+        if (brandName !== null) {
+            url += `&make=${brandName}`;
+        }
         // Append model_id if it's not null
         if (model_id !== null) {
           url += `&model_id=${model_id}`;
@@ -189,6 +182,7 @@ function BuyCars() {
     end_kilometers,
     carTransmission,
     fuelType,
+    bodyShape
   ]);
 
   const filteredModels = makeWithModels.filter((model) => model.count_cars > 0);
@@ -232,14 +226,12 @@ function BuyCars() {
   // Handle Price filter
   const handlePriceFilter = () => {
     setUpdateUrl(true);
-    setShowResultsNumber({...showResultsNumber, "category": "price"})
   };
 
   // Handle Year change
   const handleYearChange = async (e) => {
     const { name, value } = e.target;
     setInputValues({ ...inputValues, [name]: value });
-    setShowResultsNumber({...showResultsNumber, "category": "year"})
     setUpdateOnChangeFilter(true);
   };
 
@@ -252,7 +244,6 @@ function BuyCars() {
   const handleKilometersChange = async (e) => {
     const { name, value } = e.target;
     setInputValues({ ...inputValues, [name]: value });
-    setShowResultsNumber({...showResultsNumber, "category": "kilometers"})
     setUpdateOnChangeFilter(true);
   };
 
@@ -264,14 +255,12 @@ function BuyCars() {
   // Handle Transmission change
   const handleTransmissionChange = (transmissionType) => {
     setInputValues({ ...inputValues, car_transmission: transmissionType });
-    setShowResultsNumber({...showResultsNumber, "category": "transmission"})
     setUpdateOnChangeFilter(true);
   };
 
   // Handle Fuel type change
   const handleFuelTypeChange = (fuelType) => {
     setInputValues({ ...inputValues, fuel_type: fuelType });
-    setShowResultsNumber({...showResultsNumber, "category": "fuel"})
     setUpdateOnChangeFilter(true);
   };
 
@@ -336,11 +325,14 @@ function BuyCars() {
       const endKilometers = end_kilometers ? end_kilometers : 1000000;
       // Construct the base URL with brandName and selectedModel.label
 
-      let url = `/car_for_sale/makeModels?make=${brandName}`;
+      let url = `/car_for_sale/makeModels?shape=${bodyShape}`;
 
+      if (brandName !== null) {
+          url += `?make=${brandName}`;
+      }
       // Add query parameters only if their values are not empty
       if (selectedModel !== null && selectedModel.label) {
-        url += `?model_id=${selectedModel.label.toLowerCase()}`;
+        url += `${url.includes("?") ? "&" : "?"}model_id=${selectedModel.label.toLowerCase()}`;
       }
       if (minPrice) {
         url += `${url.includes("?") ? "&" : "?"}min_input_price=${minPrice}`;
@@ -377,8 +369,7 @@ function BuyCars() {
         try {
           const response = await axiosInstance.get(url);
           setLoading(false);
-          // setCountCarsForSale(response.data.count_cars_for_sale);
-          setShowResultsNumber({...showResultsNumber, "results": response.data.count_cars_for_sale});
+          setCountCarsForSale(response.data.count_cars_for_sale);
         } catch (error) {
           console.log("Error while filtering", error);
           setLoading(false);
@@ -387,7 +378,7 @@ function BuyCars() {
       fetchData();
       setUpdateOnChangeFilter(false); // Reset the flag after update
     }
-  }, [updateOnChangeFilter, brandName, navigate, inputValues, selectedModel]);
+  }, [updateOnChangeFilter, brandName, navigate, inputValues, selectedModel, bodyShape]);
 
   // Update URL with when filters are applied
   useEffect(() => {
@@ -415,11 +406,14 @@ function BuyCars() {
       const startKilometers = start_kilometers ? start_kilometers : 1;
       const endKilometers = end_kilometers ? end_kilometers : 1000000;
       // Construct the base URL with brandName and selectedModel.label
-      let url = `/buyCars/${brandName}`;
+      let url = `/bodyShape/${bodyShape}`;
 
+      if (brandName !== null) {
+          url += `?make=${brandName}`;
+      }
       // Add query parameters only if their values are not empty
       if (selectedModel !== null && selectedModel.label) {
-        url += `?model_id=${selectedModel.label.toLowerCase()}`;
+        url += `${url.includes("?") ? "&" : "?"}model_id=${selectedModel.label.toLowerCase()}`;
       }
       if (min_input_price) {
         url += `${url.includes("?") ? "&" : "?"}min_input_price=${minPrice}`;
@@ -459,6 +453,7 @@ function BuyCars() {
   const handleDropdownClick = (e) => {
     e.stopPropagation(); // Prevents the default behavior of event propagation
   };
+
   return (
     <section className="bpage container page home" id="NotFound">
       <div className="row justify-content-center">
@@ -504,15 +499,9 @@ function BuyCars() {
                   aria-expanded="false"
                 >
                   {inputValues.min_input_price
-                    ? `${
-                        inputValues.max_input_price
-                          ? inputValues.max_input_price
-                          : 1950
-                      } - ${
-                        inputValues.max_input_price
-                          ? inputValues.max_input_price
-                          : new Date().getFullYear()
-                      }`
+                    ? `${formatNumber(
+                        inputValues.min_input_price
+                      )} - ${formatNumber(inputValues.max_input_price)}`
                     : "Choose range"}
                 </button>
                 <div className="css-4xgw5l-IndicatorsContainer2">
@@ -595,7 +584,7 @@ function BuyCars() {
                     <button
                       className="sc-1c4mb2u-0 hHfOrj filter"
                       type="submit"
-                      disabled={showResultsNumber.results  === 0 && showResultsNumber.category == "price"}
+                      disabled={countCarsForSale === 0}
                       onClick={handlePriceFilter}
                     >
                       {loading ? (
@@ -607,8 +596,8 @@ function BuyCars() {
                           aria-label="Loading Spinner"
                           data-testid="loader"
                         />
-                      ) : showResultsNumber.results !== null && showResultsNumber.category == "price" ? (
-                        `Show ${showResultsNumber.results} Results`
+                      ) : countCarsForSale > 0 ? (
+                        `Show ${countCarsForSale} Results`
                       ) : (
                         "Apply filters"
                       )}
@@ -631,14 +620,8 @@ function BuyCars() {
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
-                  {inputValues.end_year
-                    ? `${
-                        inputValues.start_year ? inputValues.start_year : 1950
-                      } - ${
-                        inputValues.end_year
-                          ? inputValues.end_year
-                          : new Date().getFullYear()
-                      }`
+                  {inputValues.start_year
+                    ? `${inputValues.start_year} - ${inputValues.end_year}`
                     : "Choose range"}
                 </button>
                 <div className="css-4xgw5l-IndicatorsContainer2">
@@ -723,7 +706,7 @@ function BuyCars() {
                     <button
                       className="sc-1c4mb2u-0 hHfOrj filter"
                       type="submit"
-                      disabled={showResultsNumber.results  === 0 && showResultsNumber.category == "year"}
+                      disabled={countCarsForSale === 0}
                       onClick={handleYearFilter}
                     >
                       {loading ? (
@@ -735,8 +718,8 @@ function BuyCars() {
                           aria-label="Loading Spinner"
                           data-testid="loader"
                         />
-                      ) : showResultsNumber.results !== null && showResultsNumber.category == "year" ? (
-                        `Show ${showResultsNumber.results} Results`
+                      ) : countCarsForSale >= 0 ? (
+                        `Show ${countCarsForSale} Results`
                       ) : (
                         "Apply filters"
                       )}
@@ -847,7 +830,7 @@ function BuyCars() {
                     <button
                       className="sc-1c4mb2u-0 hHfOrj filter"
                       type="submit"
-                      disabled={showResultsNumber.results  === 0 && showResultsNumber.category == "kilometers"}
+                      disabled={countCarsForSale === 0}
                       onClick={handleKilometersFilter}
                     >
                       {loading ? (
@@ -859,8 +842,8 @@ function BuyCars() {
                           aria-label="Loading Spinner"
                           data-testid="loader"
                         />
-                      ) : showResultsNumber.results !== null && showResultsNumber.category == "kilometers" ? (
-                        `Show ${showResultsNumber.results} Results`
+                      ) : countCarsForSale > 0 ? (
+                        `Show ${countCarsForSale} Results`
                       ) : (
                         "Apply filters"
                       )}
@@ -1130,7 +1113,7 @@ function BuyCars() {
                     <button
                       className="sc-1c4mb2u-0 hHfOrj filter"
                       type="submit"
-                      disabled={showResultsNumber.results === 0 && (showResultsNumber.category == "transmission" || showResultsNumber.category == "fuel")}
+                      disabled={countCarsForSale === 0}
                       onClick={handleYearFilter}
                     >
                       {loading ? (
@@ -1142,8 +1125,8 @@ function BuyCars() {
                           aria-label="Loading Spinner"
                           data-testid="loader"
                         />
-                      ) : showResultsNumber.results !== null && (showResultsNumber.category == "transmission" || showResultsNumber.category == "fuel") ? (
-                        `Show ${showResultsNumber.results} Results`
+                      ) : countCarsForSale >= 0 ? (
+                        `Show ${countCarsForSale} Results`
                       ) : (
                         "Apply filters"
                       )}
@@ -1220,4 +1203,4 @@ function BuyCars() {
   );
 }
 
-export default BuyCars;
+export default BodyShape;

@@ -97,14 +97,6 @@ function CarMoreDetails() {
                               </div>
                             </button>
                           </div>
-                          <div className="mt-2 flex flex-wrap md:mt-2 lg:mt-2-5">
-                            <span
-                              className="mx-1 text-sm lg:mr-2"
-                              id="taxesFeesLabel"
-                            >
-                              Complete your car purchase in minutes.
-                            </span>
-                          </div>
                         </div>
                       </div>
                       <button
@@ -199,7 +191,10 @@ function CarMoreDetails() {
                 </div>
               </Sticky>
             </div>
-            <CarListingDetails carDetails={carDetails} carFeatures={carFeatures} />
+            <CarListingDetails
+              carDetails={carDetails}
+              carFeatures={carFeatures}
+            />
           </div>
         </div>
       </div>

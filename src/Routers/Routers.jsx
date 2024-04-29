@@ -9,6 +9,7 @@ import Login from "../frontend/pages/Auth/Login";
 import PrivateRoutes from "../../utils/PrivateRoutes";
 import AdminDashboard from "../dashboard/pages/admin/AdminDashboard";
 import NotFound from "../frontend/pages/notFound/NotFound";
+import BodyShape from "../frontend/pages/buyCars/BodyShape";
 
 function Routers() {
   return (
@@ -18,6 +19,7 @@ function Routers() {
       <Route path="/buyCars/:make/:model" element={<BuyCars />} />
       <Route path="/buyCars/:make" element={<BuyCars />} />
       <Route path="/buyCars" element={<BuyCars />} />
+      <Route path="/bodyShape/:shape" element={<BodyShape />} />
       <Route path="/RentCars" element={<RentCars />} />
       <Route path="/ImportOnOrder" element={<ImportOnOrder />} />
       <Route path="/login" element={<Login />} />
@@ -25,11 +27,6 @@ function Routers() {
       <Route path="*" element={<NotFound />} />
       <Route path="/admin/*" element={<PrivateRoutes />}>
         <Route path="dashboard" element={<AdminDashboard />} />
-        {/* <Route path="users" element={<AdminUsers />} />
-        <Route path="bookings" element={<AdminBookings />} />
-        <Route path="calendar" element={<AdminCalendar />} />
-        <Route path="vouchers" element={<AdminVoucher />} />
-        <Route path="support" element={<Support />} /> */}
       </Route>
     </Routes>
   );

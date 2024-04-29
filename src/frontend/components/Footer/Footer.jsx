@@ -1,10 +1,23 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axiosInstance from "../../../../utils/axiosInstance";
 
-function footer() {
+function Footer() {
   const [emailSubscribe, setEmailSubscribe] = useState("");
   const year = new Date().getFullYear();
+  const [carBodyTypeList, setCarBodyTypeList] = useState("");
+  const imageBaseUrl = import.meta.env.VITE_REACT_APP_API;
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await axiosInstance.get("/car_body_type/list");
+      setCarBodyTypeList(response.data.car_body);
+    };
+    fetchData();
+  }, []);
+
+  const limitBodyType = carBodyTypeList.slice(0, 5);
+
   return (
     <>
       <footer className="footer-section">
@@ -27,10 +40,7 @@ function footer() {
                         <h3 className="text-white mt-3 mb-20">
                           Are You Looking to Sell your Car?
                         </h3>
-                        <a
-                          href="#"
-                          className="at-explore-btn text-white"
-                        >
+                        <a href="#" className="at-explore-btn text-white">
                           <span className="me-2 text-white">
                             <svg
                               width="39"
@@ -92,10 +102,7 @@ function footer() {
                         <h3 className="text-dark mt-3 mb-20">
                           Are You Looking to Buy or Rent a Car?
                         </h3>
-                        <a
-                          href="#"
-                          className="at-explore-btn text-dark"
-                        >
+                        <a href="#" className="at-explore-btn text-dark">
                           <span className="me-2 text-white mt-2">
                             <svg
                               width="39"
@@ -180,11 +187,9 @@ function footer() {
                 <div className="ms-lg-5 ms-xl-0 mt-5 mt-lg-0">
                   <div className="row align-items-center">
                     <div className="col-6">
-                      <a
-                        href="#"
-                        className="footer-logo d-inline-block"
-                      >
-                        <svg
+                      <a href="#" className="footer-logo d-inline-block">
+                        {/* <img src="/assets/svg/myotobox.svg" /> */}
+                        {/* <svg
                           width="890.5000000000001"
                           height="133.12576794511895"
                           viewBox="0 0 369.6666666666667 55.26351362572971"
@@ -211,7 +216,7 @@ function footer() {
                           >
                             <path d="M18.54 5 l0.32 0 l0 15 l-2.22 0 l0 -11.26 l-5.78 11.26 l-1.26 0 l-5.78 -11.26 l0 11.26 l-2.22 0 l0 -15 l0.3 0 l2.38 0 l5.94 11.6 l5.94 -11.6 l2.38 0 z M30.439999999999998 10.12 c0 0 -2.5 5.92 -4.16 9.88 c-1.4 3.32 -2.5 5.32 -4.36 5.32 c-0.58 0 -1.32 -0.28 -1.86 -0.6 l0.62 -1.8 c0.16 0.14 0.52 0.34 0.76 0.4 c1.54 0.44 2.5 -2.78 3.16 -4.36 l-3.74 -8.84 l2.08 0 l2.72 6.48 l2.7 -6.48 l2.08 0 z M39.06 6.66 c-3.16 0 -5.4 2.8 -5.4 5.84 c0 3.06 2.24 5.86 5.4 5.86 c3.18 0 5.4 -2.8 5.4 -5.86 c0 -3.04 -2.24 -5.84 -5.4 -5.84 z M39.06 4.82 c4.2 0 7.62 3.32 7.62 7.68 s-3.42 7.7 -7.62 7.7 s-7.62 -3.34 -7.62 -7.7 s3.42 -7.68 7.62 -7.68 z M52.480000000000004 18.36 c0.64 0.26 1.14 0.08 1.44 -0.06 l0 1.6 c-0.26 0.16 -0.64 0.3 -1.18 0.3 c-1.18 0 -2.22 -0.38 -2.86 -1.42 c-0.6 -1 -0.6 -1.54 -0.6 -3.1 l0 -3.88 l-1.2 0 l0 -1.68 l1.2 0 l0 -3.12 l2.06 0 l0 3.12 l2.58 0 l0 1.68 l-2.58 0 l0 3.88 c0 1.64 0.16 2.24 1.14 2.68 z M61.06 11.64 c-1.7 0 -3.08 1.42 -3.08 3.44 c0 2 1.38 3.44 3.08 3.44 s3.08 -1.44 3.08 -3.44 c0 -2.02 -1.38 -3.44 -3.08 -3.44 z M61.06 9.94 c2.84 0 5.14 2.2 5.14 5.14 s-2.3 5.12 -5.14 5.12 s-5.14 -2.18 -5.14 -5.12 s2.3 -5.14 5.14 -5.14 z M73.36 9.94 c2.84 0 4.94 2.2 4.94 5.14 s-2.1 5.12 -4.94 5.12 c-0.96 0 -2.06 -0.36 -2.84 -0.94 l0 0.74 l-2.06 0 l0 -15 l2.06 0 l0 5.9 c0.66 -0.54 1.88 -0.96 2.84 -0.96 z M73.16 18.52 c1.7 0 3.08 -1.44 3.08 -3.44 c0 -2.02 -1.38 -3.44 -3.08 -3.44 c-1.12 0 -2.1 0.5 -2.64 1.56 c-0.28 0.56 -0.44 1.2 -0.44 1.88 s0.16 1.32 0.44 1.86 c0.54 1.06 1.52 1.58 2.64 1.58 z M85.04 11.64 c-1.7 0 -3.08 1.42 -3.08 3.44 c0 2 1.38 3.44 3.08 3.44 s3.08 -1.44 3.08 -3.44 c0 -2.02 -1.38 -3.44 -3.08 -3.44 z M85.04 9.94 c2.84 0 5.14 2.2 5.14 5.14 s-2.3 5.12 -5.14 5.12 s-5.14 -2.18 -5.14 -5.12 s2.3 -5.14 5.14 -5.14 z M100.52000000000001 10.12 l-3.5 4.94 l3.5 4.94 l-2.36 0 l-2.2 -3.3 l-2.22 3.3 l-2.36 0 l3.52 -4.94 l-3.52 -4.94 l2.36 0 l2.22 3.3 l2.2 -3.3 l2.36 0 z"></path>
                           </g>
-                        </svg>
+                        </svg> */}
                       </a>
                     </div>
                     <div className="col-6">
@@ -272,30 +277,12 @@ function footer() {
                           Vehicles Type
                         </h6>
                         <ul className="footer-nav">
-                          <li>
-                            <a href="#">All Autohive Vehicles</a>
-                          </li>
-                          <li>
-                            <a href="#">SUVs</a>
-                          </li>
-                          <li>
-                            <a href="#">Trucks</a>
-                          </li>
-                          <li>
-                            <a href="#">Cars</a>
-                          </li>
-                          <li>
-                            <a href="#">Crossovers</a>
-                          </li>
-                          <li>
-                            <a href="#">Electrified Vehicles</a>
-                          </li>
-                          <li>
-                            <a href="#">Hybrids</a>
-                          </li>
-                          <li>
-                            <a href="#">Hybrid SUVs</a>
-                          </li>
+                          {limitBodyType.length > 0 &&
+                            limitBodyType.map((carBodyType, index) => (
+                              <li key={index}>
+                                <a href="#">{carBodyType.body_type_name}</a>
+                              </li>
+                            ))}
                         </ul>
                       </div>
                     </div>
@@ -369,4 +356,4 @@ function footer() {
   );
 }
 
-export default footer;
+export default Footer;

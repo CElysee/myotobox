@@ -11203,9 +11203,9 @@ form.search-form.active
 }
 #autos-nav .navbar-brand {
   padding: 0;
-  margin: 8px 0 8px 4px;
+  margin: -35px 0 8px 4px;
   width: 200px !important;
-  height: 24px;
+  height: 28px;
 }
 #autos-nav .nav-link {
   padding-top: 0;
