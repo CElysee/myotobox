@@ -2,6 +2,8 @@ import React, { useState } from "react";
 // import Logo from "";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import "./Header.css";
+import { selectUser, selectIsAuthenticated } from "../../../features/userSlice";
+import { useSelector } from "react-redux";
 
 function Header() {
   const nav_links = [
@@ -40,7 +42,6 @@ function Header() {
   const MenuItem = ({ to, display }) => {
     const location = useLocation();
     const isActive = location.pathname === to;
-
     return (
       <li
         className={isActive ? "nav-item active" : "nav-item"}
@@ -54,7 +55,8 @@ function Header() {
       </li>
     );
   };
-
+  const selectedUser = useSelector(selectUser);
+  const isAuthenticated = useSelector(selectIsAuthenticated);
   return (
     <>
       <div
@@ -93,7 +95,15 @@ function Header() {
             </g>
           </svg> */}
         </Link>
-        <Link
+        { isAuthenticated ? (<Link
+          to={"/"}
+          className="btn btn-primary btn-lg btn-signin"
+          style={{ marginRight: "10px", width: "auto", padding: "0px 10px" }}
+          onClick={navigateToSignUp}
+        >
+          {selectedUser.name} - My Account
+        </Link>) : (<>
+          <Link
           to={"/login"}
           className="btn btn-primary btn-lg btn-signin"
           style={{ marginRight: "10px" }}
@@ -104,6 +114,8 @@ function Header() {
         <Link className="btn btn-primary btn-lg btn-signin" to={"/sign-up"}>
           Sign Up
         </Link>
+        </>)}
+        
         <button className="navbar-toggler closed" type="button">
           <span className="navbar-toggler-icon">
             <span className="sr-only">Nav</span>
@@ -119,30 +131,6 @@ function Header() {
                 <MenuItem key={i} to={link.path} display={link.display} />
               ))}
             </ul>
-            {/* <form
-              method="post"
-              className="search-form form-inline"
-              autoComplete="off"
-              noValidate=""
-            >
-              <fieldset className="form-group" style={{ width: "100%" }}>
-                <div role="combobox" className="react-autosuggest__container">
-                  <input
-                    type="text"
-                    autoComplete="off"
-                    className="form-control"
-                    placeholder="Search for cars (ex. BMW, Audi, Ford)"
-                    name="search"
-                    value=""
-                  />
-                  <div
-                    id="react-autowhatever-1"
-                    role="listbox"
-                    className="react-autosuggest__suggestions-container"
-                  ></div>
-                </div>
-              </fieldset>
-            </form> */}
           </div>
         </div>
         <div className="header-border"></div>

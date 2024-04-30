@@ -9,14 +9,20 @@ import {
   formatDate,
 } from "../../../../utils/helpers";
 import CarListingDetails from "../carListingDetails/CarListingDetails";
+import { selectIsAuthenticated } from "../../../features/userSlice";
+import { useSelector } from "react-redux";
+import AuthLogin from "../auth/Login";
+import BookATestDrive from "../bookATestDrive/bookATestDrive";
 
 function CarMoreDetails() {
   const urlParams = useParams();
   const [carDetails, setCarDetails] = useState([]);
   const [carFeatures, setCarFeatures] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [isAboutToBook, setIsAboutToBook] = useState(false);
 
   const stock_numner = urlParams.stock;
+  const isAuthenticated = useSelector(selectIsAuthenticated);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,9 +43,12 @@ function CarMoreDetails() {
     fetchData();
   }, []);
 
+  const handleIsAboutToBook = () => {
+    setIsAboutToBook(!isAboutToBook);
+  };
   return (
     <>
-      <div className="md:pt-3">
+      <div className="pt-3">
         <div className="container">
           <div className="row md:flex-row-reverse">
             <div className="col-12 col-md-4 col-lg-4 contact_dealer">
@@ -101,15 +110,22 @@ function CarMoreDetails() {
                       </div>
                       <button
                         type="button"
-                        data-ignore-contrast="true"
-                        data-loading="false"
-                        data-test="leadCTA"
-                        aria-haspopup="dialog"
-                        target="blank"
-                        className="mt-4 w-full py-[24px] mb-4 btn btn-primary btn-md"
+                        className={`mt-4 w-full py-[24px] mb-4 btn btn-primary btn-md ${
+                          isAboutToBook ? "d-none" : ""
+                        }`}
+                        onClick={handleIsAboutToBook}
                       >
-                        <span className="btn-inner">Book a test drive</span>
+                        <span className="btn-inner">
+                          {isAuthenticated
+                            ? "Book a Test Drive"
+                            : "Sign In and Book a Test Drive"}
+                        </span>
                       </button>
+                      {isAboutToBook && isAuthenticated ? (
+                        <BookATestDrive />
+                      ) : !isAuthenticated && isAboutToBook  ? (
+                        <AuthLogin isAboutToBook={setIsAboutToBook} />
+                      ) : null}
                       <span style={{ fontSize: " 0px" }}></span>
                       <div className="flex flex-col border-t pt-4 md:mt-4 md:border-t md:pl-2 lg:pl-3">
                         <div

@@ -10,6 +10,7 @@ import PrivateRoutes from "../../utils/PrivateRoutes";
 import AdminDashboard from "../dashboard/pages/admin/AdminDashboard";
 import NotFound from "../frontend/pages/notFound/NotFound";
 import BodyShape from "../frontend/pages/buyCars/BodyShape";
+import ThankYouBookingTestDrive from "../frontend/pages/messages/ThankYouBookingTestDrive";
 
 function Routers() {
   return (
@@ -24,6 +25,7 @@ function Routers() {
       <Route path="/ImportOnOrder" element={<ImportOnOrder />} />
       <Route path="/login" element={<Login />} />
       <Route path="dashboard" element={<AdminDashboard />} />
+      <Route path="/bookingThankYou" element={<ThankYouBookingTestDrive />} />
       <Route path="*" element={<NotFound />} />
       <Route path="/admin/*" element={<PrivateRoutes />}>
         <Route path="dashboard" element={<AdminDashboard />} />

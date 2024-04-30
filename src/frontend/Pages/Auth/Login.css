@@ -1,3 +1,15 @@
+.login-card-book {
+  display: block;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  background-position: center;
+  padding: 30px 20px;
+  box-shadow: 0 0 37px rgba(8, 21, 66, 0.05);
+  border-radius: 10px;
+  --tw-bg-opacity: 1;
+  background-color: rgb(252 251 252 / var(--tw-bg-opacity));
+}
 .login-card {
   /* min-height: 100vh; */
   display: block;
@@ -223,4 +235,27 @@ input[type="password"]{
   font-size: 2rem;
   border-radius: 4px;
   border: 1px solid rgba(0,0,0,.3);
+}
+.form-control{
+  appearance: auto;
+  border-radius: 10px !important;
+  /* background: #000 !important; */
+}
+.login-card-book select{
+  height: auto !important;
+  padding: 15px !important;
+}
+.open-button {
+  position: absolute;
+  top: 10px;
+  right: 11px;
+  width: 25px;
+  height: 25px;
+  background: #fff;
+  pointer-events: none;
+}
+
+.open-button button {
+  border: none;
+  background: transparent;
 }
