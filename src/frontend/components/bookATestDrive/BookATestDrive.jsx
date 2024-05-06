@@ -53,7 +53,7 @@ function BookATestDrive() {
       try {
         const response = await axiosInstance.post("/book-a-test-drive/create", params);
         console.log(response.data);
-        navigate("/bookingThankYou")
+        navigate("/booking_message")
       } catch (error) {
         console.error(error);
       } finally {

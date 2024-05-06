@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from "react";
-import "./ImportOnOrder.css";
 import axiosInstance from "../../../../utils/axiosInstance";
 import { useSelector } from "react-redux";
 import { Editor } from "@tinymce/tinymce-react";
@@ -8,6 +7,7 @@ import RiseLoader from "react-spinners/RiseLoader";
 import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { useNavigate } from "react-router-dom";
+import { roundNumbers } from "../../../../utils/helpers";
 
 const override = {
   display: "block",
@@ -15,40 +15,48 @@ const override = {
   borderColor: "#e55812",
   paddingRight: "10px",
 };
-function ImportOnOrder() {
+
+function TaxCalculator() {
   const [carBrands, setCarBrands] = useState([]);
   const [carModels, setCarModels] = useState([]);
   const [carTrims, setCarTrims] = useState([]);
+  const [usdToRwf, setUsdToRwf] = useState(0);
+  const [formError, setFormErrors] = useState("");
   const tinymce = import.meta.env.VITE_TINYMCE_API;
   const editorRef = useRef(null);
   const navigate = useNavigate();
   const [inputValues, setInputValues] = useState({
-    price_range: "",
-    fuel_type: "",
-    transmission_type: "",
     car_brand_id: "",
     car_model_id: "",
     car_trim_id: "",
-    manufacture_year_from: "",
-    manufacture_year_to: "",
-    kilometers_from: "",
-    kilometers_to: "",
-    exterior_color: "",
-    car_color: "",
-    names: "",
-    phone_number: "",
-    email: "",
-    order_note: "",
+    weight: "",
+    engine_cc: "",
+    year_of_manufacture: "",
+    price_when_new: "",
+    amortisation_period: "",
+    current_residual_value: "",
+    freight_cost: "",
+    insurance: "",
+    cif_kigali: "",
+    current_value: "",
+    quitus_fiscal: "",
+    vehicle_category: "",
     user_id: "",
   });
   const [loading, setLoading] = useState(false);
   const [color, setColor] = useState("#fff");
+  const currencyAPiKey = import.meta.env.VITE_CURRENCY_API_KEY;
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axiosInstance.get("/car_for_sale/car_brands/");
         setCarBrands(response.data.car_brand);
+        const currency_rate = await axiosInstance.get(
+          `https://openexchangerates.org/api/latest.json?app_id=${currencyAPiKey}`
+        );
+        // setUsdToRwf(currency_rate.data.rates.RWF);
+        setUsdToRwf(1325);
       } catch (error) {
         console.error(error);
       }
@@ -70,47 +78,141 @@ function ImportOnOrder() {
       const trims = carModels.filter((model) => model.id == value)[0].trims;
       setCarTrims(trims);
     }
-  };
-  // const handleEditorChange = (content, editor) => {
-  //   // Update the content state whenever the editor content changes
-  //   setInputValues((prevValues) => ({
-  //     ...prevValues,
-  //     order_note: content,
-  //   }));
-  // };
+    if (name === "year_of_manufacture") {
+      // Check if value is a valid number representing a year
+      const valueAsNumber = parseInt(value);
+      if (
+        !isNaN(valueAsNumber) &&
+        valueAsNumber >= 1900 &&
+        valueAsNumber <= new Date().getFullYear()
+      ) {
+        const currentYear = new Date().getFullYear();
+        const period = currentYear - valueAsNumber;
 
-  const handleEditorChange = (event, editor) => {
-    const data = editor.getData();
-    setInputValues((prevValues) => ({
-      ...prevValues,
-      order_note: data,
-    }));
+        // Update state using callback form of setState
+        setInputValues((prevState) => ({
+          ...prevState,
+          year_of_manufacture: valueAsNumber, // Ensure year_of_manufacture is set to the latest value
+          amortisation_period:
+            period === 1 ? `${period} year` : `${period} years`,
+          price_when_new: "",
+          current_residual_value: "",
+          current_value: "",
+          cif_kigali: "",
+          freight_cost: "",
+          insurance: "",
+        }));
+      } else {
+        setInputValues((prevState) => ({
+          ...prevState,
+          year_of_manufacture: valueAsNumber, // Ensure year_of_manufacture is set to the latest value
+          price_when_new: "",
+          current_residual_value: "",
+          current_value: "",
+          cif_kigali: "",
+          freight_cost: "",
+          insurance: "",
+        }));
+      }
+    }
+    if (name === "price_when_new") {
+      const valueAsNumber = parseInt(value);
+      if (!isNaN(valueAsNumber)) {
+        const currentYear = new Date().getFullYear();
+        const yearOfManufacture = inputValues.year_of_manufacture;
+        const period = currentYear - yearOfManufacture;
+
+        let depreciationRate = 0;
+        if (period <= 2) {
+          depreciationRate = 0.2;
+        } else if (period <= 3) {
+          depreciationRate = 0.3;
+        } else if (period <= 4) {
+          depreciationRate = 0.4;
+        } else if (period <= 5) {
+          depreciationRate = 0.5;
+        } else if (period <= 6) {
+          depreciationRate = 0.55;
+        } else if (period <= 7) {
+          depreciationRate = 0.6;
+        } else if (period <= 8) {
+          depreciationRate = 0.65;
+        } else if (period <= 9) {
+          depreciationRate = 0.7;
+        } else if (period <= 10) {
+          depreciationRate = 0.75;
+        } else {
+          depreciationRate = 0.8;
+        }
+        const depreciation = roundNumbers(depreciationRate * valueAsNumber);
+        const current_value = roundNumbers(valueAsNumber - depreciation);
+
+        setInputValues((prevState) => ({
+          ...prevState,
+          price_when_new: valueAsNumber,
+          current_residual_value: current_value,
+        }));
+      } else {
+        console.error("Invalid price entered.");
+        // Optionally, show an error message to the user
+      }
+    }
+    if (name === "insurance") {
+      if (
+        inputValues.current_residual_value &&
+        inputValues.freight_cost &&
+        inputValues.insurance
+      ) {
+        const cif_to_kgl =
+          parseFloat(inputValues.current_residual_value) +
+          parseFloat(inputValues.freight_cost) +
+          parseFloat(value);
+
+        setInputValues((prevState) => ({
+          ...prevState,
+          cif_kigali: roundNumbers(cif_to_kgl),
+        }));
+      }
+    }
   };
+
+  useEffect(() => {
+    if (inputValues.cif_kigali) {
+        const current_value = inputValues.cif_kigali * usdToRwf;
+        const roundedCifToKgl = roundNumbers(current_value);
+        setInputValues((prevState) => ({
+          ...prevState,
+          current_value: roundedCifToKgl,
+        }));
+      }
+  }, [inputValues.cif_kigali]);
+
   const user = useSelector(selectUser);
   const isAuthenticated = useSelector(selectIsAuthenticated);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const submitData = async () => {
       const params = {
         ...inputValues,
         user_id: user.userId,
       };
-      console.log(params);
       try {
         const response = await axiosInstance.post(
-          "/import-on-order/create/",
+          "/tax-calculator/create",
           params
         );
-        // console.log(response);
-        navigate("/import_on_order_message");
+        const order_id = response.data.data_id;
+        // navigate(`/car_tax_calculator_results/${order_id}`);
+        setLoading(false);
       } catch (error) {
-        console.error("Error adding a new import order", error);
+        console.error("Error while calculating taxes", error);
+        setLoading(false);
       }
     };
     submitData();
   };
-
   return (
     <div className="main_content import_on_order" style={{ marginTop: "83px" }}>
       <div className="banner-section1">
@@ -135,12 +237,12 @@ function ImportOnOrder() {
                 </svg>
               </span>
               <h1>
-                To Best Way To Buy <span>Your Dream Car.</span>
+                To Best Way To Calculate <span>Car Taxes.</span>
               </h1>
               <p>
-                We import high-quality vehicles and offer outstanding services.
-                Our commitment to excellence guarantees that you will receive
-                safe, clean, and reliable cars.
+                We offer an advanced system powered by AI to accurately
+                calculate car taxes. With our cutting-edge technology, you can
+                easily..
               </p>
               <p className="pt-4">
                 <strong>
@@ -157,60 +259,9 @@ function ImportOnOrder() {
             style={{ visibility: "visible", animationDelay: "300ms" }}
           >
             <div className="car-filter-area">
-              <h4>Find Your Dream Car</h4>
+              <h4>Moto Vehicles Value Depreciation and Duties Calculation</h4>
               <div className="" id="importorder">
                 <form onSubmit={handleSubmit}>
-                  <div className="inline_form">
-                    <div className="form-inner mb-25">
-                      <label>Budget before taxes*</label>
-                      <select
-                        className="select"
-                        name="price_range"
-                        value={inputValues.price_range}
-                        onChange={handleFormInputs}
-                      >
-                        <option>Select price range</option>
-                        <option value="1,000,000 - 5,000,000 Rwf">1,000,000 - 5,000,000 Rwf</option>
-                        <option value="5,000,000 - 10,000,000 Rwf">5,000,000 - 10,000,000 Rwf</option>
-                        <option value="10,000,000 - 15,000,000 Rwf">10,000,000 - 15,000,000 Rwf</option>
-                        <option value="15,000,000 - 25,000,000 Rwf">15,000,000 - 25,000,000 Rwf</option>
-                        <option value="25,000,000 - 35,000,000 Rwf">25,000,000 - 35,000,000 Rwf</option>
-                        <option value="35,000,000 - 45,000,000 Rwf">35,000,000 - 45,000,000 Rwf</option>
-                        <option value="35,000,000 - 45,000,000 Rwf">45,000,000 - 60,000,000 Rwf</option>
-                        <option value="60,000,000 - 80,000,000 Rwf">60,000,000 - 80,000,000 Rwf</option>
-                        <option value="80,000,000+ Rwf">80,000,000+ Rwf</option>
-                      </select>
-                    </div>
-                    <div className="form-inner mb-25">
-                      <label>Fuel Type</label>
-                      <select
-                        className="select"
-                        name="fuel_type"
-                        value={inputValues.fuel_type}
-                        onChange={handleFormInputs}
-                      >
-                        <option>Select fuel type</option>
-                        <option value="Petrol">Petrol</option>
-                        <option value="Diesel">Diesel</option>
-                        <option value="Hybrid">Hybrid</option>
-                        <option value="Electric">Electric</option>
-                      </select>
-                    </div>
-                    <div className="form-inner mb-25">
-                      <label>Transmission Type</label>
-                      <select
-                        className="select"
-                        name="transmission_type"
-                        value={inputValues.transmission_type}
-                        onChange={handleFormInputs}
-                      >
-                        <option>Select transmission type</option>
-                        <option>Automatic</option>
-                        <option>Manual</option>
-                      </select>
-                    </div>
-                  </div>
-
                   <div className="inline_form">
                     <div className="form-inner mb-25">
                       <label>Select Brand*</label>
@@ -219,8 +270,9 @@ function ImportOnOrder() {
                         name="car_brand_id"
                         value={inputValues.car_brand_id}
                         onChange={handleFormInputs}
+                        required
                       >
-                        <option>Select Brand</option>
+                        <option value="">Select Brand</option>
                         {carBrands.length > 0 &&
                           carBrands.map((brand, index) => (
                             <option key={index} value={brand.id}>
@@ -236,8 +288,9 @@ function ImportOnOrder() {
                         name="car_model_id"
                         value={inputValues.car_model_id}
                         onChange={handleFormInputs}
+                        required
                       >
-                        <option>Select Model</option>
+                        <option value="">Select Model</option>
                         {carModels.length > 0 &&
                           carModels.map((model, index) => (
                             <option key={index} value={model.id}>
@@ -247,12 +300,13 @@ function ImportOnOrder() {
                       </select>
                     </div>
                     <div className="form-inner mb-25">
-                      <label>Select Trim*</label>
+                      <label>Select Trim</label>
                       <select
                         className="select"
                         name="car_trim_id"
                         value={inputValues.car_trim_id}
                         onChange={handleFormInputs}
+                        required
                       >
                         <option>Select Trim</option>
                         {carTrims.length > 0 &&
@@ -266,152 +320,180 @@ function ImportOnOrder() {
                   </div>
                   <div className="inline_form">
                     <div className="form-inner mb-25">
-                      <label>Manufacture Year (From)</label>
+                      <label>Weight (Kg)</label>
                       <input
                         type="number"
-                        placeholder="2000"
-                        name="manufacture_year_from"
-                        value={inputValues.manufacture_year_from}
+                        name="weight"
+                        value={inputValues.weight}
                         onChange={handleFormInputs}
+                        required
                       ></input>
                     </div>
                     <div className="form-inner mb-25">
-                      <label>Manufacture Year (To)</label>
+                      <label>Engine Capacity (CC)</label>
                       <input
                         type="number"
-                        placeholder="2024"
-                        name="manufacture_year_to"
-                        value={inputValues.manufacture_year_to}
+                        name="engine_cc"
+                        value={inputValues.engine_cc}
                         onChange={handleFormInputs}
+                        required
+                      ></input>
+                    </div>
+                  </div>
+                  <div className="inline_form">
+                    <div className="form-inner mb-25">
+                      <label>Year of Manufucture</label>
+                      <input
+                        type="number"
+                        name="year_of_manufacture"
+                        value={inputValues.year_of_manufacture}
+                        onChange={handleFormInputs}
+                        required
                       ></input>
                     </div>
                     <div className="form-inner mb-25">
-                      <label>Car Color</label>
+                      <label>Price when new (MSRP - USD)</label>
+                      <input
+                        type="number"
+                        name="price_when_new"
+                        value={inputValues.price_when_new}
+                        onChange={handleFormInputs}
+                        required
+                      ></input>
+                    </div>
+                    <div className="form-inner mb-25">
+                      <label>Amortisation Period</label>
                       <input
                         type="text"
-                        placeholder="black"
-                        name="car_color"
-                        value={inputValues.car_color}
-                        onChange={handleFormInputs}
+                        name="amortisation_period"
+                        value={inputValues.amortisation_period}
+                        disabled
+                        required
                       ></input>
                     </div>
                   </div>
                   <div className="inline_form"></div>
                   <div className="inline_form">
                     <div className="form-inner mb-25">
-                      <label>Kilometers (From)</label>
+                      <label>Current (Residual) Value - USD</label>
                       <input
                         type="number"
-                        placeholder="2000"
-                        name="kilometers_from"
-                        value={inputValues.kilometers_from}
-                        onChange={handleFormInputs}
+                        name="current_residual_value"
+                        value={inputValues.current_residual_value}
+                        disabled
+                        required
                       ></input>
                     </div>
                     <div className="form-inner mb-25">
-                      <label>Kilometers (To)</label>
+                      <label>Freight</label>
                       <input
                         type="number"
-                        placeholder="400000"
-                        name="kilometers_to"
-                        value={inputValues.kilometers_to}
+                        name="freight_cost"
+                        value={inputValues.freight_cost}
                         onChange={handleFormInputs}
+                        required
                       ></input>
                     </div>
                     <div className="form-inner mb-25">
-                      <label>Exterior Color</label>
+                      <label>Insurance</label>
                       <input
-                        type="text"
-                        placeholder="black"
-                        name="exterior_color"
-                        value={inputValues.exterior_color}
+                        type="number"
+                        name="insurance"
+                        value={inputValues.insurance}
                         onChange={handleFormInputs}
+                        required
                       ></input>
                     </div>
                   </div>
                   <div className="inline_form">
                     <div className="form-inner mb-25">
-                      <label>Names</label>
-                      <input
-                        type="text"
-                        placeholder="David Murenzi"
-                        name="names"
-                        value={inputValues.names}
-                        onChange={handleFormInputs}
-                      ></input>
-                    </div>
-                    <div className="form-inner mb-25">
-                      <label>Phone number</label>
+                      <label>CIF Kigali</label>
                       <input
                         type="number"
-                        placeholder="078******"
-                        name="phone_number"
-                        value={inputValues.phone_number}
+                        name="cif_kigali"
+                        value={inputValues.cif_kigali}
                         onChange={handleFormInputs}
+                        disabled
+                        required
                       ></input>
                     </div>
                     <div className="form-inner mb-25">
-                      <label>Email</label>
+                      <label>
+                        Current Value in Rfw (1 USD = {roundNumbers(usdToRwf)}{" "}
+                        Rwf)
+                      </label>
                       <input
-                        type="email"
-                        placeholder="david@myotobox.rw"
-                        name="email"
-                        value={inputValues.email}
+                        type="number"
+                        name="current_value"
+                        value={inputValues.current_value}
                         onChange={handleFormInputs}
+                        disabled
+                        required
                       ></input>
                     </div>
                   </div>
                   <div className="inline_form">
                     <div className="form-inner mb-25">
-                      <label>Order Note</label>
-                      {/* <Editor
-                        apiKey="xnd39f6aiczpogl36kpm15h9cmzy7n4rs3ds86q3jyyu9wm9"
-                        onInit={(evt, editor) => (editorRef.current = editor)}
-                        initialValue={inputValues.order_note}
-                        name="seller_note"
-                        onEditorChange={handleEditorChange}
-                        init={{
-                          height: 200,
-                          menubar: false,
-                          directionality: "ltr", // Set directionality to LTR
-                          plugins: [
-                            "advlist autolink lists link image charmap print preview anchor",
-                            "searchreplace visualblocks code fullscreen",
-                            "insertdatetime media table paste code help wordcount",
-                          ],
-                          toolbar:
-                            "undo redo | formatselect | " +
-                            "bold italic backcolor | alignleft aligncenter " +
-                            "alignright alignjustify | bullist numlist outdent indent | " +
-                            "removeformat | help",
-                          content_style:
-                            "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
-                        }}
-                      /> */}
-                      <CKEditor
-                        editor={ClassicEditor}
-                        data={inputValues.order_note}
-                        onChange={handleEditorChange}
-                        config={{
-                          toolbar: [
-                            "heading",
-                            "|",
-                            "bold",
-                            "italic",
-                            "link",
-                            "bulletedList",
-                            "numberedList",
-                            "blockQuote",
-                            "alignment:left",
-                            "alignment:center",
-                            "alignment:right",
-                            "alignment:justify",
-                          ],
-                        }}
-                      />
+                      <label>Quitus fiscal? (YES or NO)</label>
+                      <select
+                        className="select"
+                        name="quitus_fiscal"
+                        value={inputValues.quitus_fiscal}
+                        onChange={handleFormInputs}
+                        required
+                      >
+                        <option value="">Select quitus fiscal status</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                      </select>
+                    </div>
+                    <div className="form-inner mb-25">
+                      <label>Vehicle Category</label>
+                      <select
+                        className="select"
+                        name="vehicle_category"
+                        value={inputValues.vehicle_category}
+                        onChange={handleFormInputs}
+                        required
+                      >
+                        <option value="">Select price range</option>
+                        <option value="Motor vehicles with  engine capacity less or equal to 1500 cc">
+                          Motor vehicles with engine capacity less or equal to
+                          1500 cc
+                        </option>
+                        <option value="Motor vehicles with engine capacity of 1500 cc to 2500cc">
+                          Motor vehicles with engine capacity of 1500 cc to
+                          2500cc
+                        </option>
+                        <option value="Motor vehicles with engine capacity above 2500cc">
+                          Motor vehicles with engine capacity above 2500cc
+                        </option>
+                        <option value="Tractors">Tractors</option>
+                        <option value="Minbuses (Seating capacity not exceeding 25 places)">
+                          Minbuses (Seating capacity not exceeding 25 places)
+                        </option>
+                        <option value="Buses (Seating capacity exceeding 25 places)">
+                          Buses (Seating capacity exceeding 25 places)
+                        </option>
+                        <option value="Pick up">Pick up</option>
+                        <option value="Truck with carrying capacity not exceeding 20 Tones">
+                          Truck with carrying capacity not exceeding 20 Tones
+                        </option>
+                        <option value="Truck with carrying capacity exceeding 20 Tones">
+                          Truck with carrying capacity exceeding 20 Tones
+                        </option>
+                      </select>
                     </div>
                   </div>
-
+                  <div className="inline_form pt-3">
+                    <p>
+                      <strong>Note: </strong>This calculations are not replacing
+                      Customs laws and Customs Management system rather it is a
+                      template to assist importers in computing depreciation of
+                      used motovehicles and estimating duties and taxes to pay
+                      in order to increase the predictability.
+                    </p>
+                  </div>
                   <div className="form-inner last">
                     {isAuthenticated ? (
                       <button className="primary-btn1" type="submit">
@@ -426,7 +508,7 @@ function ImportOnOrder() {
                             className="loader"
                           />
                         ) : (
-                          "Send Order"
+                          "Calculate Taxes"
                         )}
                       </button>
                     ) : (
@@ -445,4 +527,4 @@ function ImportOnOrder() {
   );
 }
 
-export default ImportOnOrder;
+export default TaxCalculator;

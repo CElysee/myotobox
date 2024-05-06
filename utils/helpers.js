@@ -47,8 +47,12 @@ const formatDate = (timestamp) => {
   }
 };
 
+const roundNumbers = (number) => {
+  return Math.round(number);
+};
+
 // Export individual functions
-export { formatNumber, capitalizeFirstLetter, formatAmount , truncateText, formatDate};
+export { formatNumber, capitalizeFirstLetter, formatAmount , truncateText, formatDate, roundNumbers};
 
 // Alternatively, export as a single object
 // export default { formatNumber, capitalizeFirstLetter };

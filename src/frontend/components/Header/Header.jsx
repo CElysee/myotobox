@@ -20,11 +20,11 @@ function Header() {
       display: "Rent",
     },
     {
-      path: "/ImportOnOrder",
+      path: "/import_on_order",
       display: "Import on order",
     },
     {
-      path: "/myotobox",
+      path: "/car_tax_calculator",
       display: "Tax calculator",
     },
     {

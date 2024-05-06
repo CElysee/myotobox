@@ -11,6 +11,9 @@ import AdminDashboard from "../dashboard/pages/admin/AdminDashboard";
 import NotFound from "../frontend/pages/notFound/NotFound";
 import BodyShape from "../frontend/pages/buyCars/BodyShape";
 import ThankYouBookingTestDrive from "../frontend/pages/messages/ThankYouBookingTestDrive";
+import ImportOnOrderMessage from "../frontend/pages/messages/ImportOnOrderMessage";
+import TaxCalculator from "../frontend/pages/taxCalculator/TaxCalculator";
+import TaxCalculatorMessage from "../frontend/pages/messages/TaxCalculatorMessage";
 
 function Routers() {
   return (
@@ -22,10 +25,16 @@ function Routers() {
       <Route path="/buyCars" element={<BuyCars />} />
       <Route path="/bodyShape/:shape" element={<BodyShape />} />
       <Route path="/RentCars" element={<RentCars />} />
-      <Route path="/ImportOnOrder" element={<ImportOnOrder />} />
+      <Route path="/import_on_order" element={<ImportOnOrder />} />
       <Route path="/login" element={<Login />} />
       <Route path="dashboard" element={<AdminDashboard />} />
-      <Route path="/bookingThankYou" element={<ThankYouBookingTestDrive />} />
+      <Route path="/booking_message" element={<ThankYouBookingTestDrive />} />
+      <Route path="/import_on_order_message" element={<ImportOnOrderMessage />} />
+      <Route path="/car_tax_calculator" element={<TaxCalculator />} />
+      <Route path="/car_tax_calculator_results/:id" element={<TaxCalculatorMessage />} />
+
+      <Route path="/404" element={<NotFound />} />
+      
       <Route path="*" element={<NotFound />} />
       <Route path="/admin/*" element={<PrivateRoutes />}>
         <Route path="dashboard" element={<AdminDashboard />} />
