@@ -80,7 +80,7 @@ function TaxCalculatorMessage() {
         console.log("Keyword:", keyword);
         try {
           const response = await fetch(
-            `https://api.bing.microsoft.com/v7.0/custom/images/search?customconfig=a64cf328-c537-4948-8fdd-85e77f3870f9&q=bmw m5 2020&count=9`,
+            `https://api.bing.microsoft.com/v7.0/custom/images/search?customconfig=a64cf328-c537-4948-8fdd-85e77f3870f9&q=${keyword}&count=9`,
             {
               method: "GET",
               headers: {
