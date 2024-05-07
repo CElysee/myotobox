@@ -27,10 +27,6 @@ function Header() {
       path: "/car_tax_calculator",
       display: "Tax calculator",
     },
-    {
-      path: "/contact",
-      display: "Contact Us",
-    },
   ];
   const navigate = useNavigate();
   const navigateToSignUp = () => {
@@ -95,27 +91,64 @@ function Header() {
             </g>
           </svg> */}
         </Link>
-        { isAuthenticated ? (<Link
-          to={"/"}
-          className="btn btn-primary btn-lg btn-signin"
-          style={{ marginRight: "10px", width: "auto", padding: "0px 10px" }}
-          onClick={navigateToSignUp}
-        >
-          {selectedUser.name} - My Account
-        </Link>) : (<>
+        {isAuthenticated ? (
           <Link
-          to={"/login"}
-          className="btn btn-primary btn-lg btn-signin"
-          style={{ marginRight: "10px" }}
-          onClick={navigateToSignUp}
+            to={"/"}
+            className="btn btn-primary btn-lg btn-signin"
+            style={{ marginRight: "10px", width: "auto", padding: "0px 10px" }}
+            onClick={navigateToSignUp}
+          >
+            {selectedUser.name} - My Account
+          </Link>
+        ) : (
+          <>
+            <Link
+              to={"/login"}
+              className="btn btn-primary btn-lg btn-signin"
+              style={{ marginRight: "10px" }}
+              onClick={navigateToSignUp}
+            >
+              Login
+            </Link>
+            <Link className="btn btn-primary btn-lg btn-signin" to={"/sign-up"}>
+              Sign Up
+            </Link>
+          </>
+        )}
+
+        <form
+          method="post"
+          className="search-form form-inline"
+          autoComplete="off"
+          noValidate=""
         >
-          Login
-        </Link>
-        <Link className="btn btn-primary btn-lg btn-signin" to={"/sign-up"}>
-          Sign Up
-        </Link>
-        </>)}
-        
+          <fieldset className="form-group" style={{width: "100%"}}>
+            <div
+              role="combobox"
+              aria-haspopup="listbox"
+              aria-owns="react-autowhatever-1"
+              aria-expanded="false"
+              className="react-autosuggest__container"
+            >
+              <input
+                type="text"
+                autoComplete="off"
+                aria-autocomplete="list"
+                aria-controls="react-autowhatever-1"
+                className="form-control"
+                placeholder="Search for cars (ex. BMW, Toyota, KIA)"
+                name="search"
+                value=""
+              />
+              <div
+                id="react-autowhatever-1"
+                role="listbox"
+                className="react-autosuggest__suggestions-container"
+              ></div>
+            </div>
+          </fieldset>
+        </form>
+
         <button className="navbar-toggler closed" type="button">
           <span className="navbar-toggler-icon">
             <span className="sr-only">Nav</span>

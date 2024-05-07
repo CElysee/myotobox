@@ -10912,10 +10912,12 @@ form.search-form .form-group .form-control {
   line-height: 18px;
   color: #828282;
   width: 100%;
-  height: 46px;
   min-width: 0;
   padding: 14px 14px 14px 53px;
   font-family: Circular !important;
+}
+.search-form input{
+  height: 46px !important;
 }
 form.search-form .form-group:hover .form-control {
   background: #e5e5e7;
@@ -11505,7 +11507,7 @@ form.search-form.active
     padding: 0;
     line-height: 15px;
     font-size: 15px;
-    font-weight: lighter;
+    font-weight: 600;
     color: #555;
   }
   #autos-nav .navbar-nav .nav-link:hover {

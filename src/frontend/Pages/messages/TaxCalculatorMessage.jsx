@@ -19,6 +19,8 @@ function TaxCalculatorMessage() {
   const [galleryImages, setGalleryImages] = useState([]);
   const [usdToRwf, setUsdToRwf] = useState(0);
   const currencyAPiKey = import.meta.env.VITE_CURRENCY_API_KEY;
+  const Ocp_Apim_Subscription_Key = import.meta.env.VITE_OCP_APIM_SUBSCRIPTION_KEY;
+  const customconfig = import.meta.env.VITE_CUSTOM_CONFIG;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -42,36 +44,15 @@ function TaxCalculatorMessage() {
           `/tax-calculator/get/${inquiry_id}`
         );
         setTaxDetails(response.data);
-        setLoading(false);
+        // setLoading(false);
       } catch (error) {
         console.error("Error fetching car details", error);
-        setLoading(false);
+        // setLoading(false);
       }
     };
     fetchData();
   }, []);
 
-  //   useEffect(() => {
-  //     const fetchImages = async () => {
-  //       try {
-  //         if (taxDetails !== "") {
-  //           const keyword = `${taxDetails.car_brand.name} ${taxDetails.car_model.brand_model_name} ${taxDetails.year_of_manufacture}`;
-  //           const response = await fetch(
-  //             `https://www.googleapis.com/customsearch/v1?q=${keyword}&num=9&searchType=image&key=AIzaSyAnjzUOVCbr6bXIO-w_GjE5iwpPJWVdEFA&cx=27930a0d6b8164d96`
-  //           );
-  //           const data = await response.json();
-  //           const imageUrls = data.items.map((item) => item.link);
-  //           setGalleryImages(imageUrls);
-  //           setLoading(false);
-  //         }
-  //         // console.log("Images fetched:", imageUrls);
-  //       } catch (error) {
-  //         console.error("Error fetching images:", error);
-  //       }
-  //     };
-
-  //     fetchImages();
-  //   }, [taxDetails]);
   useEffect(() => {
     const fetchImages = async () => {
       if (taxDetails !== "") {
@@ -80,11 +61,11 @@ function TaxCalculatorMessage() {
         console.log("Keyword:", keyword);
         try {
           const response = await fetch(
-            `https://api.bing.microsoft.com/v7.0/custom/images/search?customconfig=a64cf328-c537-4948-8fdd-85e77f3870f9&q=${keyword}&count=9`,
+            `https://api.bing.microsoft.com/v7.0/custom/images/search?customconfig=${customconfig}&q=${keyword}&count=9`,
             {
               method: "GET",
               headers: {
-                "Ocp-Apim-Subscription-Key": "33ef5e5800634c3aa0853fcd61186318",
+                "Ocp-Apim-Subscription-Key": Ocp_Apim_Subscription_Key,
               },
             }
           );
