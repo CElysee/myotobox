@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 // import Logo from "";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import "./Header.css";
 import { selectUser, selectIsAuthenticated } from "../../../features/userSlice";
 import { useSelector } from "react-redux";
+import axiosInstance from "../../../../utils/axiosInstance";
 
 function Header() {
   const nav_links = [
@@ -34,10 +35,10 @@ function Header() {
   };
 
   const [activeIndex, setActiveIndex] = useState(0);
-
   const MenuItem = ({ to, display }) => {
     const location = useLocation();
     const isActive = location.pathname === to;
+
     return (
       <li
         className={isActive ? "nav-item active" : "nav-item"}
@@ -53,6 +54,49 @@ function Header() {
   };
   const selectedUser = useSelector(selectUser);
   const isAuthenticated = useSelector(selectIsAuthenticated);
+  const [search, setSearch] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+  };
+
+  useEffect(() => {
+    const fetchSearchResults = async () => {
+      try {
+        if (search !== "") {
+          const response = await axiosInstance.get(
+            `/car_for_sale/search?keyword=${search}`
+          );
+          setSearchResults(response.data);
+        } else {
+          setSearchResults([]); // Clear search results if search query is empty
+        }
+      } catch (error) {
+        console.error("Error fetching search results:", error);
+      }
+    };
+
+    fetchSearchResults();
+  }, [search]);
+
+  const handleSearchResultClick = async (result) => {
+    try {
+      const response = await axiosInstance.get(
+        `/car_for_sale/search/${result}`
+      );
+      const car = response.data;
+      const brandSlug = car.car_brand.toLowerCase();
+      const modelSlug = car.car_model.toLowerCase();
+      const navigateUrl = `/buyCars/${brandSlug}/?model_id=${modelSlug}`;
+
+      navigate(navigateUrl);
+      setSearch("");
+      setSearchResults([]);
+    } catch (error) {
+      console.error("Error fetching car details:", error);
+    }
+  };
   return (
     <>
       <div
@@ -118,11 +162,13 @@ function Header() {
 
         <form
           method="post"
-          className="search-form form-inline"
+          className={`search-form form-inline ${
+            searchResults.length > 0 ? "active" : ""
+          }`}
           autoComplete="off"
           noValidate=""
         >
-          <fieldset className="form-group" style={{width: "100%"}}>
+          <fieldset className="form-group" style={{ width: "100%" }}>
             <div
               role="combobox"
               aria-haspopup="listbox"
@@ -138,13 +184,43 @@ function Header() {
                 className="form-control"
                 placeholder="Search for cars (ex. BMW, Toyota, KIA)"
                 name="search"
-                value=""
+                value={search}
+                onChange={handleSearch}
               />
               <div
                 id="react-autowhatever-1"
                 role="listbox"
-                className="react-autosuggest__suggestions-container"
-              ></div>
+                className={`react-autosuggest__suggestions-container ${
+                  searchResults.length > 0
+                    ? "react-autosuggest__suggestions-container--open"
+                    : ""
+                }`}
+              >
+                <ul
+                  role="listbox"
+                  className="react-autosuggest__suggestions-list"
+                >
+                  {searchResults.length > 0 &&
+                    searchResults.map((result, index) => (
+                      <li
+                        key={index}
+                        role="option"
+                        id="react-autowhatever-1--item-0"
+                        aria-selected="false"
+                        className="react-autosuggest__suggestion react-autosuggest__suggestion--first"
+                        data-suggestion-index={index}
+                      >
+                        <button
+                          type="button"
+                          className="rb"
+                          onClick={() => handleSearchResultClick(result)}
+                        >
+                          {result}
+                        </button>
+                      </li>
+                    ))}
+                </ul>
+              </div>
             </div>
           </fieldset>
         </form>

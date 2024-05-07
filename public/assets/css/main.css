@@ -10935,6 +10935,10 @@ form.search-form .form-group:before {
   top: 16px;
   z-index: 11;
 }
+form.search-form.active .react-autosuggest__suggestions-container .react-autosuggest__container .react-autosuggest__suggestions-container--open{
+  border: 0;
+  opacity: 1;
+}
 form.search-form.pad .form-group .form-control {
   padding-right: 35px;
 }
