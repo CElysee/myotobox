@@ -107,12 +107,6 @@ function BuyCars() {
       }
 
       setListBrands(list_brands.data.car_brand);
-
-      // Check if brand[0].models is not empty
-
-      // setCarsForSale(response.data.cars_for_sale);
-      // setCountCarsForSale(response.data.count_cars_for_sale);
-      // console.log(brand)
     };
     fetchData();
   }, [brandName, make_search.model, model_id]);
@@ -228,12 +222,12 @@ function BuyCars() {
     const { name, value } = e.target;
     setInputValues({ ...inputValues, [name]: value });
     setUpdateOnChangeFilter(true);
+    setShowResultsNumber({ ...showResultsNumber, category: "price" });
   };
 
   // Handle Price filter
   const handlePriceFilter = () => {
     setUpdateUrl(true);
-    setShowResultsNumber({ ...showResultsNumber, category: "price" });
   };
 
   // Handle Year change
@@ -509,13 +503,13 @@ function BuyCars() {
                 >
                   {inputValues.min_input_price
                     ? `${
-                        inputValues.max_input_price
-                          ? inputValues.max_input_price
-                          : 1950
+                        inputValues.min_input_price
+                          ? formatNumber(inputValues.min_input_price)
+                          : 0
                       } - ${
                         inputValues.max_input_price
-                          ? inputValues.max_input_price
-                          : new Date().getFullYear()
+                          ? formatNumber(inputValues.max_input_price)
+                          : formatNumber(120000000)
                       }`
                     : "Choose range"}
                 </button>
@@ -770,7 +764,7 @@ function BuyCars() {
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
-                  {inputValues.start_kilometers
+                  {inputValues.start_kilometers || inputValues.end_kilometers
                     ? `${formatNumber(
                         inputValues.start_kilometers
                       )} - ${formatNumber(inputValues.end_kilometers)}`
@@ -1172,7 +1166,28 @@ function BuyCars() {
             </div>
           </div>
 
-          <MobileFilter listBrands={listBrands} brandModels={brandModels} handleBrandChange={handleBrandChange} handleModelChange={handleModelChange} />
+          <MobileFilter
+            listBrands={listBrands}
+            brandModels={brandModels}
+            startYear={startYear}
+            endYear={endYear}
+            minInputPrice={minInputPrice}
+            maxInputPrice={maxInputPrice}
+            inputValues={inputValues}
+            loading={loading}
+            start_kilometers={start_kilometers}
+            end_kilometers={end_kilometers}
+            showResultsNumber={showResultsNumber}
+            handleModelChange={handleModelChange}
+            handleBrandChange={handleBrandChange}
+            handleYearChange={handleYearChange}
+            handlePriceChange={handlePriceChange}
+            handleKilometersChange={handleKilometersChange}
+            handleReset={handleReset}
+            handlePriceFilter={handlePriceFilter}
+            handleYearFilter={handleYearFilter}
+            handleKilometersFilter={handleKilometersFilter}
+          />
 
           <div className="sc-2be0ug-3 jbRQcv pt-4 mobile-remove-padding">
             <div className="sc-2be0ug-4 dGXCjo custom-color">

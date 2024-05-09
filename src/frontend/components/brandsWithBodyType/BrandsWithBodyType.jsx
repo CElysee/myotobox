@@ -102,12 +102,6 @@ function BrandsWithBodyType() {
                       <h5 className="mt-3 mb-0">
                         {carBodyType.body_type_name}
                       </h5>
-                      <a
-                        href="#"
-                        className="explore-btn position-absolute text-white"
-                      >
-                        <i className="fa-solid fa-arrow-right-long"></i>
-                      </a>
                     </div>
                   </Link>
                 ))}

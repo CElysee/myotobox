@@ -113,22 +113,7 @@ function PopoverModel({
             </div>
             <div></div>
           </div>
-          <div className="sc-krNlru dCroFP dropDownButtonsRow">
-            <button
-              className="sc-tagGq hLfOBg"
-              type="reset"
-              data-testid="reset"
-            >
-              Clear
-            </button>
-            <button
-              className="sc-tagGq eZFUTO filter"
-              type="submit"
-              data-testid="submit"
-            >
-              Apply filters
-            </button>
-          </div>
+          
         </form>
       </div>
     </>

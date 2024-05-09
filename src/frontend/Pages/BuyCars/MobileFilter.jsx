@@ -11,10 +11,23 @@ function MobileFilter({
   brandModels,
   handleBrandChange,
   handleModelChange,
-  handlePriceRangeChange,
+  handlePriceChange,
   handleYearChange,
   handleKilometersChange,
   handleMoreFiltersChange,
+  startYear,
+  endYear,
+  minInputPrice,
+  maxInputPrice,
+  start_kilometers,
+  end_kilometers,
+  inputValues,
+  loading,
+  handleReset,
+  showResultsNumber,
+  handlePriceFilter,
+  handleYearFilter,
+  handleKilometersFilter,
 }) {
   const [showMakePopOver, setShowMakePopOver] = useState(false);
   const [showModelPopOver, setShowModelPopOver] = useState(false);
@@ -236,9 +249,42 @@ function MobileFilter({
         handleShowPopOver={handleShowModelPopOver}
         handleModelChange={handleModelChange}
       />
-      {/* <PopoverPriceRange showPopOver={showPriceRangePopOver} handleShowPopOver={handleShowPriceRangePopOver} /> */}
-      {/* <PopoverYear showPopOver={showYearPopOver} handleShowPopOver={handleShowYearPopOver} /> */}
-      {/* <PopoverKilometers showPopOver={showKilometersPopOver} handleShowPopOver={handleShowKilometersPopOver} /> */}
+      <PopoverPriceRange
+        showPopOver={showPriceRangePopOver}
+        handleShowPopOver={handleShowPriceRangePopOver}
+        minInputPrice={minInputPrice}
+        maxInputPrice={maxInputPrice}
+        handlePriceChange={handlePriceChange}
+        inputValues={inputValues}
+        loading={loading}
+        handlePriceFilter={handlePriceFilter}
+        handleReset={handleReset}
+        showResultsNumber={showResultsNumber}
+      />
+      <PopoverYear
+        showPopOver={showYearPopOver}
+        handleShowPopOver={handleShowYearPopOver}
+        startYear={startYear}
+        endYear={endYear}
+        handleYearChange={handleYearChange}
+        inputValues={inputValues}
+        handleReset={handleReset}
+        handleYearFilter={handleYearFilter}
+        loading={loading}
+        showResultsNumber={showResultsNumber}
+      />
+      <PopoverKilometers
+        showPopOver={showKilometersPopOver}
+        handleShowPopOver={handleShowKilometersPopOver}
+        start_kilometers={start_kilometers}
+        end_kilometers={end_kilometers}
+        handleKilometersChange={handleKilometersChange}
+        inputValues={inputValues}
+        handleReset={handleReset}
+        handleKilometersFilter={handleKilometersFilter}
+        loading={loading}
+        showResultsNumber={showResultsNumber}
+      />
       {/* <PopoverFilterOthers showPopOver={showMoreFiltersPopOver} handleShowPopOver={handleShowMoreFiltersPopOver} /> */}
     </div>
   );

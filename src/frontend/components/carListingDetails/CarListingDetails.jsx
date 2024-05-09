@@ -366,7 +366,7 @@ function CarListingDetails({carDetails, carFeatures}) {
         </div>
       </div>
       <div className="border-t pb-5 pt-5" data-test="vdpFeaturesSection">
-        <h2 className="heading-3_5 normal-case pb-3" data-qa="Heading">
+        <h2 className="heading-3_5 normal-case" data-qa="Heading">
           Standard Features
         </h2>
         <div className="row">
@@ -392,7 +392,7 @@ function CarListingDetails({carDetails, carFeatures}) {
             </div>
           ))}
         </div>
-        <div className="border-t pb-5 pt-5 mt-5">
+        <div className="border-t pt-3 mt-5">
           <h2 className="heading-3_5 normal-case" data-qa="Heading">
             MyOtobox's Note
           </h2>

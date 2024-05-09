@@ -12,6 +12,7 @@ import {
   formatAmount,
   truncateText,
 } from "../../../../utils/helpers";
+import MobileFilter from "./MobileFilter";
 
 const override = {
   display: "block",
@@ -39,6 +40,10 @@ function BodyShape() {
   const [skeleton, setSkeleton] = useState([1, 2, 3, 4]);
   const [updateUrl, setUpdateUrl] = useState(false);
   const [updateOnChangeFilter, setUpdateOnChangeFilter] = useState(false);
+  const [showResultsNumber, setShowResultsNumber] = useState({
+    results: "",
+    category: "",
+  });
 
   const model_id = new URLSearchParams(location.search).get("model_id");
   const minInputPrice = new URLSearchParams(location.search).get(
@@ -458,7 +463,7 @@ function BodyShape() {
     <section className="bpage container page home" id="NotFound">
       <div className="row justify-content-center">
         <div className="filterbar">
-          <div className="car_filter">
+        <div className="car_filter mobile-hide">
             <div className="iEzCwv firstItem">
               <label className="form-label" htmlFor="expertise">
                 Make
@@ -487,7 +492,7 @@ function BodyShape() {
 
             <div className="iEzCwv thirdItem">
               <label className="form-label" htmlFor="expertise">
-                Price (RWF)
+                Price Range (RWF)
               </label>
               <div className="dropdown" style={{ display: "flex" }}>
                 <button
@@ -499,9 +504,15 @@ function BodyShape() {
                   aria-expanded="false"
                 >
                   {inputValues.min_input_price
-                    ? `${formatNumber(
+                    ? `${
                         inputValues.min_input_price
-                      )} - ${formatNumber(inputValues.max_input_price)}`
+                          ? formatNumber(inputValues.min_input_price)
+                          : 0
+                      } - ${
+                        inputValues.max_input_price
+                          ? formatNumber(inputValues.max_input_price)
+                          : formatNumber(120000000)
+                      }`
                     : "Choose range"}
                 </button>
                 <div className="css-4xgw5l-IndicatorsContainer2">
@@ -584,7 +595,10 @@ function BodyShape() {
                     <button
                       className="sc-1c4mb2u-0 hHfOrj filter"
                       type="submit"
-                      disabled={countCarsForSale === 0}
+                      disabled={
+                        showResultsNumber.results === 0 &&
+                        showResultsNumber.category == "price"
+                      }
                       onClick={handlePriceFilter}
                     >
                       {loading ? (
@@ -596,8 +610,9 @@ function BodyShape() {
                           aria-label="Loading Spinner"
                           data-testid="loader"
                         />
-                      ) : countCarsForSale > 0 ? (
-                        `Show ${countCarsForSale} Results`
+                      ) : showResultsNumber.results !== null &&
+                        showResultsNumber.category == "price" ? (
+                        `Show ${showResultsNumber.results} Results`
                       ) : (
                         "Apply filters"
                       )}
@@ -620,8 +635,14 @@ function BodyShape() {
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
-                  {inputValues.start_year
-                    ? `${inputValues.start_year} - ${inputValues.end_year}`
+                  {inputValues.end_year
+                    ? `${
+                        inputValues.start_year ? inputValues.start_year : 1950
+                      } - ${
+                        inputValues.end_year
+                          ? inputValues.end_year
+                          : new Date().getFullYear()
+                      }`
                     : "Choose range"}
                 </button>
                 <div className="css-4xgw5l-IndicatorsContainer2">
@@ -681,7 +702,6 @@ function BodyShape() {
                           <input
                             type="number"
                             className="sc-u95ujf-0 dNPQQh sc-1xtdvaj-4 fNpmOJ"
-                            data-testid="max-input-price"
                             min="1950"
                             max={new Date().getFullYear()}
                             step="1"
@@ -706,7 +726,10 @@ function BodyShape() {
                     <button
                       className="sc-1c4mb2u-0 hHfOrj filter"
                       type="submit"
-                      disabled={countCarsForSale === 0}
+                      disabled={
+                        showResultsNumber.results === 0 &&
+                        showResultsNumber.category == "year"
+                      }
                       onClick={handleYearFilter}
                     >
                       {loading ? (
@@ -718,8 +741,9 @@ function BodyShape() {
                           aria-label="Loading Spinner"
                           data-testid="loader"
                         />
-                      ) : countCarsForSale >= 0 ? (
-                        `Show ${countCarsForSale} Results`
+                      ) : showResultsNumber.results !== null &&
+                        showResultsNumber.category == "year" ? (
+                        `Show ${showResultsNumber.results} Results`
                       ) : (
                         "Apply filters"
                       )}
@@ -742,7 +766,7 @@ function BodyShape() {
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
-                  {inputValues.start_kilometers
+                  {inputValues.start_kilometers || inputValues.end_kilometers
                     ? `${formatNumber(
                         inputValues.start_kilometers
                       )} - ${formatNumber(inputValues.end_kilometers)}`
@@ -830,7 +854,10 @@ function BodyShape() {
                     <button
                       className="sc-1c4mb2u-0 hHfOrj filter"
                       type="submit"
-                      disabled={countCarsForSale === 0}
+                      disabled={
+                        showResultsNumber.results === 0 &&
+                        showResultsNumber.category == "kilometers"
+                      }
                       onClick={handleKilometersFilter}
                     >
                       {loading ? (
@@ -842,8 +869,9 @@ function BodyShape() {
                           aria-label="Loading Spinner"
                           data-testid="loader"
                         />
-                      ) : countCarsForSale > 0 ? (
-                        `Show ${countCarsForSale} Results`
+                      ) : showResultsNumber.results !== null &&
+                        showResultsNumber.category == "kilometers" ? (
+                        `Show ${showResultsNumber.results} Results`
                       ) : (
                         "Apply filters"
                       )}
@@ -889,7 +917,6 @@ function BodyShape() {
                     </svg>
                   </div>
                 </div>
-
                 <div
                   className="dropdown-menu"
                   aria-labelledby="dropdownMenuButton"
@@ -897,85 +924,83 @@ function BodyShape() {
                 >
                   <div className="sc-rpwses-6 jSvZvk dropDownContentHolder">
                     <div className="dropdown_holder">
-                      <div>
+                      <div
+                        data-testid="transmission_type-item"
+                        className="sc-tyg5kx-2 gUvuUo multi_list"
+                      >
                         <div
-                          data-testid="transmission_type-item"
-                          className="sc-tyg5kx-2 gUvuUo multi_list"
+                          className="sc-bwquqg-0 jLvUMq sc-tyg5kx-1 fTIrXz title"
+                          size="14"
+                          type="default"
                         >
-                          <div
-                            className="sc-bwquqg-0 jLvUMq sc-tyg5kx-1 fTIrXz title"
-                            size="14"
-                            type="default"
-                          >
-                            Transmission Type
-                          </div>
-                          <div>
-                            <div className="sc-tyg5kx-8 gfvDkr">
-                              <div className="sc-1ygqovz-0 dFceLx tagWrapper">
-                                <div className="sc-1ygqovz-1 jzJwEM tagList transmission_type motors no-seo-link false">
+                          Transmission Type
+                        </div>
+                        <div>
+                          <div className="sc-tyg5kx-8 gfvDkr">
+                            <div className="sc-1ygqovz-0 dFceLx tagWrapper">
+                              <div className="sc-1ygqovz-1 jzJwEM tagList transmission_type motors no-seo-link false">
+                                <div
+                                  display="block"
+                                  type="button"
+                                  className="sc-6bmekm-0 cOTnrw"
+                                  onClick={() =>
+                                    handleTransmissionChange(
+                                      "Manual Transmission"
+                                    )
+                                  }
+                                >
                                   <div
-                                    display="block"
+                                    data-testid="transmission_type-manual-transmission"
                                     type="button"
-                                    className="sc-6bmekm-0 cOTnrw"
+                                    className={`sc-6bmekm-1 contentContainer ${
+                                      inputValues.car_transmission ===
+                                      "Manual Transmission"
+                                        ? "dwAEqK-auto"
+                                        : "dwAEqK"
+                                    }`}
+                                  >
+                                    <span
+                                      type="large"
+                                      className="sc-6bmekm-3 cTaNfx"
+                                    >
+                                      Manual Transmission
+                                    </span>
+                                  </div>
+                                </div>
+                                <div
+                                  display="block"
+                                  type="large"
+                                  className="sc-6bmekm-0 cOTnrw"
+                                >
+                                  <div
+                                    data-testid="transmission_type-automatic-transmission"
+                                    type="large"
+                                    className={`sc-6bmekm-1 contentContainer ${
+                                      inputValues.car_transmission ===
+                                      "Automatic Transmission"
+                                        ? "dwAEqK-auto"
+                                        : "dwAEqK"
+                                    }`}
                                     onClick={() =>
                                       handleTransmissionChange(
-                                        "Manual Transmission"
+                                        "Automatic Transmission"
                                       )
                                     }
                                   >
-                                    <div
-                                      data-testid="transmission_type-manual-transmission"
-                                      type="button"
-                                      className={`sc-6bmekm-1 contentContainer ${
-                                        inputValues.car_transmission ===
-                                        "Manual Transmission"
-                                          ? "dwAEqK-auto"
-                                          : "dwAEqK"
-                                      }`}
-                                    >
-                                      <span
-                                        type="large"
-                                        className="sc-6bmekm-3 cTaNfx"
-                                      >
-                                        Manual Transmission
-                                      </span>
-                                    </div>
-                                  </div>
-                                  <div
-                                    display="block"
-                                    type="large"
-                                    className="sc-6bmekm-0 cOTnrw"
-                                  >
-                                    <div
-                                      data-testid="transmission_type-automatic-transmission"
+                                    <span
                                       type="large"
-                                      className={`sc-6bmekm-1 contentContainer ${
-                                        inputValues.car_transmission ===
-                                        "Automatic Transmission"
-                                          ? "dwAEqK-auto"
-                                          : "dwAEqK"
-                                      }`}
-                                      onClick={() =>
-                                        handleTransmissionChange(
-                                          "Automatic Transmission"
-                                        )
-                                      }
+                                      className="sc-6bmekm-3 cTaNfx"
                                     >
-                                      <span
-                                        type="large"
-                                        className="sc-6bmekm-3 cTaNfx"
-                                      >
-                                        Automatic Transmission
-                                      </span>
-                                    </div>
+                                      Automatic Transmission
+                                    </span>
                                   </div>
                                 </div>
                               </div>
                             </div>
                           </div>
                         </div>
-                        <div className="sc-uf558u-0 cCmKOx divider"></div>
                       </div>
+                      <div className="sc-uf558u-0 cCmKOx divider"></div>
                       <div>
                         <div
                           data-testid="fuel_type-item"
@@ -1113,7 +1138,11 @@ function BodyShape() {
                     <button
                       className="sc-1c4mb2u-0 hHfOrj filter"
                       type="submit"
-                      disabled={countCarsForSale === 0}
+                      disabled={
+                        showResultsNumber.results === 0 &&
+                        (showResultsNumber.category == "transmission" ||
+                          showResultsNumber.category == "fuel")
+                      }
                       onClick={handleYearFilter}
                     >
                       {loading ? (
@@ -1125,8 +1154,10 @@ function BodyShape() {
                           aria-label="Loading Spinner"
                           data-testid="loader"
                         />
-                      ) : countCarsForSale >= 0 ? (
-                        `Show ${countCarsForSale} Results`
+                      ) : showResultsNumber.results !== null &&
+                        (showResultsNumber.category == "transmission" ||
+                          showResultsNumber.category == "fuel") ? (
+                        `Show ${showResultsNumber.results} Results`
                       ) : (
                         "Apply filters"
                       )}
@@ -1136,6 +1167,29 @@ function BodyShape() {
               </div>
             </div>
           </div>
+
+          <MobileFilter
+            listBrands={listBrands}
+            brandModels={brandModels}
+            startYear={startYear}
+            endYear={endYear}
+            minInputPrice={minInputPrice}
+            maxInputPrice={maxInputPrice}
+            inputValues={inputValues}
+            loading={loading}
+            start_kilometers={start_kilometers}
+            end_kilometers={end_kilometers}
+            showResultsNumber={showResultsNumber}
+            handleModelChange={handleModelChange}
+            handleBrandChange={handleBrandChange}
+            handleYearChange={handleYearChange}
+            handlePriceChange={handlePriceChange}
+            handleKilometersChange={handleKilometersChange}
+            handleReset={handleReset}
+            handlePriceFilter={handlePriceFilter}
+            handleYearFilter={handleYearFilter}
+            handleKilometersFilter={handleKilometersFilter}
+          />
 
           <div className="sc-2be0ug-3 jbRQcv pt-4">
             <div className="sc-2be0ug-4 dGXCjo custom-color">

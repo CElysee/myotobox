@@ -1387,12 +1387,15 @@ input[type="time"]:before {
   .main_content {
     margin-top: 75px !important;
   }
+  .car-details {
+    margin-top: 0px !important;
+  }
 }
 @media (max-width: 768.98px) {
-  .page.home .heading h1{
+  .page.home .heading h1 {
     font-size: 1.2rem;
   }
-  .mobile-remove-padding{
+  .mobile-remove-padding {
     padding: 0 !important;
   }
   .car_filter {
@@ -1447,6 +1450,38 @@ input[type="time"]:before {
   .copyright-links {
     text-align: center !important;
   }
+  .car-details .car-photos .gallery-preview {
+    height: auto !important;
+    display: contents !important;
+}
+.car-details .car-photos .gallery-preview .draggable {
+  height: auto !important;
+  display: block !important;
+}
+.car-details .car-photos .gallery-preview .images {
+  padding-top: 10px !important;
+}
+.car-details .car-photos .gallery-preview .images .group .preload-wrap {
+  -ms-flex: 0 0 auto;
+  -webkit-box-flex: 0;
+  flex: 0 0 auto;
+  width: 33.333333% !important;
+  padding-right: 3px;
+  padding-left: 3px;
+  height: auto !important;
+}
+.car-details .car-photos .gallery-preview .images .group .preload-wrap:nth-of-type(2n) {
+  margin-left: 0px !important;
+}
+.car-details .car-photos .gallery-preview .images .group {
+  width: 100% !important;
+}
+.car-photos{
+  padding-top: 15px;
+}
+.car-details {
+  margin-top: 0px !important;
+}
 }
 .padding-l-r {
   padding: 0 10px;
@@ -1709,7 +1744,7 @@ input[type="time"]:before {
   overflow: hidden;
   padding: 16px;
   transform: translate(0px, 0px);
-  min-height: 700px;
+  min-height: 33vh;
 }
 .dCroFP {
   display: flex;
@@ -1719,6 +1754,10 @@ input[type="time"]:before {
   padding: 16px 16px 0px;
   margin: 0px -16px;
   background: white;
+  position: absolute;
+  top: 75%;
+  left: 16px;
+  width: 100%;
 }
 .dCroFP > :first-child {
   flex: 1 1 0%;
@@ -1787,8 +1826,8 @@ input[type="time"]:before {
   -webkit-box-flex: 1;
   flex-grow: 1;
   overflow: auto;
-  position: relative;
-  bottom: 25px;
+  /* position: relative; */
+  /* bottom: 25px; */
 }
 .hFTrak {
   max-height: 50vh;
@@ -1853,9 +1892,7 @@ input[type="time"]:before {
   cursor: pointer;
   transition: all 0.2s ease 0s;
 }
-.kpnEkf-active{
-  font-weight: 700 !important;
-  color: var(--first-color) !important;
+.kpnEkf-active {
   height: 44px;
   padding: 10px 12px;
   display: flex;
@@ -1863,9 +1900,11 @@ input[type="time"]:before {
   align-items: center;
   -webkit-box-pack: justify;
   justify-content: space-between;
+  font-weight: 700;
   border-bottom: 1px solid rgb(247, 247, 248);
   cursor: pointer;
   transition: all 0.2s ease 0s;
+  color: var(--first-color);
 }
 .chnukS {
   position: fixed;
@@ -1873,6 +1912,9 @@ input[type="time"]:before {
   background: rgba(23, 25, 28, 0.2);
   z-index: 50;
 }
-.showPopover{
+.showPopover {
   display: block;
+}
+.view_more{
+  padding: 10px 65px;
 }

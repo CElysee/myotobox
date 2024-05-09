@@ -6,7 +6,7 @@ import CarGallery from "../../components/carGallery/CarGallery";
 function CarDetails() {
   return (
     <>
-      <div className="main_content" id="main_content">
+      <div className="main_content padding-l-r" id="main_content">
         <CarGallery />
         <CarMoreDetails />
       </div>

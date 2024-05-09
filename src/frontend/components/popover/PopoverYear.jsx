@@ -1,9 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
+import RiseLoader from "react-spinners/RiseLoader";
+import {
+  formatNumber,
+  formatAmount,
+  truncateText,
+} from "../../../../utils/helpers";
 
-function PopoverYear({ showPopOver, handleShowPopOver }) {
+const override = {
+  display: "block",
+  margin: "0 auto",
+  borderColor: "#e55812",
+  paddingRight: "10px",
+};
+function PopoverYear({
+  showPopOver,
+  handleShowPopOver,
+  handleYearFilter,
+  inputValues,
+  handleReset,
+  handleYearChange,
+  startYear,
+  endYear,
+  loading,
+  showResultsNumber,
+}) {
+  const [color, setColor] = useState("#fff");
   return (
     <>
-    {showPopOver && (  <div className="sc-jMakVo chnukS"></div>)}
+      {showPopOver && <div className="sc-jMakVo chnukS"></div>}
       <div
         className={`sc-jaXxmE iJRokZ category_1 dropDownPopover ${
           showPopOver ? "showPopover" : null
@@ -19,7 +43,15 @@ function PopoverYear({ showPopOver, handleShowPopOver }) {
             <div className="sc-jGKxIK juFfCH dropdownTitle">
               <div className="sc-hwdzOV eAyoUW dropDownTitleHolder">
                 <div className="sc-esYiGF jsLgPD" size="16" type="default">
-                 Year
+                  {inputValues.start_year || inputValues.end_year
+                    ? `${
+                        inputValues.start_year ? inputValues.start_year : 1950
+                      } - ${
+                        inputValues.end_year
+                          ? inputValues.end_year
+                          : new Date().getFullYear()
+                      }`
+                    : "Choose year range"}
                 </div>
                 <button
                   className="sc-tagGq fRhCEv"
@@ -39,10 +71,10 @@ function PopoverYear({ showPopOver, handleShowPopOver }) {
             <div className="sc-dBmzty hFTrak">
               <div className="sc-fifgRP dJFunU">
                 <div className="sc-bDumWk bQMEsa">
-                <div className="sc-rpwses-6 jSvZvk dropDownContentHolder">
+                  <div className="sc-rpwses-6 jSvZvk dropDownContentHolder">
                     <div className="sc-1xtdvaj-0 iqjTqg">
                       <div className="sc-1xtdvaj-1 kWPgKZ">
-                      <div className="sc-1xtdvaj-2 gKrQdv">
+                        <div className="sc-1xtdvaj-2 gKrQdv">
                           <div
                             className="sc-bwquqg-0 dKpJPQ"
                             size="14"
@@ -59,7 +91,8 @@ function PopoverYear({ showPopOver, handleShowPopOver }) {
                             step="1"
                             name="start_year"
                             placeholder="1950"
-                            value={""}
+                            value={inputValues.start_year}
+                            onChange={handleYearChange}
                           />
                         </div>
                         <div className="sc-1xtdvaj-3 drIaET">
@@ -78,7 +111,8 @@ function PopoverYear({ showPopOver, handleShowPopOver }) {
                             step="1"
                             name="end_year"
                             placeholder={new Date().getFullYear()}
-                            value={""}
+                            value={inputValues.end_year}
+                            onChange={handleYearChange}
                           />
                         </div>
                       </div>
@@ -94,6 +128,10 @@ function PopoverYear({ showPopOver, handleShowPopOver }) {
               className="sc-tagGq hLfOBg"
               type="reset"
               data-testid="reset"
+              onClick={() => {
+                handleReset("year");
+                handleShowPopOver(!showPopOver);
+              }}
             >
               Clear
             </button>
@@ -101,8 +139,27 @@ function PopoverYear({ showPopOver, handleShowPopOver }) {
               className="sc-tagGq eZFUTO filter"
               type="submit"
               data-testid="submit"
+              disabled={
+                showResultsNumber.results === 0 &&
+                showResultsNumber.category == "year"
+              }
+              onClick={handleYearFilter}
             >
-              Apply filters
+              {loading ? (
+                <RiseLoader
+                  color={color}
+                  loading={loading}
+                  cssOverride={override}
+                  size={10}
+                  aria-label="Loading Spinner"
+                  data-testid="loader"
+                />
+              ) : showResultsNumber.results !== null &&
+                showResultsNumber.category == "year" ? (
+                `Show ${showResultsNumber.results} Results`
+              ) : (
+                "Apply filters"
+              )}
             </button>
           </div>
         </form>

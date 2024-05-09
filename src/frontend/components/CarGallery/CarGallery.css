@@ -1,6 +1,6 @@
 
 .car-details:not(.preview) {
-    margin-top: 30px!important;
+    margin-top: 30px;
 }
 .car-details h2 {
     margin-bottom: 4px;

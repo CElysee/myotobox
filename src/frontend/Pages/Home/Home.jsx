@@ -12,7 +12,7 @@ function Home() {
       <div className="container mobile-gap">
         <div className="row flex-nowrap">
           <div className="d-md-flex col-md-12" style={{ justifyContent: "center" }}>
-            <a className="btn btn-lg btn-primary" href="/past-auctions/">
+            <a className="btn btn-lg btn-primary view_more" href="">
               View more
             </a>
           </div>
