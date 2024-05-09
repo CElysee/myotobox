@@ -7,6 +7,7 @@ import SellCarsGrid from "../../components/sellCarsGrid/SellCarsGrid";
 import axiosInstance from "../../../../utils/axiosInstance";
 import Select from "react-select";
 import ContentLoader from "react-content-loader";
+import MobileFilter from "./MobileFilter";
 import {
   formatNumber,
   formatAmount,
@@ -39,8 +40,8 @@ function BuyCars() {
   const [updateUrl, setUpdateUrl] = useState(false);
   const [updateOnChangeFilter, setUpdateOnChangeFilter] = useState(false);
   const [showResultsNumber, setShowResultsNumber] = useState({
-    "results": "",
-    "category": "",
+    results: "",
+    category: "",
   });
 
   const model_id = new URLSearchParams(location.search).get("model_id");
@@ -68,10 +69,10 @@ function BuyCars() {
   const [inputValues, setInputValues] = useState({
     brand_id: "",
     model_id: "",
-    min_input_price: minInputPrice,
-    max_input_price: maxInputPrice,
-    start_year: startYear,
-    end_year: endYear,
+    min_input_price: minInputPrice || "",
+    max_input_price: maxInputPrice || "",
+    start_year: startYear || "",
+    end_year: endYear || "",
     start_kilometers: "",
     end_kilometers: "",
     car_transmission: "",
@@ -232,14 +233,14 @@ function BuyCars() {
   // Handle Price filter
   const handlePriceFilter = () => {
     setUpdateUrl(true);
-    setShowResultsNumber({...showResultsNumber, "category": "price"})
+    setShowResultsNumber({ ...showResultsNumber, category: "price" });
   };
 
   // Handle Year change
   const handleYearChange = async (e) => {
     const { name, value } = e.target;
     setInputValues({ ...inputValues, [name]: value });
-    setShowResultsNumber({...showResultsNumber, "category": "year"})
+    setShowResultsNumber({ ...showResultsNumber, category: "year" });
     setUpdateOnChangeFilter(true);
   };
 
@@ -252,7 +253,7 @@ function BuyCars() {
   const handleKilometersChange = async (e) => {
     const { name, value } = e.target;
     setInputValues({ ...inputValues, [name]: value });
-    setShowResultsNumber({...showResultsNumber, "category": "kilometers"})
+    setShowResultsNumber({ ...showResultsNumber, category: "kilometers" });
     setUpdateOnChangeFilter(true);
   };
 
@@ -264,14 +265,14 @@ function BuyCars() {
   // Handle Transmission change
   const handleTransmissionChange = (transmissionType) => {
     setInputValues({ ...inputValues, car_transmission: transmissionType });
-    setShowResultsNumber({...showResultsNumber, "category": "transmission"})
+    setShowResultsNumber({ ...showResultsNumber, category: "transmission" });
     setUpdateOnChangeFilter(true);
   };
 
   // Handle Fuel type change
   const handleFuelTypeChange = (fuelType) => {
     setInputValues({ ...inputValues, fuel_type: fuelType });
-    setShowResultsNumber({...showResultsNumber, "category": "fuel"})
+    setShowResultsNumber({ ...showResultsNumber, category: "fuel" });
     setUpdateOnChangeFilter(true);
   };
 
@@ -378,7 +379,10 @@ function BuyCars() {
           const response = await axiosInstance.get(url);
           setLoading(false);
           // setCountCarsForSale(response.data.count_cars_for_sale);
-          setShowResultsNumber({...showResultsNumber, "results": response.data.count_cars_for_sale});
+          setShowResultsNumber({
+            ...showResultsNumber,
+            results: response.data.count_cars_for_sale,
+          });
         } catch (error) {
           console.log("Error while filtering", error);
           setLoading(false);
@@ -463,7 +467,7 @@ function BuyCars() {
     <section className="bpage container page home" id="NotFound">
       <div className="row justify-content-center">
         <div className="filterbar">
-          <div className="car_filter">
+          <div className="car_filter mobile-hide">
             <div className="iEzCwv firstItem">
               <label className="form-label" htmlFor="expertise">
                 Make
@@ -492,7 +496,7 @@ function BuyCars() {
 
             <div className="iEzCwv thirdItem">
               <label className="form-label" htmlFor="expertise">
-                Price (RWF)
+                Price Range (RWF)
               </label>
               <div className="dropdown" style={{ display: "flex" }}>
                 <button
@@ -595,7 +599,10 @@ function BuyCars() {
                     <button
                       className="sc-1c4mb2u-0 hHfOrj filter"
                       type="submit"
-                      disabled={showResultsNumber.results  === 0 && showResultsNumber.category == "price"}
+                      disabled={
+                        showResultsNumber.results === 0 &&
+                        showResultsNumber.category == "price"
+                      }
                       onClick={handlePriceFilter}
                     >
                       {loading ? (
@@ -607,7 +614,8 @@ function BuyCars() {
                           aria-label="Loading Spinner"
                           data-testid="loader"
                         />
-                      ) : showResultsNumber.results !== null && showResultsNumber.category == "price" ? (
+                      ) : showResultsNumber.results !== null &&
+                        showResultsNumber.category == "price" ? (
                         `Show ${showResultsNumber.results} Results`
                       ) : (
                         "Apply filters"
@@ -698,7 +706,6 @@ function BuyCars() {
                           <input
                             type="number"
                             className="sc-u95ujf-0 dNPQQh sc-1xtdvaj-4 fNpmOJ"
-                            data-testid="max-input-price"
                             min="1950"
                             max={new Date().getFullYear()}
                             step="1"
@@ -723,7 +730,10 @@ function BuyCars() {
                     <button
                       className="sc-1c4mb2u-0 hHfOrj filter"
                       type="submit"
-                      disabled={showResultsNumber.results  === 0 && showResultsNumber.category == "year"}
+                      disabled={
+                        showResultsNumber.results === 0 &&
+                        showResultsNumber.category == "year"
+                      }
                       onClick={handleYearFilter}
                     >
                       {loading ? (
@@ -735,7 +745,8 @@ function BuyCars() {
                           aria-label="Loading Spinner"
                           data-testid="loader"
                         />
-                      ) : showResultsNumber.results !== null && showResultsNumber.category == "year" ? (
+                      ) : showResultsNumber.results !== null &&
+                        showResultsNumber.category == "year" ? (
                         `Show ${showResultsNumber.results} Results`
                       ) : (
                         "Apply filters"
@@ -847,7 +858,10 @@ function BuyCars() {
                     <button
                       className="sc-1c4mb2u-0 hHfOrj filter"
                       type="submit"
-                      disabled={showResultsNumber.results  === 0 && showResultsNumber.category == "kilometers"}
+                      disabled={
+                        showResultsNumber.results === 0 &&
+                        showResultsNumber.category == "kilometers"
+                      }
                       onClick={handleKilometersFilter}
                     >
                       {loading ? (
@@ -859,7 +873,8 @@ function BuyCars() {
                           aria-label="Loading Spinner"
                           data-testid="loader"
                         />
-                      ) : showResultsNumber.results !== null && showResultsNumber.category == "kilometers" ? (
+                      ) : showResultsNumber.results !== null &&
+                        showResultsNumber.category == "kilometers" ? (
                         `Show ${showResultsNumber.results} Results`
                       ) : (
                         "Apply filters"
@@ -906,7 +921,6 @@ function BuyCars() {
                     </svg>
                   </div>
                 </div>
-
                 <div
                   className="dropdown-menu"
                   aria-labelledby="dropdownMenuButton"
@@ -914,85 +928,83 @@ function BuyCars() {
                 >
                   <div className="sc-rpwses-6 jSvZvk dropDownContentHolder">
                     <div className="dropdown_holder">
-                      <div>
+                      <div
+                        data-testid="transmission_type-item"
+                        className="sc-tyg5kx-2 gUvuUo multi_list"
+                      >
                         <div
-                          data-testid="transmission_type-item"
-                          className="sc-tyg5kx-2 gUvuUo multi_list"
+                          className="sc-bwquqg-0 jLvUMq sc-tyg5kx-1 fTIrXz title"
+                          size="14"
+                          type="default"
                         >
-                          <div
-                            className="sc-bwquqg-0 jLvUMq sc-tyg5kx-1 fTIrXz title"
-                            size="14"
-                            type="default"
-                          >
-                            Transmission Type
-                          </div>
-                          <div>
-                            <div className="sc-tyg5kx-8 gfvDkr">
-                              <div className="sc-1ygqovz-0 dFceLx tagWrapper">
-                                <div className="sc-1ygqovz-1 jzJwEM tagList transmission_type motors no-seo-link false">
+                          Transmission Type
+                        </div>
+                        <div>
+                          <div className="sc-tyg5kx-8 gfvDkr">
+                            <div className="sc-1ygqovz-0 dFceLx tagWrapper">
+                              <div className="sc-1ygqovz-1 jzJwEM tagList transmission_type motors no-seo-link false">
+                                <div
+                                  display="block"
+                                  type="button"
+                                  className="sc-6bmekm-0 cOTnrw"
+                                  onClick={() =>
+                                    handleTransmissionChange(
+                                      "Manual Transmission"
+                                    )
+                                  }
+                                >
                                   <div
-                                    display="block"
+                                    data-testid="transmission_type-manual-transmission"
                                     type="button"
-                                    className="sc-6bmekm-0 cOTnrw"
+                                    className={`sc-6bmekm-1 contentContainer ${
+                                      inputValues.car_transmission ===
+                                      "Manual Transmission"
+                                        ? "dwAEqK-auto"
+                                        : "dwAEqK"
+                                    }`}
+                                  >
+                                    <span
+                                      type="large"
+                                      className="sc-6bmekm-3 cTaNfx"
+                                    >
+                                      Manual Transmission
+                                    </span>
+                                  </div>
+                                </div>
+                                <div
+                                  display="block"
+                                  type="large"
+                                  className="sc-6bmekm-0 cOTnrw"
+                                >
+                                  <div
+                                    data-testid="transmission_type-automatic-transmission"
+                                    type="large"
+                                    className={`sc-6bmekm-1 contentContainer ${
+                                      inputValues.car_transmission ===
+                                      "Automatic Transmission"
+                                        ? "dwAEqK-auto"
+                                        : "dwAEqK"
+                                    }`}
                                     onClick={() =>
                                       handleTransmissionChange(
-                                        "Manual Transmission"
+                                        "Automatic Transmission"
                                       )
                                     }
                                   >
-                                    <div
-                                      data-testid="transmission_type-manual-transmission"
-                                      type="button"
-                                      className={`sc-6bmekm-1 contentContainer ${
-                                        inputValues.car_transmission ===
-                                        "Manual Transmission"
-                                          ? "dwAEqK-auto"
-                                          : "dwAEqK"
-                                      }`}
-                                    >
-                                      <span
-                                        type="large"
-                                        className="sc-6bmekm-3 cTaNfx"
-                                      >
-                                        Manual Transmission
-                                      </span>
-                                    </div>
-                                  </div>
-                                  <div
-                                    display="block"
-                                    type="large"
-                                    className="sc-6bmekm-0 cOTnrw"
-                                  >
-                                    <div
-                                      data-testid="transmission_type-automatic-transmission"
+                                    <span
                                       type="large"
-                                      className={`sc-6bmekm-1 contentContainer ${
-                                        inputValues.car_transmission ===
-                                        "Automatic Transmission"
-                                          ? "dwAEqK-auto"
-                                          : "dwAEqK"
-                                      }`}
-                                      onClick={() =>
-                                        handleTransmissionChange(
-                                          "Automatic Transmission"
-                                        )
-                                      }
+                                      className="sc-6bmekm-3 cTaNfx"
                                     >
-                                      <span
-                                        type="large"
-                                        className="sc-6bmekm-3 cTaNfx"
-                                      >
-                                        Automatic Transmission
-                                      </span>
-                                    </div>
+                                      Automatic Transmission
+                                    </span>
                                   </div>
                                 </div>
                               </div>
                             </div>
                           </div>
                         </div>
-                        <div className="sc-uf558u-0 cCmKOx divider"></div>
                       </div>
+                      <div className="sc-uf558u-0 cCmKOx divider"></div>
                       <div>
                         <div
                           data-testid="fuel_type-item"
@@ -1130,7 +1142,11 @@ function BuyCars() {
                     <button
                       className="sc-1c4mb2u-0 hHfOrj filter"
                       type="submit"
-                      disabled={showResultsNumber.results === 0 && (showResultsNumber.category == "transmission" || showResultsNumber.category == "fuel")}
+                      disabled={
+                        showResultsNumber.results === 0 &&
+                        (showResultsNumber.category == "transmission" ||
+                          showResultsNumber.category == "fuel")
+                      }
                       onClick={handleYearFilter}
                     >
                       {loading ? (
@@ -1142,7 +1158,9 @@ function BuyCars() {
                           aria-label="Loading Spinner"
                           data-testid="loader"
                         />
-                      ) : showResultsNumber.results !== null && (showResultsNumber.category == "transmission" || showResultsNumber.category == "fuel") ? (
+                      ) : showResultsNumber.results !== null &&
+                        (showResultsNumber.category == "transmission" ||
+                          showResultsNumber.category == "fuel") ? (
                         `Show ${showResultsNumber.results} Results`
                       ) : (
                         "Apply filters"
@@ -1154,7 +1172,9 @@ function BuyCars() {
             </div>
           </div>
 
-          <div className="sc-2be0ug-3 jbRQcv pt-4">
+          <MobileFilter listBrands={listBrands} brandModels={brandModels} handleBrandChange={handleBrandChange} handleModelChange={handleModelChange} />
+
+          <div className="sc-2be0ug-3 jbRQcv pt-4 mobile-remove-padding">
             <div className="sc-2be0ug-4 dGXCjo custom-color">
               <div className="sc-1gw24wa-0 ligASl">
                 <div className="sc-a5hw56-0 eDOeRK sc-1xfau7x-0 isSldw">

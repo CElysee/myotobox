@@ -38,7 +38,7 @@ function TaxCalculatorMessage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      setLoading(true);
+      // setLoading(true);
       try {
         const response = await axiosInstance.get(
           `/tax-calculator/get/${inquiry_id}`

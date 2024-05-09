@@ -204,7 +204,7 @@ function TaxCalculator() {
           params
         );
         const order_id = response.data.data_id;
-        // navigate(`/car_tax_calculator_results/${order_id}`);
+        navigate(`/car_tax_calculator_results/${order_id}`);
         setLoading(false);
       } catch (error) {
         console.error("Error while calculating taxes", error);

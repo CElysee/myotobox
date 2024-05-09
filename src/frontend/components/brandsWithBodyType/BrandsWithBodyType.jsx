@@ -92,7 +92,7 @@ function BrandsWithBodyType() {
             <div className="ct-row d-flex align-items-center justify-content-center flex-wrap">
               {carBodyTypeList.length > 0 &&
                 carBodyTypeList.map((carBodyType, index) => (
-                  <Link className="ct-col" key={index} to={`/bodyShape/${carBodyType.body_type_name}`}>
+                  <Link className="ct-col mobile-body-shape" key={index} to={`/bodyShape/${carBodyType.body_type_name}`}>
                     <div className="brand-card text-center bg-white position-relative rounded">
                       <img
                         src={`${imageBaseUrl}/BodyTypeImage/${carBodyType.body_type_image}`}
