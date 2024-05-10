@@ -132,7 +132,7 @@ div.preload-wrap img {
     color: #262626;
 }
 .car-details .car-heading {
-    order: 2;
+    /* order: 2; */
     position: relative;
 }
 .car-title svg{

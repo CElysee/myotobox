@@ -1369,7 +1369,29 @@ input[type="time"]:before {
   flex-direction: row !important;
   justify-content: space-between;
 }
+.auth-btn{
+  display: flex;
+}
+@media (max-width: 390px) {
+  #autos-nav{
+    padding: auto;
+  }
+}
 @media (max-width: 480px) {
+  .login-card .login-main {
+    width: 100% !important;
+    padding: 0 !important;
+}
+  .auth-btn{
+    width: fit-content !important;
+    display: inline-block;
+  }
+  .auth-btn .btn-signin{
+    height: auto !important;
+    margin-top: 10px;
+    padding: 10px 50px !important;
+    font-size: 16px;
+  }
   .mobile-hide {
     display: none !important;
   }
@@ -1390,8 +1412,36 @@ input[type="time"]:before {
   .car-details {
     margin-top: 0px !important;
   }
+  .inline_form .form-inner {
+    flex: none;
+    width: 100% !important;
+    padding: 10px 0 !important;
+  }
+  .inline_form {
+    display: contents !important;
+  }
+  #autos-nav .navbar-collapse {
+    background: var(--dark);
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: -10px;
+    right: -10px;
+    bottom: 0;
+    z-index: 1;
+  }
 }
-@media (max-width: 768.98px) {
+@media (max-width: 768px) {
+  .mobile-t-5{
+    padding-top: 100px !important;
+  }
+  .banner-section1 {
+    padding: 30px 10px !important;
+  }
+  .banner-section1 .car-filter-area {
+    padding: 10px 10px !important;
+    margin-top: 20px;
+  }
   .page.home .heading h1 {
     font-size: 1.2rem;
   }
@@ -1419,16 +1469,7 @@ input[type="time"]:before {
   #autos-nav .navbar-toggler {
     margin-left: 4px;
   }
-  #autos-nav .navbar-collapse {
-    background: var(--dark);
-    height: 100vh;
-    position: absolute;
-    top: 0;
-    left: -10px;
-    right: -10px;
-    bottom: 0;
-    z-index: 1;
-  }
+
   #autos-nav .nav-link {
     color: #fff;
   }
@@ -1453,35 +1494,43 @@ input[type="time"]:before {
   .car-details .car-photos .gallery-preview {
     height: auto !important;
     display: contents !important;
-}
-.car-details .car-photos .gallery-preview .draggable {
-  height: auto !important;
-  display: block !important;
-}
-.car-details .car-photos .gallery-preview .images {
-  padding-top: 10px !important;
-}
-.car-details .car-photos .gallery-preview .images .group .preload-wrap {
-  -ms-flex: 0 0 auto;
-  -webkit-box-flex: 0;
-  flex: 0 0 auto;
-  width: 33.333333% !important;
-  padding-right: 3px;
-  padding-left: 3px;
-  height: auto !important;
-}
-.car-details .car-photos .gallery-preview .images .group .preload-wrap:nth-of-type(2n) {
-  margin-left: 0px !important;
-}
-.car-details .car-photos .gallery-preview .images .group {
-  width: 100% !important;
-}
-.car-photos{
-  padding-top: 15px;
-}
-.car-details {
-  margin-top: 0px !important;
-}
+  }
+  .car-details .car-photos .gallery-preview .draggable {
+    height: auto !important;
+    display: block !important;
+  }
+  .car-details .car-photos .gallery-preview .images {
+    padding-top: 10px !important;
+  }
+  .car-details .car-photos .gallery-preview .images .group .preload-wrap {
+    -ms-flex: 0 0 auto;
+    -webkit-box-flex: 0;
+    flex: 0 0 auto;
+    width: 33.333333% !important;
+    padding-right: 3px;
+    padding-left: 3px;
+    height: auto !important;
+  }
+  .car-details
+    .car-photos
+    .gallery-preview
+    .images
+    .group
+    .preload-wrap:nth-of-type(2n) {
+    margin-left: 0px !important;
+  }
+  .car-details .car-photos .gallery-preview .images .group {
+    width: 100% !important;
+  }
+  .car-photos {
+    padding-top: 15px;
+  }
+  .car-details {
+    margin-top: 0px !important;
+  }
+  .banner-section1 .banner-content h1 {
+    font-size: 50px !important;
+  }
 }
 .padding-l-r {
   padding: 0 10px;
@@ -1915,6 +1964,6 @@ input[type="time"]:before {
 .showPopover {
   display: block;
 }
-.view_more{
+.view_more {
   padding: 10px 65px;
 }

@@ -2,7 +2,7 @@ import React from "react";
 
 function ImportOnOrderMessage() {
   return (
-    <section className="bpage container">
+    <section className="bpage container mobile-t-5">
       <div className="row justify-content-center">
         <div className="ThankYouMessage col-lg-12 d-flex flex-column align-items-center justify-content-center flex-grow-1 wrap">
           <h2>

@@ -202,19 +202,18 @@ function Header() {
             {selectedUser.name} - My Account
           </Link>
         ) : (
-          <>
+          <div className="auth-btn">
             <Link
               to={"/login"}
               className="btn btn-primary btn-lg btn-signin"
               style={{ marginRight: "10px" }}
-              onClick={navigateToSignUp}
             >
               Login
             </Link>
             <Link className="btn btn-primary btn-lg btn-signin" to={"/sign-up"}>
               Sign Up
             </Link>
-          </>
+          </div>
         )}
         <div className="header-border"></div>
       </div>
@@ -409,22 +408,23 @@ function Header() {
                       </Link>
                     </li>
                   ) : (
-                    <>
+                    <div className="auth-btn">
                       <Link
-                        to={"/login"}
+                      to={"/login"}
                         className="btn btn-primary btn-lg btn-signin"
                         style={{ marginRight: "10px" }}
-                        onClick={navigateToSignUp}
+                        onClick={handleMobileMenu}
                       >
                         Login
                       </Link>
                       <Link
                         className="btn btn-primary btn-lg btn-signin"
                         to={"/sign-up"}
+                        onClick={handleMobileMenu}
                       >
                         Sign Up
                       </Link>
-                    </>
+                    </div>
                   )}
                 </ul>
               </div>

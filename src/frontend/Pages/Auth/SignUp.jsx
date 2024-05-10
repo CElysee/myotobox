@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Login.css";
 import axiosInstance from "../../../../utils/axiosInstance";
 import "react-toastify/dist/ReactToastify.css";
@@ -8,6 +9,7 @@ import { ToastContainer, toast } from "react-toastify";
 import OtpInput from "react-otp-input";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
+import Select from "react-select";
 
 const override = {
   display: "block",
@@ -27,8 +29,41 @@ function Login() {
   const [color, setColor] = useState("#fff");
   const [formError, setFormError] = useState(false);
   const [isOtpVerified, setIsOtpVerified] = useState(false);
+  const [countryList, setCountryList] = useState([]);
+  const [selectedCountry, setSelectedCountry] = useState([]);
   const navigate = useNavigate();
+  const [inputValues, setInputValues] = useState({
+    email: "",
+    phone_number: "",
+    firstName: "",
+    lastName: "",
+    password: "",
+    gender: "",
+    country_id: "",
+  })
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axiosInstance.get("/country/list");
+        setCountryList(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, []);
 
+  const countryOptions = countryList.map((country) => ({
+    value: country.id,
+    label: country.name,
+  }));
+
+  const handleCountryChange = (selectedOption) => {
+    setInputValues({
+      ...inputValues,
+      country_id: selectedOption,
+    });
+  };
   const passwordChangeHandler = (e) => {
     setPassword(e.target.value);
   };
@@ -141,156 +176,96 @@ function Login() {
                     <p className="error">
                       {formError && "Please fill all the fields"}
                     </p>
-                    <div className="form-group">
-                      <label className="col-form-label">Names</label>
-                      <input
-                        className="form-control"
-                        type="text"
-                        name="name"
-                        required=""
-                        placeholder="Murenzi David"
-                        onChange={handleValueChange}
-                        value={names}
-                      />
-                    </div>
-                    <PhoneInput
-                      placeholder="078*********"
-                      defaultCountry="RW"
-                      value={phoneNumber}
-                      onChange={setPhoneNumber}
-                    />
-                    {otpSent && (
-                      <div>
-                        <label className="col-form-label">
-                          Enter verification code sent to your phone number
-                        </label>
-                        <OtpInput
-                          inputStyle={{ width: "25%" }}
-                          value={otpInput} // Assuming you intended to use a variable named otpInput here
-                          onChange={setOtpInput} // Assuming setOtpInput is the function to update otpInput
-                          numInputs={4}
-                          inputType="number"
-                          renderSeparator={<span>-</span>}
-                          renderInput={(props) => <input {...props} />}
+                    <div className="inline_form">
+                      <div className="form-group">
+                        <label className="col-form-label">First Name</label>
+                        <input
+                          className="form-control"
+                          type="text"
+                          name="name"
+                          required=""
+                          placeholder="Murenzi David"
+                          onChange={handleValueChange}
+                          value={names}
                         />
                       </div>
-                    )}
-
-                    <div
-                      className={isOtpVerified && "otp-verify"}
-                      style={{ display: "none" }}
-                    >
+                      <div className="form-group">
+                        <label className="col-form-label">Last Name</label>
+                        <input
+                          className="form-control"
+                          type="text"
+                          name="name"
+                          required=""
+                          placeholder="Murenzi David"
+                          onChange={handleValueChange}
+                          value={names}
+                        />
+                      </div>
+                    </div>
+                    <div className="inline_form">
+                      <div className="form-group">
+                        <label className="col-form-label">Phone Number</label>
+                        <PhoneInput
+                          placeholder="078*********"
+                          defaultCountry="RW"
+                          value={phoneNumber}
+                          onChange={setPhoneNumber}
+                        />
+                      </div>
                       <div className="form-group">
                         <label className="col-form-label">Email</label>
                         <input
                           className="form-control"
                           type="email"
-                          name="email"
+                          name="name"
                           required=""
-                          placeholder="test@myotobox.rw"
+                          placeholder="Murenzi David"
                           onChange={handleValueChange}
-                          value={email}
+                          value={names}
                         />
                       </div>
+                    </div>
+                    <div className="inline_form">
                       <div className="form-group">
-                        <label className="col-form-label">Password</label>
-
-                        <div className="form-input position-relativ position-relative d-flex align-items-center input-container">
-                          <input
-                            className="form-control"
-                            type={showPassword ? "text" : "password"}
-                            name="password"
-                            required=""
-                            placeholder="*********"
-                            onChange={handleValueChange}
-                            value={password}
-                          />
-                          <div
-                            className="cursor-pointer grey-2-text"
-                            onClick={passwordView}
-                          >
-                            <svg
-                              width="16px"
-                              height="16px"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <g id="SVGRepo_bgCarrier" strokeWidth="0" />
-
-                              <g
-                                id="SVGRepo_tracerCarrier"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              />
-
-                              <g id="SVGRepo_iconCarrier">
-                                {" "}
-                                <path
-                                  d="M15.0007 12C15.0007 13.6569 13.6576 15 12.0007 15C10.3439 15 9.00073 13.6569 9.00073 12C9.00073 10.3431 10.3439 9 12.0007 9C13.6576 9 15.0007 10.3431 15.0007 12Z"
-                                  stroke="#000000"
-                                  strokeWidth="2"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                />{" "}
-                                <path
-                                  d="M12.0012 5C7.52354 5 3.73326 7.94288 2.45898 12C3.73324 16.0571 7.52354 19 12.0012 19C16.4788 19 20.2691 16.0571 21.5434 12C20.2691 7.94291 16.4788 5 12.0012 5Z"
-                                  stroke="#000000"
-                                  strokeWidth="2"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                />{" "}
-                              </g>
-                            </svg>
-                          </div>
-                        </div>
+                        <label className="col-form-label">Gender</label>
+                        <select className="select" name="price_range">
+                          <option>Select gender</option>
+                          <option value="Male">Male</option>
+                          <option value="Female">Female</option>
+                        </select>
+                      </div>
+                      <div className="form-group">
+                        <label className="col-form-label">Country</label>
+                        <Select
+                          placeholder="eg: Rwanda"
+                          name="country_id"
+                          // isMulti
+                          options={countryOptions}
+                          value={selectedCountry}
+                          onChange={handleCountryChange}
+                        />
                       </div>
                     </div>
-
-                    {isOtpVerified ? (
-                      <div className="form-group mb-0">
-                        <button
-                          className="btn btn-primary btn-block w-100 mt-3"
-                          type="submit"
-                        >
-                          {loading ? (
-                            <RiseLoader
-                              color={color}
-                              loading={loading}
-                              cssOverride={override}
-                              size={10}
-                              aria-label="Loading Spinner"
-                              data-testid="loader"
-                              className="loader"
-                            />
-                          ) : (
-                            "Sign Up"
-                          )}
-                        </button>
-                      </div>
-                    ) : (
-                      <div className="form-group mb-0">
-                        <button
-                          className="btn btn-primary btn-block w-100 mt-3"
-                          type="submit"
-                          onClick={sendOtp}
-                        >
-                          {loading ? (
-                            <RiseLoader
-                              color={color}
-                              loading={loading}
-                              cssOverride={override}
-                              size={10}
-                              aria-label="Loading Spinner"
-                              data-testid="loader"
-                              className="loader"
-                            />
-                          ) : (
-                            "Verify Phone Number"
-                          )}
-                        </button>
-                      </div>
-                    )}
+                    <div className="form-group mb-0">
+                      <button
+                        className="btn btn-primary btn-block w-100 mt-3"
+                        type="submit"
+                      >
+                        {loading ? (
+                          <RiseLoader
+                            color={color}
+                            loading={loading}
+                            cssOverride={override}
+                            size={10}
+                            aria-label="Loading Spinner"
+                            data-testid="loader"
+                            className="loader"
+                          />
+                        ) : (
+                          "Sign Up"
+                        )}
+                      </button>
+                    </div>
 
                     <h6 className="text-muted mt-4 or">Follow us</h6>
                     <div
@@ -396,10 +371,10 @@ function Login() {
                       </div>
                     </div>
                     <p className="mt-4 mb-0 text-center">
-                      Don't have account?
-                      <a className="ms-2" href="sign-up.html">
-                        Create Account
-                      </a>
+                      Have an account?
+                      <Link to={"/login"} className="ms-2" href="sign-up.html">
+                        Sign In
+                      </Link>
                     </p>
                   </form>
                 </div>

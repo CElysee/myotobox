@@ -86,7 +86,7 @@ function TaxCalculatorMessage() {
   }, [taxDetails]); // Empty dependency array ensures the effect runs only once on component mount
 
   return (
-    <div className="main_content" id="main_content">
+    <div className="main_content padding-l-r" id="main_content">
       <>
         <div className="page container car-details">
           {loading ? (

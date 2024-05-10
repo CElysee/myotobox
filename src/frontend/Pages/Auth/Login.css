@@ -40,10 +40,53 @@
 .login-card .login-main .theme-form .form-group {
   margin-bottom: 10px;
   position: relative;
+  width: 100%;
+  padding: 2px;
 }
 .login-card .login-main .theme-form label {
   font-size: 14px;
   letter-spacing: 0.4px;
+}
+.login-card select{
+  height: auto !important;
+  padding: 15px 10px !important;
+}
+.login-card .css-13cymwt-control {
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  cursor: default;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex-wrap: wrap;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  justify-content: space-between;
+  min-height: 38px;
+  outline: 0 !important;
+  position: relative;
+  -webkit-transition: all 100ms;
+  transition: all 100ms;
+  background-color: hsl(0, 0%, 100%);
+  border-color: hsl(0, 0%, 80%);
+  border-style: solid;
+  border-width: 1px;
+  box-sizing: border-box;
+  padding: 6px 10px !important;
+  border-radius: 10px !important; 
+}
+.login-card .css-t3ipsp-control:hover{
+
+  background-color: hsl(0, 0%, 100%) !important;
+  border-color: hsl(0, 0%, 80%) !important;
+  padding: 6px 10px !important;
+  border-radius: 10px !important; 
 }
 .col-form-label {
   padding-bottom: 4px;

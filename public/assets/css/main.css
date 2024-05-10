@@ -11298,7 +11298,7 @@ form.search-form.active
   left: 16px;
   z-index: 1;
 }
-@media (max-width: 768.98px) {
+@media (max-width: 768px) {
   .mobile-heading {
     display: flex;
     flex-direction: column;
@@ -11319,9 +11319,9 @@ form.search-form.active
     background: var(--first-color);
     border-radius: 0 3px 3px 0;
   }
-  #autos-nav {
+  /* #autos-nav {
     padding: 0 10px;
-  }
+  } */
   #autos-nav .container-fluid .header-border,
   #autos-nav .container-lg .header-border,
   #autos-nav .container-md .header-border,

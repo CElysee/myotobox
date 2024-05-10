@@ -14,6 +14,7 @@ import ThankYouBookingTestDrive from "../frontend/pages/messages/ThankYouBooking
 import ImportOnOrderMessage from "../frontend/pages/messages/ImportOnOrderMessage";
 import TaxCalculator from "../frontend/pages/taxCalculator/TaxCalculator";
 import TaxCalculatorMessage from "../frontend/pages/messages/TaxCalculatorMessage";
+import SignUp from "../frontend/pages/Auth/SignUp";
 
 function Routers() {
   return (
@@ -27,6 +28,7 @@ function Routers() {
       <Route path="/RentCars" element={<RentCars />} />
       <Route path="/import_on_order" element={<ImportOnOrder />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/sign-up" element={<SignUp />} />
       <Route path="dashboard" element={<AdminDashboard />} />
       <Route path="/booking_message" element={<ThankYouBookingTestDrive />} />
       <Route path="/import_on_order_message" element={<ImportOnOrderMessage />} />
