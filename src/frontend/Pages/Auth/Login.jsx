@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Login.css";
 import axiosInstance from "../../../../utils/axiosInstance";
 import "react-toastify/dist/ReactToastify.css";
@@ -299,9 +300,9 @@ function Login() {
                     </div>
                     <p className="mt-4 mb-0 text-center">
                       Don't have account?
-                      <a className="ms-2" href="sign-up.html">
+                      <Link className="ms-2" to={"/sign-up"}>
                         Create Account
-                      </a>
+                      </Link>
                     </p>
                   </form>
                 </div>
