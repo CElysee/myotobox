@@ -10,6 +10,7 @@ import OtpInput from "react-otp-input";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import Select from "react-select";
+import { set } from "lodash";
 
 const override = {
   display: "block",
@@ -18,20 +19,14 @@ const override = {
   paddingRight: "10px",
 };
 function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [names, setNames] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [otpInput, setOtpInput] = useState("");
-  const [otpSent, setOtpSent] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [color, setColor] = useState("#fff");
   const [formError, setFormError] = useState(false);
-  const [isOtpVerified, setIsOtpVerified] = useState(false);
   const [countryList, setCountryList] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState([]);
   const navigate = useNavigate();
+
   const [inputValues, setInputValues] = useState({
     email: "",
     phone_number: "",
@@ -40,7 +35,8 @@ function Login() {
     password: "",
     gender: "",
     country_id: "",
-  })
+  });
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -61,60 +57,43 @@ function Login() {
   const handleCountryChange = (selectedOption) => {
     setInputValues({
       ...inputValues,
-      country_id: selectedOption,
+      country_id: selectedOption.value,
+    });
+    setSelectedCountry(selectedOption);
+  };
+  const handleValueChange = (e) => {
+    const { name, value } = e.target;
+    setInputValues({
+      ...inputValues,
+      [name]: value,
     });
   };
-  const passwordChangeHandler = (e) => {
-    setPassword(e.target.value);
-  };
+
   const passwordView = () => {
     setShowPassword(!showPassword);
   };
+
   const submitHandler = async (e) => {
     e.preventDefault();
-    if (email != "" || password != "") {
-      setFormError(false);
-      setLoading(true);
-      const formData = new FormData();
-      // Append some data to the FormData
-      formData.append("username", email);
-      formData.append("password", password);
-
-      try {
-        const response = await axiosInstance.post("/auth/login", formData, {
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-        });
-        const role = response.data.role;
-        localStorage.setItem("access_token", response.data.access_token);
-        localStorage.setItem("user_role", response.data.role);
-        localStorage.setItem("userId", response.data.userId);
-
-        notify("Login Successfully", "success");
-        switch (role) {
-          case "admin":
-            navigate("/admin/dashboard");
-            break;
-          case "mentee":
-            navigate("/mentee/dashboard");
-            break;
-          case "mentor":
-            navigate("/mentor/dashboard");
-            break;
-          default:
-            navigate("/signIn");
-        }
-      } catch (error) {
-        console.error(error);
-        notify(error.response.data.detail, "error");
-      } finally {
-        setLoading(false);
-      }
-    } else {
-      notify("Please fill all the fields", "error");
-      setFormError(true);
+    setLoading(true);
+    try {
+      const customConfig = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      const response = await axiosInstance.post("/auth/create_admin", inputValues, customConfig);
+      notify("Account created successfully", "success");
+      const dataToPass = {
+        user_name: inputValues.firstName + " " + inputValues.lastName,
+      };
+      navigate("/account-created", {
+        state: { data: dataToPass },
+      });
+    } catch (error) {
+      console.error(error);
     }
+    setLoading(false);
   };
   const notify = (message, type) => {
     if (type === "success") {
@@ -127,33 +106,10 @@ function Login() {
       });
     }
   };
-  const handleValueChange = (e) => {
-    switch (e.target.name) {
-      case "name":
-        setNames(e.target.value);
-        break;
-      case "email":
-        setEmail(e.target.value);
-        break;
-      case "password":
-        setPassword(e.target.value);
-        break;
-    }
-  };
-  const sendOtp = async (e) => {
-    e.preventDefault();
-    if (names != "" && phoneNumber.length >= 10) {
-      setOtpSent(true);
-      setFormError(false);
-    } else {
-      notify("Please fill all fields", "error");
-      setFormError(true);
-    }
-  };
   return (
     <>
       <div className="container-fluid" style={{ marginTop: "80px" }}>
-        <ToastContainer autoClose={1500} />
+        <ToastContainer autoClose={5000} />
         <div className="row">
           <div
             className="col-md-7"
@@ -182,11 +138,11 @@ function Login() {
                         <input
                           className="form-control"
                           type="text"
-                          name="name"
-                          required=""
-                          placeholder="Murenzi David"
+                          name="firstName"
+                          placeholder="Murenzi"
                           onChange={handleValueChange}
-                          value={names}
+                          value={inputValues.firstName}
+                          required
                         />
                       </div>
                       <div className="form-group">
@@ -194,11 +150,11 @@ function Login() {
                         <input
                           className="form-control"
                           type="text"
-                          name="name"
-                          required=""
-                          placeholder="Murenzi David"
+                          name="lastName"
+                          placeholder="David"
                           onChange={handleValueChange}
-                          value={names}
+                          value={inputValues.lastName}
+                          required
                         />
                       </div>
                     </div>
@@ -208,8 +164,14 @@ function Login() {
                         <PhoneInput
                           placeholder="078*********"
                           defaultCountry="RW"
-                          value={phoneNumber}
-                          onChange={setPhoneNumber}
+                          value={inputValues.phone_number}
+                          onChange={(value) => {
+                            setInputValues({
+                              ...inputValues,
+                              phone_number: value,
+                            });
+                          }}
+                          required
                         />
                       </div>
                       <div className="form-group">
@@ -217,18 +179,24 @@ function Login() {
                         <input
                           className="form-control"
                           type="email"
-                          name="name"
-                          required=""
-                          placeholder="Murenzi David"
+                          name="email"
+                          placeholder="david@myotobox"
                           onChange={handleValueChange}
-                          value={names}
+                          value={inputValues.email}
+                          required
                         />
                       </div>
                     </div>
                     <div className="inline_form">
                       <div className="form-group">
                         <label className="col-form-label">Gender</label>
-                        <select className="select" name="price_range">
+                        <select
+                          className="select"
+                          name="gender"
+                          value={inputValues.gender}
+                          onChange={handleValueChange}
+                          required
+                        >
                           <option>Select gender</option>
                           <option value="Male">Male</option>
                           <option value="Female">Female</option>
@@ -238,12 +206,66 @@ function Login() {
                         <label className="col-form-label">Country</label>
                         <Select
                           placeholder="eg: Rwanda"
+                          className="country-select"
                           name="country_id"
                           // isMulti
                           options={countryOptions}
                           value={selectedCountry}
                           onChange={handleCountryChange}
+                          required
                         />
+                      </div>
+                    </div>
+                    <div className="form-group">
+                      <label className="col-form-label">Password</label>
+                      <div className="form-input position-relativ position-relative d-flex align-items-center input-container">
+                        <input
+                          className="form-control"
+                          type={showPassword ? "text" : "password"}
+                          name="password"
+                          placeholder="*********"
+                          onChange={handleValueChange}
+                          value={inputValues.password}
+                          required
+                        />
+                        <div
+                          className="cursor-pointer grey-2-text"
+                          onClick={passwordView}
+                        >
+                          <svg
+                            width="16px"
+                            height="16px"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <g id="SVGRepo_bgCarrier" strokeWidth="0" />
+
+                            <g
+                              id="SVGRepo_tracerCarrier"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+
+                            <g id="SVGRepo_iconCarrier">
+                              {" "}
+                              <path
+                                d="M15.0007 12C15.0007 13.6569 13.6576 15 12.0007 15C10.3439 15 9.00073 13.6569 9.00073 12C9.00073 10.3431 10.3439 9 12.0007 9C13.6576 9 15.0007 10.3431 15.0007 12Z"
+                                stroke="#000000"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />{" "}
+                              <path
+                                d="M12.0012 5C7.52354 5 3.73326 7.94288 2.45898 12C3.73324 16.0571 7.52354 19 12.0012 19C16.4788 19 20.2691 16.0571 21.5434 12C20.2691 7.94291 16.4788 5 12.0012 5Z"
+                                stroke="#000000"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />{" "}
+                            </g>
+                          </svg>
+                        </div>
                       </div>
                     </div>
                     <div className="form-group mb-0">

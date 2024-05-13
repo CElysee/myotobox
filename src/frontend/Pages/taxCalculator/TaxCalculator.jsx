@@ -8,6 +8,7 @@ import { CKEditor } from "@ckeditor/ckeditor5-react";
 import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { useNavigate } from "react-router-dom";
 import { roundNumbers } from "../../../../utils/helpers";
+import Login from "../../components/auth/Login";
 
 const override = {
   display: "block",
@@ -17,6 +18,7 @@ const override = {
 };
 
 function TaxCalculator() {
+  const dismissButtonRef = useRef();
   const [carBrands, setCarBrands] = useState([]);
   const [carModels, setCarModels] = useState([]);
   const [carTrims, setCarTrims] = useState([]);
@@ -25,6 +27,7 @@ function TaxCalculator() {
   const tinymce = import.meta.env.VITE_TINYMCE_API;
   const editorRef = useRef(null);
   const navigate = useNavigate();
+  const [loginTitle, setLoginTitle] = useState("Sign In to Calculate Taxes");
   const [inputValues, setInputValues] = useState({
     car_brand_id: "",
     car_model_id: "",
@@ -178,13 +181,13 @@ function TaxCalculator() {
 
   useEffect(() => {
     if (inputValues.cif_kigali) {
-        const current_value = inputValues.cif_kigali * usdToRwf;
-        const roundedCifToKgl = roundNumbers(current_value);
-        setInputValues((prevState) => ({
-          ...prevState,
-          current_value: roundedCifToKgl,
-        }));
-      }
+      const current_value = inputValues.cif_kigali * usdToRwf;
+      const roundedCifToKgl = roundNumbers(current_value);
+      setInputValues((prevState) => ({
+        ...prevState,
+        current_value: roundedCifToKgl,
+      }));
+    }
   }, [inputValues.cif_kigali]);
 
   const user = useSelector(selectUser);
@@ -213,6 +216,9 @@ function TaxCalculator() {
     };
     submitData();
   };
+  const handleClosingModal = () => {
+    dismissButtonRef.current.click();
+  }
   return (
     <div className="main_content import_on_order" style={{ marginTop: "83px" }}>
       <div className="banner-section1">
@@ -512,12 +518,50 @@ function TaxCalculator() {
                         )}
                       </button>
                     ) : (
-                      <button className="primary-btn1" type="submit">
-                        Login to send order
+                      <button
+                        className="primary-btn1"
+                        type="button"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
+                        ref={dismissButtonRef}
+                      >
+                        Login to Calculate Taxes
                       </button>
                     )}
                   </div>
                 </form>
+                <div
+                  className="modal fade"
+                  id="exampleModal"
+                  tabIndex="-1"
+                  aria-labelledby="exampleModalLabel"
+                  aria-hidden="true"
+                >
+                  <div className="modal-dialog modal-dialog-centered">
+                    <div className="modal-content">
+                      <div className="modal-header">
+                        <button
+                          type="button"
+                          className="btn-close"
+                          data-bs-dismiss="modal"
+                          aria-label="Close"
+                        ></button>
+                      </div>
+                      <div className="modal-body">
+                        <Login loginTitle={loginTitle}  CloseModal={handleClosingModal}/>
+                      </div>
+                      <div className="modal-footer">
+                        <button
+                          type="button"
+                          className="btn btn-dark"
+                          data-bs-dismiss="modal"
+                        >
+                          Close
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

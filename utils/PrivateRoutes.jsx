@@ -1,10 +1,19 @@
-import { Outlet, Navigate } from "react-router-dom";
+import { createSlice } from "@reduxjs/toolkit";
 
-const PrivateRoutes = () => {
-    let auth = localStorage.getItem("access_token"); // Use curly braces to define the object
-    return (
-        auth ? <Outlet/> : <Navigate to="/login"/>
-    );
-}
+export const greetingSlice = createSlice({
+  name: "greeting",
+  initialState: {
+    currentTime: new Date().getHours(),
+    greeting_time:
+      new Date().getHours() < 12
+        ? "Good Morning"
+        : new Date().getHours() < 18
+        ? "Good Afternoon"
+        : "Good Evening", // Update greeting directly in state
+  },
+  reducers: {
+  },
+});
 
-export default PrivateRoutes;
+export const { setTime } = greetingSlice.actions;
+export default greetingSlice.reducer;

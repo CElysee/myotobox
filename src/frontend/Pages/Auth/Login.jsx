@@ -6,7 +6,8 @@ import axiosInstance from "../../../../utils/axiosInstance";
 import "react-toastify/dist/ReactToastify.css";
 import RiseLoader from "react-spinners/RiseLoader";
 import { ToastContainer, toast } from "react-toastify";
-
+import { useDispatch } from "react-redux";
+import { login } from "../../../features/userSlice";
 
 const override = {
   display: "block",
@@ -22,6 +23,7 @@ function Login() {
   const [color, setColor] = useState("#fff");
   const [formError, setFormError] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const emailChangeHandler = (e) => {
     setEmail(e.target.value);
@@ -41,7 +43,7 @@ function Login() {
       // Append some data to the FormData
       formData.append("username", email);
       formData.append("password", password);
-  
+
       try {
         const response = await axiosInstance.post("/auth/login", formData, {
           headers: {
@@ -49,31 +51,23 @@ function Login() {
           },
         });
         const role = response.data.role;
-        localStorage.setItem("access_token", response.data.access_token);
-        localStorage.setItem("user_role", response.data.role);
-        localStorage.setItem("userId", response.data.userId);
-  
-        notify("Login Successfully", "success");
-        switch (role) {
-          case "admin":
-            navigate("/admin/dashboard");
-            break;
-          case "mentee":
-            navigate("/mentee/dashboard");
-            break;
-          case "mentor":
-            navigate("/mentor/dashboard");
-            break;
-          default:
-            navigate("/signIn");
-        }
+        console.log(response.data.access_token);
+        localStorage.setItem("token", response.data.access_token);
+        dispatch(login(response.data));
+        // switch (role) {
+        //   case "admin":
+        //     navigate("/admin/dashboard");
+        //     break;
+        //   default:
+        //     navigate("/");
+        // }
       } catch (error) {
         console.error(error);
         notify(error.response.data.detail, "error");
       } finally {
         setLoading(false);
       }
-    }else{
+    } else {
       notify("Please fill all the fields", "error");
       setFormError(true);
     }
@@ -89,10 +83,11 @@ function Login() {
       });
     }
   };
+  console.log(localStorage.getItem("token"))
   return (
     <>
       <div className="container-fluid" style={{ marginTop: "80px" }}>
-        <ToastContainer autoClose={1500} />
+        <ToastContainer autoClose={5000} />
         <div className="row">
           <div
             className="col-md-7"
@@ -110,7 +105,9 @@ function Login() {
                   <form className="theme-form" onSubmit={submitHandler}>
                     <h4>Sign in to account</h4>
                     <p>Enter your email & password to login</p>
-                    <p className="error">{formError && "Please fill all the fields"}</p>
+                    <p className="error">
+                      {formError && "Please fill all the fields"}
+                    </p>
                     <div className="form-group">
                       <label className="col-form-label">Email Address</label>
                       <input

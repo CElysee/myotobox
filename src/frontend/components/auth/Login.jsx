@@ -13,7 +13,7 @@ const override = {
   borderColor: "#e55812",
   paddingRight: "10px",
 };
-function Login({ isAboutToBook }) {
+function Login({ isAboutToBook, loginTitle, CloseModal }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -50,8 +50,13 @@ function Login({ isAboutToBook }) {
 
         // console.log(response.data);
         dispatch(login(response.data));
-        isAboutToBook(false);
+        if (isAboutToBook) {
+          isAboutToBook(false);
+        }
         notify("Login Successfully", "success");
+        if (CloseModal) {
+          CloseModal();
+        }
       } catch (error) {
         console.error(error);
         notify(error.response.data.detail, "error");
@@ -79,7 +84,8 @@ function Login({ isAboutToBook }) {
       <div>
         <div className="login-main">
           <form className="theme-form" onSubmit={submitHandler}>
-            <h4>Sign In and Book a Test Drive</h4>
+            {/* <h4>Sign In and Book a Test Drive</h4> */}
+            <h4>{loginTitle}</h4>
             <p className="error">{formError && "Please fill all the fields"}</p>
             <div className="form-group">
               <label className="col-form-label">Email Address</label>
