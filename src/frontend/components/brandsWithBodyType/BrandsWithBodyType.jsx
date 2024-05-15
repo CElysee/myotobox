@@ -3,7 +3,7 @@ import axiosInstance from "../../../../utils/AxiosInstance";
 import { Link } from "react-router-dom";
 
 function BrandsWithBodyType() {
-  const [carBodyTypeList, setCarBodyTypeList] = useState("");
+  const [carBodyTypeList, setCarBodyTypeList] = useState([]);
   const imageBaseUrl = import.meta.env.VITE_REACT_APP_API;
   useEffect(() => {
     const fetchData = async () => {
