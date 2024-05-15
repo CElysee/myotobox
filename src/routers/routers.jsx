@@ -5,7 +5,7 @@ import BuyCars from "../frontend/pages/buyCars/BuyCars";
 import RentCars from "../frontend/pages/rentCars/RentCars";
 import CarDetails from "../frontend/pages/carDetails/CarDetails";
 import ImportOnOrder from "../frontend/pages/importOnOrder/ImportOnOrder";
-import Login from "../frontend/pages/Auth/Login";
+import Login from "../frontend/pages/auth/Login";
 import PrivateRoutes from "../../utils/PrivateRoutes";
 import AdminDashboard from "../dashboard/pages/admin/AdminDashboard";
 import NotFound from "../frontend/pages/notFound/NotFound";
@@ -14,7 +14,7 @@ import ThankYouBookingTestDrive from "../frontend/pages/messages/ThankYouBooking
 import ImportOnOrderMessage from "../frontend/pages/messages/ImportOnOrderMessage";
 import TaxCalculator from "../frontend/pages/taxCalculator/TaxCalculator";
 import TaxCalculatorMessage from "../frontend/pages/messages/TaxCalculatorMessage";
-import SignUp from "../frontend/pages/Auth/SignUp";
+import SignUp from "../frontend/pages/auth/SignUp";
 import AccountCreated from "../frontend/pages/messages/AccountCreated";
 
 function Routers() {
