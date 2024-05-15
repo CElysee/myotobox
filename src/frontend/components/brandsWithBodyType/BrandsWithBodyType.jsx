@@ -10,9 +10,14 @@ function BrandsWithBodyType() {
   const imageBaseUrl = import.meta.env.VITE_REACT_APP_API;
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axiosInstance.get("/car_body_type/list");
-      setCarBodyTypeList(response.data.car_body);
-      setLoading(false);
+      try {
+        const response = await axiosInstance.get("/car_body_type/list");
+        setCarBodyTypeList(response.data.car_body);
+        // setLoading(false);
+      } catch (error) {
+        console.log(error);
+        setLoading(false);
+      }
     };
     fetchData();
   }, []);
