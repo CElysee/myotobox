@@ -8,7 +8,7 @@ function Home() {
   return (
     <div className="main_content">
       <BrandsWithBodyType />
-      {/* <SellCarsGrid /> */}
+      <SellCarsGrid />
       <div className="container mobile-gap">
         <div className="row flex-nowrap">
           <div className="d-md-flex col-md-12" style={{ justifyContent: "center" }}>

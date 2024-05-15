@@ -21,7 +21,6 @@ function BrandsWithBodyType() {
     };
     fetchData();
   }, []);
-  console.log(carBodyTypeList);
   return (
     <>
       <section className="bpage container pb-4" id="brands">
