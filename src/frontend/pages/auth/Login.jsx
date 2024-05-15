@@ -83,7 +83,6 @@ function Login() {
       });
     }
   };
-  console.log(localStorage.getItem("token"));
   return (
     <>
       <div className="container-fluid" style={{ marginTop: "80px" }}>
