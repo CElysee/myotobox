@@ -28399,7 +28399,7 @@ ul.dot-group li {
   align-items: center;
   justify-content: center;
   margin: 0 auto;
-  background: url("https://admin.pixelstrap.com/cuba/assets/images/login/login_bg.jpg");
+  background: url(/assets/images/login_bg.jpg);
   background-position: center;
   padding: 30px 12px;
 }
