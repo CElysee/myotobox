@@ -1379,7 +1379,7 @@ input[type="time"]:before {
 }
 @media (max-width: 480px) {
   #root > .page {
-    margin-top: 60px;
+    margin-top: 92px;
     min-height: calc(100vh - 57px);
   }
   .login-card .login-main {
@@ -1411,7 +1411,7 @@ input[type="time"]:before {
     /* width: 70px; */
   }
   .main_content {
-    margin-top: 75px !important;
+    margin-top: 110px !important;
   }
   .car-details {
     margin-top: 0px !important;
@@ -1427,12 +1427,13 @@ input[type="time"]:before {
   #autos-nav .navbar-collapse {
     background: var(--dark);
     height: 100vh;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: -10px;
     right: -10px;
     bottom: 0;
     z-index: 1;
+    padding: 25px;
   }
 }
 @media (max-width: 768px) {
@@ -1586,7 +1587,7 @@ input[type="time"]:before {
   font-size: 14px;
   margin-right: -8px;
   top: 0px;
-  z-index: 50;
+  /* z-index: 50; */
   background: rgb(255, 255, 255);
   width: calc(100% + 16px);
   padding: 30px 8px;
@@ -1642,9 +1643,9 @@ input[type="time"]:before {
   border: 1px solid rgb(255, 217, 129);
   font-weight: bold;
 }
-.mui-style-1yd0ikp {
+/* .mui-style-1yd0ikp {
   z-index: 1002;
-}
+} */
 @media (min-width: 0px) {
   .mui-style-1yd0ikp {
     border-radius: 20px;
