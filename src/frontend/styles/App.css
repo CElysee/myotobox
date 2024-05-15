@@ -1,0 +1,45 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
+.link-button {
+    color: #0f2236;
+    -webkit-text-decoration: var(--link-text-decoration);
+    text-decoration: var(--link-text-decoration);
+    background-color: var(--first-color);
+}
+button {
+    /* border-radius: 50px !important; */
+    border: 1px solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    background-color: #31c981;
+    cursor: pointer;
+    transition: border-color 0.25s;
+}
+.btn{
+    font-size: 1rem;
+}
+.main_content{
+    margin-top: 0px;
+}
+.Toastify__toast-theme--light {
+    background: #fff;
+    color: #000000;
+    font-weight: 400;
+    font-family: 'Circular' !important;
+}
+.Toastify__progress-bar--success {
+    background: #ffc402 !important;
+}
+.Toastify__toast-body > div:last-child {
+    word-break: break-word;
+    -ms-flex: 1;
+    flex: 1;
+    color: #000;
+}
+.error{
+    font-family: 'Circular' !important;
+    color: red !important;
+    font-size: 15px !important;
+}
