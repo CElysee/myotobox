@@ -35,7 +35,7 @@ function BodyShape() {
   const [listBrands, setListBrands] = useState([]);
   const imageBaseUrl = import.meta.env.VITE_REACT_APP_API;
   const [color, setColor] = useState("#fff");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [skeletonLoading, setSkeletonLoading] = useState(false);
   const [skeleton, setSkeleton] = useState([1, 2, 3, 4]);
   const [updateUrl, setUpdateUrl] = useState(false);
@@ -169,6 +169,7 @@ function BodyShape() {
         setMakeWithModels(make_models.data.cars_for_sale);
         setCountCarsForSale(make_models.data.count_cars_for_sale);
         setSkeletonLoading(false);
+        setLoading(false);
       } catch (error) {
         console.log("Error fetching data", error);
         setSkeletonLoading(false);

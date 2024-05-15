@@ -8,6 +8,7 @@ import {
   truncateText,
 } from "../../../../utils/Helpers";
 import ContentLoader from "react-content-loader";
+import { set } from "lodash";
 
 function SellCarsGrid({ brandName, makeWithModels, countCars }) {
   const [carsForSale, setCarsForSale] = useState([]);
@@ -22,6 +23,7 @@ function SellCarsGrid({ brandName, makeWithModels, countCars }) {
       if (makeWithModels) {
         setCarsForSale(makeWithModels);
         setCountCarsForSale(countCars);
+        setLoading(false);
       } else {
         const response = await axiosInstance.get(`/car_for_sale/list`);
         setCarsForSale(response.data.cars_for_sale);
