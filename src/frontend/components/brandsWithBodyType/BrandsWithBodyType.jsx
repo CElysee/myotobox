@@ -13,14 +13,15 @@ function BrandsWithBodyType() {
       try {
         const response = await axiosInstance.get("/car_body_type/list");
         setCarBodyTypeList(response.data.car_body);
-        // setLoading(false);
+        setLoading(false);
       } catch (error) {
         console.log(error);
-        setLoading(false);
+        setLoading(true);
       }
     };
     fetchData();
   }, []);
+  console.log(carBodyTypeList);
   return (
     <>
       <section className="bpage container pb-4" id="brands">
