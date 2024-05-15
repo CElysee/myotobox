@@ -90,25 +90,26 @@ function BrandsWithBodyType() {
           </ul>
           <div className="tab-content mt-5">
             <div className="ct-row d-flex align-items-center justify-content-center flex-wrap">
-              {carBodyTypeList.length > 0 &&
-                carBodyTypeList.map((carBodyType, index) => (
-                  <Link
-                    className="ct-col mobile-body-shape"
-                    key={index}
-                    to={`/bodyShape/${carBodyType.body_type_name}`}
-                  >
-                    <div className="brand-card text-center bg-white position-relative rounded">
-                      <img
-                        src={`${imageBaseUrl}/BodyTypeImage/${carBodyType.body_type_image}`}
-                        className="img-fluid icon-black"
-                        alt={carBodyType.body_type_name}
-                      ></img>
-                      <h5 className="mt-3 mb-0">
-                        {carBodyType.body_type_name}
-                      </h5>
-                    </div>
-                  </Link>
-                ))}
+              {carBodyTypeList.length > 0
+                ? carBodyTypeList.map((carBodyType, index) => (
+                    <Link
+                      className="ct-col mobile-body-shape"
+                      key={index}
+                      to={`/bodyShape/${carBodyType.body_type_name}`}
+                    >
+                      <div className="brand-card text-center bg-white position-relative rounded">
+                        <img
+                          src={`${imageBaseUrl}/BodyTypeImage/${carBodyType.body_type_image}`}
+                          className="img-fluid icon-black"
+                          alt={carBodyType.body_type_name}
+                        ></img>
+                        <h5 className="mt-3 mb-0">
+                          {carBodyType.body_type_name}
+                        </h5>
+                      </div>
+                    </Link>
+                  ))
+                : null}
             </div>
           </div>
         </div>
