@@ -235,6 +235,9 @@ function Footer() {
                           <li>
                             <a href="#">FAQs & support</a>
                           </li>
+                          <li>
+                            <Link to={"/login"}>Login</Link>
+                          </li>
                         </ul>
                       </div>
                     </div>
