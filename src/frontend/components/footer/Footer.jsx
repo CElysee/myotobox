@@ -236,7 +236,7 @@ function Footer() {
                             <a href="#">FAQs & support</a>
                           </li>
                           <li>
-                            <Link to={"/login"}>Login</Link>
+                            <Link to={"https://dashboard.myotobox.rw"}>Login</Link>
                           </li>
                         </ul>
                       </div>
