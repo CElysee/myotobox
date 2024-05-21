@@ -22,7 +22,7 @@ function App() {
 
   return (
     <>
-      {loading ? (
+      {/* {loading ? (
         <div id="preLoader">
           <div className="loader">
             <div className="road">
@@ -50,12 +50,11 @@ function App() {
           </div>
         </div>
       ) : (
-        <>
-          <Header />
-          <Router />
-          <Footer />
-        </>
-      )}
+        
+      )} */}
+      <Header />
+      <Router />
+      <Footer />
     </>
   );
 }
