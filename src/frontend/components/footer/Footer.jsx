@@ -136,7 +136,7 @@ function Footer() {
                     <div className="col-lg-6 align-self-end">
                       <div className="footer-banner-right">
                         <img
-                          src="/assets/images/images/fc3d21442ec199ff.webp"
+                          src="/assets/images/fc3d21442ec199ff.webp"
                           alt="car"
                           className="img-fluid"
                         />
