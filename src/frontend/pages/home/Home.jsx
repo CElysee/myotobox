@@ -9,7 +9,7 @@ function Home() {
     <div className="main_content">
       <BrandsWithBodyType />
       <SellCarsGrid />
-      <div className="container mobile-gap">
+      <div className="container mobile-gap pt-2">
         <div className="row flex-nowrap">
           <div className="d-md-flex col-md-12" style={{ justifyContent: "center" }}>
             <a className="btn btn-lg btn-primary view_more" href="">

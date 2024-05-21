@@ -79,7 +79,7 @@ function SellCarsGrid({ brandName, makeWithModels, countCars }) {
           <div className="row pt-3">
             {carsForSale.length > 0 ? (
               carsForSale.map((car, index) => (
-                <div className="auction-item col-md-3" key={index}>
+                <div className="auction-item col-md-3 pb-4" key={index}>
                   <div
                     className="linkable card card-shadow vehicle-card"
                     aria-label={`View details ${car.car_name_info}, - Price: ${car.car_price}`}

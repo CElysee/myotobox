@@ -89,7 +89,7 @@ function BrandsWithBodyType() {
             <li>
               <Link to={"/buyCars/byd"}>
                 <img
-                  src="assets/brands/byd.png"
+                  src="assets/brands/byd.webp"
                   alt="byd"
                   className="icon-red"
                 />

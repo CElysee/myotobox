@@ -74,7 +74,7 @@ function Footer() {
                     <div className="col-lg-6 align-self-end">
                       <div className="footer-banner-right">
                         <img
-                          src="/assets/images/footer-car-2.png"
+                          src="/assets/images/4fc3d21442ec199f.webp"
                           alt="car"
                           className="img-fluid"
                         />
@@ -136,7 +136,7 @@ function Footer() {
                     <div className="col-lg-6 align-self-end">
                       <div className="footer-banner-right">
                         <img
-                          src="/assets/images/footer-car-1.png"
+                          src="/assets/images/images/fc3d21442ec199ff.webp"
                           alt="car"
                           className="img-fluid"
                         />

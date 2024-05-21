@@ -31,7 +31,7 @@ function WhyChooseUs() {
                   </p>
                 </div>
                 <img
-                  src="assets/images/toyota.png"
+                  src="assets/images/c3d21442ec199ffd.webp"
                   alt="car"
                   className="img-fluid"
                 />
