@@ -5,10 +5,9 @@ function WhyChooseUs() {
     <>
       <section
         className="about-section pt-120 pb-220 bg-primary-light position-relative z-1 overflow-hidden py-5"
-        data-background="assets/img/shapes/about-bg.jpg"
       >
         <img
-          src="https://autohive-html.themetags.com/assets/img/shapes/tire-primary-light.png"
+          src="/assets/images/tire-primary-light.webp"
           alt="tire"
           className="tire-primary-light position-absolute end-0 top-0 z--1"
         />
