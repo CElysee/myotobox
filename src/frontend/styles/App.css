@@ -1,5 +1,4 @@
 @charset "UTF-8";
-@import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
 .link-button {
     color: #0f2236;
     -webkit-text-decoration: var(--link-text-decoration);
