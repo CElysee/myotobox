@@ -15,7 +15,7 @@ function WhyChooseUs() {
             <div className="col-xl-6 col-lg-6">
               <div className="about-left position-relative z-1">
                 <div className="at-section-title mb-20">
-                  <span className="at-subtitle position-relative lead text-primary">
+                  <span className="at-subtitle position-relative lead text-dark">
                     Why Choose Us
                   </span>
                   <h2 className="mt-2 mb-4">

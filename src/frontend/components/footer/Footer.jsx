@@ -37,9 +37,9 @@ function Footer() {
                         <span className="icon-wrapper d-flex align-items-center justify-content-center rounded">
                           <img src="/assets/svg/sale-car.svg" width={"40px"} />
                         </span>
-                        <h3 className="text-white mt-3 mb-20">
+                        <h4 className="text-white mt-3 mb-20">
                           Are You Looking to Sell your Car?
-                        </h3>
+                        </h4>
                         <a href="#" className="at-explore-btn text-white">
                           <span className="me-2 text-white">
                             <svg
@@ -84,7 +84,7 @@ function Footer() {
                 </div>
               </div>
               <div className="col-xl-6">
-                <div className="footer-banner position-relative bg-primary z-3 rounded">
+                <div className="footer-banner position-relative bg-yellow z-3 rounded">
                   <img
                     src="/assets/images/banner-wave.png"
                     alt="wave"
@@ -99,9 +99,9 @@ function Footer() {
                             width={"40px"}
                           />
                         </span>
-                        <h3 className="text-dark mt-3 mb-20">
+                        <h4 className="text-dark mt-3 mb-20">
                           Are You Looking to Buy or Rent a Car?
-                        </h3>
+                        </h4>
                         <a href="#" className="at-explore-btn text-dark">
                           <span className="me-2 text-white mt-2">
                             <svg
@@ -157,8 +157,8 @@ function Footer() {
               <div className="col-xl-5 col-lg-5">
                 <div className="footer-widget widget-basic">
                   <div className="phone-box d-flex align-items-center">
-                    <span className="icon-wrapper d-inline-flex align-items-center justify-content-center rounded-circle bg-primary text-white">
-                      <i className="flaticon-phone-call"></i>
+                    <span className="icon-wrapper d-inline-flex align-items-center justify-content-center rounded-circle bg-yellow text-white">
+                      <i className="fa-regular fa-phone-volume fa-fw"></i>
                     </span>
                     <h4 className="text-white ms-3 mb-0">+250 782 384 772</h4>
                   </div>
@@ -193,22 +193,22 @@ function Footer() {
                           <ul className="footer-social-list">
                             <li>
                               <a href="#">
-                                <i className="fab fa-facebook-f"></i>
+                                <i className="fa-brands fa-facebook fa-fw"></i>
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <i className="fab fa-linkedin"></i>
+                                <i className="fa-brands fa-instagram fa-fw"></i>
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <i className="fab fa-twitter"></i>
+                                <i className="fa-brands fa-square-x-twitter fa-fw"></i>
                               </a>
                             </li>
                             <li>
                               <a href="#">
-                                <i className="fab fa-behance"></i>
+                                <i className="fa-brands fa-youtube"></i>
                               </a>
                             </li>
                           </ul>
@@ -236,7 +236,9 @@ function Footer() {
                             <a href="#">FAQs & support</a>
                           </li>
                           <li>
-                            <Link to={"https://dashboard.myotobox.rw"}>Login</Link>
+                            <Link to={"https://dashboard.myotobox.rw"}>
+                              Login
+                            </Link>
                           </li>
                         </ul>
                       </div>
