@@ -27,9 +27,9 @@ function BrandsWithBodyType() {
         <div className="row justify-content-center">
           <div className="col-lg-7">
             <div className="at-section-title text-center">
-              <h1 className="at-subtitle lead text-dark position-relative">
+              {/* <h1 className="at-subtitle lead text-dark position-relative">
                 Shop your favorite brand
-              </h1>
+              </h1> */}
             </div>
           </div>
         </div>
