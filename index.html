@@ -36,7 +36,6 @@
       rel="preload"
       href="/assets/images/tire-primary-light.webp"
       type="image/webp"
-      
     />
     <link
       rel="preload"
@@ -45,10 +44,7 @@
       onload="this.onload=null;this.rel='stylesheet'"
     />
     <noscript>
-      <link
-        rel="stylesheet"
-        href="/assets/css/main.css"
-      />
+      <link rel="stylesheet" href="/assets/css/main.css" />
     </noscript>
     <link
       rel="preload"
@@ -57,10 +53,7 @@
       onload="this.onload=null;this.rel='stylesheet'"
     />
     <noscript>
-      <link
-        rel="stylesheet"
-        href="/assets/css/all.min.css"
-      />
+      <link rel="stylesheet" href="/assets/css/all.min.css" />
     </noscript>
     <link
       rel="preload"
@@ -78,10 +71,62 @@
         crossorigin="anonymous"
       />
     </noscript>
+    <style>
+      #tasksList tr:hover .tasks-list-menu,
+      .at-section-title .at-subtitle.shape-primary::after,
+      .choices[data-type*="select-multiple"] .choices__button:focus,
+      .choices[data-type*="select-multiple"] .choices__button:hover,
+      .choices[data-type*="select-one"] .choices__button:focus,
+      .choices[data-type*="select-one"] .choices__button:hover,
+      .choices[data-type*="text"] .choices__button:focus,
+      .choices[data-type*="text"] .choices__button:hover,
+      .explore-box:hover .explore-place-bid-img .bg-overlay,
+      .gallery-box:hover .box-content .post,
+      .numInputWrapper:hover span {
+        opacity: 1;
+      }
+      .at-section-title .at-subtitle::after {
+        content: "";
+        width: 130px;
+        height: 50px;
+        border: 3px solid var(--dark);
+        position: absolute;
+        bottom: -50px;
+        right: 122px;
+        border-radius: 50%;
+        opacity: 0.2;
+        -webkit-clip-path: circle(45.4% at 43% 0);
+        clip-path: circle(45.4% at 43% 0);
+      }
+      .lead {
+        font-size: 2.25rem !important;
+        font-weight: 700 !important;
+      }
+      .position-relative {
+        position: relative !important;
+      }
+      .position-absolute {
+        position: absolute !important;
+      }
+      .position-fixed {
+        position: fixed !important;
+      }
+      .position-sticky {
+        position: -webkit-sticky !important;
+        position: sticky !important;
+      }
+      .fixed-bottom,
+      .fixed-top {
+        position: fixed;
+        right: 0;
+        left: 0;
+        z-index: 1030;
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <script type="module" src="/src/main.jsx" defer></script>
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
