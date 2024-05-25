@@ -4,11 +4,11 @@ function WhyChooseUs() {
   return (
     <>
       <section className="about-section pt-120 pb-220 bg-primary-light position-relative z-1 overflow-hidden py-5">
-        <img
+        {/* <img
           src="/assets/images/tire-primary-light.webp"
           alt="tire"
           className="tire-primary-light position-absolute end-0 top-0 z--1"
-        ></img>
+        ></img> */}
         <span className="small-circle-shape position-absolute z--1"></span>
         <div className="container">
           <div className="row align-items-center">
