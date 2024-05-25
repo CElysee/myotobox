@@ -6,7 +6,7 @@ import WhyChooseUs from "../../components/whyChooseUs/WhyChooseUs";
 
 function Home() {
   return (
-    <div className="main_content">
+    <div className="main_content" style={{paddingTop: "95px"}}>
       <BrandsWithBodyType />
       <SellCarsGrid />
       <div className="container mobile-gap pt-2">
