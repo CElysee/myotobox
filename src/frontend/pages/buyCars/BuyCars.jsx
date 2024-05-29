@@ -458,7 +458,7 @@ function BuyCars() {
     e.stopPropagation(); // Prevents the default behavior of event propagation
   };
   return (
-    <section className="bpage container page home" id="NotFound">
+    <section className="bpage container page home" id="NotFound" style={{paddingTop: "100px"}}>
       <div className="row justify-content-center">
         <div className="filterbar">
           <div className="car_filter mobile-hide">
