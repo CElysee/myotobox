@@ -413,7 +413,7 @@ function BuyCars() {
       const startKilometers = start_kilometers ? start_kilometers : 1;
       const endKilometers = end_kilometers ? end_kilometers : 1000000;
       // Construct the base URL with brandName and selectedModel.label
-      let url = `/buyCars/${brandName}`;
+      let url = `/buy_cars/${brandName}`;
 
       // Add query parameters only if their values are not empty
       if (selectedModel !== null && selectedModel.label) {

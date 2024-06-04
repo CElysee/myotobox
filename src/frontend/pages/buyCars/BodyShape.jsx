@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import RiseLoader from "react-spinners/RiseLoader";
-import "./BuyCars.css";
+import "./BuyCars";
 import makeAnimated from "react-select/animated";
 import SellCarsGrid from "../../components/sellCarsGrid/SellCarsGrid";
 import axiosInstance from "../../../../utils/AxiosInstance";

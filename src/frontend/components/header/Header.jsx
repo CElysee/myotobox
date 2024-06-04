@@ -13,7 +13,7 @@ function Header() {
       display: "Home",
     },
     {
-      path: "/buyCars",
+      path: "/buy_cars",
       display: "Buy",
     },
     {
@@ -91,7 +91,7 @@ function Header() {
       const car = response.data;
       const brandSlug = car.car_brand.toLowerCase();
       const modelSlug = car.car_model.toLowerCase();
-      const navigateUrl = `/buyCars/${brandSlug}/?model_id=${modelSlug}`;
+      const navigateUrl = `/buy_cars/${brandSlug}/?model_id=${modelSlug}`;
 
       navigate(navigateUrl);
       setSearch("");

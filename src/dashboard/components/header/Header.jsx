@@ -10,7 +10,7 @@ function Header() {
       display: "Home",
     },
     {
-      path: "/BuyCars",
+      path: "/buy_cars",
       display: "Buy",
     },
     {
