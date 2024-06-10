@@ -47,7 +47,7 @@ function SellCarsGrid({ brandName, makeWithModels, countCars }) {
   return (
     <>
       <div className="featured-tabs page container home">
-        <div className="row pt-3">
+        <div className="row">
           <div className="col primary">
             <div className="heading clearfix">
               <h1>

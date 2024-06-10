@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "../frontend/pages/home/Home";
 import BuyCars from "../frontend/pages/BuyCars/BuyCars";
 import RentCars from "../frontend/pages/rentCars/RentCars";
+import CarRentalOverView from "../frontend/pages/carRentalOverView/CarRentalOverView";
 import CarDetails from "../frontend/pages/carDetails/CarDetails";
 import ImportOnOrder from "../frontend/pages/importOnOrder/ImportOnOrder";
 import Login from "../frontend/pages/auth/Login";
@@ -26,6 +27,7 @@ function Routers() {
       <Route path="/buy_cars" element={<BuyCars />} />
       <Route path="/bodyShape/:shape" element={<BodyShape />} />
       {/* <Route path="/rentCars" element={<RentCars />} /> */}
+      <Route path="/car_rental_overview/:stock/:name" element={<CarRentalOverView />} />
       <Route path="/import_on_order" element={<ImportOnOrder />} />
       <Route path="/login" element={<Login />} />
       <Route path="/sign-up" element={<SignUp />} />

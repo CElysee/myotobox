@@ -20,7 +20,7 @@ function Home() {
         </div>
       </div>
 
-      {/* <RentCarsGrid /> */}
+      <RentCarsGrid />
       <WhyChooseUs />
     </div>
   );

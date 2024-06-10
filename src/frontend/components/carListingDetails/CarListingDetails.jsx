@@ -351,7 +351,7 @@ function CarListingDetails({ carDetails, carFeatures }) {
             <h3 className="heading-base" data-qa="Heading">
               <strong>Listed By</strong>
               <div className="heading-base mt-1" data-qa="Heading">
-                {carDetails.car_seller_name}
+                {carDetails.car_renter_name}
               </div>
             </h3>
           </div>
@@ -399,7 +399,7 @@ function CarListingDetails({ carDetails, carFeatures }) {
           <div className="seller-note-body">
             <div
               dangerouslySetInnerHTML={{
-                __html: carDetails.seller_note,
+                __html: carDetails.renter_note,
               }}
             />
           </div>
