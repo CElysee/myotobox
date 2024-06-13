@@ -16,6 +16,7 @@ import TaxCalculator from "../frontend/pages/taxCalculator/TaxCalculator";
 import TaxCalculatorMessage from "../frontend/pages/messages/TaxCalculatorMessage";
 import SignUp from "../frontend/pages/auth/SignUp";
 import AccountCreated from "../frontend/pages/messages/AccountCreated";
+import RentalBookingMessage from "../frontend/pages/messages/RentalBookingMessage";
 
 function Routers() {
   return (
@@ -34,6 +35,7 @@ function Routers() {
       <Route path="/account-created" element={<AccountCreated />} />
       <Route path="dashboard" element={<UserDashboard />} />
       <Route path="/booking_message" element={<ThankYouBookingTestDrive />} />
+      <Route path="/rental_confirmation" element={<RentalBookingMessage />} />
       <Route
         path="/import_on_order_message"
         element={<ImportOnOrderMessage />}

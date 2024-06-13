@@ -13,6 +13,7 @@ import { selectIsAuthenticated } from "../../../features/userSlice";
 import { useSelector } from "react-redux";
 import AuthLogin from "../auth/Login";
 import BookRentalCar from "../bookRentalCar/BookRentalCar";
+import CarDetails from "../../pages/carRentalOverView/CarRentalOverView";
 
 function RentalMoreDetails() {
   const urlParams = useParams();
@@ -102,7 +103,7 @@ function RentalMoreDetails() {
                                       strokeLinejoin="round"
                                     />
                                   </svg>
-                                  Great Deal
+                                  {carDetails.car_status}
                                 </span>
                               </div>
                             </button>
@@ -123,7 +124,7 @@ function RentalMoreDetails() {
                         </span>
                       </button>
                       {isAboutToBook && isAuthenticated ? (
-                        <BookRentalCar />
+                        <BookRentalCar carDetails={carDetails} />
                       ) : !isAuthenticated && isAboutToBook ? (
                         <AuthLogin isAboutToBook={setIsAboutToBook} />
                       ) : null}
