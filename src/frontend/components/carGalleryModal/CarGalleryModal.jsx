@@ -14,11 +14,10 @@ function CarGalleryModal({gallery, modalTitle}) {
     >
       <div className="modal-dialog modal-fullscreen">
         <div className="modal-content">
-          <div className="modal-header">
+          <div className="modal-header" style={{paddingBottom: "15px !important"}}>
             <button
               type="button"
-              data-bs-dismiss="modal"
-              aria-label="Close"
+              data-dismiss="modal"
               className="_5kaapu"
               style={{ borderRadius: "50%" }}
             >

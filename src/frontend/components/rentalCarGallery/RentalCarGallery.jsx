@@ -128,8 +128,8 @@ function RentalCarGallery() {
                             data-section="exterior"
                             data-id={car.stock_number}
                             type="button"
-                            data-bs-toggle="modal"
-                            data-bs-target="#exampleModal"
+                            data-toggle="modal"
+                            data-target="#exampleModal"
                           />
                         </div>
                         <div className="images">
@@ -139,8 +139,8 @@ function RentalCarGallery() {
                                 className="preload-wrap loaded"
                                 key={index}
                                 type="button"
-                                data-bs-toggle="modal"
-                                data-bs-target="#exampleModal"
+                                data-toggle="modal"
+                                data-target="#exampleModal"
                               >
                                 <img
                                   src={`${imageBaseUrl}/CarRentImages/${image.image_name}`}
@@ -165,6 +165,9 @@ function RentalCarGallery() {
                               <div
                                 data-section="interior"
                                 data-id="all"
+                                type="button"
+                                data-toggle="modal"
+                                data-target="#exampleModal"
                                 className="all"
                               >
                                 All Photos ({galleryImages.length + 1})
