@@ -99,7 +99,7 @@ function BookRentalCar({ carDetails }) {
                 value={inputValues.start_date}
               />
             </div>
-            <div className="col-md-6 form-group">
+            {/* <div className="col-md-6 form-group">
               <label className="col-form-label">Start Time</label>
               <input
                 className="form-control"
@@ -109,7 +109,7 @@ function BookRentalCar({ carDetails }) {
                 onChange={handleFormInputs}
                 value={inputValues.start_time}
               />
-            </div>
+            </div> */}
             <div className="col-md-6 form-group">
               <label className="col-form-label">End Date</label>
               <input
@@ -122,7 +122,7 @@ function BookRentalCar({ carDetails }) {
                 value={inputValues.end_date}
               />
             </div>
-            <div className="col-md-6 form-group">
+            {/* <div className="col-md-6 form-group">
               <label className="col-form-label">End Time</label>
               <input
                 className="form-control"
@@ -132,7 +132,7 @@ function BookRentalCar({ carDetails }) {
                 onChange={handleFormInputs}
                 value={inputValues.end_time}
               />
-            </div>
+            </div> */}
           </div>
           <div className="row">
             <div className="col-md-6 form-group">
