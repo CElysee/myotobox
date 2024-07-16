@@ -1,19 +1,11 @@
-import { createSlice } from "@reduxjs/toolkit";
+import React from "react";
+import { useSelector } from "react-redux";
+import { Navigate, Outlet } from "react-router-dom";
+import { selectIsAuthenticated } from "../src/features/userSlice";
 
-export const greetingSlice = createSlice({
-  name: "greeting",
-  initialState: {
-    currentTime: new Date().getHours(),
-    greeting_time:
-      new Date().getHours() < 12
-        ? "Good Morning"
-        : new Date().getHours() < 18
-        ? "Good Afternoon"
-        : "Good Evening", // Update greeting directly in state
-  },
-  reducers: {
-  },
-});
+const PrivateRoutes = ({ component: component, ...rest }) => {
+  const isAuthenticated = useSelector(selectIsAuthenticated);
+  return isAuthenticated ? <Outlet /> : <Navigate to="/" />;
+};
 
-export const { setTime } = greetingSlice.actions;
-export default greetingSlice.reducer;
+export default PrivateRoutes;

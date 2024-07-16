@@ -1,19 +1,18 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import RiseLoader from "react-spinners/RiseLoader";
-import "./RentCars.css";
+import "./BuyCars";
 import makeAnimated from "react-select/animated";
-// import SellCarsGrid from "../../components/sellCarsGrid/SellCarsGrid";
+import SellCarsGrid from "../../components/sellCarsGrid/SellCarsGrid";
 import axiosInstance from "../../../../utils/AxiosInstance";
 import Select from "react-select";
 import ContentLoader from "react-content-loader";
-import MobileFilter from "./MobileFilter";
 import {
   formatNumber,
   formatAmount,
   truncateText,
 } from "../../../../utils/Helpers";
-import RentCarsGrid from "../../components/rentCarsGrid/RentCarsGrid";
+import MobileFilter from "./MobileFilter";
 
 const override = {
   display: "block",
@@ -21,12 +20,13 @@ const override = {
   borderColor: "#e55812",
   paddingRight: "10px",
 };
-function RentCars() {
+function BodyShape() {
   const make_search = useParams();
   const navigate = useNavigate();
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const [brandName, setBrandName] = useState(make_search.make);
+  const [bodyShape, setBodyShape] = useState(make_search.shape);
+  const [brandName, setBrandName] = useState();
   const [selectedBrand, setSelectedBrand] = useState([]);
   const [brandModels, setBrandModels] = useState([]);
   const [selectedModel, setSelectedModel] = useState([]);
@@ -35,7 +35,7 @@ function RentCars() {
   const [listBrands, setListBrands] = useState([]);
   const imageBaseUrl = import.meta.env.VITE_REACT_APP_API;
   const [color, setColor] = useState("#fff");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [skeletonLoading, setSkeletonLoading] = useState(false);
   const [skeleton, setSkeleton] = useState([1, 2, 3, 4]);
   const [updateUrl, setUpdateUrl] = useState(false);
@@ -70,10 +70,10 @@ function RentCars() {
   const [inputValues, setInputValues] = useState({
     brand_id: "",
     model_id: "",
-    min_input_price: minInputPrice || "",
-    max_input_price: maxInputPrice || "",
-    start_year: startYear || "",
-    end_year: endYear || "",
+    min_input_price: minInputPrice,
+    max_input_price: maxInputPrice,
+    start_year: startYear,
+    end_year: endYear,
     start_kilometers: "",
     end_kilometers: "",
     car_transmission: "",
@@ -84,11 +84,11 @@ function RentCars() {
     setBrandModels([]);
     const fetchData = async () => {
       // const response = await axiosInstance.get("/car_for_sale/list");
-      const list_brands = await axiosInstance.get("/car_for_rent/car_brands");
-      // console.log("list_brands", list_brands);
-      if (brandName) {
+      const list_brands = await axiosInstance.get("/car_for_sale/car_brands");
+      if (selectedBrand !== null && selectedBrand.label) {
         const brand = list_brands.data.car_brand.filter(
-          (brand) => brand.name.toLowerCase() == brandName.toLowerCase()
+          (brand) =>
+            brand.name.toLowerCase() == selectedBrand.label.toLowerCase()
         );
         setSelectedBrand({
           value: brand[0].id,
@@ -107,7 +107,6 @@ function RentCars() {
           }
         }
       }
-
       setListBrands(list_brands.data.car_brand);
     };
     fetchData();
@@ -117,8 +116,11 @@ function RentCars() {
     setSkeletonLoading(true);
     const fetchData = async () => {
       try {
-        let url = `/car_for_rent/makeModels?make=${brandName}`;
+        let url = `/car_for_sale/makeModels?shape=${bodyShape}`;
 
+        if (brandName !== null) {
+          url += `&make=${brandName}`;
+        }
         // Append model_id if it's not null
         if (model_id !== null) {
           url += `&model_id=${model_id}`;
@@ -126,30 +128,23 @@ function RentCars() {
         // Append min_input_price if it's not null
         if (minInputPrice !== null) {
           url += `&min_input_price=${minInputPrice}`;
-        }else{
-          url += `&min_input_price=1`;
         }
 
         // Append max_input_price if it's not null
         if (maxInputPrice !== null) {
           url += `&max_input_price=${maxInputPrice}`;
-        }else{
-          url += `&max_input_price=550000000`;
         }
 
         // Append start_year if it's not null
         if (startYear !== null) {
           url += `&start_year=${startYear}`;
-        }else{
-          url += `&start_year=1950`;
         }
 
         // Append end_year if it's not null
         if (endYear !== null) {
           url += `&end_year=${endYear}`;
-        }else{
-          url += `&end_year=${new Date().getFullYear()}`;
         }
+
         // Append start_kilometers if it's not null
         if (start_kilometers !== null) {
           url += `&start_kilometers=${start_kilometers}`;
@@ -171,10 +166,10 @@ function RentCars() {
         }
 
         const make_models = await axiosInstance.get(url);
-        setMakeWithModels(make_models.data.cars_for_rent);
-        console.log("make_models", make_models);
-        setCountCarsForSale(make_models.data.count_cars_for_rent);
+        setMakeWithModels(make_models.data.cars_for_sale);
+        setCountCarsForSale(make_models.data.count_cars_for_sale);
         setSkeletonLoading(false);
+        setLoading(false);
       } catch (error) {
         console.log("Error fetching data", error);
         setSkeletonLoading(false);
@@ -194,6 +189,7 @@ function RentCars() {
     end_kilometers,
     carTransmission,
     fuelType,
+    bodyShape,
   ]);
 
   const filteredModels = makeWithModels.filter((model) => model.count_cars > 0);
@@ -232,7 +228,6 @@ function RentCars() {
     const { name, value } = e.target;
     setInputValues({ ...inputValues, [name]: value });
     setUpdateOnChangeFilter(true);
-    setShowResultsNumber({ ...showResultsNumber, category: "price" });
   };
 
   // Handle Price filter
@@ -244,7 +239,6 @@ function RentCars() {
   const handleYearChange = async (e) => {
     const { name, value } = e.target;
     setInputValues({ ...inputValues, [name]: value });
-    setShowResultsNumber({ ...showResultsNumber, category: "year" });
     setUpdateOnChangeFilter(true);
   };
 
@@ -257,7 +251,6 @@ function RentCars() {
   const handleKilometersChange = async (e) => {
     const { name, value } = e.target;
     setInputValues({ ...inputValues, [name]: value });
-    setShowResultsNumber({ ...showResultsNumber, category: "kilometers" });
     setUpdateOnChangeFilter(true);
   };
 
@@ -269,14 +262,12 @@ function RentCars() {
   // Handle Transmission change
   const handleTransmissionChange = (transmissionType) => {
     setInputValues({ ...inputValues, car_transmission: transmissionType });
-    setShowResultsNumber({ ...showResultsNumber, category: "transmission" });
     setUpdateOnChangeFilter(true);
   };
 
   // Handle Fuel type change
   const handleFuelTypeChange = (fuelType) => {
     setInputValues({ ...inputValues, fuel_type: fuelType });
-    setShowResultsNumber({ ...showResultsNumber, category: "fuel" });
     setUpdateOnChangeFilter(true);
   };
 
@@ -341,11 +332,16 @@ function RentCars() {
       const endKilometers = end_kilometers ? end_kilometers : 1000000;
       // Construct the base URL with brandName and selectedModel.label
 
-      let url = `/car_for_rent/makeModels?make=${brandName}`;
+      let url = `/car_for_sale/makeModels?shape=${bodyShape}`;
 
+      if (brandName !== null) {
+        url += `?make=${brandName}`;
+      }
       // Add query parameters only if their values are not empty
       if (selectedModel !== null && selectedModel.label) {
-        url += `?model_id=${selectedModel.label.toLowerCase()}`;
+        url += `${
+          url.includes("?") ? "&" : "?"
+        }model_id=${selectedModel.label.toLowerCase()}`;
       }
       if (minPrice) {
         url += `${url.includes("?") ? "&" : "?"}min_input_price=${minPrice}`;
@@ -382,11 +378,7 @@ function RentCars() {
         try {
           const response = await axiosInstance.get(url);
           setLoading(false);
-          setCountCarsForSale(response.data);
-          setShowResultsNumber({
-            ...showResultsNumber,
-            results: response.data.count_cars_for_sale,
-          });
+          setCountCarsForSale(response.data.count_cars_for_sale);
         } catch (error) {
           console.log("Error while filtering", error);
           setLoading(false);
@@ -395,7 +387,14 @@ function RentCars() {
       fetchData();
       setUpdateOnChangeFilter(false); // Reset the flag after update
     }
-  }, [updateOnChangeFilter, brandName, navigate, inputValues, selectedModel]);
+  }, [
+    updateOnChangeFilter,
+    brandName,
+    navigate,
+    inputValues,
+    selectedModel,
+    bodyShape,
+  ]);
 
   // Update URL with when filters are applied
   useEffect(() => {
@@ -423,11 +422,16 @@ function RentCars() {
       const startKilometers = start_kilometers ? start_kilometers : 1;
       const endKilometers = end_kilometers ? end_kilometers : 1000000;
       // Construct the base URL with brandName and selectedModel.label
-      let url = `/rent_cars/${brandName}`;
+      let url = `/bodyShape/${bodyShape}`;
 
+      if (brandName !== null) {
+        url += `?make=${brandName}`;
+      }
       // Add query parameters only if their values are not empty
       if (selectedModel !== null && selectedModel.label) {
-        url += `?model_id=${selectedModel.label.toLowerCase()}`;
+        url += `${
+          url.includes("?") ? "&" : "?"
+        }model_id=${selectedModel.label.toLowerCase()}`;
       }
       if (min_input_price) {
         url += `${url.includes("?") ? "&" : "?"}min_input_price=${minPrice}`;
@@ -467,12 +471,9 @@ function RentCars() {
   const handleDropdownClick = (e) => {
     e.stopPropagation(); // Prevents the default behavior of event propagation
   };
+
   return (
-    <section
-      className="bpage container page home"
-      id="NotFound"
-      style={{ paddingTop: "100px" }}
-    >
+    <section className="bpage container page home" id="NotFound">
       <div className="row justify-content-center">
         <div className="filterbar">
           <div className="car_filter mobile-hide">
@@ -622,14 +623,11 @@ function RentCars() {
                           aria-label="Loading Spinner"
                           data-testid="loader"
                         />
-                      ) : showResultsNumber.category === "price" ? (
-                        showResultsNumber.results > 0 ? (
-                          `${showResultsNumber.results} Results`
-                        ) : (
-                          `No Results`
-                        )
+                      ) : showResultsNumber.results !== null &&
+                        showResultsNumber.category == "price" ? (
+                        `Show ${showResultsNumber.results} Results`
                       ) : (
-                        `${showResultsNumber.results} Apply filters`
+                        "Apply filters"
                       )}
                     </button>
                   </div>
@@ -756,14 +754,11 @@ function RentCars() {
                           aria-label="Loading Spinner"
                           data-testid="loader"
                         />
-                      ) : showResultsNumber.category === "year" ? (
-                        showResultsNumber.results > 0 ? (
-                          `${showResultsNumber.results} Results`
-                        ) : (
-                          `No Results`
-                        )
+                      ) : showResultsNumber.results !== null &&
+                        showResultsNumber.category == "year" ? (
+                        `Show ${showResultsNumber.results} Results`
                       ) : (
-                        `${showResultsNumber.results} Apply filters`
+                        "Apply filters"
                       )}
                     </button>
                   </div>
@@ -887,14 +882,11 @@ function RentCars() {
                           aria-label="Loading Spinner"
                           data-testid="loader"
                         />
-                      ) : showResultsNumber.category === "kilometers" ? (
-                        showResultsNumber.results > 0 ? (
-                          `${showResultsNumber.results} Results`
-                        ) : (
-                          `No Results`
-                        )
+                      ) : showResultsNumber.results !== null &&
+                        showResultsNumber.category == "kilometers" ? (
+                        `Show ${showResultsNumber.results} Results`
                       ) : (
-                        `${showResultsNumber.results} Apply filters`
+                        "Apply filters"
                       )}
                     </button>
                   </div>
@@ -904,7 +896,7 @@ function RentCars() {
 
             <div className="iEzCwv thirdItem">
               <label className="form-label" htmlFor="expertise">
-                Other Filters
+                Filters
               </label>
               <div className="dropdown" style={{ display: "flex" }}>
                 <button
@@ -1212,7 +1204,7 @@ function RentCars() {
             handleKilometersFilter={handleKilometersFilter}
           />
 
-          <div className="sc-2be0ug-3 jbRQcv pt-4 mobile-remove-padding">
+          <div className="sc-2be0ug-3 jbRQcv pt-4">
             <div className="sc-2be0ug-4 dGXCjo custom-color">
               <div className="sc-1gw24wa-0 ligASl">
                 <div className="sc-a5hw56-0 eDOeRK sc-1xfau7x-0 isSldw">
@@ -1266,8 +1258,8 @@ function RentCars() {
               </ContentLoader>
             ))
           ) : (
-            <RentCarsGrid
-              rentBrandName={brandName}
+            <SellCarsGrid
+              brandName={brandName}
               makeWithModels={makeWithModels}
               countCars={countCarsForSale}
             />
@@ -1278,4 +1270,4 @@ function RentCars() {
   );
 }
 
-export default RentCars;
+export default BodyShape;

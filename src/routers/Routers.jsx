@@ -7,7 +7,7 @@ import CarDetails from "../frontend/pages/carDetails/CarDetails";
 import ImportOnOrder from "../frontend/pages/importOnOrder/ImportOnOrder";
 import Login from "../frontend/pages/auth/Login";
 import PrivateRoutes from "../../utils/PrivateRoutes";
-import UserDashboard from "../dashboard/user/UserDashboard";
+// import UserDashboard from "../dashboard/user/UserDashboard";
 import NotFound from "../frontend/pages/notFound/NotFound";
 import BodyShape from "../frontend/pages/BuyCars/BodyShape";
 import ThankYouBookingTestDrive from "../frontend/pages/messages/ThankYouBookingTestDrive";
@@ -17,6 +17,12 @@ import TaxCalculatorMessage from "../frontend/pages/messages/TaxCalculatorMessag
 import SignUp from "../frontend/pages/auth/SignUp";
 import AccountCreated from "../frontend/pages/messages/AccountCreated";
 import RentalBookingMessage from "../frontend/pages/messages/RentalBookingMessage";
+import UserDashboard from "../frontend/pages/dashboard/Dashboard";
+import UserProfile from "../frontend/pages/dashboard/Profile";
+import UserBookedTestDrive from "../frontend/pages/dashboard/BookedTestDrive";
+import UserBookedRentals from "../frontend/pages/dashboard/BookedRentals";
+import UserImportOnOrders from "../frontend/pages/dashboard/ImportOnOrders";
+import UserTaxCalculator from "../frontend/pages/dashboard/TaxCalculator";
 
 function Routers() {
   return (
@@ -27,8 +33,13 @@ function Routers() {
       <Route path="/buy_cars/:make" element={<BuyCars />} />
       <Route path="/buy_cars" element={<BuyCars />} />
       <Route path="/bodyShape/:shape" element={<BodyShape />} />
-      {/* <Route path="/rentCars" element={<RentCars />} /> */}
-      <Route path="/car_rental_overview/:stock/:name" element={<CarRentalOverView />} />
+      <Route path="/rent_cars" element={<RentCars />} />
+      <Route path="/rent_cars/:make/:model" element={<RentCars />} />
+      <Route path="/rent_cars/:make" element={<RentCars />} />
+      <Route
+        path="/car_rental_overview/:stock/:name"
+        element={<CarRentalOverView />}
+      />
       <Route path="/import_on_order" element={<ImportOnOrder />} />
       <Route path="/login" element={<Login />} />
       <Route path="/sign-up" element={<SignUp />} />
@@ -45,12 +56,19 @@ function Routers() {
         path="/car_tax_calculator_results/:id"
         element={<TaxCalculatorMessage />}
       />
+
+      <Route path="/user/*" element={<PrivateRoutes />}>
+        <Route path="dashboard" element={<UserDashboard />} />
+        <Route path="profile" element={<UserProfile />} />
+        <Route path="booked_test_drive" element={<UserBookedTestDrive />} />
+        <Route path="booked_rentals" element={<UserBookedRentals />} />
+        <Route path="import_on_orders" element={<UserImportOnOrders />} />
+        <Route path="tax_calculated" element={<UserTaxCalculator />} />
+        <Route path="*" element={<NotFound />} />
+      </Route>
       <Route path="/404" element={<NotFound />} />
 
       <Route path="*" element={<NotFound />} />
-      <Route path="/user/*" element={<PrivateRoutes />}>
-        <Route path="dashboard" element={<UserDashboard />} />
-      </Route>
     </Routes>
   );
 }

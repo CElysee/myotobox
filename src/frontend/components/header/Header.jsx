@@ -17,7 +17,7 @@ function Header() {
       display: "Buy",
     },
     {
-      path: "#",
+      path: "/rent_cars",
       display: "Rent",
     },
     {
@@ -193,10 +193,9 @@ function Header() {
 
         {isAuthenticated ? (
           <Link
-            to={"/"}
+            to={"/user/dashboard"}
             className="btn btn-primary btn-lg btn-signin"
             style={{ marginRight: "10px", width: "auto", padding: "0px 10px" }}
-            onClick={navigateToSignUp}
           >
             {selectedUser.name} - My Account
           </Link>

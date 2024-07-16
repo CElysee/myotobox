@@ -19,11 +19,10 @@ function RentCarsGrid(rentBrandName, makeWithModels, countCars) {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      if (rentBrandName && Object.keys(rentBrandName).length > 0) {
-        setCarsForRent(makeWithModels);
+      if (rentBrandName.rentBrandName && makeWithModels) {
+        setCarsForRent(rentBrandName.makeWithModels);
         setCountCarsForRent(countCars);
         setLoading(false);
-        console.log("makeWithModels is not null", makeWithModels);
       } else {
         const response = await axiosInstance.get(`/car_for_rent/list`);
         setCarsForRent(response.data.cars_for_rent);
@@ -51,10 +50,17 @@ function RentCarsGrid(rentBrandName, makeWithModels, countCars) {
           <div className="col primary">
             <div className="heading clearfix">
               <h1>
-                Rent cars <span className="makeName">{""}</span> cars online in
-                Rwanda.{" "}
+                Rent the best{" "}
+                <span className="makeName">
+                  <span className="makeName">
+                    {rentBrandName.rentBrandName
+                      ? rentBrandName.rentBrandName?.toUpperCase()
+                      : ""}
+                  </span>
+                </span>{" "}
+                cars online in Rwanda.
                 <span className="text-sm-2 graph-icon-title ml-1 vehicle-card-price-rating-label font-bold">
-                  {formatAmount(countCarsForRent)} cars
+                  {countCarsForRent ? formatAmount(countCarsForRent) : "0"} cars
                 </span>
               </h1>
             </div>
@@ -194,7 +200,8 @@ function RentCarsGrid(rentBrandName, makeWithModels, countCars) {
                                 data-test="vehicleCardPricingBlockPrice"
                               >
                                 <span data-test="vehicleListingPriceAmount">
-                                  {formatAmount(car.car_price_per_day)} Rwf / Day
+                                  {formatAmount(car.car_price_per_day)} Rwf /
+                                  Day
                                 </span>
                               </div>
                             </div>
@@ -243,8 +250,11 @@ function RentCarsGrid(rentBrandName, makeWithModels, countCars) {
                 <div className="sc-fThUAz GNSHw">
                   <h3 className="sc-kMribo kQonRp">
                     At this time, we do not have any{" "}
-                    {Object.keys(rentBrandName).length > 0 &&
-                      rentBrandName.toUpperCase()}{" "}
+                    <span className="makeName">
+                      {rentBrandName.rentBrandName
+                        ? rentBrandName.rentBrandName?.toUpperCase()
+                        : ""}
+                    </span>
                     vehicles matching your search in stock. We're happy to
                     assist you with alternative choices.
                   </h3>
