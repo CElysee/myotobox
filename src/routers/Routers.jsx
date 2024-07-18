@@ -9,7 +9,7 @@ import Login from "../frontend/pages/auth/Login";
 import PrivateRoutes from "../../utils/PrivateRoutes";
 // import UserDashboard from "../dashboard/user/UserDashboard";
 import NotFound from "../frontend/pages/notFound/NotFound";
-import BodyShape from "../frontend/pages/BuyCars/BodyShape";
+import BodyShape from "../frontend/pages/buyCars/BodyShape";
 import ThankYouBookingTestDrive from "../frontend/pages/messages/ThankYouBookingTestDrive";
 import ImportOnOrderMessage from "../frontend/pages/messages/ImportOnOrderMessage";
 import TaxCalculator from "../frontend/pages/taxCalculator/TaxCalculator";
