@@ -46,13 +46,13 @@ function SellCarsGrid({ brandName, makeWithModels, countCars }) {
   };
   return (
     <>
-      <div className="featured-tabs page container home">
+      <div className="featured-tabs page container home pt-3">
         <div className="row">
           <div className="col primary">
             <div className="heading clearfix">
               <h1>
-                Buy & sell <span className="makeName">{brandName}</span> cars
-                online in Rwanda.{" "}
+                Buy & Sell Cars <span className="makeName">{brandName}</span>{" "}
+                Online in Rwanda | Affordable & Trusted{" "},
                 <span className="text-sm-2 graph-icon-title ml-1 vehicle-card-price-rating-label font-bold">
                   {formatAmount(countCarsForSale)} cars
                 </span>
@@ -76,7 +76,7 @@ function SellCarsGrid({ brandName, makeWithModels, countCars }) {
             </ContentLoader>
           ))
         ) : (
-          <div className="row pt-3">
+          <div className="row pt-4">
             {carsForSale.length > 0 ? (
               carsForSale.map((car, index) => (
                 <div className="auction-item col-md-3 pb-4" key={index}>

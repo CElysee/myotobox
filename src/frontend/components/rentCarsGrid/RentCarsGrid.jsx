@@ -17,18 +17,24 @@ function RentCarsGrid(rentBrandName, makeWithModels, countCars) {
   const imageBaseUrl = import.meta.env.VITE_REACT_APP_API;
 
   useEffect(() => {
+    // console.log("rentBrandName", rentBrandName.makeWithModels.length);
     const fetchData = async () => {
       setLoading(true);
-      if (rentBrandName.rentBrandName && makeWithModels) {
-        setCarsForRent(rentBrandName.makeWithModels);
-        setCountCarsForRent(countCars);
-        setLoading(false);
+      if (rentBrandName && rentBrandName.makeWithModels) {
+        if (rentBrandName.makeWithModels.length > 0) {
+          setCarsForRent(rentBrandName.makeWithModels);
+          setCountCarsForRent(rentBrandName.makeWithModels.length);
+        } else {
+          const response = await axiosInstance.get(`/car_for_rent/list`);
+          setCarsForRent(response.data.cars_for_rent);
+          setCountCarsForRent(response.data.count_cars_for_rent);
+        }
       } else {
         const response = await axiosInstance.get(`/car_for_rent/list`);
         setCarsForRent(response.data.cars_for_rent);
         setCountCarsForRent(response.data.count_cars_for_rent);
-        setLoading(false);
       }
+      setLoading(false);
     };
     fetchData();
   }, [rentBrandName, makeWithModels, countCars]);
@@ -45,12 +51,12 @@ function RentCarsGrid(rentBrandName, makeWithModels, countCars) {
   };
   return (
     <>
-      <div className="featured-tabs page container home pt-3">
+      <div className="featured-tabs page container home pt-4">
         <div className="row flex-nowrap">
           <div className="col primary">
             <div className="heading clearfix">
               <h1>
-                Rent the best{" "}
+              Rent Top{" "}
                 <span className="makeName">
                   <span className="makeName">
                     {rentBrandName.rentBrandName
@@ -58,7 +64,7 @@ function RentCarsGrid(rentBrandName, makeWithModels, countCars) {
                       : ""}
                   </span>
                 </span>{" "}
-                cars online in Rwanda.
+                Cars Online in Rwanda | Affordable Rates & Reliable Service,
                 <span className="text-sm-2 graph-icon-title ml-1 vehicle-card-price-rating-label font-bold">
                   {countCarsForRent ? formatAmount(countCarsForRent) : "0"} cars
                 </span>
@@ -81,7 +87,7 @@ function RentCarsGrid(rentBrandName, makeWithModels, countCars) {
             </ContentLoader>
           ))
         ) : (
-          <div className="row pt-3">
+          <div className="row pt-4">
             {carsForRent.length > 0 ? (
               carsForRent.map((car, index) => (
                 <div className="auction-item col-md-3 pb-4" key={index}>

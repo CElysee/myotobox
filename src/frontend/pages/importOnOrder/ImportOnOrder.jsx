@@ -112,7 +112,7 @@ function ImportOnOrder() {
   };
 
   return (
-    <div className="main_content import_on_order" style={{ marginTop: "83px" }}>
+    <div className="main_content import_on_order">
       <div className="banner-section1">
         <div className="row">
           <div

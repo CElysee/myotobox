@@ -126,28 +126,28 @@ function RentCars() {
         // Append min_input_price if it's not null
         if (minInputPrice !== null) {
           url += `&min_input_price=${minInputPrice}`;
-        }else{
+        } else {
           url += `&min_input_price=1`;
         }
 
         // Append max_input_price if it's not null
         if (maxInputPrice !== null) {
           url += `&max_input_price=${maxInputPrice}`;
-        }else{
+        } else {
           url += `&max_input_price=550000000`;
         }
 
         // Append start_year if it's not null
         if (startYear !== null) {
           url += `&start_year=${startYear}`;
-        }else{
+        } else {
           url += `&start_year=1950`;
         }
 
         // Append end_year if it's not null
         if (endYear !== null) {
           url += `&end_year=${endYear}`;
-        }else{
+        } else {
           url += `&end_year=${new Date().getFullYear()}`;
         }
         // Append start_kilometers if it's not null
@@ -278,6 +278,11 @@ function RentCars() {
     setInputValues({ ...inputValues, fuel_type: fuelType });
     setShowResultsNumber({ ...showResultsNumber, category: "fuel" });
     setUpdateOnChangeFilter(true);
+  };
+
+  // Handle Year filter
+  const handleOtherFilters = () => {
+    setUpdateUrl(true);
   };
 
   const handleReset = (data) => {
@@ -423,8 +428,12 @@ function RentCars() {
       const startKilometers = start_kilometers ? start_kilometers : 1;
       const endKilometers = end_kilometers ? end_kilometers : 1000000;
       // Construct the base URL with brandName and selectedModel.label
-      let url = `/rent_cars/${brandName}`;
 
+      let url = `/rent_cars`;
+
+      if (brandName) {
+        url = `/rent_cars/${brandName}`;
+      }
       // Add query parameters only if their values are not empty
       if (selectedModel !== null && selectedModel.label) {
         url += `?model_id=${selectedModel.label.toLowerCase()}`;
@@ -471,7 +480,6 @@ function RentCars() {
     <section
       className="bpage container page home"
       id="NotFound"
-      style={{ paddingTop: "100px" }}
     >
       <div className="row justify-content-center">
         <div className="filterbar">
@@ -1164,9 +1172,9 @@ function RentCars() {
                         (showResultsNumber.category == "transmission" ||
                           showResultsNumber.category == "fuel")
                       }
-                      onClick={handleYearFilter}
+                      onClick={handleOtherFilters}
                     >
-                      {loading ? (
+                      {/* {loading ? (
                         <RiseLoader
                           color={color}
                           loading={loading}
@@ -1181,6 +1189,25 @@ function RentCars() {
                         `Show ${showResultsNumber.results} Results`
                       ) : (
                         "Apply filters"
+                      )} */}
+                      {loading ? (
+                        <RiseLoader
+                          color={color}
+                          loading={loading}
+                          cssOverride={override}
+                          size={10}
+                          aria-label="Loading Spinner"
+                          data-testid="loader"
+                        />
+                      ) : showResultsNumber.category == "transmission" ||
+                        showResultsNumber.category == "fuel" ? (
+                        showResultsNumber.results > 0 ? (
+                          `${showResultsNumber.results} Results`
+                        ) : (
+                          `No Results`
+                        )
+                      ) : (
+                        `${showResultsNumber.results} Apply filters`
                       )}
                     </button>
                   </div>
