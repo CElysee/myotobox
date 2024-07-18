@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Home from "../frontend/pages/home/Home";
-import BuyCars from "../frontend/pages/BuyCars/BuyCars";
+import BuyCars from "../frontend/pages/buyCars/BuyCars";
 import RentCars from "../frontend/pages/rentCars/RentCars";
 import CarRentalOverView from "../frontend/pages/carRentalOverView/CarRentalOverView";
 import CarDetails from "../frontend/pages/carDetails/CarDetails";
