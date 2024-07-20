@@ -1,11 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import axiosInstance from "../../../../utils/AxiosInstance";
 import { useSelector } from "react-redux";
-import { Editor } from "@tinymce/tinymce-react";
 import { selectUser, selectIsAuthenticated } from "../../../features/userSlice";
 import RiseLoader from "react-spinners/RiseLoader";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { useNavigate } from "react-router-dom";
 import { roundNumbers } from "../../../../utils/Helpers";
 import Login from "../../components/auth/Login";
@@ -24,8 +21,6 @@ function TaxCalculator() {
   const [carTrims, setCarTrims] = useState([]);
   const [usdToRwf, setUsdToRwf] = useState(0);
   const [formError, setFormErrors] = useState("");
-  const tinymce = import.meta.env.VITE_TINYMCE_API;
-  const editorRef = useRef(null);
   const navigate = useNavigate();
   const [loginTitle, setLoginTitle] = useState("Sign In to Calculate Taxes");
   const [inputValues, setInputValues] = useState({

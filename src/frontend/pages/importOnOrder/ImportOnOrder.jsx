@@ -5,9 +5,11 @@ import { useSelector } from "react-redux";
 import { Editor } from "@tinymce/tinymce-react";
 import { selectUser, selectIsAuthenticated } from "../../../features/userSlice";
 import RiseLoader from "react-spinners/RiseLoader";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
-import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+// import { CKEditor } from "@ckeditor/ckeditor5-react";
+// import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { useNavigate } from "react-router-dom";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 const override = {
   display: "block",
@@ -19,6 +21,7 @@ function ImportOnOrder() {
   const [carBrands, setCarBrands] = useState([]);
   const [carModels, setCarModels] = useState([]);
   const [carTrims, setCarTrims] = useState([]);
+  const [value, setValue] = useState('');
   const tinymce = import.meta.env.VITE_TINYMCE_API;
   const editorRef = useRef(null);
   const navigate = useNavigate();
@@ -404,7 +407,7 @@ function ImportOnOrder() {
                             "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
                         }}
                       /> */}
-                      <CKEditor
+                      {/* <CKEditor
                         editor={ClassicEditor}
                         data={inputValues.order_note}
                         onChange={handleEditorChange}
@@ -424,7 +427,8 @@ function ImportOnOrder() {
                             "alignment:justify",
                           ],
                         }}
-                      />
+                      /> */}
+                      <ReactQuill theme="snow" value={inputValues.order_note} onChange={handleEditorChange} />
                     </div>
                   </div>
 
