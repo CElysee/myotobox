@@ -17,7 +17,6 @@ const pages = [
 if (!fs.existsSync(criticalCssDir)) {
   fs.mkdirSync(criticalCssDir);
 }
-
 const extractCriticalCss = async () => {
   const browser = await puppeteer.launch({
     headless: true,
