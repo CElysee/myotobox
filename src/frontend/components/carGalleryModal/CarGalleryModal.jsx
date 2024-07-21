@@ -19,7 +19,6 @@ function CarGalleryModal({gallery, modalTitle}) {
               type="button"
               data-dismiss="modal"
               className="_5kaapu"
-              style={{ borderRadius: "50%" }}
             >
               <span className="i3tjjh1 atm_mk_h2mmj6 dir dir-ltr">
                 <svg

@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 function Home() {
   return (
-    <div className="main_content">
+    <div className="main_content" style={{paddingTop: "70px"}}>
       <BrandsWithBodyType />
       <SellCarsGrid />
       <div className="container mobile-gap">

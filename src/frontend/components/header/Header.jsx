@@ -193,7 +193,8 @@ function Header() {
 
         {isAuthenticated ? (
           <Link
-            to={"/user/dashboard"}
+            // to={"/user/dashboard"}
+            to={""}
             className="btn btn-primary btn-lg btn-signin"
             style={{ marginRight: "10px", width: "auto", padding: "0px 10px" }}
           >
@@ -394,7 +395,7 @@ function Header() {
                     <li className="nav-item">
                       <Link
                         className="btn btn-primary btn-lg btn-signin"
-                        onClick={navigateToSignUp}
+                        // onClick={navigateToSignUp}
                         style={{
                           width: "auto",
                           padding: "10px 10px",

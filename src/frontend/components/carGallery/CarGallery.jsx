@@ -79,7 +79,12 @@ function CarGallery() {
                       <h1>
                         {car.car_year} {car.car_name_info}
                       </h1>
-                      <div aria-hidden="true" className="_5kaapu">
+                      <div className="d-md-flex justify-content-between flex-wrap pl-2">
+                        <h2>
+                          <span className="inspected">Inspected</span>
+                        </h2>
+                      </div>
+                      <div aria-hidden="true" className="_5kaapu ml-2">
                         <span className="_14tkmhr">
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -110,12 +115,6 @@ function CarGallery() {
                         Share
                       </button>
                     </div>
-
-                    <div className="d-md-flex justify-content-between flex-wrap">
-                      <h2>
-                        <span className="inspected">Inspected</span>
-                      </h2>
-                    </div>
                   </div>
                 </div>
                 <div className="row car-photos">
@@ -129,8 +128,8 @@ function CarGallery() {
                             data-section="exterior"
                             data-id={car.stock_number}
                             type="button"
-                            data-bs-toggle="modal"
-                            data-bs-target="#exampleModal"
+                            data-toggle="modal"
+                            data-target="#exampleModal"
                           />
                         </div>
                         <div className="images">
@@ -140,8 +139,8 @@ function CarGallery() {
                                 className="preload-wrap loaded"
                                 key={index}
                                 type="button"
-                                data-bs-toggle="modal"
-                                data-bs-target="#exampleModal"
+                                data-toggle="modal"
+                                data-target="#exampleModal"
                               >
                                 <img
                                   src={`${imageBaseUrl}/CarSellImages/${image.image_name}`}

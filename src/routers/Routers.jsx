@@ -23,10 +23,13 @@ import UserBookedTestDrive from "../frontend/pages/dashboard/BookedTestDrive";
 import UserBookedRentals from "../frontend/pages/dashboard/BookedRentals";
 import UserImportOnOrders from "../frontend/pages/dashboard/ImportOnOrders";
 import UserTaxCalculator from "../frontend/pages/dashboard/TaxCalculator";
+import ScrollToTop from "../frontend/components/ScrollToTop/ScrollToTop";
 
 function Routers() {
   return (
-    <Routes scrollRestoration="auto">
+    <ScrollToTop>
+    <Routes>
+     
       <Route path="/" element={<Home />} />
       <Route path="/carDetails/:stock/:name" element={<CarDetails />} />
       <Route path="/buy_cars/:make/:model" element={<BuyCars />} />
@@ -69,7 +72,9 @@ function Routers() {
       <Route path="/404" element={<NotFound />} />
 
       <Route path="*" element={<NotFound />} />
+    
     </Routes>
+    </ScrollToTop>
   );
 }
 

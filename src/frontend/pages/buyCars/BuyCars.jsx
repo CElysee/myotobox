@@ -124,21 +124,28 @@ function BuyCars() {
         // Append min_input_price if it's not null
         if (minInputPrice !== null) {
           url += `&min_input_price=${minInputPrice}`;
+        } else {
+          url += `&min_input_price=1`;
         }
-
         // Append max_input_price if it's not null
         if (maxInputPrice !== null) {
           url += `&max_input_price=${maxInputPrice}`;
+        } else {
+          url += `&max_input_price=550000000`;
         }
 
         // Append start_year if it's not null
         if (startYear !== null) {
           url += `&start_year=${startYear}`;
+        } else {
+          url += `&start_year=1950`;
         }
 
         // Append end_year if it's not null
         if (endYear !== null) {
           url += `&end_year=${endYear}`;
+        } else {
+          url += `&end_year=${new Date().getFullYear()}`;
         }
 
         // Append start_kilometers if it's not null
@@ -413,8 +420,11 @@ function BuyCars() {
       const startKilometers = start_kilometers ? start_kilometers : 1;
       const endKilometers = end_kilometers ? end_kilometers : 1000000;
       // Construct the base URL with brandName and selectedModel.label
-      let url = `/buy_cars/${brandName}`;
+      let url = `/buy_cars`;
 
+      if (brandName) {
+        url = `/buy_cars/${brandName}`;
+      }
       // Add query parameters only if their values are not empty
       if (selectedModel !== null && selectedModel.label) {
         url += `?model_id=${selectedModel.label.toLowerCase()}`;
@@ -458,11 +468,7 @@ function BuyCars() {
     e.stopPropagation(); // Prevents the default behavior of event propagation
   };
   return (
-    <section
-      className="bpage container page home"
-      id="NotFound"
-      style={{ paddingTop: "100px" }}
-    >
+    <section className="bpage container page home" id="NotFound">
       <div className="row justify-content-center">
         <div className="filterbar">
           <div className="car_filter mobile-hide">

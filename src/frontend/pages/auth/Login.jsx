@@ -54,13 +54,7 @@ function Login() {
         console.log(response.data.access_token);
         localStorage.setItem("token", response.data.access_token);
         dispatch(login(response.data));
-        // switch (role) {
-        //   case "admin":
-        //     navigate("/admin/dashboard");
-        //     break;
-        //   default:
-        //     navigate("/");
-        // }
+        navigate("/");
       } catch (error) {
         console.error(error);
         notify(error.response.data.detail, "error");

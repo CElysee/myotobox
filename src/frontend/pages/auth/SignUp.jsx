@@ -11,6 +11,8 @@ import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import Select from "react-select";
 import { set } from "lodash";
+import { isValidPhoneNumber } from "libphonenumber-js";
+import zxcvbn from "zxcvbn";
 
 const override = {
   display: "block",
@@ -25,6 +27,13 @@ function Login() {
   const [formError, setFormError] = useState(false);
   const [countryList, setCountryList] = useState([]);
   const [selectedCountry, setSelectedCountry] = useState([]);
+  const [passwordStrength, setPasswordStrength] = useState("");
+  const [errors, setErrors] = useState({
+    phone: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
   const navigate = useNavigate();
 
   const [inputValues, setInputValues] = useState({
@@ -33,6 +42,7 @@ function Login() {
     firstName: "",
     lastName: "",
     password: "",
+    confirmPassword: "",
     gender: "",
     country_id: "",
   });
@@ -54,6 +64,25 @@ function Login() {
     label: country.name,
   }));
 
+  const handlePhoneChange = (value) => {
+    if (typeof value === "string" && isValidPhoneNumber(value)) {
+      setErrors({ ...errors, phone: "" });
+      setInputValues({ ...inputValues, phone_number: value });
+    } else {
+      setErrors({ ...errors, phone: "Invalid phone number." });
+    }
+  };
+  const handleEmailChange = (e) => {
+    const value = e.target.value;
+    console.log("Email", value);
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    setInputValues({ ...inputValues, email: value });
+    if (emailRegex.test(value)) {
+      setErrors({ ...errors, email: "" });
+    } else {
+      setErrors({ ...errors, email: "Invalid email address." });
+    }
+  };
   const handleCountryChange = (selectedOption) => {
     setInputValues({
       ...inputValues,
@@ -72,7 +101,47 @@ function Login() {
   const passwordView = () => {
     setShowPassword(!showPassword);
   };
+  const handlePasswordChange = (e) => {
+    const { name, value } = e.target;
+    setInputValues({ ...inputValues, [name]: value });
+    // Validate passwords
+    if (name === 'password') {
+      if (inputValues.password && inputValues.confirmPassword) {
+        if (inputValues.password.length < 6) {
+          setErrors({ ...errors, password: 'Password must be at least 6 characters long.' });
+        } else {
+          setErrors({ ...errors, password: '' });
+        }
+      }
+      // Update password strength
+      const result = zxcvbn(value);
+      setPasswordStrength(result.score);
+    }
+    if (name === 'confirmPassword') {
+      if (inputValues.password !== e.target.value) {
+        setErrors({ ...errors, confirmPassword: 'Passwords do not match.' });
+      } else {
+        setErrors({ ...errors, confirmPassword: '' });
+      }
+    }
+  };
 
+  const getPasswordStrengthText = (score) => {
+    switch (score) {
+      case 0:
+        return "Very Weak";
+      case 1:
+        return "Weak";
+      case 2:
+        return "Moderate";
+      case 3:
+        return "Strong";
+      case 4:
+        return "Very Strong";
+      default:
+        return "";
+    }
+  };
   const submitHandler = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -116,22 +185,22 @@ function Login() {
         <ToastContainer autoClose={5000} />
         <div className="row">
           <div
-            className="col-md-7"
+            className="col-md-6"
             style={{
-              backgroundImage: `url("/assets/images/login_1.jpg")`,
+              backgroundImage: `url("/assets/images/meta_image1.jpeg")`,
               backgroundSize: "cover",
               backgroundPosition: "center center",
               display: "block",
             }}
           ></div>
-          <div className="col-md-5 p-0">
+          <div className="col-md-6 p-0">
             <div className="login-card login-dark">
               <div>
                 <div className="login-main">
                   <form className="theme-form" onSubmit={submitHandler}>
                     <h4>
                       Join MyOtobox today and start exploring cars for sale and
-                      rent.
+                      rent in Rwanda.
                     </h4>
                     <p className="error">
                       {formError && "Please fill all the fields"}
@@ -143,7 +212,6 @@ function Login() {
                           className="form-control"
                           type="text"
                           name="firstName"
-                          placeholder="Murenzi"
                           onChange={handleValueChange}
                           value={inputValues.firstName}
                           required
@@ -155,7 +223,6 @@ function Login() {
                           className="form-control"
                           type="text"
                           name="lastName"
-                          placeholder="David"
                           onChange={handleValueChange}
                           value={inputValues.lastName}
                           required
@@ -169,26 +236,27 @@ function Login() {
                           placeholder="078*********"
                           defaultCountry="RW"
                           value={inputValues.phone_number}
-                          onChange={(value) => {
-                            setInputValues({
-                              ...inputValues,
-                              phone_number: value,
-                            });
-                          }}
+                          onChange={handlePhoneChange}
                           required
                         />
+                        {errors.phone && (
+                          <div style={{ color: "red" }}>{errors.phone}</div>
+                        )}
                       </div>
                       <div className="form-group">
                         <label className="col-form-label">Email</label>
                         <input
                           className="form-control"
                           type="email"
-                          name="email"
-                          placeholder="david@myotobox"
-                          onChange={handleValueChange}
+                          // name="email"
+                          // placeholder="david@gmail.com"
                           value={inputValues.email}
+                          onChange={handleEmailChange}
                           required
                         />
+                        {errors.email && (
+                          <div style={{ color: "red" }}>{errors.email}</div>
+                        )}
                       </div>
                     </div>
                     <div className="inline_form">
@@ -220,62 +288,142 @@ function Login() {
                         />
                       </div>
                     </div>
-                    <div className="form-group">
-                      <label className="col-form-label">Password</label>
-                      <div className="form-input position-relativ position-relative d-flex align-items-center input-container">
-                        <input
-                          className="form-control"
-                          type={showPassword ? "text" : "password"}
-                          name="password"
-                          placeholder="*********"
-                          onChange={handleValueChange}
-                          value={inputValues.password}
-                          required
-                        />
-                        <div
-                          className="cursor-pointer grey-2-text"
-                          onClick={passwordView}
-                        >
-                          <svg
-                            width="16px"
-                            height="16px"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            xmlns="http://www.w3.org/2000/svg"
+                    <div className="inline_form">
+                      <div className="form-group">
+                        <label className="col-form-label">Password</label>
+                        <div className="form-input position-relativ position-relative d-flex align-items-center input-container">
+                          <input
+                            className="form-control"
+                            type={showPassword ? "text" : "password"}
+                            name="password"
+                            placeholder="*********"
+                            onChange={handlePasswordChange}
+                            value={inputValues.password}
+                            required
+                          />
+                          <div
+                            className="cursor-pointer grey-2-text"
+                            onClick={passwordView}
                           >
-                            <g id="SVGRepo_bgCarrier" strokeWidth="0" />
+                            <svg
+                              width="16px"
+                              height="16px"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <g id="SVGRepo_bgCarrier" strokeWidth="0" />
 
-                            <g
-                              id="SVGRepo_tracerCarrier"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            />
-
-                            <g id="SVGRepo_iconCarrier">
-                              {" "}
-                              <path
-                                d="M15.0007 12C15.0007 13.6569 13.6576 15 12.0007 15C10.3439 15 9.00073 13.6569 9.00073 12C9.00073 10.3431 10.3439 9 12.0007 9C13.6576 9 15.0007 10.3431 15.0007 12Z"
-                                stroke="#000000"
-                                strokeWidth="2"
+                              <g
+                                id="SVGRepo_tracerCarrier"
                                 strokeLinecap="round"
                                 strokeLinejoin="round"
-                              />{" "}
-                              <path
-                                d="M12.0012 5C7.52354 5 3.73326 7.94288 2.45898 12C3.73324 16.0571 7.52354 19 12.0012 19C16.4788 19 20.2691 16.0571 21.5434 12C20.2691 7.94291 16.4788 5 12.0012 5Z"
-                                stroke="#000000"
-                                strokeWidth="2"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              />{" "}
-                            </g>
-                          </svg>
+                              />
+
+                              <g id="SVGRepo_iconCarrier">
+                                {" "}
+                                <path
+                                  d="M15.0007 12C15.0007 13.6569 13.6576 15 12.0007 15C10.3439 15 9.00073 13.6569 9.00073 12C9.00073 10.3431 10.3439 9 12.0007 9C13.6576 9 15.0007 10.3431 15.0007 12Z"
+                                  stroke="#000000"
+                                  strokeWidth="2"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                />{" "}
+                                <path
+                                  d="M12.0012 5C7.52354 5 3.73326 7.94288 2.45898 12C3.73324 16.0571 7.52354 19 12.0012 19C16.4788 19 20.2691 16.0571 21.5434 12C20.2691 7.94291 16.4788 5 12.0012 5Z"
+                                  stroke="#000000"
+                                  strokeWidth="2"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                />{" "}
+                              </g>
+                            </svg>
+                          </div>
                         </div>
+                        {errors.password && (
+                          <div style={{ color: "red" }}>{errors.password}</div>
+                        )}
+                        {passwordStrength ? (
+                          <div style={{ display: "inline-block" }}>
+                            Password Strength:{" "}
+                            {getPasswordStrengthText(passwordStrength)}
+                          </div>
+                        ) : (
+                          ""
+                        )}
+                      </div>
+                      <div className="form-group">
+                        <label className="col-form-label">
+                          Confirm Password
+                        </label>
+                        <div className="form-input position-relativ position-relative d-flex align-items-center input-container">
+                          <input
+                            className="form-control"
+                            type={showPassword ? "text" : "password"}
+                            name="confirmPassword"
+                            placeholder="*********"
+                            onChange={handlePasswordChange}
+                            value={inputValues.confirmPassword}
+                            required
+                          />
+                          <div
+                            className="cursor-pointer grey-2-text"
+                            onClick={passwordView}
+                          >
+                            <svg
+                              width="16px"
+                              height="16px"
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <g id="SVGRepo_bgCarrier" strokeWidth="0" />
+
+                              <g
+                                id="SVGRepo_tracerCarrier"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
+
+                              <g id="SVGRepo_iconCarrier">
+                                {" "}
+                                <path
+                                  d="M15.0007 12C15.0007 13.6569 13.6576 15 12.0007 15C10.3439 15 9.00073 13.6569 9.00073 12C9.00073 10.3431 10.3439 9 12.0007 9C13.6576 9 15.0007 10.3431 15.0007 12Z"
+                                  stroke="#000000"
+                                  strokeWidth="2"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                />{" "}
+                                <path
+                                  d="M12.0012 5C7.52354 5 3.73326 7.94288 2.45898 12C3.73324 16.0571 7.52354 19 12.0012 19C16.4788 19 20.2691 16.0571 21.5434 12C20.2691 7.94291 16.4788 5 12.0012 5Z"
+                                  stroke="#000000"
+                                  strokeWidth="2"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                />{" "}
+                              </g>
+                            </svg>
+                          </div>
+                        </div>
+                        {errors.confirmPassword && (
+                          <div style={{ color: "red" }}>
+                            {errors.confirmPassword}
+                          </div>
+                        )}
                       </div>
                     </div>
+
                     <div className="form-group mb-0">
                       <button
                         className="btn btn-primary btn-block w-100 mt-3"
                         type="submit"
+                        disabled={
+                          loading ||
+                          errors.phone ||
+                          errors.email ||
+                          errors.password ||
+                          errors.confirmPassword
+                        }
                       >
                         {loading ? (
                           <RiseLoader
@@ -287,8 +435,13 @@ function Login() {
                             data-testid="loader"
                             className="loader"
                           />
+                        ) : errors.phone ||
+                          errors.email ||
+                          errors.password ||
+                          errors.confirmPassword ? (
+                          "Please correct the errors to proceed."
                         ) : (
-                          "Sign Up"
+                          "Sign-up"
                         )}
                       </button>
                     </div>
