@@ -20,7 +20,10 @@
     "destination": "dist",
     "puppeteer": {
       "timeout": 60000
-    }
+    },
+    "puppeteerArgs": [
+      "--no-sandbox"
+    ]
   },
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^42.0.1",

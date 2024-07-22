@@ -94,11 +94,11 @@ function CarGallery() {
                 />
                 <div className="row car-heading">
                   <div className="col">
-                    <div className="car-title">
-                      <h1>
+                    <div className="car-title mobile-car-title">
+                      <h1 className="pr-2">
                         {car.car_year} {car.car_name_info}
                       </h1>
-                      <div className="d-md-flex justify-content-between flex-wrap pl-2 pt-1">
+                      <div className="d-md-flex justify-content-between flex-wrap pt-1">
                         <h2>
                           <span className="inspected">Inspected</span>
                         </h2>

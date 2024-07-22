@@ -75,7 +75,7 @@ function RentalCarGallery() {
               <div key={index}>
                 <div className="row car-heading">
                   <div className="col">
-                    <div className="car-title">
+                    <div className="car-title mobile-car-title">
                       <h1>
                         {car.car_year} {car.car_name_info}
                       </h1>
