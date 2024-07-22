@@ -399,7 +399,7 @@ function CarListingDetails({ carDetails, carFeatures }) {
           <div className="seller-note-body">
             <div
               dangerouslySetInnerHTML={{
-                __html: carDetails.renter_note,
+                __html: carDetails.inspection_note,
               }}
             />
           </div>
