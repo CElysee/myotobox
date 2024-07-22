@@ -5,7 +5,7 @@ import axiosInstance from "../../../../utils/AxiosInstance";
 import ContentLoader from "react-content-loader";
 import CarGalleryModal from "../carGalleryModal/CarGalleryModal";
 import { Helmet } from "react-helmet-async";
-import { formatAmount } from "../../../../utils/helpers";
+import { formatAmount } from "../../../../utils/Helpers";
 
 function CarGallery() {
   const urlParams = useParams();

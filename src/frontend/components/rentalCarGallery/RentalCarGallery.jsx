@@ -4,7 +4,7 @@ import "./RentalCarGallery.css";
 import axiosInstance from "../../../../utils/AxiosInstance";
 import ContentLoader from "react-content-loader";
 import CarGalleryModal from "../carGalleryModal/CarGalleryModal";
-import { formatAmount } from "../../../../utils/helpers";
+import { formatAmount } from "../../../../utils/Helpers";
 
 function RentalCarGallery() {
   const urlParams = useParams();
