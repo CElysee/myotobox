@@ -8,6 +8,8 @@ import { Helmet } from "react-helmet-async";
 import { formatAmount } from "../../../../utils/Helpers";
 import SEO from "../Seo/SEO";
 
+// import { SuperSEO } from "react-super-seo";
+
 function CarGallery() {
   const urlParams = useParams();
   const imageBaseUrl = import.meta.env.VITE_REACT_APP_API;
@@ -80,16 +82,8 @@ function CarGallery() {
               <div key={index}>
                 <SEO
                   title={`${car.car_year} ${car.car_name_info} - Myotobox`}
-                  description={`${car.car_transmission} - ${
-                    car.car_fuel_type
-                  } - ${car.car_drive_train}, ${
-                    car.car_engine_capacity
-                  } with ${formatAmount(
-                    car.car_mileage
-                  )} Kilometers is for sale on Myotobox!`}
-                  name="Myotobox"
-                  type="website"
-                  url={fullUrl}
+                  description={`${car.car_transmission} - ${car.car_fuel_type} - ${car.car_drive_train}, ${car.car_engine_capacity} with ${car.car_mileage} Kilometers is for sale on Myotobox!`}
+                  url={`https://www.myotobox.rw${fullUrl}`}
                   image={`${imageBaseUrl}${car.cover_image}`}
                 />
                 <div className="row car-heading">

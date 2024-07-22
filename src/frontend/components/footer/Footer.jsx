@@ -314,7 +314,7 @@ function Footer() {
                   </div>
                 </div>
                 <div className="col-sm-5">
-                  <div className="copyright-links text-start text-sm-end mt-1 mt-sm-0">
+                  <div className="copyright-links text-center text-sm-end mt-1 mt-sm-0">
                     <a href="#">Terms of use</a>
                     <a href="#">Privacy policy</a>
                   </div>
