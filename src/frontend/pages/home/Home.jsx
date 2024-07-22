@@ -4,7 +4,7 @@ import RentCarsGrid from "../../components/rentCarsGrid/RentCarsGrid";
 import BrandsWithBodyType from "../../components/brandsWithBodyType/BrandsWithBodyType";
 import WhyChooseUs from "../../components/whyChooseUs/WhyChooseUs";
 import { Link } from "react-router-dom";
-import SEO from "../../components/SEO/SEO"
+import SEO from "../../components/Seo/SEO"
 
 function Home() {
   return (
