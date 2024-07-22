@@ -33,18 +33,18 @@ function Routers() {
         <Route path="/" element={<Home />} />
         <Route path="/testHelmet" element={<TestHelmet />} />
         <Route path="/carDetails/:stock/:name" element={<CarDetails />} />
-        <Route path="/buy_cars/:make/:model" element={<BuyCars />} />
-        <Route path="/buy_cars/:make" element={<BuyCars />} />
-        <Route path="/buy_cars" element={<BuyCars />} />
+        <Route path="/buy-cars/:make/:model" element={<BuyCars />} />
+        <Route path="/buy-cars/:make" element={<BuyCars />} />
+        <Route path="/buy-cars" element={<BuyCars />} />
         <Route path="/bodyShape/:shape" element={<BodyShape />} />
-        <Route path="/rent_cars" element={<RentCars />} />
-        <Route path="/rent_cars/:make/:model" element={<RentCars />} />
-        <Route path="/rent_cars/:make" element={<RentCars />} />
+        <Route path="/rent-cars" element={<RentCars />} />
+        <Route path="/rent-cars/:make/:model" element={<RentCars />} />
+        <Route path="/rent-cars/:make" element={<RentCars />} />
         <Route
           path="/car_rental_overview/:stock/:name"
           element={<CarRentalOverView />}
         />
-        <Route path="/import_on_order" element={<ImportOnOrder />} />
+        <Route path="/import-on-order" element={<ImportOnOrder />} />
         <Route path="/login" element={<Login />} />
         <Route path="/sign-up" element={<SignUp />} />
         <Route path="/account-created" element={<AccountCreated />} />
@@ -52,12 +52,12 @@ function Routers() {
         <Route path="/booking_message" element={<ThankYouBookingTestDrive />} />
         <Route path="/rental_confirmation" element={<RentalBookingMessage />} />
         <Route
-          path="/import_on_order_message"
+          path="/import-on-order_message"
           element={<ImportOnOrderMessage />}
         />
-        <Route path="/car_tax_calculator" element={<TaxCalculator />} />
+        <Route path="/car-tax-calculator" element={<TaxCalculator />} />
         <Route
-          path="/car_tax_calculator_results/:id"
+          path="/car-tax-calculator_results/:id"
           element={<TaxCalculatorMessage />}
         />
 
@@ -66,7 +66,7 @@ function Routers() {
           <Route path="profile" element={<UserProfile />} />
           <Route path="booked_test_drive" element={<UserBookedTestDrive />} />
           <Route path="booked_rentals" element={<UserBookedRentals />} />
-          <Route path="import_on_orders" element={<UserImportOnOrders />} />
+          <Route path="import-on-orders" element={<UserImportOnOrders />} />
           <Route path="tax_calculated" element={<UserTaxCalculator />} />
           <Route path="*" element={<NotFound />} />
         </Route>

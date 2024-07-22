@@ -36,7 +36,7 @@ function BrandsWithBodyType() {
         <div className="brands-filter mt-4">
           <ul className="nav nav-tabs border-0 justify-content-center flex-wrap">
             <li>
-              <Link to={"/buy_cars/toyota"}>
+              <Link to={"/buy-cars/toyota"}>
                 <img
                   src="assets/brands/toyota.svg"
                   alt="toyota"
@@ -46,7 +46,7 @@ function BrandsWithBodyType() {
               </Link>
             </li>
             <li>
-              <Link to={"/buy_cars/hyundai"}>
+              <Link to={"/buy-cars/hyundai"}>
                 <img
                   src="assets/brands/hyundai.svg"
                   alt="Hyundai"
@@ -56,7 +56,7 @@ function BrandsWithBodyType() {
               </Link>
             </li>
             <li>
-              <Link to={"/buy_cars/kia"}>
+              <Link to={"/buy-cars/kia"}>
                 <img
                   src="assets/brands/kia.svg"
                   alt="Kia"
@@ -67,7 +67,7 @@ function BrandsWithBodyType() {
             </li>
 
             <li>
-              <Link to={"/buy_cars/Mercedes-Benz"}>
+              <Link to={"/buy-cars/Mercedes-Benz"}>
                 <img
                   src="assets/brands/mercedes-benz.svg"
                   alt="Mercedes Benz"
@@ -77,7 +77,7 @@ function BrandsWithBodyType() {
               </Link>
             </li>
             <li>
-              <Link to={"/buy_cars/volkswagen"}>
+              <Link to={"/buy-cars/volkswagen"}>
                 <img
                   src="assets/brands/volkswagen.svg"
                   alt="Volkswagen"
@@ -87,7 +87,7 @@ function BrandsWithBodyType() {
               </Link>
             </li>
             <li>
-              <Link to={"/buy_cars/byd"}>
+              <Link to={"/buy-cars/byd"}>
                 <img
                   src="assets/brands/byd.webp"
                   alt="byd"

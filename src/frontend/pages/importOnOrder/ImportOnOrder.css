@@ -1,1 +1,129 @@
-.banner-section1{background-image:url(/assets/images/banner2-bg-_1_.webp),linear-gradient(#fafafa,#fafafa);background-size:cover;background-repeat:no-repeat;padding:95px 30px}@media (min-width:1200px){.g-xl-4,.gy-xl-4{--bs-gutter-y:1.5rem}.g-xl-4,.gx-xl-4{--bs-gutter-x:1.5rem}}.g-5,.gy-5{--bs-gutter-y:3rem}.fadeInUp{-webkit-animation-name:fadeInUp;animation-name:fadeInUp}.banner-section1 .banner-content{max-width:705px;width:100%}.banner-section1 .banner-content .sub-title{font-weight:700;font-size:20px;display:flex;align-items:center;gap:10px;letter-spacing:.2em;color:#5e5e5e;margin-bottom:15px}.banner-section1 .banner-content h1{font-weight:700;font-size:75px;line-height:1.11;color:var(--first-color);margin-bottom:20px}.banner-section1 .banner-content p{font-size:20px;color:#5e5e5e;line-height:34px;margin-bottom:0}.banner-section1 .banner-content .customar-review{padding-top:50px}.banner-section1 .car-filter-area{background-color:#fff;padding:40px 30px;border-radius:5px;display:inline-block;width:100%}.banner-section1 .car-filter-area h4{font-weight:700;font-size:26px;color:#13141a;margin-bottom:25px}.primary-btn1{background-color:var(--first-color)}.select{margin-bottom:0px}input,select{word-wrap:normal;width:100%;background:#f3f3f3;border-radius:5px;height:50px;display:flex;align-items:center;line-height:1;padding:0 12px;outline:0!important;box-shadow:none!important;border:1px solid #f3f3f3;color:#5e5e5e;font-size:14px;font-weight:400}.banner-section1 .car-filter-area .form-inner label{font-weight:600;font-size:13px;line-height:1;color:#13141a;display:block;margin-bottom:10px}.banner-section1 .car-filter-area .form-inner .primary-btn1{width:100%;justify-content:center;padding:10px 20px;font-size:15px;font-weight:600;color:#000}.inline_form{display:flex;justify-content:space-between}.inline_form .form-inner{flex:1;padding:10px}.last{margin-top:30px}.import_on_order input,select{height:50px!important;border-radius:10px!important;border-color:#ccc}.ql-editor{min-height:150px;overflow-y:auto}
+.banner-section1 {
+  background-image: url(/assets/images/banner2-bg-_1_.webp),
+    linear-gradient(#fafafa, #fafafa);
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 95px 30px;
+}
+@media (min-width: 1200px) {
+  .g-xl-4,
+  .gy-xl-4 {
+    --bs-gutter-y: 1.5rem;
+  }
+  .g-xl-4,
+  .gx-xl-4 {
+    --bs-gutter-x: 1.5rem;
+  }
+}
+.g-5,
+.gy-5 {
+  --bs-gutter-y: 3rem;
+}
+.fadeInUp {
+  -webkit-animation-name: fadeInUp;
+  animation-name: fadeInUp;
+}
+.banner-section1 .banner-content {
+  max-width: 705px;
+  width: 100%;
+}
+.banner-section1 .banner-content .sub-title {
+  font-weight: 700;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  letter-spacing: 0.2em;
+  color: #5e5e5e;
+  margin-bottom: 15px;
+}
+.banner-section1 .banner-content h1 {
+  font-weight: 700;
+  font-size: 75px;
+  line-height: 1.11;
+  color: var(--first-color);
+  margin-bottom: 20px;
+}
+.banner-section1 .banner-content p {
+  font-size: 20px;
+  color: #5e5e5e;
+  line-height: 34px;
+  margin-bottom: 0;
+}
+.banner-section1 .banner-content .customar-review {
+  padding-top: 50px;
+}
+.banner-section1 .car-filter-area {
+  background-color: #fff;
+  padding: 40px 30px;
+  border-radius: 5px;
+  display: inline-block;
+  width: 100%;
+}
+.banner-section1 .car-filter-area h4 {
+  font-weight: 700;
+  font-size: 26px;
+  color: #13141a;
+  margin-bottom: 25px;
+}
+.primary-btn1 {
+  background-color: var(--first-color);
+}
+.select {
+  margin-bottom: 0px;
+}
+input,
+select {
+  word-wrap: normal;
+  width: 100%;
+  background: #f3f3f3;
+  border-radius: 5px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  line-height: 1;
+  padding: 0 12px;
+  outline: 0 !important;
+  box-shadow: none !important;
+  border: 1px solid #f3f3f3;
+  color: #5e5e5e;
+  font-size: 14px;
+  font-weight: 400;
+}
+.banner-section1 .car-filter-area .form-inner label {
+  font-weight: 600;
+  font-size: 13px;
+  line-height: 1;
+  color: #13141a;
+  display: block;
+  margin-bottom: 10px;
+}
+.banner-section1 .car-filter-area .form-inner .primary-btn1 {
+  width: 100%;
+  justify-content: center;
+  padding: 10px 20px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #000;
+}
+.inline_form {
+  display: flex;
+  justify-content: space-between;
+}
+.inline_form .form-inner {
+  flex: 1;
+  padding: 10px;
+}
+.last {
+  margin-top: 30px;
+}
+.import-on-order input,
+select {
+  height: 50px !important;
+  border-radius: 10px !important;
+  border-color: #ccc;
+}
+.ql-editor {
+  min-height: 150px;
+  overflow-y: auto;
+}

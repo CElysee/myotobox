@@ -14,6 +14,7 @@ import {
   truncateText,
 } from "../../../../utils/Helpers";
 import RentCarsGrid from "../../components/rentCarsGrid/RentCarsGrid";
+import SEO from "../../components/Seo/SEO";
 
 const override = {
   display: "block",
@@ -429,10 +430,10 @@ function RentCars() {
       const endKilometers = end_kilometers ? end_kilometers : 1000000;
       // Construct the base URL with brandName and selectedModel.label
 
-      let url = `/rent_cars`;
+      let url = `/rent-cars`;
 
       if (brandName) {
-        url = `/rent_cars/${brandName}`;
+        url = `/rent-cars/${brandName}`;
       }
       // Add query parameters only if their values are not empty
       if (selectedModel !== null && selectedModel.label) {
@@ -477,10 +478,15 @@ function RentCars() {
     e.stopPropagation(); // Prevents the default behavior of event propagation
   };
   return (
-    <section
-      className="bpage container page home"
-      id="NotFound"
-    >
+    <>
+    <SEO
+        title="Rent a Car in Rwanda | Myotobox"
+        description="Rent a car in Rwanda with Myotobox. Explore the Land of a Thousand Hills at your own pace. Easy booking, reliable vehicles."
+        url="https://www.myotobox.rw/rent-cars"
+        image="/assets/images/car-rental.webp"
+      />
+   
+    <section className="bpage container page home" id="NotFound">
       <div className="row justify-content-center">
         <div className="filterbar">
           <div className="car_filter mobile-hide">
@@ -1302,6 +1308,7 @@ function RentCars() {
         </div>
       </div>
     </section>
+    </>
   );
 }
 

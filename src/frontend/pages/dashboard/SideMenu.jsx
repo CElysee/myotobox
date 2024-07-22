@@ -90,7 +90,7 @@ function SideMenu() {
         </li>
         <li className="nav-item">
           <NavLink
-            to="/user/import_on_orders"
+            to="/user/import-on-orders"
             className={({ isActive }) =>
               isActive
                 ? "nav-link active-menu py-2 text-dark rounded-0"

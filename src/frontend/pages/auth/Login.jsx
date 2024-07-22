@@ -8,6 +8,7 @@ import RiseLoader from "react-spinners/RiseLoader";
 import { ToastContainer, toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { login } from "../../../features/userSlice";
+import SEO from "../../components/Seo/SEO";
 
 const override = {
   display: "block",
@@ -79,6 +80,12 @@ function Login() {
   };
   return (
     <>
+      <SEO
+        title="Rent or Buy a Car in Rwanda | MyOtobox"
+        description="Find your perfect car in Rwanda with MyOtobox. We offer car rentals, sales, and import services. Enjoy flexible options and excellent customer service"
+        url="https://www.myotobox.rw/"
+        image="/assets/images/meta_image1.jpeg"
+      />
       <div className="container-fluid" style={{ marginTop: "80px" }}>
         <ToastContainer autoClose={5000} />
         <div className="row">

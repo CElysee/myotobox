@@ -215,7 +215,7 @@ function TaxCalculatorMessage() {
                             </div>
                           </div>
                           <Link
-                            to="/buy_cars"
+                            to="/buy-cars"
                             type="button"
                             className={`mt-4 w-full py-[24px] mb-4 btn btn-primary btn-md `}
                           >

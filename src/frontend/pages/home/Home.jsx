@@ -4,14 +4,14 @@ import RentCarsGrid from "../../components/rentCarsGrid/RentCarsGrid";
 import BrandsWithBodyType from "../../components/brandsWithBodyType/BrandsWithBodyType";
 import WhyChooseUs from "../../components/whyChooseUs/WhyChooseUs";
 import { Link } from "react-router-dom";
-import SEO from "../../components/Seo/SEO"
+import SEO from "../../components/Seo/SEO";
 
 function Home() {
   return (
     <>
       <SEO
-        title="Easy Car Buying & Renting in Rwanda | Myotobox"
-        description="Buying or renting a car in Rwanda is easy with Myotobox. Choose from a wide selection of new and used cars at unbeatable rental rates!"
+        title="Rent or Buy a Car in Rwanda | MyOtobox"
+        description="Find your perfect car in Rwanda with MyOtobox. We offer car rentals, sales, and import services. Enjoy flexible options and excellent customer service"
         url="https://www.myotobox.rw/"
         image="/assets/images/meta_image1.jpeg"
       />
@@ -26,7 +26,7 @@ function Home() {
             >
               <Link
                 className="btn btn-lg btn-primary view_more"
-                to={"/buy_cars"}
+                to={"/buy-cars"}
               >
                 View more
               </Link>

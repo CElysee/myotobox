@@ -13,6 +13,7 @@ import Select from "react-select";
 import { set } from "lodash";
 import { isValidPhoneNumber } from "libphonenumber-js";
 import zxcvbn from "zxcvbn";
+import SEO from "../../components/Seo/SEO";
 
 const override = {
   display: "block",
@@ -105,23 +106,26 @@ function Login() {
     const { name, value } = e.target;
     setInputValues({ ...inputValues, [name]: value });
     // Validate passwords
-    if (name === 'password') {
+    if (name === "password") {
       if (inputValues.password && inputValues.confirmPassword) {
         if (inputValues.password.length < 6) {
-          setErrors({ ...errors, password: 'Password must be at least 6 characters long.' });
+          setErrors({
+            ...errors,
+            password: "Password must be at least 6 characters long.",
+          });
         } else {
-          setErrors({ ...errors, password: '' });
+          setErrors({ ...errors, password: "" });
         }
       }
       // Update password strength
       const result = zxcvbn(value);
       setPasswordStrength(result.score);
     }
-    if (name === 'confirmPassword') {
+    if (name === "confirmPassword") {
       if (inputValues.password !== e.target.value) {
-        setErrors({ ...errors, confirmPassword: 'Passwords do not match.' });
+        setErrors({ ...errors, confirmPassword: "Passwords do not match." });
       } else {
-        setErrors({ ...errors, confirmPassword: '' });
+        setErrors({ ...errors, confirmPassword: "" });
       }
     }
   };
@@ -181,6 +185,12 @@ function Login() {
   };
   return (
     <>
+      <SEO
+        title="Rent or Buy a Car in Rwanda | MyOtobox"
+        description="Find your perfect car in Rwanda with MyOtobox. We offer car rentals, sales, and import services. Enjoy flexible options and excellent customer service"
+        url="https://www.myotobox.rw/"
+        image="/assets/images/meta_image1.jpeg"
+      />
       <div className="container-fluid" style={{ marginTop: "80px" }}>
         <ToastContainer autoClose={5000} />
         <div className="row">

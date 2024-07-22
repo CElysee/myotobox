@@ -2,13 +2,12 @@ import React, { useEffect, useState, useMemo } from "react";
 import { useParams, useNavigate, useLocation } from "react-router-dom";
 import RiseLoader from "react-spinners/RiseLoader";
 import "./BuyCars.css";
-import makeAnimated from "react-select/animated";
 import SellCarsGrid from "../../components/sellCarsGrid/SellCarsGrid";
 import axiosInstance from "../../../../utils/AxiosInstance";
 import Select from "react-select";
 import ContentLoader from "react-content-loader";
 import MobileFilter from "./MobileFilter";
-import { Helmet } from 'react-helmet-async';
+import SEO from "../../components/Seo/SEO";
 import {
   formatNumber,
   formatAmount,
@@ -421,10 +420,10 @@ function BuyCars() {
       const startKilometers = start_kilometers ? start_kilometers : 1;
       const endKilometers = end_kilometers ? end_kilometers : 1000000;
       // Construct the base URL with brandName and selectedModel.label
-      let url = `/buy_cars`;
+      let url = `/buy-cars`;
 
       if (brandName) {
-        url = `/buy_cars/${brandName}`;
+        url = `/buy-cars/${brandName}`;
       }
       // Add query parameters only if their values are not empty
       if (selectedModel !== null && selectedModel.label) {
@@ -470,6 +469,12 @@ function BuyCars() {
   };
   return (
     <>
+      <SEO
+        title="Buy New or Used Cars in Rwanda | Myotobox - Easy Car Purchasing"
+        description="Find your dream car at Myotobox Rwanda. We offer a vast selection of new and used vehicles to fit every budget and lifestyle. Enjoy excellent customer service and competitive prices."
+        url="https://www.myotobox.rw/buy-cars"
+        image="/assets/images/meta_image1.jpeg"
+      />
       <section className="bpage container page home" id="NotFound">
         <div className="row justify-content-center">
           <div className="filterbar">

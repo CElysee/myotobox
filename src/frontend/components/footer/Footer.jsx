@@ -265,33 +265,33 @@ function Footer() {
                         </h6>
                         <ul className="footer-nav">
                           <li>
-                            <Link to={"/buy_cars/toyota"}>
+                            <Link to={"/buy-cars/toyota"}>
                               <span>Toyota</span>
                             </Link>
                           </li>
                           <li>
-                            <Link to={"/buy_cars/hyundai"}>
+                            <Link to={"/buy-cars/hyundai"}>
                               <span>Hyundai</span>
                             </Link>
                           </li>
                           <li>
-                            <Link to={"/buy_cars/kia"}>
+                            <Link to={"/buy-cars/kia"}>
                               <span>KIA</span>
                             </Link>
                           </li>
 
                           <li>
-                            <Link to={"/buy_cars/mercedes"}>
+                            <Link to={"/buy-cars/mercedes"}>
                               <span>Mercedes Benz</span>
                             </Link>
                           </li>
                           <li>
-                            <Link to={"/buy_cars/volkswagen"}>
+                            <Link to={"/buy-cars/volkswagen"}>
                               <span>Volkswagen</span>
                             </Link>
                           </li>
                           <li>
-                            <Link to={"/buy_cars/byd"}>
+                            <Link to={"/buy-cars/byd"}>
                               <span>BYD</span>
                             </Link>
                           </li>

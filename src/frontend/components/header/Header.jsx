@@ -13,19 +13,19 @@ function Header() {
       display: "Home",
     },
     {
-      path: "/buy_cars",
+      path: "/buy-cars",
       display: "Buy",
     },
     {
-      path: "/rent_cars",
+      path: "/rent-cars",
       display: "Rent",
     },
     {
-      path: "/import_on_order",
+      path: "/import-on-order",
       display: "Import on order",
     },
     {
-      path: "/car_tax_calculator",
+      path: "/car-tax-calculator",
       display: "Tax calculator",
     },
   ];
@@ -91,7 +91,7 @@ function Header() {
       const car = response.data;
       const brandSlug = car.car_brand.toLowerCase();
       const modelSlug = car.car_model.toLowerCase();
-      const navigateUrl = `/buy_cars/${brandSlug}/?model_id=${modelSlug}`;
+      const navigateUrl = `/buy-cars/${brandSlug}/?model_id=${modelSlug}`;
 
       navigate(navigateUrl);
       setSearch("");
