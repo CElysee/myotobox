@@ -7,6 +7,7 @@ import Router from "../routers/Routers";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 import { useParams } from "react-router-dom";
+import { HelmetProvider } from "react-helmet-async";
 
 function App() {
   const params = useParams();
@@ -22,9 +23,11 @@ function App() {
 
   return (
     <>
-      <Header />
-      <Router />
-      <Footer />
+      <HelmetProvider>
+        <Header />
+        <Router />
+        <Footer />
+      </HelmetProvider>
     </>
   );
 }
