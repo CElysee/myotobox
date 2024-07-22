@@ -1,4 +1,5 @@
 import { Routes, Route } from "react-router-dom";
+import ScrollToTop from "../frontend/components/ScrollToTop/ScrollToTop";
 import Home from "../frontend/pages/home/Home";
 import BuyCars from "../frontend/pages/buyCars/BuyCars";
 import RentCars from "../frontend/pages/rentCars/RentCars";
@@ -23,57 +24,56 @@ import UserBookedTestDrive from "../frontend/pages/dashboard/BookedTestDrive";
 import UserBookedRentals from "../frontend/pages/dashboard/BookedRentals";
 import UserImportOnOrders from "../frontend/pages/dashboard/ImportOnOrders";
 import UserTaxCalculator from "../frontend/pages/dashboard/TaxCalculator";
-import ScrollToTop from "../frontend/components/ScrollToTop/ScrollToTop";
+import TestHelmet from "../frontend/pages/HelmetTest";
 
 function Routers() {
   return (
     <ScrollToTop>
-    <Routes>
-     
-      <Route path="/" element={<Home />} />
-      <Route path="/carDetails/:stock/:name" element={<CarDetails />} />
-      <Route path="/buy_cars/:make/:model" element={<BuyCars />} />
-      <Route path="/buy_cars/:make" element={<BuyCars />} />
-      <Route path="/buy_cars" element={<BuyCars />} />
-      <Route path="/bodyShape/:shape" element={<BodyShape />} />
-      <Route path="/rent_cars" element={<RentCars />} />
-      <Route path="/rent_cars/:make/:model" element={<RentCars />} />
-      <Route path="/rent_cars/:make" element={<RentCars />} />
-      <Route
-        path="/car_rental_overview/:stock/:name"
-        element={<CarRentalOverView />}
-      />
-      <Route path="/import_on_order" element={<ImportOnOrder />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/sign-up" element={<SignUp />} />
-      <Route path="/account-created" element={<AccountCreated />} />
-      <Route path="dashboard" element={<UserDashboard />} />
-      <Route path="/booking_message" element={<ThankYouBookingTestDrive />} />
-      <Route path="/rental_confirmation" element={<RentalBookingMessage />} />
-      <Route
-        path="/import_on_order_message"
-        element={<ImportOnOrderMessage />}
-      />
-      <Route path="/car_tax_calculator" element={<TaxCalculator />} />
-      <Route
-        path="/car_tax_calculator_results/:id"
-        element={<TaxCalculatorMessage />}
-      />
-
-      <Route path="/user/*" element={<PrivateRoutes />}>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/testHelmet" element={<TestHelmet />} />
+        <Route path="/carDetails/:stock/:name" element={<CarDetails />} />
+        <Route path="/buy_cars/:make/:model" element={<BuyCars />} />
+        <Route path="/buy_cars/:make" element={<BuyCars />} />
+        <Route path="/buy_cars" element={<BuyCars />} />
+        <Route path="/bodyShape/:shape" element={<BodyShape />} />
+        <Route path="/rent_cars" element={<RentCars />} />
+        <Route path="/rent_cars/:make/:model" element={<RentCars />} />
+        <Route path="/rent_cars/:make" element={<RentCars />} />
+        <Route
+          path="/car_rental_overview/:stock/:name"
+          element={<CarRentalOverView />}
+        />
+        <Route path="/import_on_order" element={<ImportOnOrder />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/account-created" element={<AccountCreated />} />
         <Route path="dashboard" element={<UserDashboard />} />
-        <Route path="profile" element={<UserProfile />} />
-        <Route path="booked_test_drive" element={<UserBookedTestDrive />} />
-        <Route path="booked_rentals" element={<UserBookedRentals />} />
-        <Route path="import_on_orders" element={<UserImportOnOrders />} />
-        <Route path="tax_calculated" element={<UserTaxCalculator />} />
-        <Route path="*" element={<NotFound />} />
-      </Route>
-      <Route path="/404" element={<NotFound />} />
+        <Route path="/booking_message" element={<ThankYouBookingTestDrive />} />
+        <Route path="/rental_confirmation" element={<RentalBookingMessage />} />
+        <Route
+          path="/import_on_order_message"
+          element={<ImportOnOrderMessage />}
+        />
+        <Route path="/car_tax_calculator" element={<TaxCalculator />} />
+        <Route
+          path="/car_tax_calculator_results/:id"
+          element={<TaxCalculatorMessage />}
+        />
 
-      <Route path="*" element={<NotFound />} />
-    
-    </Routes>
+        <Route path="/user/*" element={<PrivateRoutes />}>
+          <Route path="dashboard" element={<UserDashboard />} />
+          <Route path="profile" element={<UserProfile />} />
+          <Route path="booked_test_drive" element={<UserBookedTestDrive />} />
+          <Route path="booked_rentals" element={<UserBookedRentals />} />
+          <Route path="import_on_orders" element={<UserImportOnOrders />} />
+          <Route path="tax_calculated" element={<UserTaxCalculator />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+        <Route path="/404" element={<NotFound />} />
+
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </ScrollToTop>
   );
 }

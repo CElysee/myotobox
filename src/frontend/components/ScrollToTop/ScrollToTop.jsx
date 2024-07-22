@@ -1,8 +1,8 @@
-// src/components/ScrollToTop.js
-import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+// src/frontend/components/ScrollToTop/ScrollToTop.js
+import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
-const ScrollToTop = ({ children }) => {
+function ScrollToTop({ children }) {
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -10,6 +10,6 @@ const ScrollToTop = ({ children }) => {
   }, [pathname]);
 
   return children;
-};
+}
 
 export default ScrollToTop;

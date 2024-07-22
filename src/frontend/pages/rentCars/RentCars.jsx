@@ -172,7 +172,7 @@ function RentCars() {
 
         const make_models = await axiosInstance.get(url);
         setMakeWithModels(make_models.data.cars_for_rent);
-        console.log("make_models", make_models);
+        // console.log("make_models", make_models);
         setCountCarsForSale(make_models.data.count_cars_for_rent);
         setSkeletonLoading(false);
       } catch (error) {
