@@ -6,6 +6,7 @@ import ContentLoader from "react-content-loader";
 import CarGalleryModal from "../carGalleryModal/CarGalleryModal";
 import { Helmet } from "react-helmet-async";
 import { formatAmount } from "../../../../utils/Helpers";
+import SEO from "../Seo/SEO";
 
 function CarGallery() {
   const urlParams = useParams();
@@ -15,7 +16,6 @@ function CarGallery() {
   const [galleryImages, setGalleryImages] = useState([]);
   const [lastGalleryImage, setLastGalleryImage] = useState();
   const [modalTitle, setModalTitle] = useState("");
-
   const stock_numner = urlParams.stock;
 
   const { stock, name } = useParams();
@@ -78,60 +78,20 @@ function CarGallery() {
           <>
             {carDetails.map((car, index) => (
               <div key={index}>
-                <Helmet>
-                  <title>
-                    {car.car_year} {car.car_name_info} - Myotobox
-                  </title>
-                  <meta
-                    name="description"
-                    content={`${car.car_transmission} - ${
-                      car.car_fuel_type
-                    } - ${car.car_drive_train}, ${
-                      car.car_engine_capacity
-                    } with ${formatAmount(
-                      car.car_mileage
-                    )} Kilometers is for sale on Myotobox!`}
-                  />
-                  <meta property="og:type" content="website" />
-                  <meta
-                    property="og:title"
-                    content={`${car.car_year} ${car.car_name_info} - Myotobox`}
-                  />
-                  <meta
-                    property="og:description"
-                    content={`${car.car_transmission} - ${
-                      car.car_fuel_type
-                    } - ${car.car_drive_train}, ${
-                      car.car_engine_capacity
-                    } with ${formatAmount(
-                      car.car_mileage
-                    )} Kilometers is for sale on Myotobox!`}
-                  />
-                  <meta
-                    property="og:image"
-                    content={`${imageBaseUrl}${car.cover_image}`}
-                  />
-                  <meta property="og:url" content={fullUrl} />
-                  <meta name="twitter:card" content="summary_large_image" />
-                  <meta
-                    name="twitter:title"
-                    content={`${car.car_year} ${car.car_name_info} - Myotobox`}
-                  />
-                  <meta
-                    name="twitter:description"
-                    content={`${car.car_transmission} - ${
-                      car.car_fuel_type
-                    } - ${car.car_drive_train}, ${
-                      car.car_engine_capacity
-                    } with ${formatAmount(
-                      car.car_mileage
-                    )} Kilometers is for sale on Myotobox!`}
-                  />
-                  <meta
-                    name="twitter:image"
-                    content={`${imageBaseUrl}${car.cover_image}`}
-                  />
-                </Helmet>
+                <SEO
+                  title={`${car.car_year} ${car.car_name_info} - Myotobox`}
+                  description={`${car.car_transmission} - ${
+                    car.car_fuel_type
+                  } - ${car.car_drive_train}, ${
+                    car.car_engine_capacity
+                  } with ${formatAmount(
+                    car.car_mileage
+                  )} Kilometers is for sale on Myotobox!`}
+                  name="Myotobox"
+                  type="website"
+                  url={fullUrl}
+                  image={`${imageBaseUrl}${car.cover_image}`}
+                />
                 <div className="row car-heading">
                   <div className="col">
                     <div className="car-title">
