@@ -83,7 +83,7 @@ function Login() {
       <SEO
         title="Rent or Buy a Car in Rwanda | MyOtobox"
         description="Find your perfect car in Rwanda with MyOtobox. We offer car rentals, sales, and import services. Enjoy flexible options and excellent customer service"
-        url="https://www.myotobox.rw/"
+        url="https://www.myotobox.rw/login"
         image="/assets/images/meta_image1.jpeg"
       />
       <div className="container-fluid" style={{ marginTop: "80px" }}>

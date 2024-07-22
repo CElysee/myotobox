@@ -24,14 +24,12 @@ import UserBookedTestDrive from "../frontend/pages/dashboard/BookedTestDrive";
 import UserBookedRentals from "../frontend/pages/dashboard/BookedRentals";
 import UserImportOnOrders from "../frontend/pages/dashboard/ImportOnOrders";
 import UserTaxCalculator from "../frontend/pages/dashboard/TaxCalculator";
-import TestHelmet from "../frontend/pages/HelmetTest";
 
 function Routers() {
   return (
     <ScrollToTop>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/testHelmet" element={<TestHelmet />} />
         <Route path="/carDetails/:stock/:name" element={<CarDetails />} />
         <Route path="/buy-cars/:make/:model" element={<BuyCars />} />
         <Route path="/buy-cars/:make" element={<BuyCars />} />
