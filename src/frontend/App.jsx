@@ -10,17 +10,6 @@ import { useParams } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 
 function App() {
-  const params = useParams();
-  const [count, setCount] = useState(0);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 500);
-  }, []);
-
   return (
     <>
       <HelmetProvider>
