@@ -49,7 +49,7 @@ function Home() {
           property="twitter:image"
           content="/assets/images/meta_image1.jpeg"
         /> */}
-      </Helmet>
+      {/* </Helmet> */}
       <div className="main_content" style={{ paddingTop: "70px" }}>
         <BrandsWithBodyType />
         <SellCarsGrid />
