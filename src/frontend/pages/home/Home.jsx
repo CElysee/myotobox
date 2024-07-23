@@ -5,7 +5,7 @@ import BrandsWithBodyType from "../../components/brandsWithBodyType/BrandsWithBo
 import WhyChooseUs from "../../components/whyChooseUs/WhyChooseUs";
 import { Link } from "react-router-dom";
 // import SEO from "../../components/Seo/SEO";
-import { Helmet, HelmetProvider } from 'react-helmet-async';
+import { Helmet, HelmetProvider } from "react-helmet-async";
 
 function Home() {
   return (
@@ -17,11 +17,38 @@ function Home() {
         image="/assets/images/meta_image1.jpeg"
       /> */}
       <Helmet prioritizeSeoTags>
-        <title>A fancy webpage</title>
-        <link rel="notImportant" href="https://www.chipotle.com" />
-        <meta name="whatever" value="notImportant" />
-        <link rel="canonical" href="https://www.tacobell.com" />
-        <meta property="og:title" content="A very important title" />
+        <title>Rent or Buy a Car in Rwanda | MyOtobox</title>
+        <meta name="title" content="Rent or Buy a Car in Rwanda | MyOtobox" />
+        <meta
+          name="description"
+          content="Find your perfect car in Rwanda with MyOtobox. We offer car rentals, sales, and import services. Enjoy flexible options and excellent customer service"
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.myotobox.rw/" />
+        <meta
+          property="og:title"
+          content="Easy Car Buying & Renting in Rwanda | Myotobox"
+        />
+        <meta
+          property="og:description"
+          content="Buying or renting a car in Rwanda is easy with Myotobox. Choose from a wide selection of new and used cars at unbeatable rental rates."
+        />
+        <meta property="og:image" content="/assets/images/meta_image1.jpeg" />
+
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content="https://www.myotobox.rw/" />
+        <meta
+          property="twitter:title"
+          content="Easy Car Buying & Renting in Rwanda | Myotobox"
+        />
+        <meta
+          property="twitter:description"
+          content="Buying or renting a car in Rwanda is easy with Myotobox. Choose from a wide selection of new and used cars at unbeatable rental rates."
+        />
+        <meta
+          property="twitter:image"
+          content="/assets/images/meta_image1.jpeg"
+        />
       </Helmet>
       <div className="main_content" style={{ paddingTop: "70px" }}>
         <BrandsWithBodyType />
