@@ -5,18 +5,18 @@ import BrandsWithBodyType from "../../components/brandsWithBodyType/BrandsWithBo
 import WhyChooseUs from "../../components/whyChooseUs/WhyChooseUs";
 import { Link } from "react-router-dom";
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import SEO from "../../components/Seo/SEO";
+// import SEO from "../../components/Seo/SEO";
 
 function Home() {
   return (
     <>
-      <SEO
+      {/* <SEO
         title="Rent or Buy a Car in Rwanda | MyOtobox"
         description="Find your perfect car in Rwanda with MyOtobox. We offer car rentals, sales, and import services. Enjoy flexible options and excellent customer service"
         url="https://www.myotobox.rw/"
         image="/assets/images/meta_image1.jpeg"
-      />
-      {/* <Helmet prioritizeSeoTags>
+      /> */}
+      <Helmet prioritizeSeoTags>
         <title>Rent or Buy a Car in Rwanda | MyOtobox</title>
         <meta name="title" content="Rent or Buy a Car in Rwanda | MyOtobox" />
         <meta
@@ -48,8 +48,8 @@ function Home() {
         <meta
           property="twitter:image"
           content="/assets/images/meta_image1.jpeg"
-        /> */}
-      {/* </Helmet> */}
+        />
+      </Helmet>
       <div className="main_content" style={{ paddingTop: "70px" }}>
         <BrandsWithBodyType />
         <SellCarsGrid />
