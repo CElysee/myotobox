@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axiosInstance from "../../../../utils/AxiosInstance";
 import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
@@ -6,6 +6,8 @@ import RiseLoader from "react-spinners/RiseLoader";
 import { ToastContainer, toast } from "react-toastify";
 import { login } from "../../../features/userSlice";
 import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+
 
 const override = {
   display: "block",
@@ -20,6 +22,8 @@ function Login({ isAboutToBook, loginTitle, CloseModal }) {
   const [loading, setLoading] = useState(false);
   const [color, setColor] = useState("#fff");
   const [formError, setFormError] = useState(false);
+  const dismissButtonRef = useRef();
+  const [loginError, setLoginError] = useState("");
 
   const dispatch = useDispatch();
   const emailChangeHandler = (e) => {
@@ -58,8 +62,9 @@ function Login({ isAboutToBook, loginTitle, CloseModal }) {
           CloseModal();
         }
       } catch (error) {
-        console.error(error);
+        // console.error(error);
         notify(error.response.data.detail, "error");
+        setLoginError(error.response.data.detail);
       } finally {
         setLoading(false);
       }
@@ -79,12 +84,14 @@ function Login({ isAboutToBook, loginTitle, CloseModal }) {
       });
     }
   };
+  const handleClosingModal = () => {
+    dismissButtonRef.current.click();
+  };
   return (
-    <div className="login-card-book login-dark mt-4">
+    <div className="login-card-book login-dark">
       <div>
         <div className="login-main">
           <form className="theme-form" onSubmit={submitHandler}>
-            {/* <h4>Sign In and Book a Test Drive</h4> */}
             <h4>{loginTitle}</h4>
             <p className="error">{formError && "Please fill all the fields"}</p>
             <div className="form-group">
@@ -151,6 +158,7 @@ function Login({ isAboutToBook, loginTitle, CloseModal }) {
                 </div>
               </div>
             </div>
+            <p className="error">{loginError}</p>
             <div className="form-group mb-0">
               <button
                 className="btn btn-primary btn-block w-100 mt-3"
@@ -173,7 +181,7 @@ function Login({ isAboutToBook, loginTitle, CloseModal }) {
             </div>
             <p className="mt-4 mb-0 text-center">
               Don't have account?
-              <a className="ms-2" href="sign-up.html">
+              <a href="/sign-up" className="ms-2" ref={dismissButtonRef}>
                 Create Account
               </a>
             </p>

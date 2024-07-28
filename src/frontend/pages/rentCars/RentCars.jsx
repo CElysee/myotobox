@@ -478,14 +478,6 @@ function RentCars() {
     e.stopPropagation(); // Prevents the default behavior of event propagation
   };
   return (
-    <>
-    <SEO
-        title="Rent a Car in Rwanda | Myotobox"
-        description="Rent a car in Rwanda with Myotobox. Explore the Land of a Thousand Hills at your own pace. Easy booking, reliable vehicles."
-        url="https://www.myotobox.rw/rent-cars"
-        image="/assets/images/car-rental.webp"
-      />
-   
     <section className="bpage container page home" id="NotFound">
       <div className="row justify-content-center">
         <div className="filterbar">
@@ -1308,7 +1300,6 @@ function RentCars() {
         </div>
       </div>
     </section>
-    </>
   );
 }
 

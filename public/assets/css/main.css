@@ -29936,3 +29936,6 @@ button {
     padding-top: 95px;
   }
 }
+.footer-nav{
+  padding-left: 0px !important;
+}

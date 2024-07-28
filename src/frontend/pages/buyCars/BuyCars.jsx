@@ -469,47 +469,6 @@ function BuyCars() {
     e.stopPropagation(); // Prevents the default behavior of event propagation
   };
   return (
-    <>
-      {/* <SEO
-        title="Buy New or Used Cars in Rwanda | Myotobox - Easy Car Purchasing"
-        description="Find your dream car at Myotobox Rwanda. We offer a vast selection of new and used vehicles to fit every budget and lifestyle. Enjoy excellent customer service and competitive prices."
-        url="https://www.myotobox.rw/buy-cars"
-        image="/assets/images/meta_image1.jpeg"
-      /> */}
-         <Helmet prioritizeSeoTags>
-        <title>Buy New or Used Cars in Rwanda | Myotobox - Easy Car Purchasing</title>
-        <meta name="title" content="Buy New or Used Cars in Rwanda | Myotobox - Easy Car Purchasing" />
-        <meta
-          name="description"
-          content="Find your dream car at Myotobox Rwanda. We offer a vast selection of new and used vehicles to fit every budget and lifestyle. Enjoy excellent customer service and competitive prices"
-        />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="ttps://www.myotobox.rw/buy-cars/" />
-        <meta
-          property="og:title"
-          content="Buy New or Used Cars in Rwanda | Myotobox - Easy Car Purchasing"
-        />
-        <meta
-          property="og:description"
-          content="Find your dream car at Myotobox Rwanda. We offer a vast selection of new and used vehicles to fit every budget and lifestyle. Enjoy excellent customer service and competitive prices"
-        />
-        <meta property="og:image" content="/assets/images/meta_image1.jpeg" />
-
-        <meta property="twitter:card" content="summary_large_image" />
-        <meta property="twitter:url" content="https://www.myotobox.rw/buy-cars/" />
-        <meta
-          property="twitter:title"
-          content="Buy New or Used Cars in Rwanda | Myotobox - Easy Car Purchasing"
-        />
-        <meta
-          property="twitter:description"
-          content="Buy New or Used Cars in Rwanda | Myotobox - Easy Car Purchasing"
-        />
-        <meta
-          property="twitter:image"
-          content="/assets/images/meta_image1.jpeg"
-        />
-      </Helmet>
       <section className="bpage container page home" id="NotFound">
         <div className="row justify-content-center">
           <div className="filterbar">
@@ -1304,7 +1263,6 @@ function BuyCars() {
           </div>
         </div>
       </section>
-    </>
   );
 }
 
