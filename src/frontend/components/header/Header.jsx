@@ -113,7 +113,7 @@ function Header() {
         id="autos-nav"
       >
         <Link to="/" className="navbar-brand logo" aria-current="page">
-          <img src="/assets/svg/myotobox.svg" alt="logo" />
+          <img src="/assets/images/myotobox-logo.png" alt="logo" />
         </Link>
 
         <div className="collapse navbar-collapse">
@@ -228,7 +228,7 @@ function Header() {
             aria-current="page"
             style={{ width: "50%" }}
           >
-            <img src="/assets/svg/myotobox.svg" alt="logo" />
+            <img src="/assets/images/myotobox-logo.png" alt="logo" />
           </Link>
           {!isAuthenticated ? (
             <Link className="btn btn-primary btn-lg btn-signin" to={"/sign-up"}>
