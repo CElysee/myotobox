@@ -30,7 +30,7 @@ function Routers() {
     <ScrollToTop>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/carDetails/:stock/:name" element={<CarDetails />} />
+        <Route path="/car-details/:stock/:name" element={<CarDetails />} />
         <Route path="/buy-cars/:make/:model" element={<BuyCars />} />
         <Route path="/buy-cars/:make" element={<BuyCars />} />
         <Route path="/buy-cars" element={<BuyCars />} />

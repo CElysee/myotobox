@@ -20,7 +20,7 @@ function SellCarsGrid({ brandName, makeWithModels, countCars }) {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      if (makeWithModels.length > 0) {
+      if (makeWithModels && makeWithModels.length > 0) {
         setCarsForSale(makeWithModels);
         setCountCarsForSale(countCars);
         setLoading(false);
@@ -53,7 +53,7 @@ function SellCarsGrid({ brandName, makeWithModels, countCars }) {
             <div className="heading clearfix">
               <h1>
                 Buy & Sell Cars <span className="makeName">{brandName}</span>{" "}
-                Online in Rwanda | Affordable & Trusted{" "},
+                Online in Rwanda | Affordable & Trusted ,
                 <span className="text-sm-2 graph-icon-title ml-1 vehicle-card-price-rating-label font-bold">
                   {formatAmount(countCarsForSale)} cars
                 </span>
@@ -87,7 +87,7 @@ function SellCarsGrid({ brandName, makeWithModels, countCars }) {
                   >
                     <Link
                       className="hero"
-                      to={`/carDetails/${car.stock_number}/${formatUrl(
+                      to={`/car-details/${car.stock_number}/${formatUrl(
                         `${car.car_year}-${car.car_name_info}`
                       )}`}
                     >
