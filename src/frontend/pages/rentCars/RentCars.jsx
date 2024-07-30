@@ -1291,11 +1291,31 @@ function RentCars() {
               </ContentLoader>
             ))
           ) : (
-            <RentCarsGrid
-              rentBrandName={brandName}
-              makeWithModels={makeWithModels}
-              countCars={countCarsForSale}
-            />
+            <>
+              {makeWithModels.length == 0 ? (
+                <div className="sc-empnci no-results mb-4">
+                  <img
+                    src="/assets/images/no-results.png"
+                    className="sc-SrznA ksfSSz"
+                  />
+                  <div className="sc-fThUAz GNSHw">
+                    <h3 className="sc-kMribo kQonRp">
+                      At this time, we do not have {brandName.toUpperCase()} vehicles in our
+                      stock. We're happy to assist you with alternative choices.
+                    </h3>
+                    <h4 className="sc-bdOgaJ bvAGqr">
+                      Look for other brands using our filters
+                    </h4>
+                  </div>
+                </div>
+              ) : (
+                <RentCarsGrid
+                  rentBrandName={brandName}
+                  makeWithModels={makeWithModels}
+                  countCars={countCarsForSale}
+                />
+              )}
+            </>
           )}
         </div>
       </div>

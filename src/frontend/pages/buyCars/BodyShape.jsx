@@ -23,10 +23,10 @@ const override = {
 function BodyShape() {
   const make_search = useParams();
   const navigate = useNavigate();
+  const [bodyShape, setBodyShape] = useState(make_search.shape);
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const [bodyShape, setBodyShape] = useState(make_search.shape);
-  const [brandName, setBrandName] = useState();
+  const [brandName, setBrandName] = useState(make_search.make);
   const [selectedBrand, setSelectedBrand] = useState([]);
   const [brandModels, setBrandModels] = useState([]);
   const [selectedModel, setSelectedModel] = useState([]);
@@ -35,7 +35,7 @@ function BodyShape() {
   const [listBrands, setListBrands] = useState([]);
   const imageBaseUrl = import.meta.env.VITE_REACT_APP_API;
   const [color, setColor] = useState("#fff");
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [skeletonLoading, setSkeletonLoading] = useState(false);
   const [skeleton, setSkeleton] = useState([1, 2, 3, 4]);
   const [updateUrl, setUpdateUrl] = useState(false);
@@ -70,10 +70,10 @@ function BodyShape() {
   const [inputValues, setInputValues] = useState({
     brand_id: "",
     model_id: "",
-    min_input_price: minInputPrice,
-    max_input_price: maxInputPrice,
-    start_year: startYear,
-    end_year: endYear,
+    min_input_price: minInputPrice || "",
+    max_input_price: maxInputPrice || "",
+    start_year: startYear || "",
+    end_year: endYear || "",
     start_kilometers: "",
     end_kilometers: "",
     car_transmission: "",
@@ -85,10 +85,9 @@ function BodyShape() {
     const fetchData = async () => {
       // const response = await axiosInstance.get("/car_for_sale/list");
       const list_brands = await axiosInstance.get("/car_for_sale/car_brands");
-      if (selectedBrand !== null && selectedBrand.label) {
+      if (brandName) {
         const brand = list_brands.data.car_brand.filter(
-          (brand) =>
-            brand.name.toLowerCase() == selectedBrand.label.toLowerCase()
+          (brand) => brand.name.toLowerCase() == brandName.toLowerCase()
         );
         setSelectedBrand({
           value: brand[0].id,
@@ -107,11 +106,91 @@ function BodyShape() {
           }
         }
       }
+
       setListBrands(list_brands.data.car_brand);
     };
     fetchData();
   }, [brandName, make_search.model, model_id]);
 
+  // useEffect(() => {
+  //   setSkeletonLoading(true);
+  //   const fetchData = async () => {
+  //     try {
+  //       let url = `/car_for_sale/makeModels?shape=${bodyShape}`;
+
+  //       if (brandName !== null) {
+  //         url += `&make=${brandName}`;
+  //       }
+  //       // Append model_id if it's not null
+  //       if (model_id !== null) {
+  //         url += `&model_id=${model_id}`;
+  //       }
+  //       // Append min_input_price if it's not null
+  //       if (minInputPrice !== null) {
+  //         url += `&min_input_price=${minInputPrice}`;
+  //       }
+
+  //       // Append max_input_price if it's not null
+  //       if (maxInputPrice !== null) {
+  //         url += `&max_input_price=${maxInputPrice}`;
+  //       }
+
+  //       // Append start_year if it's not null
+  //       if (startYear !== null) {
+  //         url += `&start_year=${startYear}`;
+  //       }
+
+  //       // Append end_year if it's not null
+  //       if (endYear !== null) {
+  //         url += `&end_year=${endYear}`;
+  //       }
+
+  //       // Append start_kilometers if it's not null
+  //       if (start_kilometers !== null) {
+  //         url += `&start_kilometers=${start_kilometers}`;
+  //       }
+
+  //       // Append end_kilometers if it's not null
+  //       if (end_kilometers !== null) {
+  //         url += `&end_kilometers=${end_kilometers}`;
+  //       }
+
+  //       // Append car_transmission if it's not null
+  //       if (carTransmission !== null) {
+  //         url += `&car_transmission=${carTransmission}`;
+  //       }
+
+  //       //  Append fuel_type if it's not null
+  //       if (fuelType !== null) {
+  //         url += `&fuel_type=${fuelType}`;
+  //       }
+
+  //       const make_models = await axiosInstance.get(url);
+  //       setMakeWithModels(make_models.data.cars_for_sale);
+  //       setCountCarsForSale(make_models.data.count_cars_for_sale);
+  //       setSkeletonLoading(false);
+  //       setLoading(false);
+  //     } catch (error) {
+  //       console.log("Error fetching data", error);
+  //       setSkeletonLoading(false);
+  //     }
+  //   };
+  //   fetchData();
+  // }, [
+  //   brandName,
+  //   model_id,
+  //   makeName,
+  //   modelName,
+  //   minInputPrice,
+  //   maxInputPrice,
+  //   startYear,
+  //   endYear,
+  //   start_kilometers,
+  //   end_kilometers,
+  //   carTransmission,
+  //   fuelType,
+  //   bodyShape,
+  // ]);
   useEffect(() => {
     setSkeletonLoading(true);
     const fetchData = async () => {
@@ -128,21 +207,28 @@ function BodyShape() {
         // Append min_input_price if it's not null
         if (minInputPrice !== null) {
           url += `&min_input_price=${minInputPrice}`;
+        } else {
+          url += `&min_input_price=1`;
         }
-
         // Append max_input_price if it's not null
         if (maxInputPrice !== null) {
           url += `&max_input_price=${maxInputPrice}`;
+        } else {
+          url += `&max_input_price=550000000`;
         }
 
         // Append start_year if it's not null
         if (startYear !== null) {
           url += `&start_year=${startYear}`;
+        } else {
+          url += `&start_year=1950`;
         }
 
         // Append end_year if it's not null
         if (endYear !== null) {
           url += `&end_year=${endYear}`;
+        } else {
+          url += `&end_year=${new Date().getFullYear()}`;
         }
 
         // Append start_kilometers if it's not null
@@ -169,7 +255,6 @@ function BodyShape() {
         setMakeWithModels(make_models.data.cars_for_sale);
         setCountCarsForSale(make_models.data.count_cars_for_sale);
         setSkeletonLoading(false);
-        setLoading(false);
       } catch (error) {
         console.log("Error fetching data", error);
         setSkeletonLoading(false);
@@ -191,7 +276,6 @@ function BodyShape() {
     fuelType,
     bodyShape,
   ]);
-
   const filteredModels = makeWithModels.filter((model) => model.count_cars > 0);
 
   const brandsOptions = listBrands.map((brand) => ({
@@ -228,6 +312,7 @@ function BodyShape() {
     const { name, value } = e.target;
     setInputValues({ ...inputValues, [name]: value });
     setUpdateOnChangeFilter(true);
+    setShowResultsNumber({ ...showResultsNumber, category: "price" });
   };
 
   // Handle Price filter
@@ -239,6 +324,7 @@ function BodyShape() {
   const handleYearChange = async (e) => {
     const { name, value } = e.target;
     setInputValues({ ...inputValues, [name]: value });
+    setShowResultsNumber({ ...showResultsNumber, category: "year" });
     setUpdateOnChangeFilter(true);
   };
 
@@ -251,6 +337,7 @@ function BodyShape() {
   const handleKilometersChange = async (e) => {
     const { name, value } = e.target;
     setInputValues({ ...inputValues, [name]: value });
+    setShowResultsNumber({ ...showResultsNumber, category: "kilometers" });
     setUpdateOnChangeFilter(true);
   };
 
@@ -262,12 +349,14 @@ function BodyShape() {
   // Handle Transmission change
   const handleTransmissionChange = (transmissionType) => {
     setInputValues({ ...inputValues, car_transmission: transmissionType });
+    setShowResultsNumber({ ...showResultsNumber, category: "transmission" });
     setUpdateOnChangeFilter(true);
   };
 
   // Handle Fuel type change
   const handleFuelTypeChange = (fuelType) => {
     setInputValues({ ...inputValues, fuel_type: fuelType });
+    setShowResultsNumber({ ...showResultsNumber, category: "fuel" });
     setUpdateOnChangeFilter(true);
   };
 
@@ -306,6 +395,95 @@ function BodyShape() {
     }
   };
 
+  // // Update when inputs are updated
+  // useEffect(() => {
+  //   if (updateOnChangeFilter) {
+  //     const {
+  //       min_input_price,
+  //       max_input_price,
+  //       start_year,
+  //       end_year,
+  //       start_kilometers,
+  //       end_kilometers,
+  //       car_transmission,
+  //       fuel_type,
+  //     } = inputValues;
+  //     // Set default values for min and max prices if they are not provided
+  //     const minPrice = min_input_price ? min_input_price : 1;
+  //     const maxPrice = max_input_price ? max_input_price : 550000000;
+
+  //     // Set default values for start and end years if they are not provided
+  //     const startYear = start_year ? start_year : 1950;
+  //     const endYear = end_year ? end_year : new Date().getFullYear();
+
+  //     // Set default values for start and end kilometers if they are not provided
+  //     const startKilometers = start_kilometers ? start_kilometers : 1;
+  //     const endKilometers = end_kilometers ? end_kilometers : 1000000;
+  //     // Construct the base URL with brandName and selectedModel.label
+
+  //     let url = `/car_for_sale/makeModels?shape=${bodyShape}`;
+
+  //     if (brandName !== null) {
+  //       url += `?make=${brandName}`;
+  //     }
+  //     // Add query parameters only if their values are not empty
+  //     if (selectedModel !== null && selectedModel.label) {
+  //       url += `${
+  //         url.includes("?") ? "&" : "?"
+  //       }model_id=${selectedModel.label.toLowerCase()}`;
+  //     }
+  //     if (minPrice) {
+  //       url += `${url.includes("?") ? "&" : "?"}min_input_price=${minPrice}`;
+  //     }
+  //     if (maxPrice) {
+  //       url += `${url.includes("?") ? "&" : "?"}max_input_price=${maxPrice}`;
+  //     }
+  //     if (startYear) {
+  //       url += `${url.includes("?") ? "&" : "?"}start_year=${startYear}`;
+  //     }
+  //     if (endYear) {
+  //       url += `${url.includes("?") ? "&" : "?"}end_year=${endYear}`;
+  //     }
+  //     if (startKilometers) {
+  //       url += `${
+  //         url.includes("?") ? "&" : "?"
+  //       }start_kilometers=${startKilometers}`;
+  //     }
+  //     if (endKilometers) {
+  //       url += `${
+  //         url.includes("?") ? "&" : "?"
+  //       }end_kilometers=${endKilometers}`;
+  //     }
+  //     if (car_transmission) {
+  //       url += `${
+  //         url.includes("?") ? "&" : "?"
+  //       }car_transmission=${car_transmission}`;
+  //     }
+  //     if (fuel_type) {
+  //       url += `${url.includes("?") ? "&" : "?"}fuel_type=${fuel_type}`;
+  //     }
+  //     const fetchData = async () => {
+  //       setLoading(true);
+  //       try {
+  //         const response = await axiosInstance.get(url);
+  //         setLoading(false);
+  //         setCountCarsForSale(response.data.count_cars_for_sale);
+  //       } catch (error) {
+  //         console.log("Error while filtering", error);
+  //         setLoading(false);
+  //       }
+  //     };
+  //     fetchData();
+  //     setUpdateOnChangeFilter(false); // Reset the flag after update
+  //   }
+  // }, [
+  //   updateOnChangeFilter,
+  //   brandName,
+  //   navigate,
+  //   inputValues,
+  //   selectedModel,
+  //   bodyShape,
+  // ]);
   // Update when inputs are updated
   useEffect(() => {
     if (updateOnChangeFilter) {
@@ -339,9 +517,7 @@ function BodyShape() {
       }
       // Add query parameters only if their values are not empty
       if (selectedModel !== null && selectedModel.label) {
-        url += `${
-          url.includes("?") ? "&" : "?"
-        }model_id=${selectedModel.label.toLowerCase()}`;
+        url += `?model_id=${selectedModel.label.toLowerCase()}`;
       }
       if (minPrice) {
         url += `${url.includes("?") ? "&" : "?"}min_input_price=${minPrice}`;
@@ -378,7 +554,11 @@ function BodyShape() {
         try {
           const response = await axiosInstance.get(url);
           setLoading(false);
-          setCountCarsForSale(response.data.count_cars_for_sale);
+          // setCountCarsForSale(response.data.count_cars_for_sale);
+          setShowResultsNumber({
+            ...showResultsNumber,
+            results: response.data.count_cars_for_sale,
+          });
         } catch (error) {
           console.log("Error while filtering", error);
           setLoading(false);
@@ -387,16 +567,83 @@ function BodyShape() {
       fetchData();
       setUpdateOnChangeFilter(false); // Reset the flag after update
     }
-  }, [
-    updateOnChangeFilter,
-    brandName,
-    navigate,
-    inputValues,
-    selectedModel,
-    bodyShape,
-  ]);
+  }, [updateOnChangeFilter, brandName, navigate, inputValues, selectedModel]);
 
-  // Update URL with when filters are applied
+  // // Update URL with when filters are applied
+  // useEffect(() => {
+  //   if (updateUrl) {
+  //     const {
+  //       min_input_price,
+  //       max_input_price,
+  //       start_year,
+  //       end_year,
+  //       start_kilometers,
+  //       end_kilometers,
+  //       car_transmission,
+  //       fuel_type,
+  //     } = inputValues;
+
+  //     // Set default values for min and max prices if they are not provided
+  //     const minPrice = min_input_price ? min_input_price : 1;
+  //     const maxPrice = max_input_price ? max_input_price : 550000000;
+
+  //     // Set default values for start and end years if they are not provided
+  //     const startYear = start_year ? start_year : 1950;
+  //     const endYear = end_year ? end_year : new Date().getFullYear();
+
+  //     // Set default values for start and end kilometers if they are not provided
+  //     const startKilometers = start_kilometers ? start_kilometers : 1;
+  //     const endKilometers = end_kilometers ? end_kilometers : 1000000;
+  //     // Construct the base URL with brandName and selectedModel.label
+  //     let url = `/bodyShape/${bodyShape}`;
+
+  //     if (brandName !== null) {
+  //       url += `?make=${brandName}`;
+  //     }
+  //     // Add query parameters only if their values are not empty
+  //     if (selectedModel !== null && selectedModel.label) {
+  //       url += `${
+  //         url.includes("?") ? "&" : "?"
+  //       }model_id=${selectedModel.label.toLowerCase()}`;
+  //     }
+  //     if (min_input_price) {
+  //       url += `${url.includes("?") ? "&" : "?"}min_input_price=${minPrice}`;
+  //     }
+  //     if (max_input_price) {
+  //       url += `${url.includes("?") ? "&" : "?"}max_input_price=${maxPrice}`;
+  //     }
+  //     if (start_year) {
+  //       url += `${url.includes("?") ? "&" : "?"}start_year=${startYear}`;
+  //     }
+  //     if (end_year) {
+  //       url += `${url.includes("?") ? "&" : "?"}end_year=${endYear}`;
+  //     }
+  //     if (start_kilometers) {
+  //       url += `${
+  //         url.includes("?") ? "&" : "?"
+  //       }start_kilometers=${startKilometers}`;
+  //     }
+  //     if (end_kilometers) {
+  //       url += `${
+  //         url.includes("?") ? "&" : "?"
+  //       }end_kilometers=${endKilometers}`;
+  //     }
+  //     if (car_transmission) {
+  //       url += `${
+  //         url.includes("?") ? "&" : "?"
+  //       }car_transmission=${car_transmission}`;
+  //     }
+  //     if (fuel_type) {
+  //       url += `${url.includes("?") ? "&" : "?"}fuel_type=${fuel_type}`;
+  //     }
+  //     navigate(url);
+  //     setUpdateUrl(false); // Reset the flag after update
+  //   }
+  // }, [updateUrl, brandName, navigate, inputValues, selectedModel]);
+
+  // const handleDropdownClick = (e) => {
+  //   e.stopPropagation(); // Prevents the default behavior of event propagation
+  // };
   useEffect(() => {
     if (updateUrl) {
       const {
@@ -422,16 +669,17 @@ function BodyShape() {
       const startKilometers = start_kilometers ? start_kilometers : 1;
       const endKilometers = end_kilometers ? end_kilometers : 1000000;
       // Construct the base URL with brandName and selectedModel.label
-      let url = `/bodyShape/${bodyShape}`;
+      let url = `/bodyShape`;
 
-      if (brandName !== null) {
+      if (bodyShape) {
+        url += `/${bodyShape}`;
+      }
+      if (brandName) {
         url += `?make=${brandName}`;
       }
       // Add query parameters only if their values are not empty
       if (selectedModel !== null && selectedModel.label) {
-        url += `${
-          url.includes("?") ? "&" : "?"
-        }model_id=${selectedModel.label.toLowerCase()}`;
+        url += `?model_id=${selectedModel.label.toLowerCase()}`;
       }
       if (min_input_price) {
         url += `${url.includes("?") ? "&" : "?"}min_input_price=${minPrice}`;
@@ -471,7 +719,6 @@ function BodyShape() {
   const handleDropdownClick = (e) => {
     e.stopPropagation(); // Prevents the default behavior of event propagation
   };
-
   return (
     <section className="bpage container page home" id="NotFound">
       <div className="row justify-content-center">
@@ -896,7 +1143,7 @@ function BodyShape() {
 
             <div className="iEzCwv thirdItem">
               <label className="form-label" htmlFor="expertise">
-                Filters
+                Other Filters
               </label>
               <div className="dropdown" style={{ display: "flex" }}>
                 <button
@@ -1204,7 +1451,7 @@ function BodyShape() {
             handleKilometersFilter={handleKilometersFilter}
           />
 
-          <div className="sc-2be0ug-3 jbRQcv pt-4">
+          <div className="sc-2be0ug-3 jbRQcv pt-4 mobile-remove-padding">
             <div className="sc-2be0ug-4 dGXCjo custom-color">
               <div className="sc-1gw24wa-0 ligASl">
                 <div className="sc-a5hw56-0 eDOeRK sc-1xfau7x-0 isSldw">
@@ -1258,11 +1505,31 @@ function BodyShape() {
               </ContentLoader>
             ))
           ) : (
-            <SellCarsGrid
-              brandName={brandName}
-              makeWithModels={makeWithModels}
-              countCars={countCarsForSale}
-            />
+            <>
+              {makeWithModels.length == 0 ? (
+                <div className="sc-empnci no-results mb-4">
+                  <img
+                    src="/assets/images/no-results.png"
+                    className="sc-SrznA ksfSSz"
+                  />
+                  <div className="sc-fThUAz GNSHw">
+                    <h3 className="sc-kMribo kQonRp">
+                      At this time, we do not have {bodyShape} vehicles in our
+                      stock. We're happy to assist you with alternative choices.
+                    </h3>
+                    <h4 className="sc-bdOgaJ bvAGqr">
+                      Look for other brands using our filters
+                    </h4>
+                  </div>
+                </div>
+              ) : (
+                <SellCarsGrid
+                  brandName={brandName}
+                  makeWithModels={makeWithModels}
+                  countCars={countCarsForSale}
+                />
+              )}
+            </>
           )}
         </div>
       </div>

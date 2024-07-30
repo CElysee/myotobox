@@ -20,10 +20,11 @@ function SellCarsGrid({ brandName, makeWithModels, countCars }) {
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      if (makeWithModels) {
+      if (makeWithModels.length > 0) {
         setCarsForSale(makeWithModels);
         setCountCarsForSale(countCars);
         setLoading(false);
+        console.log("makeWithModels", makeWithModels);
       } else {
         const response = await axiosInstance.get(`/car_for_sale/list`);
         setCarsForSale(response.data.cars_for_sale);
@@ -64,7 +65,7 @@ function SellCarsGrid({ brandName, makeWithModels, countCars }) {
         {loading ? (
           contentLaoderCount.map((item, index) => (
             <ContentLoader
-              style={{ width: "25%", height: "300px", padding: "10px" }}
+              className="content-loader"
               speed={1}
               backgroundColor="#eee"
               foregroundColor="#e8e7e7"

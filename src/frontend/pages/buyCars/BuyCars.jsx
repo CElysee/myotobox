@@ -424,7 +424,7 @@ function BuyCars() {
       let url = `/buy-cars`;
 
       if (brandName) {
-        url = `/buy-cars/${brandName}`;
+        url += `/${brandName}`;
       }
       // Add query parameters only if their values are not empty
       if (selectedModel !== null && selectedModel.label) {
@@ -469,472 +469,550 @@ function BuyCars() {
     e.stopPropagation(); // Prevents the default behavior of event propagation
   };
   return (
-      <section className="bpage container page home" id="NotFound">
-        <div className="row justify-content-center">
-          <div className="filterbar">
-            <div className="car_filter mobile-hide">
-              <div className="iEzCwv firstItem">
-                <label className="form-label" htmlFor="expertise">
-                  Make
-                </label>
-                <Select
-                  placeholder="eg: Toyota"
-                  name="brand_id"
-                  // isMulti
-                  options={brandsOptions}
-                  value={selectedBrand}
-                  onChange={handleBrandChange}
-                />
-              </div>
-              <div className="iEzCwv secondItem">
-                <label className="form-label" htmlFor="expertise">
-                  Model
-                </label>
-                <Select
-                  placeholder="Model name"
-                  name="industry_id"
-                  options={modelOptions}
-                  value={selectedModel}
-                  onChange={handleModelChange}
-                />
-              </div>
+    <section className="bpage container page home" id="NotFound">
+      <div className="row justify-content-center">
+        <div className="filterbar">
+          <div className="car_filter mobile-hide">
+            <div className="iEzCwv firstItem">
+              <label className="form-label" htmlFor="expertise">
+                Make
+              </label>
+              <Select
+                placeholder="eg: Toyota"
+                name="brand_id"
+                // isMulti
+                options={brandsOptions}
+                value={selectedBrand}
+                onChange={handleBrandChange}
+              />
+            </div>
+            <div className="iEzCwv secondItem">
+              <label className="form-label" htmlFor="expertise">
+                Model
+              </label>
+              <Select
+                placeholder="Model name"
+                name="industry_id"
+                options={modelOptions}
+                value={selectedModel}
+                onChange={handleModelChange}
+              />
+            </div>
 
-              <div className="iEzCwv thirdItem">
-                <label className="form-label" htmlFor="expertise">
-                  Price Range (RWF)
-                </label>
-                <div className="dropdown" style={{ display: "flex" }}>
-                  <button
-                    className="btn btn-secondary dropdown-toggle carfilter_button_dropdown"
-                    type="button"
-                    id="dropdownMenuButton"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    {inputValues.min_input_price
-                      ? `${
-                          inputValues.min_input_price
-                            ? formatNumber(inputValues.min_input_price)
-                            : 0
-                        } - ${
-                          inputValues.max_input_price
-                            ? formatNumber(inputValues.max_input_price)
-                            : formatNumber(120000000)
-                        }`
-                      : "Choose range"}
-                  </button>
-                  <div className="css-4xgw5l-IndicatorsContainer2">
-                    <span className=" css-1u9des2-indicatorSeparator"></span>
-                    <div
-                      className="css-1xc3v61-indicatorContainer"
-                      aria-hidden="true"
-                    >
-                      <svg
-                        height="20"
-                        width="20"
-                        viewBox="0 0 20 20"
-                        aria-hidden="true"
-                        focusable="false"
-                        className="css-tj5bde-Svg"
-                      >
-                        <path d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"></path>
-                      </svg>
-                    </div>
-                  </div>
+            <div className="iEzCwv thirdItem">
+              <label className="form-label" htmlFor="expertise">
+                Price Range (RWF)
+              </label>
+              <div className="dropdown" style={{ display: "flex" }}>
+                <button
+                  className="btn btn-secondary dropdown-toggle carfilter_button_dropdown"
+                  type="button"
+                  id="dropdownMenuButton"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  {inputValues.min_input_price
+                    ? `${
+                        inputValues.min_input_price
+                          ? formatNumber(inputValues.min_input_price)
+                          : 0
+                      } - ${
+                        inputValues.max_input_price
+                          ? formatNumber(inputValues.max_input_price)
+                          : formatNumber(120000000)
+                      }`
+                    : "Choose range"}
+                </button>
+                <div className="css-4xgw5l-IndicatorsContainer2">
+                  <span className=" css-1u9des2-indicatorSeparator"></span>
                   <div
-                    className="dropdown-menu"
-                    aria-labelledby="dropdownMenuButton"
+                    className="css-1xc3v61-indicatorContainer"
+                    aria-hidden="true"
                   >
-                    <div className="sc-rpwses-6 jSvZvk dropDownContentHolder">
-                      <div className="sc-1xtdvaj-0 iqjTqg">
-                        <div className="sc-1xtdvaj-1 kWPgKZ">
-                          <div className="sc-1xtdvaj-2 gKrQdv">
-                            <div
-                              className="sc-bwquqg-0 dKpJPQ"
-                              size="14"
-                              type="secondary"
-                            >
-                              From
-                            </div>
-                            <input
-                              type="number"
-                              className="sc-u95ujf-0 dNPQQh sc-1xtdvaj-4 fNpmOJ"
-                              min="1"
-                              max="550000000"
-                              step="1"
-                              name="min_input_price"
-                              placeholder="0"
-                              value={inputValues.min_input_price}
-                              onChange={handlePriceChange}
-                            />
+                    <svg
+                      height="20"
+                      width="20"
+                      viewBox="0 0 20 20"
+                      aria-hidden="true"
+                      focusable="false"
+                      className="css-tj5bde-Svg"
+                    >
+                      <path d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"></path>
+                    </svg>
+                  </div>
+                </div>
+                <div
+                  className="dropdown-menu"
+                  aria-labelledby="dropdownMenuButton"
+                >
+                  <div className="sc-rpwses-6 jSvZvk dropDownContentHolder">
+                    <div className="sc-1xtdvaj-0 iqjTqg">
+                      <div className="sc-1xtdvaj-1 kWPgKZ">
+                        <div className="sc-1xtdvaj-2 gKrQdv">
+                          <div
+                            className="sc-bwquqg-0 dKpJPQ"
+                            size="14"
+                            type="secondary"
+                          >
+                            From
                           </div>
-                          <div className="sc-1xtdvaj-3 drIaET">
-                            <div
-                              className="sc-bwquqg-0 dKpJPQ"
-                              size="14"
-                              type="secondary"
-                            >
-                              Upto
-                            </div>
-                            <input
-                              type="number"
-                              className="sc-u95ujf-0 dNPQQh sc-1xtdvaj-4 fNpmOJ"
-                              min="1"
-                              max="550000000"
-                              step="1"
-                              name="max_input_price"
-                              placeholder="Any"
-                              value={inputValues.max_input_price}
-                              onChange={handlePriceChange}
-                            />
+                          <input
+                            type="number"
+                            className="sc-u95ujf-0 dNPQQh sc-1xtdvaj-4 fNpmOJ"
+                            min="1"
+                            max="550000000"
+                            step="1"
+                            name="min_input_price"
+                            placeholder="0"
+                            value={inputValues.min_input_price}
+                            onChange={handlePriceChange}
+                          />
+                        </div>
+                        <div className="sc-1xtdvaj-3 drIaET">
+                          <div
+                            className="sc-bwquqg-0 dKpJPQ"
+                            size="14"
+                            type="secondary"
+                          >
+                            Upto
                           </div>
+                          <input
+                            type="number"
+                            className="sc-u95ujf-0 dNPQQh sc-1xtdvaj-4 fNpmOJ"
+                            min="1"
+                            max="550000000"
+                            step="1"
+                            name="max_input_price"
+                            placeholder="Any"
+                            value={inputValues.max_input_price}
+                            onChange={handlePriceChange}
+                          />
                         </div>
                       </div>
                     </div>
-                    <div className="sc-rpwses-1 gjZPbt dropDownButtonsRow">
-                      <button
-                        className="sc-1c4mb2u-0 hUdPjg"
-                        type="reset"
-                        data-testid="reset"
-                        onClick={() => handleReset("price")}
-                      >
-                        Clear
-                      </button>
-                      <button
-                        className="sc-1c4mb2u-0 hHfOrj filter"
-                        type="submit"
-                        disabled={
-                          showResultsNumber.results === 0 &&
-                          showResultsNumber.category == "price"
-                        }
-                        onClick={handlePriceFilter}
-                      >
-                        {loading ? (
-                          <RiseLoader
-                            color={color}
-                            loading={loading}
-                            cssOverride={override}
-                            size={10}
-                            aria-label="Loading Spinner"
-                            data-testid="loader"
-                          />
-                        ) : showResultsNumber.results !== null &&
-                          showResultsNumber.category == "price" ? (
-                          `Show ${showResultsNumber.results} Results`
-                        ) : (
-                          "Apply filters"
-                        )}
-                      </button>
-                    </div>
+                  </div>
+                  <div className="sc-rpwses-1 gjZPbt dropDownButtonsRow">
+                    <button
+                      className="sc-1c4mb2u-0 hUdPjg"
+                      type="reset"
+                      data-testid="reset"
+                      onClick={() => handleReset("price")}
+                    >
+                      Clear
+                    </button>
+                    <button
+                      className="sc-1c4mb2u-0 hHfOrj filter"
+                      type="submit"
+                      disabled={
+                        showResultsNumber.results === 0 &&
+                        showResultsNumber.category == "price"
+                      }
+                      onClick={handlePriceFilter}
+                    >
+                      {loading ? (
+                        <RiseLoader
+                          color={color}
+                          loading={loading}
+                          cssOverride={override}
+                          size={10}
+                          aria-label="Loading Spinner"
+                          data-testid="loader"
+                        />
+                      ) : showResultsNumber.results !== null &&
+                        showResultsNumber.category == "price" ? (
+                        `Show ${showResultsNumber.results} Results`
+                      ) : (
+                        "Apply filters"
+                      )}
+                    </button>
                   </div>
                 </div>
               </div>
+            </div>
 
-              <div className="iEzCwv thirdItem">
-                <label className="form-label" htmlFor="expertise">
-                  Year
-                </label>
-                <div className="dropdown" style={{ display: "flex" }}>
-                  <button
-                    className="btn btn-secondary dropdown-toggle carfilter_button_dropdown"
-                    type="button"
-                    id="dropdownMenuButton"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    {inputValues.end_year
-                      ? `${
-                          inputValues.start_year ? inputValues.start_year : 1950
-                        } - ${
-                          inputValues.end_year
-                            ? inputValues.end_year
-                            : new Date().getFullYear()
-                        }`
-                      : "Choose range"}
-                  </button>
-                  <div className="css-4xgw5l-IndicatorsContainer2">
-                    <span className=" css-1u9des2-indicatorSeparator"></span>
-                    <div
-                      className="css-1xc3v61-indicatorContainer"
-                      aria-hidden="true"
-                    >
-                      <svg
-                        height="20"
-                        width="20"
-                        viewBox="0 0 20 20"
-                        aria-hidden="true"
-                        focusable="false"
-                        className="css-tj5bde-Svg"
-                      >
-                        <path d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"></path>
-                      </svg>
-                    </div>
-                  </div>
+            <div className="iEzCwv thirdItem">
+              <label className="form-label" htmlFor="expertise">
+                Year
+              </label>
+              <div className="dropdown" style={{ display: "flex" }}>
+                <button
+                  className="btn btn-secondary dropdown-toggle carfilter_button_dropdown"
+                  type="button"
+                  id="dropdownMenuButton"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  {inputValues.end_year
+                    ? `${
+                        inputValues.start_year ? inputValues.start_year : 1950
+                      } - ${
+                        inputValues.end_year
+                          ? inputValues.end_year
+                          : new Date().getFullYear()
+                      }`
+                    : "Choose range"}
+                </button>
+                <div className="css-4xgw5l-IndicatorsContainer2">
+                  <span className=" css-1u9des2-indicatorSeparator"></span>
                   <div
-                    className="dropdown-menu"
-                    aria-labelledby="dropdownMenuButton"
+                    className="css-1xc3v61-indicatorContainer"
+                    aria-hidden="true"
                   >
-                    <div className="sc-rpwses-6 jSvZvk dropDownContentHolder">
-                      <div className="sc-1xtdvaj-0 iqjTqg">
-                        <div className="sc-1xtdvaj-1 kWPgKZ">
-                          <div className="sc-1xtdvaj-2 gKrQdv">
-                            <div
-                              className="sc-bwquqg-0 dKpJPQ"
-                              size="14"
-                              type="secondary"
-                            >
-                              From
-                            </div>
-                            <input
-                              type="number"
-                              className="sc-u95ujf-0 dNPQQh sc-1xtdvaj-4 fNpmOJ"
-                              data-testid="min-input-price"
-                              min="1950"
-                              max={new Date().getFullYear()}
-                              step="1"
-                              name="start_year"
-                              placeholder="1950"
-                              value={inputValues.start_year}
-                              onChange={handleYearChange}
-                            />
+                    <svg
+                      height="20"
+                      width="20"
+                      viewBox="0 0 20 20"
+                      aria-hidden="true"
+                      focusable="false"
+                      className="css-tj5bde-Svg"
+                    >
+                      <path d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"></path>
+                    </svg>
+                  </div>
+                </div>
+                <div
+                  className="dropdown-menu"
+                  aria-labelledby="dropdownMenuButton"
+                >
+                  <div className="sc-rpwses-6 jSvZvk dropDownContentHolder">
+                    <div className="sc-1xtdvaj-0 iqjTqg">
+                      <div className="sc-1xtdvaj-1 kWPgKZ">
+                        <div className="sc-1xtdvaj-2 gKrQdv">
+                          <div
+                            className="sc-bwquqg-0 dKpJPQ"
+                            size="14"
+                            type="secondary"
+                          >
+                            From
                           </div>
-                          <div className="sc-1xtdvaj-3 drIaET">
-                            <div
-                              className="sc-bwquqg-0 dKpJPQ"
-                              size="14"
-                              type="secondary"
-                            >
-                              Upto
-                            </div>
-                            <input
-                              type="number"
-                              className="sc-u95ujf-0 dNPQQh sc-1xtdvaj-4 fNpmOJ"
-                              min="1950"
-                              max={new Date().getFullYear()}
-                              step="1"
-                              name="end_year"
-                              placeholder={new Date().getFullYear()}
-                              value={inputValues.end_year}
-                              onChange={handleYearChange}
-                            />
+                          <input
+                            type="number"
+                            className="sc-u95ujf-0 dNPQQh sc-1xtdvaj-4 fNpmOJ"
+                            data-testid="min-input-price"
+                            min="1950"
+                            max={new Date().getFullYear()}
+                            step="1"
+                            name="start_year"
+                            placeholder="1950"
+                            value={inputValues.start_year}
+                            onChange={handleYearChange}
+                          />
+                        </div>
+                        <div className="sc-1xtdvaj-3 drIaET">
+                          <div
+                            className="sc-bwquqg-0 dKpJPQ"
+                            size="14"
+                            type="secondary"
+                          >
+                            Upto
                           </div>
+                          <input
+                            type="number"
+                            className="sc-u95ujf-0 dNPQQh sc-1xtdvaj-4 fNpmOJ"
+                            min="1950"
+                            max={new Date().getFullYear()}
+                            step="1"
+                            name="end_year"
+                            placeholder={new Date().getFullYear()}
+                            value={inputValues.end_year}
+                            onChange={handleYearChange}
+                          />
                         </div>
                       </div>
                     </div>
-                    <div className="sc-rpwses-1 gjZPbt dropDownButtonsRow">
-                      <button
-                        className="sc-1c4mb2u-0 hUdPjg"
-                        type="reset"
-                        data-testid="reset"
-                        onClick={() => handleReset("year")}
-                      >
-                        Clear
-                      </button>
-                      <button
-                        className="sc-1c4mb2u-0 hHfOrj filter"
-                        type="submit"
-                        disabled={
-                          showResultsNumber.results === 0 &&
-                          showResultsNumber.category == "year"
-                        }
-                        onClick={handleYearFilter}
-                      >
-                        {loading ? (
-                          <RiseLoader
-                            color={color}
-                            loading={loading}
-                            cssOverride={override}
-                            size={10}
-                            aria-label="Loading Spinner"
-                            data-testid="loader"
-                          />
-                        ) : showResultsNumber.results !== null &&
-                          showResultsNumber.category == "year" ? (
-                          `Show ${showResultsNumber.results} Results`
-                        ) : (
-                          "Apply filters"
-                        )}
-                      </button>
-                    </div>
+                  </div>
+                  <div className="sc-rpwses-1 gjZPbt dropDownButtonsRow">
+                    <button
+                      className="sc-1c4mb2u-0 hUdPjg"
+                      type="reset"
+                      data-testid="reset"
+                      onClick={() => handleReset("year")}
+                    >
+                      Clear
+                    </button>
+                    <button
+                      className="sc-1c4mb2u-0 hHfOrj filter"
+                      type="submit"
+                      disabled={
+                        showResultsNumber.results === 0 &&
+                        showResultsNumber.category == "year"
+                      }
+                      onClick={handleYearFilter}
+                    >
+                      {loading ? (
+                        <RiseLoader
+                          color={color}
+                          loading={loading}
+                          cssOverride={override}
+                          size={10}
+                          aria-label="Loading Spinner"
+                          data-testid="loader"
+                        />
+                      ) : showResultsNumber.results !== null &&
+                        showResultsNumber.category == "year" ? (
+                        `Show ${showResultsNumber.results} Results`
+                      ) : (
+                        "Apply filters"
+                      )}
+                    </button>
                   </div>
                 </div>
               </div>
+            </div>
 
-              <div className="iEzCwv thirdItem">
-                <label className="form-label" htmlFor="expertise">
-                  Kilometers
-                </label>
-                <div className="dropdown" style={{ display: "flex" }}>
-                  <button
-                    className="btn btn-secondary dropdown-toggle carfilter_button_dropdown"
-                    type="button"
-                    id="dropdownMenuButton"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                  >
-                    {inputValues.start_kilometers || inputValues.end_kilometers
-                      ? `${formatNumber(
-                          inputValues.start_kilometers
-                        )} - ${formatNumber(inputValues.end_kilometers)}`
-                      : "Choose range"}
-                  </button>
-                  <div className="css-4xgw5l-IndicatorsContainer2">
-                    <span className=" css-1u9des2-indicatorSeparator"></span>
-                    <div
-                      className="css-1xc3v61-indicatorContainer"
-                      aria-hidden="true"
-                    >
-                      <svg
-                        height="20"
-                        width="20"
-                        viewBox="0 0 20 20"
-                        aria-hidden="true"
-                        focusable="false"
-                        className="css-tj5bde-Svg"
-                      >
-                        <path d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"></path>
-                      </svg>
-                    </div>
-                  </div>
+            <div className="iEzCwv thirdItem">
+              <label className="form-label" htmlFor="expertise">
+                Kilometers
+              </label>
+              <div className="dropdown" style={{ display: "flex" }}>
+                <button
+                  className="btn btn-secondary dropdown-toggle carfilter_button_dropdown"
+                  type="button"
+                  id="dropdownMenuButton"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  {inputValues.start_kilometers || inputValues.end_kilometers
+                    ? `${formatNumber(
+                        inputValues.start_kilometers
+                      )} - ${formatNumber(inputValues.end_kilometers)}`
+                    : "Choose range"}
+                </button>
+                <div className="css-4xgw5l-IndicatorsContainer2">
+                  <span className=" css-1u9des2-indicatorSeparator"></span>
                   <div
-                    className="dropdown-menu"
-                    aria-labelledby="dropdownMenuButton"
+                    className="css-1xc3v61-indicatorContainer"
+                    aria-hidden="true"
                   >
-                    <div className="sc-rpwses-6 jSvZvk dropDownContentHolder">
-                      <div className="sc-1xtdvaj-0 iqjTqg">
-                        <div className="sc-1xtdvaj-1 kWPgKZ">
-                          <div className="sc-1xtdvaj-2 gKrQdv">
-                            <div
-                              className="sc-bwquqg-0 dKpJPQ"
-                              size="14"
-                              type="secondary"
-                            >
-                              From
-                            </div>
-                            <input
-                              type="number"
-                              className="sc-u95ujf-0 dNPQQh sc-1xtdvaj-4 fNpmOJ"
-                              data-testid="min-input-price"
-                              min="0"
-                              max="10000000"
-                              step="1"
-                              name="start_kilometers"
-                              placeholder="0"
-                              value={inputValues.start_kilometers}
-                              onChange={handleKilometersChange}
-                            />
+                    <svg
+                      height="20"
+                      width="20"
+                      viewBox="0 0 20 20"
+                      aria-hidden="true"
+                      focusable="false"
+                      className="css-tj5bde-Svg"
+                    >
+                      <path d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"></path>
+                    </svg>
+                  </div>
+                </div>
+                <div
+                  className="dropdown-menu"
+                  aria-labelledby="dropdownMenuButton"
+                >
+                  <div className="sc-rpwses-6 jSvZvk dropDownContentHolder">
+                    <div className="sc-1xtdvaj-0 iqjTqg">
+                      <div className="sc-1xtdvaj-1 kWPgKZ">
+                        <div className="sc-1xtdvaj-2 gKrQdv">
+                          <div
+                            className="sc-bwquqg-0 dKpJPQ"
+                            size="14"
+                            type="secondary"
+                          >
+                            From
                           </div>
-                          <div className="sc-1xtdvaj-3 drIaET">
-                            <div
-                              className="sc-bwquqg-0 dKpJPQ"
-                              size="14"
-                              type="secondary"
-                            >
-                              Upto
-                            </div>
-                            <input
-                              type="number"
-                              className="sc-u95ujf-0 dNPQQh sc-1xtdvaj-4 fNpmOJ"
-                              data-testid="max-input-price"
-                              min="0"
-                              max="10000000"
-                              step="1"
-                              name="end_kilometers"
-                              placeholder="Any"
-                              value={inputValues.end_kilometers}
-                              onChange={handleKilometersChange}
-                            />
+                          <input
+                            type="number"
+                            className="sc-u95ujf-0 dNPQQh sc-1xtdvaj-4 fNpmOJ"
+                            data-testid="min-input-price"
+                            min="0"
+                            max="10000000"
+                            step="1"
+                            name="start_kilometers"
+                            placeholder="0"
+                            value={inputValues.start_kilometers}
+                            onChange={handleKilometersChange}
+                          />
+                        </div>
+                        <div className="sc-1xtdvaj-3 drIaET">
+                          <div
+                            className="sc-bwquqg-0 dKpJPQ"
+                            size="14"
+                            type="secondary"
+                          >
+                            Upto
                           </div>
+                          <input
+                            type="number"
+                            className="sc-u95ujf-0 dNPQQh sc-1xtdvaj-4 fNpmOJ"
+                            data-testid="max-input-price"
+                            min="0"
+                            max="10000000"
+                            step="1"
+                            name="end_kilometers"
+                            placeholder="Any"
+                            value={inputValues.end_kilometers}
+                            onChange={handleKilometersChange}
+                          />
                         </div>
                       </div>
                     </div>
-                    <div className="sc-rpwses-1 gjZPbt dropDownButtonsRow">
-                      <button
-                        className="sc-1c4mb2u-0 hUdPjg"
-                        type="reset"
-                        data-testid="reset"
-                        onClick={() => handleReset("kilometers")}
-                      >
-                        Clear
-                      </button>
-                      <button
-                        className="sc-1c4mb2u-0 hHfOrj filter"
-                        type="submit"
-                        disabled={
-                          showResultsNumber.results === 0 &&
-                          showResultsNumber.category == "kilometers"
-                        }
-                        onClick={handleKilometersFilter}
-                      >
-                        {loading ? (
-                          <RiseLoader
-                            color={color}
-                            loading={loading}
-                            cssOverride={override}
-                            size={10}
-                            aria-label="Loading Spinner"
-                            data-testid="loader"
-                          />
-                        ) : showResultsNumber.results !== null &&
-                          showResultsNumber.category == "kilometers" ? (
-                          `Show ${showResultsNumber.results} Results`
-                        ) : (
-                          "Apply filters"
-                        )}
-                      </button>
-                    </div>
+                  </div>
+                  <div className="sc-rpwses-1 gjZPbt dropDownButtonsRow">
+                    <button
+                      className="sc-1c4mb2u-0 hUdPjg"
+                      type="reset"
+                      data-testid="reset"
+                      onClick={() => handleReset("kilometers")}
+                    >
+                      Clear
+                    </button>
+                    <button
+                      className="sc-1c4mb2u-0 hHfOrj filter"
+                      type="submit"
+                      disabled={
+                        showResultsNumber.results === 0 &&
+                        showResultsNumber.category == "kilometers"
+                      }
+                      onClick={handleKilometersFilter}
+                    >
+                      {loading ? (
+                        <RiseLoader
+                          color={color}
+                          loading={loading}
+                          cssOverride={override}
+                          size={10}
+                          aria-label="Loading Spinner"
+                          data-testid="loader"
+                        />
+                      ) : showResultsNumber.results !== null &&
+                        showResultsNumber.category == "kilometers" ? (
+                        `Show ${showResultsNumber.results} Results`
+                      ) : (
+                        "Apply filters"
+                      )}
+                    </button>
                   </div>
                 </div>
               </div>
+            </div>
 
-              <div className="iEzCwv thirdItem">
-                <label className="form-label" htmlFor="expertise">
-                  Other Filters
-                </label>
-                <div className="dropdown" style={{ display: "flex" }}>
-                  <button
-                    className="btn btn-secondary dropdown-toggle carfilter_button_dropdown"
-                    type="button"
-                    id="dropdownMenuButton"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                    data-bs-auto-close="inside"
-                  >
-                    {carTransmission
-                      ? carTransmission
-                      : "Transmission Type, Fuel Type, "}
-                  </button>
-                  <div className="css-4xgw5l-IndicatorsContainer2">
-                    <span className=" css-1u9des2-indicatorSeparator"></span>
-                    <div
-                      className="css-1xc3v61-indicatorContainer"
-                      aria-hidden="true"
-                    >
-                      <svg
-                        height="20"
-                        width="20"
-                        viewBox="0 0 20 20"
-                        aria-hidden="true"
-                        focusable="false"
-                        className="css-tj5bde-Svg"
-                      >
-                        <path d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"></path>
-                      </svg>
-                    </div>
-                  </div>
+            <div className="iEzCwv thirdItem">
+              <label className="form-label" htmlFor="expertise">
+                Other Filters
+              </label>
+              <div className="dropdown" style={{ display: "flex" }}>
+                <button
+                  className="btn btn-secondary dropdown-toggle carfilter_button_dropdown"
+                  type="button"
+                  id="dropdownMenuButton"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  data-bs-auto-close="inside"
+                >
+                  {carTransmission
+                    ? carTransmission
+                    : "Transmission Type, Fuel Type, "}
+                </button>
+                <div className="css-4xgw5l-IndicatorsContainer2">
+                  <span className=" css-1u9des2-indicatorSeparator"></span>
                   <div
-                    className="dropdown-menu"
-                    aria-labelledby="dropdownMenuButton"
-                    onClick={handleDropdownClick}
+                    className="css-1xc3v61-indicatorContainer"
+                    aria-hidden="true"
                   >
-                    <div className="sc-rpwses-6 jSvZvk dropDownContentHolder">
-                      <div className="dropdown_holder">
+                    <svg
+                      height="20"
+                      width="20"
+                      viewBox="0 0 20 20"
+                      aria-hidden="true"
+                      focusable="false"
+                      className="css-tj5bde-Svg"
+                    >
+                      <path d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"></path>
+                    </svg>
+                  </div>
+                </div>
+                <div
+                  className="dropdown-menu"
+                  aria-labelledby="dropdownMenuButton"
+                  onClick={handleDropdownClick}
+                >
+                  <div className="sc-rpwses-6 jSvZvk dropDownContentHolder">
+                    <div className="dropdown_holder">
+                      <div
+                        data-testid="transmission_type-item"
+                        className="sc-tyg5kx-2 gUvuUo multi_list"
+                      >
                         <div
-                          data-testid="transmission_type-item"
+                          className="sc-bwquqg-0 jLvUMq sc-tyg5kx-1 fTIrXz title"
+                          size="14"
+                          type="default"
+                        >
+                          Transmission Type
+                        </div>
+                        <div>
+                          <div className="sc-tyg5kx-8 gfvDkr">
+                            <div className="sc-1ygqovz-0 dFceLx tagWrapper">
+                              <div className="sc-1ygqovz-1 jzJwEM tagList transmission_type motors no-seo-link false">
+                                <div
+                                  display="block"
+                                  type="button"
+                                  className="sc-6bmekm-0 cOTnrw"
+                                  onClick={() =>
+                                    handleTransmissionChange(
+                                      "Manual Transmission"
+                                    )
+                                  }
+                                >
+                                  <div
+                                    data-testid="transmission_type-manual-transmission"
+                                    type="button"
+                                    className={`sc-6bmekm-1 contentContainer ${
+                                      inputValues.car_transmission ===
+                                      "Manual Transmission"
+                                        ? "dwAEqK-auto"
+                                        : "dwAEqK"
+                                    }`}
+                                  >
+                                    <span
+                                      type="large"
+                                      className="sc-6bmekm-3 cTaNfx"
+                                    >
+                                      Manual Transmission
+                                    </span>
+                                  </div>
+                                </div>
+                                <div
+                                  display="block"
+                                  type="large"
+                                  className="sc-6bmekm-0 cOTnrw"
+                                >
+                                  <div
+                                    data-testid="transmission_type-automatic-transmission"
+                                    type="large"
+                                    className={`sc-6bmekm-1 contentContainer ${
+                                      inputValues.car_transmission ===
+                                      "Automatic Transmission"
+                                        ? "dwAEqK-auto"
+                                        : "dwAEqK"
+                                    }`}
+                                    onClick={() =>
+                                      handleTransmissionChange(
+                                        "Automatic Transmission"
+                                      )
+                                    }
+                                  >
+                                    <span
+                                      type="large"
+                                      className="sc-6bmekm-3 cTaNfx"
+                                    >
+                                      Automatic Transmission
+                                    </span>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="sc-uf558u-0 cCmKOx divider"></div>
+                      <div>
+                        <div
+                          data-testid="fuel_type-item"
                           className="sc-tyg5kx-2 gUvuUo multi_list"
                         >
                           <div
@@ -942,37 +1020,34 @@ function BuyCars() {
                             size="14"
                             type="default"
                           >
-                            Transmission Type
+                            Fuel Type
                           </div>
                           <div>
                             <div className="sc-tyg5kx-8 gfvDkr">
                               <div className="sc-1ygqovz-0 dFceLx tagWrapper">
-                                <div className="sc-1ygqovz-1 jzJwEM tagList transmission_type motors no-seo-link false">
+                                <div className="sc-1ygqovz-1 jzJwEM tagList fuel_type motors no-seo-link false">
                                   <div
                                     display="block"
-                                    type="button"
+                                    type="large"
                                     className="sc-6bmekm-0 cOTnrw"
-                                    onClick={() =>
-                                      handleTransmissionChange(
-                                        "Manual Transmission"
-                                      )
-                                    }
                                   >
                                     <div
-                                      data-testid="transmission_type-manual-transmission"
-                                      type="button"
+                                      data-testid="fuel_type-petrol"
+                                      type="large"
                                       className={`sc-6bmekm-1 contentContainer ${
-                                        inputValues.car_transmission ===
-                                        "Manual Transmission"
+                                        inputValues.fuel_type === "Petrol"
                                           ? "dwAEqK-auto"
                                           : "dwAEqK"
                                       }`}
+                                      onClick={() =>
+                                        handleFuelTypeChange("Petrol")
+                                      }
                                     >
                                       <span
                                         type="large"
                                         className="sc-6bmekm-3 cTaNfx"
                                       >
-                                        Manual Transmission
+                                        Petrol
                                       </span>
                                     </div>
                                   </div>
@@ -982,25 +1057,73 @@ function BuyCars() {
                                     className="sc-6bmekm-0 cOTnrw"
                                   >
                                     <div
-                                      data-testid="transmission_type-automatic-transmission"
+                                      data-testid="fuel_type-petrol"
                                       type="large"
                                       className={`sc-6bmekm-1 contentContainer ${
-                                        inputValues.car_transmission ===
-                                        "Automatic Transmission"
+                                        inputValues.fuel_type === "Diesel"
                                           ? "dwAEqK-auto"
                                           : "dwAEqK"
                                       }`}
                                       onClick={() =>
-                                        handleTransmissionChange(
-                                          "Automatic Transmission"
-                                        )
+                                        handleFuelTypeChange("Diesel")
                                       }
                                     >
                                       <span
                                         type="large"
                                         className="sc-6bmekm-3 cTaNfx"
                                       >
-                                        Automatic Transmission
+                                        Diesel
+                                      </span>
+                                    </div>
+                                  </div>
+
+                                  <div
+                                    display="block"
+                                    type="large"
+                                    className="sc-6bmekm-0 cOTnrw"
+                                  >
+                                    <div
+                                      data-testid="fuel_type-hybrid"
+                                      type="large"
+                                      className={`sc-6bmekm-1 contentContainer ${
+                                        inputValues.fuel_type === "Hybrid"
+                                          ? "dwAEqK-auto"
+                                          : "dwAEqK"
+                                      }`}
+                                      onClick={() =>
+                                        handleFuelTypeChange("Hybrid")
+                                      }
+                                    >
+                                      <span
+                                        type="large"
+                                        className="sc-6bmekm-3 cTaNfx"
+                                      >
+                                        Hybrid
+                                      </span>
+                                    </div>
+                                  </div>
+                                  <div
+                                    display="block"
+                                    type="large"
+                                    className="sc-6bmekm-0 cOTnrw"
+                                  >
+                                    <div
+                                      data-testid="fuel_type-electric"
+                                      type="large"
+                                      className={`sc-6bmekm-1 contentContainer ${
+                                        inputValues.fuel_type === "Electric"
+                                          ? "dwAEqK-auto"
+                                          : "dwAEqK"
+                                      }`}
+                                      onClick={() =>
+                                        handleFuelTypeChange("Electric")
+                                      }
+                                    >
+                                      <span
+                                        type="large"
+                                        className="sc-6bmekm-3 cTaNfx"
+                                      >
+                                        Electric
                                       </span>
                                     </div>
                                   </div>
@@ -1009,260 +1132,157 @@ function BuyCars() {
                             </div>
                           </div>
                         </div>
-                        <div className="sc-uf558u-0 cCmKOx divider"></div>
-                        <div>
-                          <div
-                            data-testid="fuel_type-item"
-                            className="sc-tyg5kx-2 gUvuUo multi_list"
-                          >
-                            <div
-                              className="sc-bwquqg-0 jLvUMq sc-tyg5kx-1 fTIrXz title"
-                              size="14"
-                              type="default"
-                            >
-                              Fuel Type
-                            </div>
-                            <div>
-                              <div className="sc-tyg5kx-8 gfvDkr">
-                                <div className="sc-1ygqovz-0 dFceLx tagWrapper">
-                                  <div className="sc-1ygqovz-1 jzJwEM tagList fuel_type motors no-seo-link false">
-                                    <div
-                                      display="block"
-                                      type="large"
-                                      className="sc-6bmekm-0 cOTnrw"
-                                    >
-                                      <div
-                                        data-testid="fuel_type-petrol"
-                                        type="large"
-                                        className={`sc-6bmekm-1 contentContainer ${
-                                          inputValues.fuel_type === "Petrol"
-                                            ? "dwAEqK-auto"
-                                            : "dwAEqK"
-                                        }`}
-                                        onClick={() =>
-                                          handleFuelTypeChange("Petrol")
-                                        }
-                                      >
-                                        <span
-                                          type="large"
-                                          className="sc-6bmekm-3 cTaNfx"
-                                        >
-                                          Petrol
-                                        </span>
-                                      </div>
-                                    </div>
-                                    <div
-                                      display="block"
-                                      type="large"
-                                      className="sc-6bmekm-0 cOTnrw"
-                                    >
-                                      <div
-                                        data-testid="fuel_type-petrol"
-                                        type="large"
-                                        className={`sc-6bmekm-1 contentContainer ${
-                                          inputValues.fuel_type === "Diesel"
-                                            ? "dwAEqK-auto"
-                                            : "dwAEqK"
-                                        }`}
-                                        onClick={() =>
-                                          handleFuelTypeChange("Diesel")
-                                        }
-                                      >
-                                        <span
-                                          type="large"
-                                          className="sc-6bmekm-3 cTaNfx"
-                                        >
-                                          Diesel
-                                        </span>
-                                      </div>
-                                    </div>
-
-                                    <div
-                                      display="block"
-                                      type="large"
-                                      className="sc-6bmekm-0 cOTnrw"
-                                    >
-                                      <div
-                                        data-testid="fuel_type-hybrid"
-                                        type="large"
-                                        className={`sc-6bmekm-1 contentContainer ${
-                                          inputValues.fuel_type === "Hybrid"
-                                            ? "dwAEqK-auto"
-                                            : "dwAEqK"
-                                        }`}
-                                        onClick={() =>
-                                          handleFuelTypeChange("Hybrid")
-                                        }
-                                      >
-                                        <span
-                                          type="large"
-                                          className="sc-6bmekm-3 cTaNfx"
-                                        >
-                                          Hybrid
-                                        </span>
-                                      </div>
-                                    </div>
-                                    <div
-                                      display="block"
-                                      type="large"
-                                      className="sc-6bmekm-0 cOTnrw"
-                                    >
-                                      <div
-                                        data-testid="fuel_type-electric"
-                                        type="large"
-                                        className={`sc-6bmekm-1 contentContainer ${
-                                          inputValues.fuel_type === "Electric"
-                                            ? "dwAEqK-auto"
-                                            : "dwAEqK"
-                                        }`}
-                                        onClick={() =>
-                                          handleFuelTypeChange("Electric")
-                                        }
-                                      >
-                                        <span
-                                          type="large"
-                                          className="sc-6bmekm-3 cTaNfx"
-                                        >
-                                          Electric
-                                        </span>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
                       </div>
                     </div>
-                    <div className="sc-rpwses-1 gjZPbt dropDownButtonsRow">
-                      <button
-                        className="sc-1c4mb2u-0 hUdPjg"
-                        type="reset"
-                        data-testid="reset"
-                        onClick={() => handleReset("transmission_fuel_type")}
-                      >
-                        Clear
-                      </button>
-                      <button
-                        className="sc-1c4mb2u-0 hHfOrj filter"
-                        type="submit"
-                        disabled={
-                          showResultsNumber.results === 0 &&
-                          (showResultsNumber.category == "transmission" ||
-                            showResultsNumber.category == "fuel")
-                        }
-                        onClick={handleYearFilter}
-                      >
-                        {loading ? (
-                          <RiseLoader
-                            color={color}
-                            loading={loading}
-                            cssOverride={override}
-                            size={10}
-                            aria-label="Loading Spinner"
-                            data-testid="loader"
-                          />
-                        ) : showResultsNumber.results !== null &&
-                          (showResultsNumber.category == "transmission" ||
-                            showResultsNumber.category == "fuel") ? (
-                          `Show ${showResultsNumber.results} Results`
-                        ) : (
-                          "Apply filters"
-                        )}
-                      </button>
-                    </div>
+                  </div>
+                  <div className="sc-rpwses-1 gjZPbt dropDownButtonsRow">
+                    <button
+                      className="sc-1c4mb2u-0 hUdPjg"
+                      type="reset"
+                      data-testid="reset"
+                      onClick={() => handleReset("transmission_fuel_type")}
+                    >
+                      Clear
+                    </button>
+                    <button
+                      className="sc-1c4mb2u-0 hHfOrj filter"
+                      type="submit"
+                      disabled={
+                        showResultsNumber.results === 0 &&
+                        (showResultsNumber.category == "transmission" ||
+                          showResultsNumber.category == "fuel")
+                      }
+                      onClick={handleYearFilter}
+                    >
+                      {loading ? (
+                        <RiseLoader
+                          color={color}
+                          loading={loading}
+                          cssOverride={override}
+                          size={10}
+                          aria-label="Loading Spinner"
+                          data-testid="loader"
+                        />
+                      ) : showResultsNumber.results !== null &&
+                        (showResultsNumber.category == "transmission" ||
+                          showResultsNumber.category == "fuel") ? (
+                        `Show ${showResultsNumber.results} Results`
+                      ) : (
+                        "Apply filters"
+                      )}
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
-
-            <MobileFilter
-              listBrands={listBrands}
-              brandModels={brandModels}
-              startYear={startYear}
-              endYear={endYear}
-              minInputPrice={minInputPrice}
-              maxInputPrice={maxInputPrice}
-              inputValues={inputValues}
-              loading={loading}
-              start_kilometers={start_kilometers}
-              end_kilometers={end_kilometers}
-              showResultsNumber={showResultsNumber}
-              handleModelChange={handleModelChange}
-              handleBrandChange={handleBrandChange}
-              handleYearChange={handleYearChange}
-              handlePriceChange={handlePriceChange}
-              handleKilometersChange={handleKilometersChange}
-              handleReset={handleReset}
-              handlePriceFilter={handlePriceFilter}
-              handleYearFilter={handleYearFilter}
-              handleKilometersFilter={handleKilometersFilter}
-            />
-
-            <div className="sc-2be0ug-3 jbRQcv pt-4 mobile-remove-padding">
-              <div className="sc-2be0ug-4 dGXCjo custom-color">
-                <div className="sc-1gw24wa-0 ligASl">
-                  <div className="sc-a5hw56-0 eDOeRK sc-1xfau7x-0 isSldw">
-                    <div className="sc-1ygqovz-0 dFceLx tagWrapper">
-                      <div className="sc-1ygqovz-1 hcVlAz tagList category_1 motors seo-link one-row">
-                        {filteredModels.length > 0
-                          ? filteredModels.map((make, index) => (
-                              <div
-                                display="block"
-                                type="small"
-                                className="sc-6bmekm-0 cOTnrw"
-                                key={index}
-                              >
-                                <div
-                                  data-testid="category_1-motors/used-cars/mercedes-benz"
-                                  type="small"
-                                  className="sc-6bmekm-1 kGzmix contentContainer"
-                                >
-                                  <a
-                                    href="/motors/used-cars/mercedes-benz/"
-                                    className="sc-6bmekm-4 ljgfSl"
-                                  >
-                                    {make.brand_model_name}
-                                    <span className="sub_label">
-                                      {" "}
-                                      ({make.count_cars})
-                                    </span>
-                                  </a>
-                                </div>
-                              </div>
-                            ))
-                          : ""}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {skeletonLoading ? (
-              skeleton.map((item, index) => (
-                <ContentLoader
-                  key={index}
-                  style={{ width: "25%", height: "300px", padding: "10px" }}
-                  speed={1}
-                  backgroundColor="#eee"
-                  foregroundColor="#e8e7e7"
-                >
-                  <rect x="2" y="4" rx="8" ry="8" width="70" height="20" />
-                  <rect x="100" y="4" rx="8" ry="8" width="60" height="20" />
-                  <rect x="0" y="40" rx="5" ry="5" width="650" height="415" />
-                </ContentLoader>
-              ))
-            ) : (
-              <SellCarsGrid
-                brandName={brandName}
-                makeWithModels={makeWithModels}
-                countCars={countCarsForSale}
-              />
-            )}
           </div>
+
+          <MobileFilter
+            listBrands={listBrands}
+            brandModels={brandModels}
+            startYear={startYear}
+            endYear={endYear}
+            minInputPrice={minInputPrice}
+            maxInputPrice={maxInputPrice}
+            inputValues={inputValues}
+            loading={loading}
+            start_kilometers={start_kilometers}
+            end_kilometers={end_kilometers}
+            showResultsNumber={showResultsNumber}
+            handleModelChange={handleModelChange}
+            handleBrandChange={handleBrandChange}
+            handleYearChange={handleYearChange}
+            handlePriceChange={handlePriceChange}
+            handleKilometersChange={handleKilometersChange}
+            handleReset={handleReset}
+            handlePriceFilter={handlePriceFilter}
+            handleYearFilter={handleYearFilter}
+            handleKilometersFilter={handleKilometersFilter}
+          />
+
+          <div className="sc-2be0ug-3 jbRQcv pt-4 mobile-remove-padding">
+            <div className="sc-2be0ug-4 dGXCjo custom-color">
+              <div className="sc-1gw24wa-0 ligASl">
+                <div className="sc-a5hw56-0 eDOeRK sc-1xfau7x-0 isSldw">
+                  <div className="sc-1ygqovz-0 dFceLx tagWrapper">
+                    <div className="sc-1ygqovz-1 hcVlAz tagList category_1 motors seo-link one-row">
+                      {filteredModels.length > 0
+                        ? filteredModels.map((make, index) => (
+                            <div
+                              display="block"
+                              type="small"
+                              className="sc-6bmekm-0 cOTnrw"
+                              key={index}
+                            >
+                              <div
+                                data-testid="category_1-motors/used-cars/mercedes-benz"
+                                type="small"
+                                className="sc-6bmekm-1 kGzmix contentContainer"
+                              >
+                                <a
+                                  href="/motors/used-cars/mercedes-benz/"
+                                  className="sc-6bmekm-4 ljgfSl"
+                                >
+                                  {make.brand_model_name}
+                                  <span className="sub_label">
+                                    {" "}
+                                    ({make.count_cars})
+                                  </span>
+                                </a>
+                              </div>
+                            </div>
+                          ))
+                        : ""}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          {skeletonLoading ? (
+            skeleton.map((item, index) => (
+              <ContentLoader
+                key={index}
+                style={{ width: "25%", height: "300px", padding: "10px" }}
+                speed={1}
+                backgroundColor="#eee"
+                foregroundColor="#e8e7e7"
+              >
+                <rect x="2" y="4" rx="8" ry="8" width="70" height="20" />
+                <rect x="100" y="4" rx="8" ry="8" width="60" height="20" />
+                <rect x="0" y="40" rx="5" ry="5" width="650" height="415" />
+              </ContentLoader>
+            ))
+          ) : (
+            <>
+              {makeWithModels.length == 0 ? (
+                <div className="sc-empnci no-results mb-4">
+                  <img
+                    src="/assets/images/no-results.png"
+                    className="sc-SrznA ksfSSz"
+                  />
+                  <div className="sc-fThUAz GNSHw">
+                    <h3 className="sc-kMribo kQonRp">
+                      At this time, we do not have {brandName.toUpperCase()} vehicles in our
+                      stock. We're happy to assist you with alternative choices.
+                    </h3>
+                    <h4 className="sc-bdOgaJ bvAGqr">
+                      Look for other brands using our filters
+                    </h4>
+                  </div>
+                </div>
+              ) : (
+                <SellCarsGrid
+                  brandName={brandName}
+                  makeWithModels={makeWithModels}
+                  countCars={countCarsForSale}
+                />
+              )}
+            </>
+          )}
         </div>
-      </section>
+      </div>
+    </section>
   );
 }
 

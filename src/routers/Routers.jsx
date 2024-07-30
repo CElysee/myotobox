@@ -34,6 +34,7 @@ function Routers() {
         <Route path="/buy-cars/:make/:model" element={<BuyCars />} />
         <Route path="/buy-cars/:make" element={<BuyCars />} />
         <Route path="/buy-cars" element={<BuyCars />} />
+        <Route path="/bodyShape" element={<BodyShape />} />
         <Route path="/bodyShape/:shape" element={<BodyShape />} />
         <Route path="/rent-cars" element={<RentCars />} />
         <Route path="/rent-cars/:make/:model" element={<RentCars />} />

@@ -85,11 +85,10 @@ function ImportOnOrder() {
   //   }));
   // };
 
-  const handleEditorChange = (event, editor) => {
-    const data = editor.getData();
+  const handleEditorChange = (value) => {
     setInputValues((prevValues) => ({
       ...prevValues,
-      order_note: data,
+      order_note: value,
     }));
   };
   const user = useSelector(selectUser);
@@ -176,6 +175,7 @@ function ImportOnOrder() {
                         name="price_range"
                         value={inputValues.price_range}
                         onChange={handleFormInputs}
+                        required
                       >
                         <option>Select price range</option>
                         <option value="1,000,000 - 5,000,000 Rwf">
@@ -212,6 +212,7 @@ function ImportOnOrder() {
                         name="fuel_type"
                         value={inputValues.fuel_type}
                         onChange={handleFormInputs}
+                        required
                       >
                         <option>Select fuel type</option>
                         <option value="Petrol">Petrol</option>
@@ -227,6 +228,7 @@ function ImportOnOrder() {
                         name="transmission_type"
                         value={inputValues.transmission_type}
                         onChange={handleFormInputs}
+                        required
                       >
                         <option>Select transmission type</option>
                         <option>Automatic</option>
@@ -243,6 +245,7 @@ function ImportOnOrder() {
                         name="car_brand_id"
                         value={inputValues.car_brand_id}
                         onChange={handleFormInputs}
+                        required
                       >
                         <option>Select Brand</option>
                         {carBrands.length > 0 &&
@@ -260,6 +263,7 @@ function ImportOnOrder() {
                         name="car_model_id"
                         value={inputValues.car_model_id}
                         onChange={handleFormInputs}
+                        required
                       >
                         <option>Select Model</option>
                         {carModels.length > 0 &&
@@ -277,6 +281,7 @@ function ImportOnOrder() {
                         name="car_trim_id"
                         value={inputValues.car_trim_id}
                         onChange={handleFormInputs}
+                        required
                       >
                         <option>Select Trim</option>
                         {carTrims.length > 0 &&
@@ -297,6 +302,7 @@ function ImportOnOrder() {
                         name="manufacture_year_from"
                         value={inputValues.manufacture_year_from}
                         onChange={handleFormInputs}
+                        required
                       ></input>
                     </div>
                     <div className="form-inner mb-25">
@@ -307,6 +313,7 @@ function ImportOnOrder() {
                         name="manufacture_year_to"
                         value={inputValues.manufacture_year_to}
                         onChange={handleFormInputs}
+                        required
                       ></input>
                     </div>
                     <div className="form-inner mb-25">
@@ -317,6 +324,7 @@ function ImportOnOrder() {
                         name="car_color"
                         value={inputValues.car_color}
                         onChange={handleFormInputs}
+                        required
                       ></input>
                     </div>
                   </div>
@@ -330,6 +338,7 @@ function ImportOnOrder() {
                         name="kilometers_from"
                         value={inputValues.kilometers_from}
                         onChange={handleFormInputs}
+                        required
                       ></input>
                     </div>
                     <div className="form-inner mb-25">
@@ -340,10 +349,11 @@ function ImportOnOrder() {
                         name="kilometers_to"
                         value={inputValues.kilometers_to}
                         onChange={handleFormInputs}
+                        required
                       ></input>
                     </div>
                     <div className="form-inner mb-25">
-                      <label>Exterior Color</label>
+                      <label>Interior Color</label>
                       <input
                         type="text"
                         placeholder="black"
@@ -362,6 +372,7 @@ function ImportOnOrder() {
                         name="names"
                         value={inputValues.names}
                         onChange={handleFormInputs}
+                        required
                       ></input>
                     </div>
                     <div className="form-inner mb-25">
@@ -372,6 +383,7 @@ function ImportOnOrder() {
                         name="phone_number"
                         value={inputValues.phone_number}
                         onChange={handleFormInputs}
+                        required
                       ></input>
                     </div>
                     <div className="form-inner mb-25">
@@ -382,6 +394,7 @@ function ImportOnOrder() {
                         name="email"
                         value={inputValues.email}
                         onChange={handleFormInputs}
+                        required
                       ></input>
                     </div>
                   </div>
@@ -392,6 +405,7 @@ function ImportOnOrder() {
                         theme="snow"
                         value={inputValues.order_note}
                         onChange={handleEditorChange}
+                        required
                       />
                     </div>
                   </div>

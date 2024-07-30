@@ -6,6 +6,7 @@ import RiseLoader from "react-spinners/RiseLoader";
 import { useNavigate } from "react-router-dom";
 import { roundNumbers } from "../../../../utils/Helpers";
 import Login from "../../components/auth/Login";
+import { set } from "lodash";
 
 const override = {
   display: "block",
@@ -21,6 +22,7 @@ function TaxCalculator() {
   const [carTrims, setCarTrims] = useState([]);
   const [usdToRwf, setUsdToRwf] = useState(0);
   const [formError, setFormErrors] = useState("");
+  const [carTrimInfo, setCarTrimInfo] = useState("");
   const navigate = useNavigate();
   const [loginTitle, setLoginTitle] = useState("Sign In to Calculate Taxes");
   const [inputValues, setInputValues] = useState({
@@ -75,6 +77,15 @@ function TaxCalculator() {
     if (name === "car_model_id") {
       const trims = carModels.filter((model) => model.id == value)[0].trims;
       setCarTrims(trims);
+    }
+    if (name === "car_trim_id") {
+      const TrimInfo = carTrims.filter((trim) => trim.id == value)[0];
+      setCarTrimInfo(TrimInfo);
+      setInputValues((prevState) => ({
+        ...prevState,
+        weight: parseInt(TrimInfo.curb_weight, 10),
+        engine_cc: parseInt(TrimInfo.engine_displacement, 10),
+      }));
     }
     if (name === "year_of_manufacture") {
       // Check if value is a valid number representing a year
@@ -196,6 +207,7 @@ function TaxCalculator() {
         ...inputValues,
         user_id: user.userId,
       };
+      console.log(params);
       try {
         const response = await axiosInstance.post(
           "/tax-calculator/create",
@@ -325,9 +337,9 @@ function TaxCalculator() {
                       <input
                         type="number"
                         name="weight"
-                        value={inputValues.weight}
-                        onChange={handleFormInputs}
+                        value={carTrimInfo.curb_weight}
                         required
+                        disabled
                       ></input>
                     </div>
                     <div className="form-inner mb-25">
@@ -335,12 +347,12 @@ function TaxCalculator() {
                       <input
                         type="number"
                         name="engine_cc"
-                        value={inputValues.engine_cc}
-                        onChange={handleFormInputs}
+                        value={carTrimInfo.engine_displacement}
+                        disabled
                         required
                       ></input>
                     </div>
-                  </div>
+                  </div> 
                   <div className="inline_form">
                     <div className="form-inner mb-25">
                       <label>Year of Manufucture</label>
@@ -501,7 +513,8 @@ function TaxCalculator() {
                         {loading ? (
                           <RiseLoader
                             color={color}
-                            loading={loading}dismissButtonRef
+                            loading={loading}
+                            dismissButtonRef
                             cssOverride={override}
                             size={10}
                             aria-label="Loading Spinner"
@@ -536,7 +549,7 @@ function TaxCalculator() {
                     <div className="modal-content">
                       <div className="modal-body">
                         <Login
-                          loginTitle={loginTitle} 
+                          loginTitle={loginTitle}
                           CloseModal={handleClosingModal}
                         />
                       </div>

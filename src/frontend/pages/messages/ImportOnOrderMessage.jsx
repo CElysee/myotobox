@@ -2,7 +2,7 @@ import React from "react";
 
 function ImportOnOrderMessage() {
   return (
-    <section className="bpage container mobile-t-5">
+    <section className="bpage container mobile-t-5 import-on-order" style={{paddingTop: "130px"}}>
       <div className="row justify-content-center">
         <div className="ThankYouMessage col-lg-12 d-flex flex-column align-items-center justify-content-center flex-grow-1 wrap">
           <h2>
@@ -17,7 +17,7 @@ function ImportOnOrderMessage() {
             src="/assets/images/thanks.png"
             alt="404"
             className="thankYouImg pt-4"
-          ></img>
+          ></img> 
         </div>
       </div>
     </section>
