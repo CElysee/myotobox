@@ -1,5 +1,5 @@
 import React from "react";
-import "../sellMyCar/sellMyCar.css";
+import "../sellMyCar/SellMyCar.css";
 import { Link } from "react-router-dom";
 
 function View4You() {
