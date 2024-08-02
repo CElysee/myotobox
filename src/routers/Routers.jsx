@@ -8,7 +8,6 @@ import CarDetails from "../frontend/pages/carDetails/CarDetails";
 import ImportOnOrder from "../frontend/pages/importOnOrder/ImportOnOrder";
 import Login from "../frontend/pages/auth/Login";
 import PrivateRoutes from "../../utils/PrivateRoutes";
-// import UserDashboard from "../dashboard/user/UserDashboard";
 import NotFound from "../frontend/pages/notFound/NotFound";
 import BodyShape from "../frontend/pages/buyCars/BodyShape";
 import ThankYouBookingTestDrive from "../frontend/pages/messages/ThankYouBookingTestDrive";
@@ -24,6 +23,10 @@ import UserBookedTestDrive from "../frontend/pages/dashboard/BookedTestDrive";
 import UserBookedRentals from "../frontend/pages/dashboard/BookedRentals";
 import UserImportOnOrders from "../frontend/pages/dashboard/ImportOnOrders";
 import UserTaxCalculator from "../frontend/pages/dashboard/TaxCalculator";
+import SellMyCar from "../frontend/pages/sellMyCar/SellMyCar";
+import SubmitCar from "../frontend/pages/sellMyCar/SubmitCar";
+import SellMyCallMessage from "../frontend/pages/messages/SellMyCallMessage";
+import View4You from "../frontend/pages/view4You/view4You";
 
 function Routers() {
   return (
@@ -59,6 +62,10 @@ function Routers() {
           path="/car-tax-calculator_results/:id"
           element={<TaxCalculatorMessage />}
         />
+        <Route path="/sell-my-car" element={<SellMyCar />} />
+        <Route path="/sell-my-car-message" element={<SellMyCallMessage />} />
+        <Route path="/submit-car" element={<SubmitCar />} />
+        <Route path="/view4you" element={<View4You />} />
 
         <Route path="/user/*" element={<PrivateRoutes />}>
           <Route path="dashboard" element={<UserDashboard />} />

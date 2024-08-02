@@ -21,6 +21,14 @@ function Header() {
       display: "Rent",
     },
     {
+      path: "/sell-my-car",
+      display: "Sell my car",
+    },
+    {
+      path: "/view4you",
+      display: "View4You",
+    },
+    {
       path: "/import-on-order",
       display: "Import on order",
     },

@@ -1300,7 +1300,7 @@ function RentCars() {
                   />
                   <div className="sc-fThUAz GNSHw">
                     <h3 className="sc-kMribo kQonRp">
-                      At this time, we do not have {brandName.toUpperCase()} vehicles in our
+                      At this time, we do not have {brandName && brandName.toUpperCase()} vehicles in our
                       stock. We're happy to assist you with alternative choices.
                     </h3>
                     <h4 className="sc-bdOgaJ bvAGqr">

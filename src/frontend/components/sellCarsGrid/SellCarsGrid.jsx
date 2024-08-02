@@ -24,7 +24,7 @@ function SellCarsGrid({ brandName, makeWithModels, countCars }) {
         setCarsForSale(makeWithModels);
         setCountCarsForSale(countCars);
         setLoading(false);
-        console.log("makeWithModels", makeWithModels);
+        // console.log("makeWithModels", makeWithModels);
       } else {
         const response = await axiosInstance.get(`/car_for_sale/list`);
         setCarsForSale(response.data.cars_for_sale);
