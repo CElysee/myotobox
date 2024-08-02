@@ -98,37 +98,13 @@ function SellMyCar() {
                       <div className="review">
                         <span className="stars"></span>
                         <span className="user">
-                          Erik N. <span className="date">Aug 2022</span>
+                          Giselle N. <span className="date">July 2024</span>
                         </span>
                         <span className="blurb">
                           Probably the best experience I've had selling a car
                           privately. The listing team was exceptionally helpful,
-                          and I had funds just 3 days after the auction ended.
+                          and I had funds just 3 days after the car was sold.
                           Great experience.
-                        </span>
-                      </div>
-                    </li>
-                    <li style={{ width: "347px" }}>
-                      <div className="review">
-                        <span className="stars"></span>
-                        <span className="user">
-                          Ian S. <span className="date">Feb 2023</span>
-                        </span>
-                        <span className="blurb">
-                          Super fast turnaround and legit buyers. Wouldn't sell
-                          a used vehicle any other way!
-                        </span>
-                      </div>
-                    </li>
-                    <li style={{ width: "347px" }}>
-                      <div className="review">
-                        <span className="stars"></span>
-                        <span className="user">
-                          Ann K. <span className="date">Nov 2023</span>
-                        </span>
-                        <span className="blurb">
-                          Sold my 99 30th Anniversary Trans Am for top dollar.
-                          They are helpful and quick to respond.
                         </span>
                       </div>
                     </li>
@@ -246,13 +222,13 @@ function SellMyCar() {
             </ol>
           </div>
           <div className="sac-footer">
-            <Link
+          <a
               className="btn btn-primary btn-lg get-started-cta"
               title="Submit Your Car"
-              to={`/submit-car`}
+              href="tel:+250782384772"
             >
-              Get Started Now
-            </Link>
+              Call MyOtobox — today!
+            </a>
           </div>
         </div>
       </div>
