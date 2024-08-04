@@ -424,7 +424,19 @@ function TaxCalculator() {
                         <option value="Online">Online</option>
                       </select>
                     </div>
-                    {inputValues.price_source === "RRA" ? (
+                    {inputValues.price_source === "Online" ||
+                    rraMsrp.length == 0 ? (
+                      <div className="form-inner mb-25">
+                        <label>Price when new (MSRP - USD)</label>
+                        <input
+                          type="number"
+                          name="price_when_new"
+                          value={inputValues.price_when_new}
+                          onChange={handleFormInputs}
+                          required
+                        ></input>
+                      </div>
+                    ) : (
                       <div className="form-inner mb-25">
                         <label>Select Price when new (USD)</label>
                         <select
@@ -442,17 +454,6 @@ function TaxCalculator() {
                               </option>
                             ))}
                         </select>
-                      </div>
-                    ) : (
-                      <div className="form-inner mb-25">
-                        <label>Price when new (MSRP - USD)</label>
-                        <input
-                          type="number"
-                          name="price_when_new"
-                          value={inputValues.price_when_new}
-                          onChange={handleFormInputs}
-                          required
-                        ></input>
                       </div>
                     )}
                     <div className="form-inner mb-25">
