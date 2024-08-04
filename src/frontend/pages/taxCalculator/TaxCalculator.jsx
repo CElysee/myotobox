@@ -21,6 +21,7 @@ function TaxCalculator() {
   const [carModels, setCarModels] = useState([]);
   const [carTrims, setCarTrims] = useState([]);
   const [usdToRwf, setUsdToRwf] = useState(0);
+  const [rraMsrp, setRraMsrp] = useState([]);
   const [formError, setFormErrors] = useState("");
   const [carTrimInfo, setCarTrimInfo] = useState("");
   const navigate = useNavigate();
@@ -31,6 +32,7 @@ function TaxCalculator() {
     car_trim_id: "",
     weight: "",
     engine_cc: "",
+    engine_displacement: "",
     year_of_manufacture: "",
     price_when_new: "",
     amortisation_period: "",
@@ -42,6 +44,7 @@ function TaxCalculator() {
     quitus_fiscal: "",
     vehicle_category: "",
     user_id: "",
+    price_source: "",
   });
   const [loading, setLoading] = useState(false);
   const [color, setColor] = useState("#fff");
@@ -63,6 +66,9 @@ function TaxCalculator() {
     };
     fetchData();
   }, []);
+  const removeCommas = (value) => {
+    return value.replace(/,/g, "");
+  };
 
   const handleFormInputs = (e) => {
     const { name, value } = e.target;
@@ -81,10 +87,12 @@ function TaxCalculator() {
     if (name === "car_trim_id") {
       const TrimInfo = carTrims.filter((trim) => trim.id == value)[0];
       setCarTrimInfo(TrimInfo);
+      // console.log(TrimInfo);
       setInputValues((prevState) => ({
         ...prevState,
         weight: parseInt(TrimInfo.curb_weight, 10),
-        engine_cc: parseInt(TrimInfo.engine_displacement, 10),
+        engine_cc: parseInt(TrimInfo.engine_cc, 10),
+        engine_displacement: TrimInfo.engine_displacement,
       }));
     }
     if (name === "year_of_manufacture") {
@@ -124,8 +132,12 @@ function TaxCalculator() {
         }));
       }
     }
+
     if (name === "price_when_new") {
-      const valueAsNumber = parseInt(value);
+      // const valueAsNumber = parseInt(value);
+      const valueAsNumber = removeCommas(value);
+      // console.log(valueAsNumber);
+
       if (!isNaN(valueAsNumber)) {
         const currentYear = new Date().getFullYear();
         const yearOfManufacture = inputValues.year_of_manufacture;
@@ -158,7 +170,7 @@ function TaxCalculator() {
 
         setInputValues((prevState) => ({
           ...prevState,
-          price_when_new: valueAsNumber,
+          price_when_new: value,
           current_residual_value: current_value,
         }));
       } else {
@@ -181,6 +193,31 @@ function TaxCalculator() {
           ...prevState,
           cif_kigali: roundNumbers(cif_to_kgl),
         }));
+      }
+    }
+    if (name == "price_source") {
+      if (value == "RRA") {
+        const find_msrp = async () => {
+          const params = {
+            car_brand: inputValues.car_brand_id,
+            car_mark: inputValues.car_model_id,
+            car_engine: inputValues.engine_displacement,
+            car_drive: "",
+            car_year: inputValues.year_of_manufacture.toString(),
+            body_style: "",
+          };
+          try {
+            const response = await axiosInstance.post(
+              "/tax-calculator/find-msrp",
+              params
+            );
+            // console.log(response);
+            setRraMsrp(response.data);
+          } catch (error) {
+            console.error("Error adding a new import order", error);
+          }
+        };
+        find_msrp();
       }
     }
   };
@@ -206,8 +243,12 @@ function TaxCalculator() {
       const params = {
         ...inputValues,
         user_id: user.userId,
+        price_when_new: parseInt(
+          removeCommas(inputValues.price_when_new).replace(/\s+/g, ""),
+          10
+        ),
       };
-      console.log(params);
+      // console.log(params);
       try {
         const response = await axiosInstance.post(
           "/tax-calculator/create",
@@ -302,6 +343,7 @@ function TaxCalculator() {
                         value={inputValues.car_model_id}
                         onChange={handleFormInputs}
                         required
+                        disabled={carModels.length === 0}
                       >
                         <option value="">Select Model</option>
                         {carModels.length > 0 &&
@@ -320,6 +362,7 @@ function TaxCalculator() {
                         value={inputValues.car_trim_id}
                         onChange={handleFormInputs}
                         required
+                        disabled={carTrims.length === 0}
                       >
                         <option>Select Trim</option>
                         {carTrims.length > 0 &&
@@ -347,13 +390,11 @@ function TaxCalculator() {
                       <input
                         type="number"
                         name="engine_cc"
-                        value={carTrimInfo.engine_displacement}
+                        value={carTrimInfo.engine_cc}
                         disabled
                         required
                       ></input>
                     </div>
-                  </div> 
-                  <div className="inline_form">
                     <div className="form-inner mb-25">
                       <label>Year of Manufucture</label>
                       <input
@@ -362,18 +403,58 @@ function TaxCalculator() {
                         value={inputValues.year_of_manufacture}
                         onChange={handleFormInputs}
                         required
+                        disabled={
+                          !inputValues.curb_weight && !inputValues.engine_cc
+                        }
                       ></input>
                     </div>
+                  </div>
+                  <div className="inline_form">
                     <div className="form-inner mb-25">
-                      <label>Price when new (MSRP - USD)</label>
-                      <input
-                        type="number"
-                        name="price_when_new"
-                        value={inputValues.price_when_new}
+                      <label>Price when new source</label>
+                      <select
+                        className="select"
+                        name="price_source"
+                        value={inputValues.price_source}
                         onChange={handleFormInputs}
                         required
-                      ></input>
+                      >
+                        <option value="">Select price source</option>
+                        <option value="RRA">RRA</option>
+                        <option value="Online">Online</option>
+                      </select>
                     </div>
+                    {inputValues.price_source === "RRA" ? (
+                      <div className="form-inner mb-25">
+                        <label>Select Price when new (USD)</label>
+                        <select
+                          className="select"
+                          name="price_when_new"
+                          value={inputValues.price_when_new}
+                          onChange={handleFormInputs}
+                          required
+                        >
+                          <option value="">Select price </option>
+                          {rraMsrp.length > 0 &&
+                            rraMsrp.map((price, index) => (
+                              <option key={index} value={price.car_new_price}>
+                                {price.car_mark} - {price.car_new_price}
+                              </option>
+                            ))}
+                        </select>
+                      </div>
+                    ) : (
+                      <div className="form-inner mb-25">
+                        <label>Price when new (MSRP - USD)</label>
+                        <input
+                          type="number"
+                          name="price_when_new"
+                          value={inputValues.price_when_new}
+                          onChange={handleFormInputs}
+                          required
+                        ></input>
+                      </div>
+                    )}
                     <div className="form-inner mb-25">
                       <label>Amortisation Period</label>
                       <input
@@ -405,6 +486,9 @@ function TaxCalculator() {
                         value={inputValues.freight_cost}
                         onChange={handleFormInputs}
                         required
+                        disabled={
+                          !inputValues.curb_weight && !inputValues.engine_cc
+                        }
                       ></input>
                     </div>
                     <div className="form-inner mb-25">
@@ -415,6 +499,9 @@ function TaxCalculator() {
                         value={inputValues.insurance}
                         onChange={handleFormInputs}
                         required
+                        disabled={
+                          !inputValues.curb_weight && !inputValues.engine_cc
+                        }
                       ></input>
                     </div>
                   </div>

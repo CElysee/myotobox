@@ -57,14 +57,18 @@ function TaxCalculatorMessage() {
 
   useEffect(() => {
     const fetchImages = async () => {
-      if (taxDetails !== "") {
+      if (taxDetails && taxDetails.car_brand && taxDetails.car_model && taxDetails.car_trim) {
         setLoading(true);
-        const keyword = `${taxDetails.car_brand.name} ${taxDetails.car_model.brand_model_name} ${taxDetails.year_of_manufacture} ${taxDetails.car_trim.trim_name} `;
+        const keyword = `${taxDetails.car_brand.name} ${taxDetails.car_model.brand_model_name} ${taxDetails.year_of_manufacture} ${taxDetails.car_trim.trim_name}`;
         const endpoint = `https://api.bing.microsoft.com/v7.0/images/search`;
+        const queryParams = new URLSearchParams({
+          q: keyword, // Use the constructed keyword
+          count: 9,
+        }).toString();
+
         try {
-          const response = await fetch(endpoint, {
+          const response = await fetch(`${endpoint}?${queryParams}`, {
             headers: { "Ocp-Apim-Subscription-Key": Ocp_Apim_Subscription_Key },
-            params: { q: keyword, count: 9 },
           });
           const data = await response.json();
           console.log("Data:", data);
@@ -77,8 +81,11 @@ function TaxCalculatorMessage() {
         }
       }
     };
-    setTimeout(fetchImages, 2000); // Add a delay of 1000 milliseconds (1 second) between requests
-  }, [taxDetails]); // Empty dependency array ensures the effect runs only once on component mount
+
+    if (taxDetails !== "") {
+      setTimeout(fetchImages, 2000); // Add a delay of 2000 milliseconds (2 seconds) between requests
+    }
+  }, [taxDetails, Ocp_Apim_Subscription_Key]);// Empty dependency array ensures the effect runs only once on component mount
 
   return (
     <div className="main_content padding-l-r" id="main_content">
